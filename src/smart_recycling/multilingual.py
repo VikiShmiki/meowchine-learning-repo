@@ -14,6 +14,11 @@ from pathlib import Path
 import numpy as np
 
 from smart_recycling.domain import WasteCategory
+from smart_recycling.encoder_artifacts import (
+    EncoderArtifactError,
+    cache_encoder_files,
+    verified_encoder_path,
+)
 from smart_recycling.language import is_macedonian
 from smart_recycling.minilm import CategorySuggestion, MiniLMError
 
@@ -69,25 +74,27 @@ def prototype_sha256():
 
 
 def load_encoder(path: Path | None = None):
-    from sentence_transformers import SentenceTransformer
-
     try:
+        verified = verified_encoder_path(MODEL_ID, MODEL_REVISION, path)
+        from sentence_transformers import SentenceTransformer
+
         encoder = SentenceTransformer(
-            str(path) if path else MODEL_ID,
-            **({"local_files_only": True} if path else {"revision": MODEL_REVISION}),
+            str(verified),
+            local_files_only=True,
             device="cpu",
             trust_remote_code=False,
         )
         encoder.eval()
         encoder.requires_grad_(False)
         return encoder
+    except EncoderArtifactError as error:
+        raise MiniLMError(str(error)) from error
     except Exception as error:
         raise MiniLMError("Multilingual encoder could not be loaded") from error
 
 
 def cache_encoder(path: Path):
-    path.parent.mkdir(parents=True, exist_ok=True)
-    load_encoder().save(str(path), safe_serialization=True)
+    cache_encoder_files(MODEL_ID, MODEL_REVISION, path)
 
 
 class MultilingualSuggester:
@@ -150,4 +157,4 @@ class BilingualSuggester:
 def load_multilingual(root: Path):
     configured = os.getenv("SRA_MULTILINGUAL_MODEL_PATH", "").strip()
     local = (root / configured).resolve() if configured else root / "models/multilingual-minilm"
-    return MultilingualSuggester(load_encoder(local if local.is_dir() else None))
+    return MultilingualSuggester(load_encoder(local if configured or local.is_dir() else None))

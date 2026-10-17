@@ -73,7 +73,7 @@ if settings.minilm_suggestions_enabled:
             else PROJECT_ROOT / "models/multilingual-minilm"
         )
         multilingual_suggester = load_object_suggester(
-            PROJECT_ROOT, "mk", model_path if model_path.is_dir() else None
+            PROJECT_ROOT, "mk", model_path if configured or model_path.exists() else None
         )
     except MiniLMError:
         logger.exception("Macedonian model unavailable; bilingual policy rules remain active")

@@ -40,8 +40,27 @@ EXPECTED_V2_SPLITS = {"train": 3052, "validation": 1116, "test": 1346}
 OBJECT_CLASSES = (*CLASSES, "clothes", "electronics")
 
 
+def validate_source_inputs(manifest: dict, source_root: Path | None = None) -> None:
+    """Relocate an immutable source bundle without weakening its checksum checks."""
+    for source_path, fingerprint in manifest["inputs"].items():
+        path = Path(source_path)
+        if source_root is not None:
+            if path.is_absolute():
+                original_root = Path(manifest["source_package"]).parents[2]
+                path = path.relative_to(original_root)
+            if ".." in path.parts:
+                raise ValueError("Dataset source path escapes its source root")
+            path = source_root / path
+            if not path.resolve().is_relative_to(source_root.resolve()):
+                raise ValueError("Dataset source symlink escapes its source root")
+        if sha256_file(path) != fingerprint:
+            raise ValueError(f"Dataset source checksum mismatch: {source_path}")
+
+
 def load_object_benchmark_data(
     data_dir: Path,
+    *,
+    source_root: Path | None = None,
 ) -> tuple[dict[str, pd.DataFrame], dict[str, tuple[EvaluationSet, ...]], dict[str, Any]]:
     """Validate v2 pairing/provenance and use object labels, not old policy labels."""
     manifest_path = data_dir / "manifest.json"
@@ -55,9 +74,7 @@ def load_object_benchmark_data(
     if set(manifest["labels"]) != set(OBJECT_CLASSES) | {"general"}:
         raise ValueError("Unexpected v2 label taxonomy")
     hashes = {"manifest.json": sha256_file(manifest_path)}
-    for source_path, fingerprint in manifest["inputs"].items():
-        if sha256_file(Path(source_path)) != fingerprint:
-            raise ValueError(f"Dataset source checksum mismatch: {source_path}")
+    validate_source_inputs(manifest, source_root)
 
     def read_table(relative: str) -> pd.DataFrame:
         path = data_dir / relative
@@ -209,12 +226,14 @@ def load_object_benchmark_data(
 
 def load_paired_benchmark_data(
     data_dir: Path = DATASET_DIR,
+    *,
+    source_root: Path | None = None,
 ) -> tuple[dict[str, pd.DataFrame], dict[str, tuple[EvaluationSet, ...]], dict[str, Any]]:
     """Verify source fingerprints and pairing before fitting any method."""
     manifest_path = data_dir / "manifest.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     if manifest.get("version") == "object-classes-v2":
-        return load_object_benchmark_data(data_dir)
+        return load_object_benchmark_data(data_dir, source_root=source_root)
     if manifest.get("status") != "complete" or manifest.get("seed") != RANDOM_SEED:
         raise ValueError("Macedonian translation package is incomplete or has the wrong seed")
     frames: dict[str, dict[str, pd.DataFrame]] = {}
@@ -369,6 +388,7 @@ def run_bilingual_benchmark(
     learning_rate: float = 2e-4,
     data_dir: Path | None = None,
     seed: int = RANDOM_SEED,
+    source_root: Path | None = None,
 ) -> dict[str, Any]:
     if batch_size < 1 or epochs < 1 or learning_rate <= 0 or seed < 0:
         raise ValueError("Invalid benchmark hyperparameters")
@@ -383,7 +403,7 @@ def run_bilingual_benchmark(
     artifacts_dir.mkdir(parents=True, exist_ok=True)
     started = time.perf_counter()
     training, evaluations, provenance = (
-        load_paired_benchmark_data(data_dir)
+        load_paired_benchmark_data(data_dir, source_root=source_root)
         if data_dir is not None
         else load_paired_benchmark_data()
     )

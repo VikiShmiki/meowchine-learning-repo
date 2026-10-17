@@ -15,6 +15,11 @@ import joblib
 import numpy as np
 
 from smart_recycling.domain import WasteCategory
+from smart_recycling.encoder_artifacts import (
+    EncoderArtifactError,
+    cache_encoder_files,
+    verified_encoder_path,
+)
 
 MODEL_ID = "sentence-transformers/all-MiniLM-L6-v2"
 MODEL_REVISION = "8b3219a92973c328a8e22fadcfa821b5dc75636a"
@@ -66,35 +71,26 @@ def _sha256(path: Path) -> str:
 
 
 def load_encoder(model_path: Path | None = None) -> SentenceEncoder:
-    """Load local bundled weights or the immutable upstream model revision."""
-    if model_path is not None and not model_path.is_dir():
-        raise MiniLMError(f"Bundled MiniLM path does not exist: {model_path}")
+    """Verify all encoder inputs, then load the pinned model without network access."""
     try:
+        verified = verified_encoder_path(MODEL_ID, MODEL_REVISION, model_path)
         from sentence_transformers import SentenceTransformer
 
-        if model_path is not None:
-            model = SentenceTransformer(str(model_path), device="cpu", trust_remote_code=False)
-        else:
-            model = SentenceTransformer(
-                MODEL_ID,
-                revision=MODEL_REVISION,
-                device="cpu",
-                trust_remote_code=False,
-            )
+        model = SentenceTransformer(
+            str(verified), device="cpu", trust_remote_code=False, local_files_only=True
+        )
         model.eval()
         model.requires_grad_(False)
         return model
-    except MiniLMError:
-        raise
+    except EncoderArtifactError as error:
+        raise MiniLMError(str(error)) from error
     except Exception as error:
         raise MiniLMError("Pinned MiniLM encoder could not be loaded") from error
 
 
 def cache_encoder(target: Path) -> None:
-    """Download the pinned encoder once and save it into a deployment image."""
-    model = load_encoder()
-    target.parent.mkdir(parents=True, exist_ok=True)
-    model.save(str(target), safe_serialization=True)
+    """Bundle verified pinned encoder files into a deployment image."""
+    cache_encoder_files(MODEL_ID, MODEL_REVISION, target)
 
 
 class MiniLMSuggester:

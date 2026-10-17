@@ -1,0 +1,3690 @@
+{
+  "dataset": {
+    "version": "ml-development-v3",
+    "seed": 42,
+    "evidence": "Agent-authored development splits; native and independent review pending",
+    "grouping": "Specific authored object concept; broad material families overlap by design",
+    "inputs": {
+      "source:data/processed/dataset_a.csv": "f7a222a4f3853eafa9e4151235d35b76446d0c6530d43473f36b718004c969f4",
+      "repo:data/mappings/needs_manual_review.csv": "3b2de33c6a2c1f27a2f894402214a00db522d29b518e9e68f113f4c0a7f553c5",
+      "repo:data/ml/v3/items.tsv": "3577c59cbfe366a13586892e6f5a9a4d073cf5941f962197867512dd0208cbff",
+      "repo:data/ml/v3/held.tsv": "c956f6c635f0a439dddd96ef33f4da0d0dc3d2c3f30799d82e93ef00c9c5c92c"
+    },
+    "legacy_mk": "All legacy automatic translations quarantined; not used for fitting",
+    "retained_english": 5004,
+    "sampled_source_english": 390,
+    "exclusions": {
+      "mapping_not_currently_approved": 17257,
+      "material_or_object_not_explicit": 3302,
+      "reserved_development_concept": 148
+    },
+    "outputs": {
+      "rows.json": "05c6aa2250085efa812a425ead5e3b3c454fbe540d6f8860f73c9084d7c99d1d",
+      "retained_english.json": "e3f4a90bec475b4529c5a54c8d7c7422e4d3b1fb05871a268386253ee94220c4",
+      "exclusions.json": "8ca08e6eed8aaeecd6aee53e4d41a648ee5150a5bbfe5ad4a3212cce028f83cf"
+    }
+  },
+  "environment": {
+    "python": "3.11.16",
+    "sklearn": "1.9.1"
+  },
+  "code_sha256": {
+    "scripts/train_ml_v3.py": "e7ac6450860c5e272d9e5b7fa33a8033d3634e91fffed843a49eeb59f6f33bea",
+    "src/smart_recycling/data/ml_v3.py": "f1bb67c22f84ea812c631089c341f6a02b0bbdbd670326cd10b92dfddf0dc914",
+    "src/smart_recycling/linear_head.py": "c85b7ae8af0927be3acc71f2ab061e3dc7ba5b57c0c21380ef42e5b658bc020c"
+  },
+  "languages": {
+    "en": {
+      "selection": {
+        "candidates": [
+          {
+            "weighting": "uniform",
+            "C": 0.1,
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.0,
+                  "recall": 0.0,
+                  "f1-score": 0.0,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 0.6666666666666666,
+                  "recall": 0.75,
+                  "f1-score": 0.7058823529411765,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.36363636363636365,
+                  "recall": 1.0,
+                  "f1-score": 0.5333333333333333,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 0.125,
+                  "f1-score": 0.2222222222222222,
+                  "support": 8.0
+                },
+                "accuracy": 0.6458333333333334,
+                "macro avg": {
+                  "precision": 0.6717171717171717,
+                  "recall": 0.6458333333333334,
+                  "f1-score": 0.5769063180827887,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.6717171717171717,
+                  "recall": 0.6458333333333334,
+                  "f1-score": 0.5769063180827887,
+                  "support": 48.0
+                }
+              },
+              "nll": 1.376827597618103
+            }
+          },
+          {
+            "weighting": "uniform",
+            "C": 1.0,
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 1.0,
+                  "recall": 0.875,
+                  "f1-score": 0.9333333333333333,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 0.8571428571428571,
+                  "recall": 0.75,
+                  "f1-score": 0.8,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.7272727272727273,
+                  "recall": 1.0,
+                  "f1-score": 0.8421052631578947,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 0.8571428571428571,
+                  "recall": 0.75,
+                  "f1-score": 0.8,
+                  "support": 8.0
+                },
+                "accuracy": 0.8958333333333334,
+                "macro avg": {
+                  "precision": 0.9069264069264068,
+                  "recall": 0.8958333333333334,
+                  "f1-score": 0.895906432748538,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.9069264069264068,
+                  "recall": 0.8958333333333334,
+                  "f1-score": 0.895906432748538,
+                  "support": 48.0
+                }
+              },
+              "nll": 0.5641860961914062
+            }
+          },
+          {
+            "weighting": "uniform",
+            "C": 10.0,
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 0.8571428571428571,
+                  "recall": 0.75,
+                  "f1-score": 0.8,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.8888888888888888,
+                  "recall": 1.0,
+                  "f1-score": 0.9411764705882353,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 0.875,
+                  "recall": 0.875,
+                  "f1-score": 0.875,
+                  "support": 8.0
+                },
+                "accuracy": 0.9375,
+                "macro avg": {
+                  "precision": 0.9368386243386243,
+                  "recall": 0.9375,
+                  "f1-score": 0.9360294117647059,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.9368386243386243,
+                  "recall": 0.9375,
+                  "f1-score": 0.9360294117647059,
+                  "support": 48.0
+                }
+              },
+              "nll": 0.24294745922088623
+            }
+          },
+          {
+            "weighting": "uniform",
+            "C": 100.0,
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 0.8333333333333334,
+                  "recall": 0.625,
+                  "f1-score": 0.7142857142857143,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.8888888888888888,
+                  "recall": 1.0,
+                  "f1-score": 0.9411764705882353,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 0.7777777777777778,
+                  "recall": 0.875,
+                  "f1-score": 0.8235294117647058,
+                  "support": 8.0
+                },
+                "accuracy": 0.9166666666666666,
+                "macro avg": {
+                  "precision": 0.9166666666666666,
+                  "recall": 0.9166666666666666,
+                  "f1-score": 0.9131652661064426,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.9166666666666666,
+                  "recall": 0.9166666666666666,
+                  "f1-score": 0.9131652661064426,
+                  "support": 48.0
+                }
+              },
+              "nll": 0.1502462774515152
+            }
+          },
+          {
+            "weighting": "class_group",
+            "C": 0.1,
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 1.0,
+                  "recall": 0.875,
+                  "f1-score": 0.9333333333333333,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.8888888888888888,
+                  "recall": 1.0,
+                  "f1-score": 0.9411764705882353,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "accuracy": 0.9791666666666666,
+                "macro avg": {
+                  "precision": 0.9814814814814815,
+                  "recall": 0.9791666666666666,
+                  "f1-score": 0.9790849673202615,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.9814814814814815,
+                  "recall": 0.9791666666666666,
+                  "f1-score": 0.9790849673202615,
+                  "support": 48.0
+                }
+              },
+              "nll": 1.0253276824951172
+            }
+          },
+          {
+            "weighting": "class_group",
+            "C": 1.0,
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 1.0,
+                  "recall": 0.875,
+                  "f1-score": 0.9333333333333333,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.8888888888888888,
+                  "recall": 1.0,
+                  "f1-score": 0.9411764705882353,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "accuracy": 0.9791666666666666,
+                "macro avg": {
+                  "precision": 0.9814814814814815,
+                  "recall": 0.9791666666666666,
+                  "f1-score": 0.9790849673202615,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.9814814814814815,
+                  "recall": 0.9791666666666666,
+                  "f1-score": 0.9790849673202615,
+                  "support": 48.0
+                }
+              },
+              "nll": 0.3680132329463959
+            }
+          },
+          {
+            "weighting": "class_group",
+            "C": 10.0,
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 1.0,
+                  "recall": 0.875,
+                  "f1-score": 0.9333333333333333,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.8888888888888888,
+                  "recall": 1.0,
+                  "f1-score": 0.9411764705882353,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "accuracy": 0.9791666666666666,
+                "macro avg": {
+                  "precision": 0.9814814814814815,
+                  "recall": 0.9791666666666666,
+                  "f1-score": 0.9790849673202615,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.9814814814814815,
+                  "recall": 0.9791666666666666,
+                  "f1-score": 0.9790849673202615,
+                  "support": 48.0
+                }
+              },
+              "nll": 0.15994396805763245
+            }
+          },
+          {
+            "weighting": "class_group",
+            "C": 100.0,
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 1.0,
+                  "recall": 0.75,
+                  "f1-score": 0.8571428571428571,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.8888888888888888,
+                  "recall": 1.0,
+                  "f1-score": 0.9411764705882353,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 0.8888888888888888,
+                  "recall": 1.0,
+                  "f1-score": 0.9411764705882353,
+                  "support": 8.0
+                },
+                "accuracy": 0.9583333333333334,
+                "macro avg": {
+                  "precision": 0.9629629629629631,
+                  "recall": 0.9583333333333334,
+                  "f1-score": 0.9565826330532213,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.9629629629629631,
+                  "recall": 0.9583333333333334,
+                  "f1-score": 0.9565826330532213,
+                  "support": 48.0
+                }
+              },
+              "nll": 0.10232441872358322
+            }
+          }
+        ],
+        "selected": 6,
+        "tfidf_candidates": [
+          {
+            "C": 0.1,
+            "weighting": "uniform",
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.0,
+                  "recall": 0.0,
+                  "f1-score": 0.0,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 1.0,
+                  "recall": 0.375,
+                  "f1-score": 0.5454545454545454,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.27586206896551724,
+                  "recall": 1.0,
+                  "f1-score": 0.43243243243243246,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 0.75,
+                  "f1-score": 0.8571428571428571,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 0.25,
+                  "f1-score": 0.4,
+                  "support": 8.0
+                },
+                "accuracy": 0.5625,
+                "macro avg": {
+                  "precision": 0.7126436781609197,
+                  "recall": 0.5625,
+                  "f1-score": 0.5391716391716391,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.7126436781609197,
+                  "recall": 0.5625,
+                  "f1-score": 0.5391716391716391,
+                  "support": 48.0
+                }
+              },
+              "nll": 1.6714015299743377
+            }
+          },
+          {
+            "C": 1.0,
+            "weighting": "uniform",
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.0,
+                  "recall": 0.0,
+                  "f1-score": 0.0,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 0.35,
+                  "recall": 0.875,
+                  "f1-score": 0.5,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.8888888888888888,
+                  "recall": 1.0,
+                  "f1-score": 0.9411764705882353,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 0.375,
+                  "f1-score": 0.5454545454545454,
+                  "support": 8.0
+                },
+                "accuracy": 0.7083333333333334,
+                "macro avg": {
+                  "precision": 0.7064814814814815,
+                  "recall": 0.7083333333333334,
+                  "f1-score": 0.6644385026737968,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.7064814814814815,
+                  "recall": 0.7083333333333334,
+                  "f1-score": 0.6644385026737968,
+                  "support": 48.0
+                }
+              },
+              "nll": 1.0066686789859223
+            }
+          },
+          {
+            "C": 10.0,
+            "weighting": "uniform",
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.0,
+                  "recall": 0.0,
+                  "f1-score": 0.0,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 0.4117647058823529,
+                  "recall": 0.875,
+                  "f1-score": 0.56,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.8888888888888888,
+                  "recall": 1.0,
+                  "f1-score": 0.9411764705882353,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 0.75,
+                  "f1-score": 0.8571428571428571,
+                  "support": 8.0
+                },
+                "accuracy": 0.7708333333333334,
+                "macro avg": {
+                  "precision": 0.7167755991285403,
+                  "recall": 0.7708333333333334,
+                  "f1-score": 0.7263865546218486,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.7167755991285403,
+                  "recall": 0.7708333333333334,
+                  "f1-score": 0.7263865546218486,
+                  "support": 48.0
+                }
+              },
+              "nll": 0.6727005328992774
+            }
+          },
+          {
+            "C": 100.0,
+            "weighting": "uniform",
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.0,
+                  "recall": 0.0,
+                  "f1-score": 0.0,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 0.4117647058823529,
+                  "recall": 0.875,
+                  "f1-score": 0.56,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.8888888888888888,
+                  "recall": 1.0,
+                  "f1-score": 0.9411764705882353,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 0.75,
+                  "f1-score": 0.8571428571428571,
+                  "support": 8.0
+                },
+                "accuracy": 0.7708333333333334,
+                "macro avg": {
+                  "precision": 0.7167755991285403,
+                  "recall": 0.7708333333333334,
+                  "f1-score": 0.7263865546218486,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.7167755991285403,
+                  "recall": 0.7708333333333334,
+                  "f1-score": 0.7263865546218486,
+                  "support": 48.0
+                }
+              },
+              "nll": 0.5695644329953113
+            }
+          },
+          {
+            "C": 0.1,
+            "weighting": "class_group",
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.0,
+                  "recall": 0.0,
+                  "f1-score": 0.0,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 0.4117647058823529,
+                  "recall": 0.875,
+                  "f1-score": 0.56,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.8888888888888888,
+                  "recall": 1.0,
+                  "f1-score": 0.9411764705882353,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 0.75,
+                  "f1-score": 0.8571428571428571,
+                  "support": 8.0
+                },
+                "accuracy": 0.7708333333333334,
+                "macro avg": {
+                  "precision": 0.7167755991285403,
+                  "recall": 0.7708333333333334,
+                  "f1-score": 0.7263865546218486,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.7167755991285403,
+                  "recall": 0.7708333333333334,
+                  "f1-score": 0.7263865546218486,
+                  "support": 48.0
+                }
+              },
+              "nll": 1.3708880303446414
+            }
+          },
+          {
+            "C": 1.0,
+            "weighting": "class_group",
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.0,
+                  "recall": 0.0,
+                  "f1-score": 0.0,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 0.4117647058823529,
+                  "recall": 0.875,
+                  "f1-score": 0.56,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.875,
+                  "recall": 0.875,
+                  "f1-score": 0.875,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 0.8571428571428571,
+                  "recall": 0.75,
+                  "f1-score": 0.8,
+                  "support": 8.0
+                },
+                "accuracy": 0.75,
+                "macro avg": {
+                  "precision": 0.6906512605042017,
+                  "recall": 0.75,
+                  "f1-score": 0.7058333333333334,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.6906512605042017,
+                  "recall": 0.75,
+                  "f1-score": 0.7058333333333334,
+                  "support": 48.0
+                }
+              },
+              "nll": 0.7456498072335682
+            }
+          },
+          {
+            "C": 10.0,
+            "weighting": "class_group",
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.0,
+                  "recall": 0.0,
+                  "f1-score": 0.0,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 0.4117647058823529,
+                  "recall": 0.875,
+                  "f1-score": 0.56,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.8888888888888888,
+                  "recall": 1.0,
+                  "f1-score": 0.9411764705882353,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 0.75,
+                  "f1-score": 0.8571428571428571,
+                  "support": 8.0
+                },
+                "accuracy": 0.7708333333333334,
+                "macro avg": {
+                  "precision": 0.7167755991285403,
+                  "recall": 0.7708333333333334,
+                  "f1-score": 0.7263865546218486,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.7167755991285403,
+                  "recall": 0.7708333333333334,
+                  "f1-score": 0.7263865546218486,
+                  "support": 48.0
+                }
+              },
+              "nll": 0.5757614320041649
+            }
+          },
+          {
+            "C": 100.0,
+            "weighting": "class_group",
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.0,
+                  "recall": 0.0,
+                  "f1-score": 0.0,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 0.4117647058823529,
+                  "recall": 0.875,
+                  "f1-score": 0.56,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.8888888888888888,
+                  "recall": 1.0,
+                  "f1-score": 0.9411764705882353,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 0.75,
+                  "f1-score": 0.8571428571428571,
+                  "support": 8.0
+                },
+                "accuracy": 0.7708333333333334,
+                "macro avg": {
+                  "precision": 0.7167755991285403,
+                  "recall": 0.7708333333333334,
+                  "f1-score": 0.7263865546218486,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.7167755991285403,
+                  "recall": 0.7708333333333334,
+                  "f1-score": 0.7263865546218486,
+                  "support": 48.0
+                }
+              },
+              "nll": 0.529173868603572
+            }
+          }
+        ],
+        "tfidf_selected": 7,
+        "temperature": 0.28904164946906635,
+        "threshold": 0.99,
+        "similarity_threshold": 0.6,
+        "artifact_sha256": "711cbe2474c9585843f30b5963a8cf3359e8a2a3a0d75d0be2e2f3a8faf2706e"
+      },
+      "evaluations": {
+        "calibration": {
+          "new": {
+            "concept_groups": 60,
+            "supported_rows": 48,
+            "held_rows": 12,
+            "class_report": {
+              "clothes": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1-score": 1.0,
+                "support": 8.0
+              },
+              "electronics": {
+                "precision": 1.0,
+                "recall": 0.75,
+                "f1-score": 0.8571428571428571,
+                "support": 8.0
+              },
+              "glass": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1-score": 1.0,
+                "support": 8.0
+              },
+              "paper_tetrapak": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1-score": 1.0,
+                "support": 8.0
+              },
+              "plastic_metal": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1-score": 1.0,
+                "support": 8.0
+              },
+              "special_unsupported": {
+                "precision": 0.8,
+                "recall": 1.0,
+                "f1-score": 0.8888888888888888,
+                "support": 8.0
+              },
+              "accuracy": 0.9583333333333334,
+              "macro avg": {
+                "precision": 0.9666666666666667,
+                "recall": 0.9583333333333334,
+                "f1-score": 0.9576719576719578,
+                "support": 48.0
+              },
+              "weighted avg": {
+                "precision": 0.9666666666666667,
+                "recall": 0.9583333333333334,
+                "f1-score": 0.9576719576719578,
+                "support": 48.0
+              }
+            },
+            "nll": 0.09045932396791108,
+            "accepted": 29,
+            "supported_coverage": 0.6041666666666666,
+            "accepted_accuracy": 1.0,
+            "held_false_suggestions": 0
+          },
+          "old": {
+            "concept_groups": 60,
+            "supported_rows": 48,
+            "held_rows": 12,
+            "class_report": {
+              "clothes": {
+                "precision": 1.0,
+                "recall": 0.75,
+                "f1-score": 0.8571428571428571,
+                "support": 8.0
+              },
+              "electronics": {
+                "precision": 0.47058823529411764,
+                "recall": 1.0,
+                "f1-score": 0.64,
+                "support": 8.0
+              },
+              "glass": {
+                "precision": 0.6363636363636364,
+                "recall": 0.875,
+                "f1-score": 0.7368421052631579,
+                "support": 8.0
+              },
+              "paper_tetrapak": {
+                "precision": 0.875,
+                "recall": 0.875,
+                "f1-score": 0.875,
+                "support": 8.0
+              },
+              "plastic_metal": {
+                "precision": 1.0,
+                "recall": 0.5,
+                "f1-score": 0.6666666666666666,
+                "support": 8.0
+              },
+              "special_unsupported": {
+                "precision": 1.0,
+                "recall": 0.25,
+                "f1-score": 0.4,
+                "support": 8.0
+              },
+              "accuracy": 0.7083333333333334,
+              "macro avg": {
+                "precision": 0.8303253119429591,
+                "recall": 0.7083333333333334,
+                "f1-score": 0.6959419381787803,
+                "support": 48.0
+              },
+              "weighted avg": {
+                "precision": 0.8303253119429591,
+                "recall": 0.7083333333333334,
+                "f1-score": 0.6959419381787803,
+                "support": 48.0
+              }
+            },
+            "nll": 0.9966035590573256
+          },
+          "tfidf": {
+            "concept_groups": 60,
+            "supported_rows": 48,
+            "held_rows": 12,
+            "class_report": {
+              "clothes": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1-score": 0.0,
+                "support": 8.0
+              },
+              "electronics": {
+                "precision": 0.4444444444444444,
+                "recall": 1.0,
+                "f1-score": 0.6153846153846154,
+                "support": 8.0
+              },
+              "glass": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1-score": 1.0,
+                "support": 8.0
+              },
+              "paper_tetrapak": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1-score": 1.0,
+                "support": 8.0
+              },
+              "plastic_metal": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1-score": 1.0,
+                "support": 8.0
+              },
+              "special_unsupported": {
+                "precision": 1.0,
+                "recall": 0.75,
+                "f1-score": 0.8571428571428571,
+                "support": 8.0
+              },
+              "accuracy": 0.7916666666666666,
+              "macro avg": {
+                "precision": 0.7407407407407408,
+                "recall": 0.7916666666666666,
+                "f1-score": 0.7454212454212454,
+                "support": 48.0
+              },
+              "weighted avg": {
+                "precision": 0.7407407407407408,
+                "recall": 0.7916666666666666,
+                "f1-score": 0.7454212454212454,
+                "support": 48.0
+              }
+            },
+            "nll": 0.5003153290893307
+          },
+          "by_variant": {
+            "0": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 1.0,
+                  "recall": 0.75,
+                  "f1-score": 0.8571428571428571,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 0.8,
+                  "recall": 1.0,
+                  "f1-score": 0.8888888888888888,
+                  "support": 8.0
+                },
+                "accuracy": 0.9583333333333334,
+                "macro avg": {
+                  "precision": 0.9666666666666667,
+                  "recall": 0.9583333333333334,
+                  "f1-score": 0.9576719576719578,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.9666666666666667,
+                  "recall": 0.9583333333333334,
+                  "f1-score": 0.9576719576719578,
+                  "support": 48.0
+                }
+              },
+              "nll": 0.09045932396791108,
+              "accepted": 29,
+              "supported_coverage": 0.6041666666666666,
+              "accepted_accuracy": 1.0,
+              "held_false_suggestions": 0
+            }
+          },
+          "old_by_variant": {
+            "0": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 1.0,
+                  "recall": 0.75,
+                  "f1-score": 0.8571428571428571,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 0.47058823529411764,
+                  "recall": 1.0,
+                  "f1-score": 0.64,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 0.6363636363636364,
+                  "recall": 0.875,
+                  "f1-score": 0.7368421052631579,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.875,
+                  "recall": 0.875,
+                  "f1-score": 0.875,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 0.5,
+                  "f1-score": 0.6666666666666666,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 0.25,
+                  "f1-score": 0.4,
+                  "support": 8.0
+                },
+                "accuracy": 0.7083333333333334,
+                "macro avg": {
+                  "precision": 0.8303253119429591,
+                  "recall": 0.7083333333333334,
+                  "f1-score": 0.6959419381787803,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.8303253119429591,
+                  "recall": 0.7083333333333334,
+                  "f1-score": 0.6959419381787803,
+                  "support": 48.0
+                }
+              },
+              "nll": 0.9966035590573256
+            }
+          }
+        },
+        "test": {
+          "new": {
+            "concept_groups": 60,
+            "supported_rows": 48,
+            "held_rows": 12,
+            "class_report": {
+              "clothes": {
+                "precision": 1.0,
+                "recall": 0.875,
+                "f1-score": 0.9333333333333333,
+                "support": 8.0
+              },
+              "electronics": {
+                "precision": 0.8888888888888888,
+                "recall": 1.0,
+                "f1-score": 0.9411764705882353,
+                "support": 8.0
+              },
+              "glass": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1-score": 1.0,
+                "support": 8.0
+              },
+              "paper_tetrapak": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1-score": 1.0,
+                "support": 8.0
+              },
+              "plastic_metal": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1-score": 1.0,
+                "support": 8.0
+              },
+              "special_unsupported": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1-score": 1.0,
+                "support": 8.0
+              },
+              "accuracy": 0.9791666666666666,
+              "macro avg": {
+                "precision": 0.9814814814814815,
+                "recall": 0.9791666666666666,
+                "f1-score": 0.9790849673202615,
+                "support": 48.0
+              },
+              "weighted avg": {
+                "precision": 0.9814814814814815,
+                "recall": 0.9791666666666666,
+                "f1-score": 0.9790849673202615,
+                "support": 48.0
+              }
+            },
+            "nll": 0.06841251247930323,
+            "accepted": 29,
+            "supported_coverage": 0.5833333333333334,
+            "accepted_accuracy": 0.9655172413793104,
+            "held_false_suggestions": 1
+          },
+          "old": {
+            "concept_groups": 60,
+            "supported_rows": 48,
+            "held_rows": 12,
+            "class_report": {
+              "clothes": {
+                "precision": 1.0,
+                "recall": 0.875,
+                "f1-score": 0.9333333333333333,
+                "support": 8.0
+              },
+              "electronics": {
+                "precision": 0.5333333333333333,
+                "recall": 1.0,
+                "f1-score": 0.6956521739130435,
+                "support": 8.0
+              },
+              "glass": {
+                "precision": 0.6153846153846154,
+                "recall": 1.0,
+                "f1-score": 0.7619047619047619,
+                "support": 8.0
+              },
+              "paper_tetrapak": {
+                "precision": 1.0,
+                "recall": 0.875,
+                "f1-score": 0.9333333333333333,
+                "support": 8.0
+              },
+              "plastic_metal": {
+                "precision": 1.0,
+                "recall": 0.5,
+                "f1-score": 0.6666666666666666,
+                "support": 8.0
+              },
+              "special_unsupported": {
+                "precision": 1.0,
+                "recall": 0.25,
+                "f1-score": 0.4,
+                "support": 8.0
+              },
+              "accuracy": 0.75,
+              "macro avg": {
+                "precision": 0.8581196581196581,
+                "recall": 0.75,
+                "f1-score": 0.7318150448585231,
+                "support": 48.0
+              },
+              "weighted avg": {
+                "precision": 0.8581196581196581,
+                "recall": 0.75,
+                "f1-score": 0.7318150448585231,
+                "support": 48.0
+              }
+            },
+            "nll": 0.9719562047485569
+          },
+          "tfidf": {
+            "concept_groups": 60,
+            "supported_rows": 48,
+            "held_rows": 12,
+            "class_report": {
+              "clothes": {
+                "precision": 1.0,
+                "recall": 0.125,
+                "f1-score": 0.2222222222222222,
+                "support": 8.0
+              },
+              "electronics": {
+                "precision": 0.47058823529411764,
+                "recall": 1.0,
+                "f1-score": 0.64,
+                "support": 8.0
+              },
+              "glass": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1-score": 1.0,
+                "support": 8.0
+              },
+              "paper_tetrapak": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1-score": 1.0,
+                "support": 8.0
+              },
+              "plastic_metal": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1-score": 1.0,
+                "support": 8.0
+              },
+              "special_unsupported": {
+                "precision": 1.0,
+                "recall": 0.75,
+                "f1-score": 0.8571428571428571,
+                "support": 8.0
+              },
+              "accuracy": 0.8125,
+              "macro avg": {
+                "precision": 0.9117647058823529,
+                "recall": 0.8125,
+                "f1-score": 0.7865608465608465,
+                "support": 48.0
+              },
+              "weighted avg": {
+                "precision": 0.9117647058823529,
+                "recall": 0.8125,
+                "f1-score": 0.7865608465608465,
+                "support": 48.0
+              }
+            },
+            "nll": 0.45933557059534585
+          },
+          "by_variant": {
+            "0": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 1.0,
+                  "recall": 0.875,
+                  "f1-score": 0.9333333333333333,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 0.8888888888888888,
+                  "recall": 1.0,
+                  "f1-score": 0.9411764705882353,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 8.0
+                },
+                "accuracy": 0.9791666666666666,
+                "macro avg": {
+                  "precision": 0.9814814814814815,
+                  "recall": 0.9791666666666666,
+                  "f1-score": 0.9790849673202615,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.9814814814814815,
+                  "recall": 0.9791666666666666,
+                  "f1-score": 0.9790849673202615,
+                  "support": 48.0
+                }
+              },
+              "nll": 0.06841251247930323,
+              "accepted": 29,
+              "supported_coverage": 0.5833333333333334,
+              "accepted_accuracy": 0.9655172413793104,
+              "held_false_suggestions": 1
+            }
+          },
+          "old_by_variant": {
+            "0": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 1.0,
+                  "recall": 0.875,
+                  "f1-score": 0.9333333333333333,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 0.5333333333333333,
+                  "recall": 1.0,
+                  "f1-score": 0.6956521739130435,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 0.6153846153846154,
+                  "recall": 1.0,
+                  "f1-score": 0.7619047619047619,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 1.0,
+                  "recall": 0.875,
+                  "f1-score": 0.9333333333333333,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 0.5,
+                  "f1-score": 0.6666666666666666,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 0.25,
+                  "f1-score": 0.4,
+                  "support": 8.0
+                },
+                "accuracy": 0.75,
+                "macro avg": {
+                  "precision": 0.8581196581196581,
+                  "recall": 0.75,
+                  "f1-score": 0.7318150448585231,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.8581196581196581,
+                  "recall": 0.75,
+                  "f1-score": 0.7318150448585231,
+                  "support": 48.0
+                }
+              },
+              "nll": 0.9719562047485569
+            }
+          }
+        }
+      }
+    },
+    "mk": {
+      "selection": {
+        "candidates": [
+          {
+            "weighting": "uniform",
+            "C": 0.1,
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 116,
+              "held_rows": 33,
+              "class_report": {
+                "clothes": {
+                  "precision": 1.0,
+                  "recall": 0.05263157894736842,
+                  "f1-score": 0.1,
+                  "support": 19.0
+                },
+                "electronics": {
+                  "precision": 0.8666666666666667,
+                  "recall": 0.65,
+                  "f1-score": 0.7428571428571429,
+                  "support": 20.0
+                },
+                "glass": {
+                  "precision": 0.875,
+                  "recall": 0.6363636363636364,
+                  "f1-score": 0.7368421052631579,
+                  "support": 22.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.3076923076923077,
+                  "recall": 0.9411764705882353,
+                  "f1-score": 0.463768115942029,
+                  "support": 17.0
+                },
+                "plastic_metal": {
+                  "precision": 0.5925925925925926,
+                  "recall": 0.7619047619047619,
+                  "f1-score": 0.6666666666666666,
+                  "support": 21.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 0.29411764705882354,
+                  "f1-score": 0.45454545454545453,
+                  "support": 17.0
+                },
+                "accuracy": 0.5603448275862069,
+                "macro avg": {
+                  "precision": 0.7736585944919279,
+                  "recall": 0.5560323491438042,
+                  "f1-score": 0.5274465808790751,
+                  "support": 116.0
+                },
+                "weighted avg": {
+                  "precision": 0.7780909224874742,
+                  "recall": 0.5603448275862069,
+                  "f1-score": 0.5394741368208582,
+                  "support": 116.0
+                }
+              },
+              "nll": 1.2692933082580566
+            }
+          },
+          {
+            "weighting": "uniform",
+            "C": 1.0,
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 116,
+              "held_rows": 33,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.7727272727272727,
+                  "recall": 0.8947368421052632,
+                  "f1-score": 0.8292682926829268,
+                  "support": 19.0
+                },
+                "electronics": {
+                  "precision": 1.0,
+                  "recall": 0.5,
+                  "f1-score": 0.6666666666666666,
+                  "support": 20.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 0.8181818181818182,
+                  "f1-score": 0.9,
+                  "support": 22.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.6086956521739131,
+                  "recall": 0.8235294117647058,
+                  "f1-score": 0.7,
+                  "support": 17.0
+                },
+                "plastic_metal": {
+                  "precision": 0.7083333333333334,
+                  "recall": 0.8095238095238095,
+                  "f1-score": 0.7555555555555555,
+                  "support": 21.0
+                },
+                "special_unsupported": {
+                  "precision": 0.7894736842105263,
+                  "recall": 0.8823529411764706,
+                  "f1-score": 0.8333333333333334,
+                  "support": 17.0
+                },
+                "accuracy": 0.7844827586206896,
+                "macro avg": {
+                  "precision": 0.8132049904075075,
+                  "recall": 0.7880541371253447,
+                  "f1-score": 0.7808039747064136,
+                  "support": 116.0
+                },
+                "weighted avg": {
+                  "precision": 0.8217732491409797,
+                  "recall": 0.7844827586206896,
+                  "f1-score": 0.782954864031399,
+                  "support": 116.0
+                }
+              },
+              "nll": 0.7236735820770264
+            }
+          },
+          {
+            "weighting": "uniform",
+            "C": 10.0,
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 116,
+              "held_rows": 33,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.8,
+                  "recall": 0.8421052631578947,
+                  "f1-score": 0.8205128205128205,
+                  "support": 19.0
+                },
+                "electronics": {
+                  "precision": 0.9285714285714286,
+                  "recall": 0.65,
+                  "f1-score": 0.7647058823529411,
+                  "support": 20.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 0.8181818181818182,
+                  "f1-score": 0.9,
+                  "support": 22.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.5833333333333334,
+                  "recall": 0.8235294117647058,
+                  "f1-score": 0.6829268292682927,
+                  "support": 17.0
+                },
+                "plastic_metal": {
+                  "precision": 0.7727272727272727,
+                  "recall": 0.8095238095238095,
+                  "f1-score": 0.7906976744186046,
+                  "support": 21.0
+                },
+                "special_unsupported": {
+                  "precision": 0.8888888888888888,
+                  "recall": 0.9411764705882353,
+                  "f1-score": 0.9142857142857143,
+                  "support": 17.0
+                },
+                "accuracy": 0.8103448275862069,
+                "macro avg": {
+                  "precision": 0.8289201539201541,
+                  "recall": 0.8140861288694107,
+                  "f1-score": 0.8121881534730623,
+                  "support": 116.0
+                },
+                "weighted avg": {
+                  "precision": 0.836435164452406,
+                  "recall": 0.8103448275862069,
+                  "f1-score": 0.8141476348276829,
+                  "support": 116.0
+                }
+              },
+              "nll": 0.4945797324180603
+            }
+          },
+          {
+            "weighting": "uniform",
+            "C": 100.0,
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 116,
+              "held_rows": 33,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.8421052631578947,
+                  "recall": 0.8421052631578947,
+                  "f1-score": 0.8421052631578947,
+                  "support": 19.0
+                },
+                "electronics": {
+                  "precision": 0.9411764705882353,
+                  "recall": 0.8,
+                  "f1-score": 0.8648648648648649,
+                  "support": 20.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 0.8181818181818182,
+                  "f1-score": 0.9,
+                  "support": 22.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.5652173913043478,
+                  "recall": 0.7647058823529411,
+                  "f1-score": 0.65,
+                  "support": 17.0
+                },
+                "plastic_metal": {
+                  "precision": 0.7727272727272727,
+                  "recall": 0.8095238095238095,
+                  "f1-score": 0.7906976744186046,
+                  "support": 21.0
+                },
+                "special_unsupported": {
+                  "precision": 0.9411764705882353,
+                  "recall": 0.9411764705882353,
+                  "f1-score": 0.9411764705882353,
+                  "support": 17.0
+                },
+                "accuracy": 0.8275862068965517,
+                "macro avg": {
+                  "precision": 0.843733811394331,
+                  "recall": 0.8292822073007832,
+                  "f1-score": 0.8314740455049332,
+                  "support": 116.0
+                },
+                "weighted avg": {
+                  "precision": 0.8505129119932013,
+                  "recall": 0.8275862068965517,
+                  "f1-score": 0.8340685212076551,
+                  "support": 116.0
+                }
+              },
+              "nll": 0.45488443970680237
+            }
+          },
+          {
+            "weighting": "class_group",
+            "C": 0.1,
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 116,
+              "held_rows": 33,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.6923076923076923,
+                  "recall": 0.9473684210526315,
+                  "f1-score": 0.8,
+                  "support": 19.0
+                },
+                "electronics": {
+                  "precision": 1.0,
+                  "recall": 0.45,
+                  "f1-score": 0.6206896551724138,
+                  "support": 20.0
+                },
+                "glass": {
+                  "precision": 0.95,
+                  "recall": 0.8636363636363636,
+                  "f1-score": 0.9047619047619048,
+                  "support": 22.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.7058823529411765,
+                  "recall": 0.7058823529411765,
+                  "f1-score": 0.7058823529411765,
+                  "support": 17.0
+                },
+                "plastic_metal": {
+                  "precision": 0.7272727272727273,
+                  "recall": 0.7619047619047619,
+                  "f1-score": 0.7441860465116279,
+                  "support": 21.0
+                },
+                "special_unsupported": {
+                  "precision": 0.7272727272727273,
+                  "recall": 0.9411764705882353,
+                  "f1-score": 0.8205128205128205,
+                  "support": 17.0
+                },
+                "accuracy": 0.7758620689655172,
+                "macro avg": {
+                  "precision": 0.8004559166323872,
+                  "recall": 0.7783280616871949,
+                  "f1-score": 0.7660054633166573,
+                  "support": 116.0
+                },
+                "weighted avg": {
+                  "precision": 0.8076742223293947,
+                  "recall": 0.7758620689655172,
+                  "f1-score": 0.7680618959799337,
+                  "support": 116.0
+                }
+              },
+              "nll": 1.1644957065582275
+            }
+          },
+          {
+            "weighting": "class_group",
+            "C": 1.0,
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 116,
+              "held_rows": 33,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.8,
+                  "recall": 0.8421052631578947,
+                  "f1-score": 0.8205128205128205,
+                  "support": 19.0
+                },
+                "electronics": {
+                  "precision": 1.0,
+                  "recall": 0.55,
+                  "f1-score": 0.7096774193548387,
+                  "support": 20.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 0.8636363636363636,
+                  "f1-score": 0.926829268292683,
+                  "support": 22.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.6363636363636364,
+                  "recall": 0.8235294117647058,
+                  "f1-score": 0.717948717948718,
+                  "support": 17.0
+                },
+                "plastic_metal": {
+                  "precision": 0.7083333333333334,
+                  "recall": 0.8095238095238095,
+                  "f1-score": 0.7555555555555555,
+                  "support": 21.0
+                },
+                "special_unsupported": {
+                  "precision": 0.8,
+                  "recall": 0.9411764705882353,
+                  "f1-score": 0.8648648648648649,
+                  "support": 17.0
+                },
+                "accuracy": 0.8017241379310345,
+                "macro avg": {
+                  "precision": 0.8241161616161615,
+                  "recall": 0.8049952197785015,
+                  "f1-score": 0.7992314410882467,
+                  "support": 116.0
+                },
+                "weighted avg": {
+                  "precision": 0.8318377742946709,
+                  "recall": 0.8017241379310345,
+                  "f1-score": 0.8012761504635946,
+                  "support": 116.0
+                }
+              },
+              "nll": 0.6518499851226807
+            }
+          },
+          {
+            "weighting": "class_group",
+            "C": 10.0,
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 116,
+              "held_rows": 33,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.8,
+                  "recall": 0.8421052631578947,
+                  "f1-score": 0.8205128205128205,
+                  "support": 19.0
+                },
+                "electronics": {
+                  "precision": 1.0,
+                  "recall": 0.75,
+                  "f1-score": 0.8571428571428571,
+                  "support": 20.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 0.8636363636363636,
+                  "f1-score": 0.926829268292683,
+                  "support": 22.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.6363636363636364,
+                  "recall": 0.8235294117647058,
+                  "f1-score": 0.717948717948718,
+                  "support": 17.0
+                },
+                "plastic_metal": {
+                  "precision": 0.7272727272727273,
+                  "recall": 0.7619047619047619,
+                  "f1-score": 0.7441860465116279,
+                  "support": 21.0
+                },
+                "special_unsupported": {
+                  "precision": 0.8888888888888888,
+                  "recall": 0.9411764705882353,
+                  "f1-score": 0.9142857142857143,
+                  "support": 17.0
+                },
+                "accuracy": 0.8275862068965517,
+                "macro avg": {
+                  "precision": 0.8420875420875419,
+                  "recall": 0.8303920451753269,
+                  "f1-score": 0.8301509041157368,
+                  "support": 116.0
+                },
+                "weighted avg": {
+                  "precision": 0.8482932776036224,
+                  "recall": 0.8275862068965517,
+                  "f1-score": 0.831885663446287,
+                  "support": 116.0
+                }
+              },
+              "nll": 0.4586549699306488
+            }
+          },
+          {
+            "weighting": "class_group",
+            "C": 100.0,
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 116,
+              "held_rows": 33,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.8,
+                  "recall": 0.8421052631578947,
+                  "f1-score": 0.8205128205128205,
+                  "support": 19.0
+                },
+                "electronics": {
+                  "precision": 0.9375,
+                  "recall": 0.75,
+                  "f1-score": 0.8333333333333334,
+                  "support": 20.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 0.8636363636363636,
+                  "f1-score": 0.926829268292683,
+                  "support": 22.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.6190476190476191,
+                  "recall": 0.7647058823529411,
+                  "f1-score": 0.6842105263157895,
+                  "support": 17.0
+                },
+                "plastic_metal": {
+                  "precision": 0.7272727272727273,
+                  "recall": 0.7619047619047619,
+                  "f1-score": 0.7441860465116279,
+                  "support": 21.0
+                },
+                "special_unsupported": {
+                  "precision": 0.8888888888888888,
+                  "recall": 0.9411764705882353,
+                  "f1-score": 0.9142857142857143,
+                  "support": 17.0
+                },
+                "accuracy": 0.8189655172413793,
+                "macro avg": {
+                  "precision": 0.8287848725348725,
+                  "recall": 0.8205881236066994,
+                  "f1-score": 0.8205596182086614,
+                  "support": 116.0
+                },
+                "weighted avg": {
+                  "precision": 0.8349797233417923,
+                  "recall": 0.8189655172413793,
+                  "f1-score": 0.8228361829811985,
+                  "support": 116.0
+                }
+              },
+              "nll": 0.4398691952228546
+            }
+          }
+        ],
+        "selected": 3,
+        "tfidf_candidates": [
+          {
+            "C": 0.1,
+            "weighting": "uniform",
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 116,
+              "held_rows": 33,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.0,
+                  "recall": 0.0,
+                  "f1-score": 0.0,
+                  "support": 19.0
+                },
+                "electronics": {
+                  "precision": 0.0,
+                  "recall": 0.0,
+                  "f1-score": 0.0,
+                  "support": 20.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 22.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.22666666666666666,
+                  "recall": 1.0,
+                  "f1-score": 0.3695652173913043,
+                  "support": 17.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 0.9047619047619048,
+                  "f1-score": 0.95,
+                  "support": 21.0
+                },
+                "special_unsupported": {
+                  "precision": 0.0,
+                  "recall": 0.0,
+                  "f1-score": 0.0,
+                  "support": 17.0
+                },
+                "accuracy": 0.5,
+                "macro avg": {
+                  "precision": 0.3711111111111111,
+                  "recall": 0.48412698412698413,
+                  "f1-score": 0.3865942028985507,
+                  "support": 116.0
+                },
+                "weighted avg": {
+                  "precision": 0.40390804597701147,
+                  "recall": 0.5,
+                  "f1-score": 0.4157983508245877,
+                  "support": 116.0
+                }
+              },
+              "nll": 1.711293965227775
+            }
+          },
+          {
+            "C": 1.0,
+            "weighting": "uniform",
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 116,
+              "held_rows": 33,
+              "class_report": {
+                "clothes": {
+                  "precision": 1.0,
+                  "recall": 0.10526315789473684,
+                  "f1-score": 0.19047619047619047,
+                  "support": 19.0
+                },
+                "electronics": {
+                  "precision": 0.3953488372093023,
+                  "recall": 0.85,
+                  "f1-score": 0.5396825396825397,
+                  "support": 20.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 22.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.7727272727272727,
+                  "recall": 1.0,
+                  "f1-score": 0.8717948717948718,
+                  "support": 17.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 0.9047619047619048,
+                  "f1-score": 0.95,
+                  "support": 21.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 0.47058823529411764,
+                  "f1-score": 0.64,
+                  "support": 17.0
+                },
+                "accuracy": 0.7327586206896551,
+                "macro avg": {
+                  "precision": 0.8613460183227625,
+                  "recall": 0.7217688829917931,
+                  "f1-score": 0.6986589336589336,
+                  "support": 116.0
+                },
+                "weighted avg": {
+                  "precision": 0.8624425894874972,
+                  "recall": 0.7327586206896551,
+                  "f1-score": 0.7074414761483727,
+                  "support": 116.0
+                }
+              },
+              "nll": 1.135133089157991
+            }
+          },
+          {
+            "C": 10.0,
+            "weighting": "uniform",
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 116,
+              "held_rows": 33,
+              "class_report": {
+                "clothes": {
+                  "precision": 1.0,
+                  "recall": 0.10526315789473684,
+                  "f1-score": 0.19047619047619047,
+                  "support": 19.0
+                },
+                "electronics": {
+                  "precision": 0.3953488372093023,
+                  "recall": 0.85,
+                  "f1-score": 0.5396825396825397,
+                  "support": 20.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 22.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.7619047619047619,
+                  "recall": 0.9411764705882353,
+                  "f1-score": 0.8421052631578947,
+                  "support": 17.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 0.9047619047619048,
+                  "f1-score": 0.95,
+                  "support": 21.0
+                },
+                "special_unsupported": {
+                  "precision": 0.8888888888888888,
+                  "recall": 0.47058823529411764,
+                  "f1-score": 0.6153846153846154,
+                  "support": 17.0
+                },
+                "accuracy": 0.7241379310344828,
+                "macro avg": {
+                  "precision": 0.8410237480004922,
+                  "recall": 0.7119649614231657,
+                  "f1-score": 0.6896081014502068,
+                  "support": 116.0
+                },
+                "weighted avg": {
+                  "precision": 0.8445730069627424,
+                  "recall": 0.7241379310344828,
+                  "f1-score": 0.6994829857579404,
+                  "support": 116.0
+                }
+              },
+              "nll": 0.7137405212647396
+            }
+          },
+          {
+            "C": 100.0,
+            "weighting": "uniform",
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 116,
+              "held_rows": 33,
+              "class_report": {
+                "clothes": {
+                  "precision": 1.0,
+                  "recall": 0.10526315789473684,
+                  "f1-score": 0.19047619047619047,
+                  "support": 19.0
+                },
+                "electronics": {
+                  "precision": 0.3953488372093023,
+                  "recall": 0.85,
+                  "f1-score": 0.5396825396825397,
+                  "support": 20.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 22.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.75,
+                  "recall": 0.8823529411764706,
+                  "f1-score": 0.8108108108108109,
+                  "support": 17.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 0.9047619047619048,
+                  "f1-score": 0.95,
+                  "support": 21.0
+                },
+                "special_unsupported": {
+                  "precision": 0.8,
+                  "recall": 0.47058823529411764,
+                  "f1-score": 0.5925925925925926,
+                  "support": 17.0
+                },
+                "accuracy": 0.7155172413793104,
+                "macro avg": {
+                  "precision": 0.8242248062015504,
+                  "recall": 0.7021610398545383,
+                  "f1-score": 0.6805936889270222,
+                  "support": 116.0
+                },
+                "weighted avg": {
+                  "precision": 0.8298015236567762,
+                  "recall": 0.7155172413793104,
+                  "f1-score": 0.691556519573761,
+                  "support": 116.0
+                }
+              },
+              "nll": 0.5972474446060695
+            }
+          },
+          {
+            "C": 0.1,
+            "weighting": "class_group",
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 116,
+              "held_rows": 33,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.48717948717948717,
+                  "recall": 1.0,
+                  "f1-score": 0.6551724137931034,
+                  "support": 19.0
+                },
+                "electronics": {
+                  "precision": 1.0,
+                  "recall": 0.3,
+                  "f1-score": 0.46153846153846156,
+                  "support": 20.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 22.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.7619047619047619,
+                  "recall": 0.9411764705882353,
+                  "f1-score": 0.8421052631578947,
+                  "support": 17.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 0.9047619047619048,
+                  "f1-score": 0.95,
+                  "support": 21.0
+                },
+                "special_unsupported": {
+                  "precision": 0.8888888888888888,
+                  "recall": 0.47058823529411764,
+                  "f1-score": 0.6153846153846154,
+                  "support": 17.0
+                },
+                "accuracy": 0.7758620689655172,
+                "macro avg": {
+                  "precision": 0.8563288563288562,
+                  "recall": 0.769421101774043,
+                  "f1-score": 0.7540334589790124,
+                  "support": 116.0
+                },
+                "weighted avg": {
+                  "precision": 0.864826744137089,
+                  "recall": 0.7758620689655172,
+                  "f1-score": 0.7621239054143178,
+                  "support": 116.0
+                }
+              },
+              "nll": 1.5240761725499141
+            }
+          },
+          {
+            "C": 1.0,
+            "weighting": "class_group",
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 116,
+              "held_rows": 33,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.48717948717948717,
+                  "recall": 1.0,
+                  "f1-score": 0.6551724137931034,
+                  "support": 19.0
+                },
+                "electronics": {
+                  "precision": 1.0,
+                  "recall": 0.3,
+                  "f1-score": 0.46153846153846156,
+                  "support": 20.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 22.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.7619047619047619,
+                  "recall": 0.9411764705882353,
+                  "f1-score": 0.8421052631578947,
+                  "support": 17.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 0.9047619047619048,
+                  "f1-score": 0.95,
+                  "support": 21.0
+                },
+                "special_unsupported": {
+                  "precision": 0.8888888888888888,
+                  "recall": 0.47058823529411764,
+                  "f1-score": 0.6153846153846154,
+                  "support": 17.0
+                },
+                "accuracy": 0.7758620689655172,
+                "macro avg": {
+                  "precision": 0.8563288563288562,
+                  "recall": 0.769421101774043,
+                  "f1-score": 0.7540334589790124,
+                  "support": 116.0
+                },
+                "weighted avg": {
+                  "precision": 0.864826744137089,
+                  "recall": 0.7758620689655172,
+                  "f1-score": 0.7621239054143178,
+                  "support": 116.0
+                }
+              },
+              "nll": 0.9254251009133811
+            }
+          },
+          {
+            "C": 10.0,
+            "weighting": "class_group",
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 116,
+              "held_rows": 33,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.48717948717948717,
+                  "recall": 1.0,
+                  "f1-score": 0.6551724137931034,
+                  "support": 19.0
+                },
+                "electronics": {
+                  "precision": 1.0,
+                  "recall": 0.3,
+                  "f1-score": 0.46153846153846156,
+                  "support": 20.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 22.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.75,
+                  "recall": 0.8823529411764706,
+                  "f1-score": 0.8108108108108109,
+                  "support": 17.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 0.9047619047619048,
+                  "f1-score": 0.95,
+                  "support": 21.0
+                },
+                "special_unsupported": {
+                  "precision": 0.8,
+                  "recall": 0.47058823529411764,
+                  "f1-score": 0.5925925925925926,
+                  "support": 17.0
+                },
+                "accuracy": 0.7672413793103449,
+                "macro avg": {
+                  "precision": 0.8395299145299145,
+                  "recall": 0.7596171802054155,
+                  "f1-score": 0.7450190464558281,
+                  "support": 116.0
+                },
+                "weighted avg": {
+                  "precision": 0.8500552608311228,
+                  "recall": 0.7672413793103449,
+                  "f1-score": 0.7541974392301384,
+                  "support": 116.0
+                }
+              },
+              "nll": 0.6504702077943851
+            }
+          },
+          {
+            "C": 100.0,
+            "weighting": "class_group",
+            "tune": {
+              "concept_groups": 60,
+              "supported_rows": 116,
+              "held_rows": 33,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.48717948717948717,
+                  "recall": 1.0,
+                  "f1-score": 0.6551724137931034,
+                  "support": 19.0
+                },
+                "electronics": {
+                  "precision": 1.0,
+                  "recall": 0.3,
+                  "f1-score": 0.46153846153846156,
+                  "support": 20.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 22.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.75,
+                  "recall": 0.8823529411764706,
+                  "f1-score": 0.8108108108108109,
+                  "support": 17.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 0.9047619047619048,
+                  "f1-score": 0.95,
+                  "support": 21.0
+                },
+                "special_unsupported": {
+                  "precision": 0.8,
+                  "recall": 0.47058823529411764,
+                  "f1-score": 0.5925925925925926,
+                  "support": 17.0
+                },
+                "accuracy": 0.7672413793103449,
+                "macro avg": {
+                  "precision": 0.8395299145299145,
+                  "recall": 0.7596171802054155,
+                  "f1-score": 0.7450190464558281,
+                  "support": 116.0
+                },
+                "weighted avg": {
+                  "precision": 0.8500552608311228,
+                  "recall": 0.7672413793103449,
+                  "f1-score": 0.7541974392301384,
+                  "support": 116.0
+                }
+              },
+              "nll": 0.5746355236162726
+            }
+          }
+        ],
+        "tfidf_selected": 5,
+        "temperature": 1.1153813191533444,
+        "threshold": 0,
+        "similarity_threshold": 0.9,
+        "artifact_sha256": "951010e6803413d16c7b3e15ce0eba5408931ed777479f3c34e9f54f9fb0ce45"
+      },
+      "evaluations": {
+        "calibration": {
+          "new": {
+            "concept_groups": 60,
+            "supported_rows": 119,
+            "held_rows": 31,
+            "class_report": {
+              "clothes": {
+                "precision": 0.9375,
+                "recall": 0.8333333333333334,
+                "f1-score": 0.8823529411764706,
+                "support": 18.0
+              },
+              "electronics": {
+                "precision": 0.8181818181818182,
+                "recall": 0.8571428571428571,
+                "f1-score": 0.8372093023255814,
+                "support": 21.0
+              },
+              "glass": {
+                "precision": 0.76,
+                "recall": 0.95,
+                "f1-score": 0.8444444444444444,
+                "support": 20.0
+              },
+              "paper_tetrapak": {
+                "precision": 0.8333333333333334,
+                "recall": 1.0,
+                "f1-score": 0.9090909090909091,
+                "support": 20.0
+              },
+              "plastic_metal": {
+                "precision": 0.9444444444444444,
+                "recall": 0.8095238095238095,
+                "f1-score": 0.8717948717948718,
+                "support": 21.0
+              },
+              "special_unsupported": {
+                "precision": 0.9285714285714286,
+                "recall": 0.6842105263157895,
+                "f1-score": 0.7878787878787878,
+                "support": 19.0
+              },
+              "accuracy": 0.8571428571428571,
+              "macro avg": {
+                "precision": 0.8703385040885041,
+                "recall": 0.855701754385965,
+                "f1-score": 0.855461876118511,
+                "support": 119.0
+              },
+              "weighted avg": {
+                "precision": 0.8689048346611372,
+                "recall": 0.8571428571428571,
+                "f1-score": 0.8555617196479834,
+                "support": 119.0
+              }
+            },
+            "nll": 0.3649544253132847,
+            "accepted": 30,
+            "supported_coverage": 0.25210084033613445,
+            "accepted_accuracy": 0.9666666666666667,
+            "held_false_suggestions": 0
+          },
+          "old": {
+            "concept_groups": 60,
+            "supported_rows": 119,
+            "held_rows": 31,
+            "class_report": {
+              "clothes": {
+                "precision": 0.9230769230769231,
+                "recall": 0.6666666666666666,
+                "f1-score": 0.7741935483870968,
+                "support": 18.0
+              },
+              "electronics": {
+                "precision": 0.328125,
+                "recall": 1.0,
+                "f1-score": 0.49411764705882355,
+                "support": 21.0
+              },
+              "glass": {
+                "precision": 0.5909090909090909,
+                "recall": 0.65,
+                "f1-score": 0.6190476190476191,
+                "support": 20.0
+              },
+              "paper_tetrapak": {
+                "precision": 0.6666666666666666,
+                "recall": 0.2,
+                "f1-score": 0.3076923076923077,
+                "support": 20.0
+              },
+              "plastic_metal": {
+                "precision": 0.2222222222222222,
+                "recall": 0.09523809523809523,
+                "f1-score": 0.13333333333333333,
+                "support": 21.0
+              },
+              "special_unsupported": {
+                "precision": 1.0,
+                "recall": 0.2631578947368421,
+                "f1-score": 0.4166666666666667,
+                "support": 19.0
+              },
+              "accuracy": 0.4789915966386555,
+              "macro avg": {
+                "precision": 0.6218333171458171,
+                "recall": 0.4791771094402673,
+                "f1-score": 0.45750852036430784,
+                "support": 119.0
+              },
+              "weighted avg": {
+                "precision": 0.6077663145677851,
+                "recall": 0.4789915966386555,
+                "f1-score": 0.45011277025771623,
+                "support": 119.0
+              }
+            },
+            "nll": 1.5676992422612377
+          },
+          "tfidf": {
+            "concept_groups": 60,
+            "supported_rows": 119,
+            "held_rows": 31,
+            "class_report": {
+              "clothes": {
+                "precision": 0.5357142857142857,
+                "recall": 0.8333333333333334,
+                "f1-score": 0.6521739130434783,
+                "support": 18.0
+              },
+              "electronics": {
+                "precision": 0.52,
+                "recall": 0.6190476190476191,
+                "f1-score": 0.5652173913043478,
+                "support": 21.0
+              },
+              "glass": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1-score": 1.0,
+                "support": 20.0
+              },
+              "paper_tetrapak": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1-score": 1.0,
+                "support": 20.0
+              },
+              "plastic_metal": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1-score": 1.0,
+                "support": 21.0
+              },
+              "special_unsupported": {
+                "precision": 1.0,
+                "recall": 0.2631578947368421,
+                "f1-score": 0.4166666666666667,
+                "support": 19.0
+              },
+              "accuracy": 0.7899159663865546,
+              "macro avg": {
+                "precision": 0.8426190476190477,
+                "recall": 0.7859231411862991,
+                "f1-score": 0.7723429951690822,
+                "support": 119.0
+              },
+              "weighted avg": {
+                "precision": 0.8450660264105642,
+                "recall": 0.7899159663865546,
+                "f1-score": 0.7775240530995007,
+                "support": 119.0
+              }
+            },
+            "nll": 0.9143934887952132
+          },
+          "by_variant": {
+            "0": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.875,
+                  "recall": 0.875,
+                  "f1-score": 0.875,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 0.7142857142857143,
+                  "recall": 0.625,
+                  "f1-score": 0.6666666666666666,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 0.8,
+                  "recall": 1.0,
+                  "f1-score": 0.8888888888888888,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.8888888888888888,
+                  "recall": 1.0,
+                  "f1-score": 0.9411764705882353,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 0.875,
+                  "f1-score": 0.9333333333333333,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 0.8571428571428571,
+                  "recall": 0.75,
+                  "f1-score": 0.8,
+                  "support": 8.0
+                },
+                "accuracy": 0.8541666666666666,
+                "macro avg": {
+                  "precision": 0.8558862433862434,
+                  "recall": 0.8541666666666666,
+                  "f1-score": 0.8508442265795207,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.8558862433862434,
+                  "recall": 0.8541666666666666,
+                  "f1-score": 0.8508442265795207,
+                  "support": 48.0
+                }
+              },
+              "nll": 0.2847056886740883,
+              "accepted": 7,
+              "supported_coverage": 0.14583333333333334,
+              "accepted_accuracy": 1.0,
+              "held_false_suggestions": 0
+            },
+            "1": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 1.0,
+                  "recall": 0.875,
+                  "f1-score": 0.9333333333333333,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 0.8888888888888888,
+                  "recall": 1.0,
+                  "f1-score": 0.9411764705882353,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 0.7777777777777778,
+                  "recall": 0.875,
+                  "f1-score": 0.8235294117647058,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.8888888888888888,
+                  "recall": 1.0,
+                  "f1-score": 0.9411764705882353,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 0.875,
+                  "recall": 0.875,
+                  "f1-score": 0.875,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 0.75,
+                  "f1-score": 0.8571428571428571,
+                  "support": 8.0
+                },
+                "accuracy": 0.8958333333333334,
+                "macro avg": {
+                  "precision": 0.9050925925925926,
+                  "recall": 0.8958333333333334,
+                  "f1-score": 0.8952264239028945,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.9050925925925926,
+                  "recall": 0.8958333333333334,
+                  "f1-score": 0.8952264239028945,
+                  "support": 48.0
+                }
+              },
+              "nll": 0.3568038416912944,
+              "accepted": 14,
+              "supported_coverage": 0.2916666666666667,
+              "accepted_accuracy": 0.9285714285714286,
+              "held_false_suggestions": 0
+            },
+            "2": {
+              "concept_groups": 30,
+              "supported_rows": 23,
+              "held_rows": 7,
+              "class_report": {
+                "clothes": {
+                  "precision": 1.0,
+                  "recall": 0.5,
+                  "f1-score": 0.6666666666666666,
+                  "support": 2.0
+                },
+                "electronics": {
+                  "precision": 0.8333333333333334,
+                  "recall": 1.0,
+                  "f1-score": 0.9090909090909091,
+                  "support": 5.0
+                },
+                "glass": {
+                  "precision": 0.6666666666666666,
+                  "recall": 1.0,
+                  "f1-score": 0.8,
+                  "support": 4.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.6666666666666666,
+                  "recall": 1.0,
+                  "f1-score": 0.8,
+                  "support": 4.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 0.6,
+                  "f1-score": 0.75,
+                  "support": 5.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 0.3333333333333333,
+                  "f1-score": 0.5,
+                  "support": 3.0
+                },
+                "accuracy": 0.782608695652174,
+                "macro avg": {
+                  "precision": 0.861111111111111,
+                  "recall": 0.7388888888888888,
+                  "f1-score": 0.7376262626262626,
+                  "support": 23.0
+                },
+                "weighted avg": {
+                  "precision": 0.8478260869565217,
+                  "recall": 0.782608695652174,
+                  "f1-score": 0.7621212121212121,
+                  "support": 23.0
+                }
+              },
+              "nll": 0.5494399632496747,
+              "accepted": 9,
+              "supported_coverage": 0.391304347826087,
+              "accepted_accuracy": 1.0,
+              "held_false_suggestions": 0
+            }
+          },
+          "old_by_variant": {
+            "0": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 1.0,
+                  "recall": 0.625,
+                  "f1-score": 0.7692307692307693,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 0.36363636363636365,
+                  "recall": 1.0,
+                  "f1-score": 0.5333333333333333,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 0.6153846153846154,
+                  "recall": 1.0,
+                  "f1-score": 0.7619047619047619,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 1.0,
+                  "recall": 0.375,
+                  "f1-score": 0.5454545454545454,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 0.3333333333333333,
+                  "recall": 0.125,
+                  "f1-score": 0.18181818181818182,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 0.25,
+                  "f1-score": 0.4,
+                  "support": 8.0
+                },
+                "accuracy": 0.5625,
+                "macro avg": {
+                  "precision": 0.7187257187257187,
+                  "recall": 0.5625,
+                  "f1-score": 0.5319569319569318,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.7187257187257187,
+                  "recall": 0.5625,
+                  "f1-score": 0.5319569319569318,
+                  "support": 48.0
+                }
+              },
+              "nll": 1.43603531707719
+            },
+            "1": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.8333333333333334,
+                  "recall": 0.625,
+                  "f1-score": 0.7142857142857143,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 0.32,
+                  "recall": 1.0,
+                  "f1-score": 0.48484848484848486,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 0.5,
+                  "recall": 0.5,
+                  "f1-score": 0.5,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.5,
+                  "recall": 0.125,
+                  "f1-score": 0.2,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 0.2,
+                  "recall": 0.125,
+                  "f1-score": 0.15384615384615385,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 0.25,
+                  "f1-score": 0.4,
+                  "support": 8.0
+                },
+                "accuracy": 0.4375,
+                "macro avg": {
+                  "precision": 0.5588888888888889,
+                  "recall": 0.4375,
+                  "f1-score": 0.40883005883005885,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.5588888888888889,
+                  "recall": 0.4375,
+                  "f1-score": 0.40883005883005885,
+                  "support": 48.0
+                }
+              },
+              "nll": 1.6678963402207072
+            },
+            "2": {
+              "concept_groups": 30,
+              "supported_rows": 23,
+              "held_rows": 7,
+              "class_report": {
+                "clothes": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 2.0
+                },
+                "electronics": {
+                  "precision": 0.29411764705882354,
+                  "recall": 1.0,
+                  "f1-score": 0.45454545454545453,
+                  "support": 5.0
+                },
+                "glass": {
+                  "precision": 1.0,
+                  "recall": 0.25,
+                  "f1-score": 0.4,
+                  "support": 4.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.0,
+                  "recall": 0.0,
+                  "f1-score": 0.0,
+                  "support": 4.0
+                },
+                "plastic_metal": {
+                  "precision": 0.0,
+                  "recall": 0.0,
+                  "f1-score": 0.0,
+                  "support": 5.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 0.3333333333333333,
+                  "f1-score": 0.5,
+                  "support": 3.0
+                },
+                "accuracy": 0.391304347826087,
+                "macro avg": {
+                  "precision": 0.5490196078431372,
+                  "recall": 0.4305555555555556,
+                  "f1-score": 0.3924242424242424,
+                  "support": 23.0
+                },
+                "weighted avg": {
+                  "precision": 0.45524296675191817,
+                  "recall": 0.391304347826087,
+                  "f1-score": 0.3205533596837945,
+                  "support": 23.0
+                }
+              },
+              "nll": 1.6333691425560095
+            }
+          }
+        },
+        "test": {
+          "new": {
+            "concept_groups": 60,
+            "supported_rows": 115,
+            "held_rows": 29,
+            "class_report": {
+              "clothes": {
+                "precision": 1.0,
+                "recall": 0.625,
+                "f1-score": 0.7692307692307693,
+                "support": 16.0
+              },
+              "electronics": {
+                "precision": 0.9090909090909091,
+                "recall": 1.0,
+                "f1-score": 0.9523809523809523,
+                "support": 20.0
+              },
+              "glass": {
+                "precision": 0.8181818181818182,
+                "recall": 0.8571428571428571,
+                "f1-score": 0.8372093023255814,
+                "support": 21.0
+              },
+              "paper_tetrapak": {
+                "precision": 0.7272727272727273,
+                "recall": 0.9411764705882353,
+                "f1-score": 0.8205128205128205,
+                "support": 17.0
+              },
+              "plastic_metal": {
+                "precision": 0.8571428571428571,
+                "recall": 0.8181818181818182,
+                "f1-score": 0.8372093023255814,
+                "support": 22.0
+              },
+              "special_unsupported": {
+                "precision": 0.8888888888888888,
+                "recall": 0.8421052631578947,
+                "f1-score": 0.8648648648648649,
+                "support": 19.0
+              },
+              "accuracy": 0.8521739130434782,
+              "macro avg": {
+                "precision": 0.8667628667628667,
+                "recall": 0.8472677348451342,
+                "f1-score": 0.8469013352734284,
+                "support": 115.0
+              },
+              "weighted avg": {
+                "precision": 0.8649852562896041,
+                "recall": 0.8521739130434782,
+                "f1-score": 0.8498822759692325,
+                "support": 115.0
+              }
+            },
+            "nll": 0.44594842457850414,
+            "accepted": 20,
+            "supported_coverage": 0.1565217391304348,
+            "accepted_accuracy": 0.9,
+            "held_false_suggestions": 2
+          },
+          "old": {
+            "concept_groups": 60,
+            "supported_rows": 115,
+            "held_rows": 29,
+            "class_report": {
+              "clothes": {
+                "precision": 0.8333333333333334,
+                "recall": 0.625,
+                "f1-score": 0.7142857142857143,
+                "support": 16.0
+              },
+              "electronics": {
+                "precision": 0.37735849056603776,
+                "recall": 1.0,
+                "f1-score": 0.547945205479452,
+                "support": 20.0
+              },
+              "glass": {
+                "precision": 0.5238095238095238,
+                "recall": 0.5238095238095238,
+                "f1-score": 0.5238095238095238,
+                "support": 21.0
+              },
+              "paper_tetrapak": {
+                "precision": 0.7,
+                "recall": 0.4117647058823529,
+                "f1-score": 0.5185185185185185,
+                "support": 17.0
+              },
+              "plastic_metal": {
+                "precision": 0.2857142857142857,
+                "recall": 0.18181818181818182,
+                "f1-score": 0.2222222222222222,
+                "support": 22.0
+              },
+              "special_unsupported": {
+                "precision": 1.0,
+                "recall": 0.2631578947368421,
+                "f1-score": 0.4166666666666667,
+                "support": 19.0
+              },
+              "accuracy": 0.4956521739130435,
+              "macro avg": {
+                "precision": 0.6200359389038633,
+                "recall": 0.50092505104115,
+                "f1-score": 0.4905746418303496,
+                "support": 115.0
+              },
+              "weighted avg": {
+                "precision": 0.6005758037423337,
+                "recall": 0.4956521739130435,
+                "f1-score": 0.4783290948567899,
+                "support": 115.0
+              }
+            },
+            "nll": 1.6761528363109022
+          },
+          "tfidf": {
+            "concept_groups": 60,
+            "supported_rows": 115,
+            "held_rows": 29,
+            "class_report": {
+              "clothes": {
+                "precision": 0.4444444444444444,
+                "recall": 0.75,
+                "f1-score": 0.5581395348837209,
+                "support": 16.0
+              },
+              "electronics": {
+                "precision": 0.6363636363636364,
+                "recall": 0.7,
+                "f1-score": 0.6666666666666666,
+                "support": 20.0
+              },
+              "glass": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1-score": 1.0,
+                "support": 21.0
+              },
+              "paper_tetrapak": {
+                "precision": 1.0,
+                "recall": 0.6470588235294118,
+                "f1-score": 0.7857142857142857,
+                "support": 17.0
+              },
+              "plastic_metal": {
+                "precision": 0.8461538461538461,
+                "recall": 1.0,
+                "f1-score": 0.9166666666666666,
+                "support": 22.0
+              },
+              "special_unsupported": {
+                "precision": 1.0,
+                "recall": 0.42105263157894735,
+                "f1-score": 0.5925925925925926,
+                "support": 19.0
+              },
+              "accuracy": 0.7652173913043478,
+              "macro avg": {
+                "precision": 0.8211603211603212,
+                "recall": 0.7530185758513932,
+                "f1-score": 0.7532966244206554,
+                "support": 115.0
+              },
+              "weighted avg": {
+                "precision": 0.8300327691632039,
+                "recall": 0.7652173913043478,
+                "f1-score": 0.7656229102134057,
+                "support": 115.0
+              }
+            },
+            "nll": 0.9518020001304054
+          },
+          "by_variant": {
+            "0": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 1.0,
+                  "recall": 0.625,
+                  "f1-score": 0.7692307692307693,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 0.8888888888888888,
+                  "recall": 1.0,
+                  "f1-score": 0.9411764705882353,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 0.8,
+                  "recall": 1.0,
+                  "f1-score": 0.8888888888888888,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.8,
+                  "recall": 1.0,
+                  "f1-score": 0.8888888888888888,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 1.0,
+                  "recall": 0.75,
+                  "f1-score": 0.8571428571428571,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 0.875,
+                  "recall": 0.875,
+                  "f1-score": 0.875,
+                  "support": 8.0
+                },
+                "accuracy": 0.875,
+                "macro avg": {
+                  "precision": 0.8939814814814815,
+                  "recall": 0.875,
+                  "f1-score": 0.8700546457899399,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.8939814814814815,
+                  "recall": 0.875,
+                  "f1-score": 0.8700546457899399,
+                  "support": 48.0
+                }
+              },
+              "nll": 0.33718583438473915,
+              "accepted": 8,
+              "supported_coverage": 0.16666666666666666,
+              "accepted_accuracy": 1.0,
+              "held_false_suggestions": 0
+            },
+            "1": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 1.0,
+                  "recall": 0.625,
+                  "f1-score": 0.7692307692307693,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 0.8888888888888888,
+                  "recall": 1.0,
+                  "f1-score": 0.9411764705882353,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 0.8571428571428571,
+                  "recall": 0.75,
+                  "f1-score": 0.8,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.7,
+                  "recall": 0.875,
+                  "f1-score": 0.7777777777777778,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 0.7777777777777778,
+                  "recall": 0.875,
+                  "f1-score": 0.8235294117647058,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 0.875,
+                  "recall": 0.875,
+                  "f1-score": 0.875,
+                  "support": 8.0
+                },
+                "accuracy": 0.8333333333333334,
+                "macro avg": {
+                  "precision": 0.8498015873015873,
+                  "recall": 0.8333333333333334,
+                  "f1-score": 0.831119071560248,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.8498015873015873,
+                  "recall": 0.8333333333333334,
+                  "f1-score": 0.831119071560248,
+                  "support": 48.0
+                }
+              },
+              "nll": 0.502953368423453,
+              "accepted": 8,
+              "supported_coverage": 0.14583333333333334,
+              "accepted_accuracy": 0.875,
+              "held_false_suggestions": 1
+            },
+            "2": {
+              "concept_groups": 24,
+              "supported_rows": 19,
+              "held_rows": 5,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.0,
+                  "recall": 0.0,
+                  "f1-score": 0.0,
+                  "support": 0.0
+                },
+                "electronics": {
+                  "precision": 1.0,
+                  "recall": 1.0,
+                  "f1-score": 1.0,
+                  "support": 4.0
+                },
+                "glass": {
+                  "precision": 0.8,
+                  "recall": 0.8,
+                  "f1-score": 0.8,
+                  "support": 5.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.5,
+                  "recall": 1.0,
+                  "f1-score": 0.6666666666666666,
+                  "support": 1.0
+                },
+                "plastic_metal": {
+                  "precision": 0.8333333333333334,
+                  "recall": 0.8333333333333334,
+                  "f1-score": 0.8333333333333334,
+                  "support": 6.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 0.6666666666666666,
+                  "f1-score": 0.8,
+                  "support": 3.0
+                },
+                "accuracy": 0.8421052631578947,
+                "macro avg": {
+                  "precision": 0.6888888888888888,
+                  "recall": 0.7166666666666667,
+                  "f1-score": 0.6833333333333335,
+                  "support": 19.0
+                },
+                "weighted avg": {
+                  "precision": 0.868421052631579,
+                  "recall": 0.8421052631578947,
+                  "f1-score": 0.8456140350877193,
+                  "support": 19.0
+                }
+              },
+              "nll": 0.5767045837755141,
+              "accepted": 4,
+              "supported_coverage": 0.15789473684210525,
+              "accepted_accuracy": 0.75,
+              "held_false_suggestions": 1
+            }
+          },
+          "old_by_variant": {
+            "0": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.8333333333333334,
+                  "recall": 0.625,
+                  "f1-score": 0.7142857142857143,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 0.42105263157894735,
+                  "recall": 1.0,
+                  "f1-score": 0.5925925925925926,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 0.5384615384615384,
+                  "recall": 0.875,
+                  "f1-score": 0.6666666666666666,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.8,
+                  "recall": 0.5,
+                  "f1-score": 0.6153846153846154,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 0.3333333333333333,
+                  "recall": 0.125,
+                  "f1-score": 0.18181818181818182,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 0.25,
+                  "f1-score": 0.4,
+                  "support": 8.0
+                },
+                "accuracy": 0.5625,
+                "macro avg": {
+                  "precision": 0.6543634727845254,
+                  "recall": 0.5625,
+                  "f1-score": 0.5284579617912951,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.6543634727845254,
+                  "recall": 0.5625,
+                  "f1-score": 0.5284579617912951,
+                  "support": 48.0
+                }
+              },
+              "nll": 1.4706842822414732
+            },
+            "1": {
+              "concept_groups": 60,
+              "supported_rows": 48,
+              "held_rows": 12,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.8333333333333334,
+                  "recall": 0.625,
+                  "f1-score": 0.7142857142857143,
+                  "support": 8.0
+                },
+                "electronics": {
+                  "precision": 0.36363636363636365,
+                  "recall": 1.0,
+                  "f1-score": 0.5333333333333333,
+                  "support": 8.0
+                },
+                "glass": {
+                  "precision": 0.5,
+                  "recall": 0.5,
+                  "f1-score": 0.5,
+                  "support": 8.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.75,
+                  "recall": 0.375,
+                  "f1-score": 0.5,
+                  "support": 8.0
+                },
+                "plastic_metal": {
+                  "precision": 0.16666666666666666,
+                  "recall": 0.125,
+                  "f1-score": 0.14285714285714285,
+                  "support": 8.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 0.25,
+                  "f1-score": 0.4,
+                  "support": 8.0
+                },
+                "accuracy": 0.4791666666666667,
+                "macro avg": {
+                  "precision": 0.6022727272727273,
+                  "recall": 0.4791666666666667,
+                  "f1-score": 0.46507936507936504,
+                  "support": 48.0
+                },
+                "weighted avg": {
+                  "precision": 0.6022727272727273,
+                  "recall": 0.4791666666666667,
+                  "f1-score": 0.46507936507936504,
+                  "support": 48.0
+                }
+              },
+              "nll": 1.7988171437949234
+            },
+            "2": {
+              "concept_groups": 24,
+              "supported_rows": 19,
+              "held_rows": 5,
+              "class_report": {
+                "clothes": {
+                  "precision": 0.0,
+                  "recall": 0.0,
+                  "f1-score": 0.0,
+                  "support": 0.0
+                },
+                "electronics": {
+                  "precision": 0.3333333333333333,
+                  "recall": 1.0,
+                  "f1-score": 0.5,
+                  "support": 4.0
+                },
+                "glass": {
+                  "precision": 0.0,
+                  "recall": 0.0,
+                  "f1-score": 0.0,
+                  "support": 5.0
+                },
+                "paper_tetrapak": {
+                  "precision": 0.0,
+                  "recall": 0.0,
+                  "f1-score": 0.0,
+                  "support": 1.0
+                },
+                "plastic_metal": {
+                  "precision": 0.4,
+                  "recall": 0.3333333333333333,
+                  "f1-score": 0.36363636363636365,
+                  "support": 6.0
+                },
+                "special_unsupported": {
+                  "precision": 1.0,
+                  "recall": 0.3333333333333333,
+                  "f1-score": 0.5,
+                  "support": 3.0
+                },
+                "accuracy": 0.3684210526315789,
+                "macro avg": {
+                  "precision": 0.2888888888888889,
+                  "recall": 0.27777777777777773,
+                  "f1-score": 0.2272727272727273,
+                  "support": 19.0
+                },
+                "weighted avg": {
+                  "precision": 0.3543859649122807,
+                  "recall": 0.3684210526315789,
+                  "f1-score": 0.29904306220095694,
+                  "support": 19.0
+                }
+              },
+              "nll": 1.885342511895091
+            }
+          }
+        }
+      }
+    }
+  }
+}

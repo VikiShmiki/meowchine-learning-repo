@@ -1371,3 +1371,55 @@ def test_map_close_start_overlay_controls_and_individual_sites(page, web_url, wi
     expect(page.get_by_role("button", name="Show all matching sites", exact=True)).to_be_enabled()
     assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
     assert not errors
+
+
+@pytest.mark.parametrize(
+    "description,reason",
+    [("glass jar", "The jar is dirty."), ("стаклено шише", "валкано")],
+)
+def test_photo_conflict_clears_previous_confirmation(page, web_url, tmp_path, description, reason):
+    from smart_recycling.vision import ModelPhotoItem, VisionService
+
+    suggestion = VisionService._suggestion(
+        ModelPhotoItem(
+            description=description,
+            reason=reason,
+            item_kind="empty_glass_packaging",
+            visible_condition="appears_empty_clean",
+        )
+    )
+    assert suggestion.status == "needs_review"
+    photo = tmp_path / "item.png"
+    Image.new("RGB", (80, 60), "green").save(photo)
+    page.route(
+        "**/api/v1/photo-suggestions",
+        lambda route: route.fulfill(
+            json={
+                "items": [suggestion.model_dump(mode="json")],
+                "message": "Review every suggestion before adding it to your trip.",
+            }
+        ),
+    )
+    requests = []
+    page.on(
+        "request",
+        lambda request: requests.append(request.url) if "/api/v1/classify" in request.url else None,
+    )
+    page.goto(web_url)
+    open_ai(page)
+    page.locator("#item").fill("phone")
+    page.locator("#classify-form button").click()
+    expect(page.locator("#manual-form")).to_be_visible()
+    expect(page.locator("#contact")).to_be_visible()
+    assert len(requests) == 1
+    page.get_by_label("Photo", exact=True).set_input_files(photo)
+    page.get_by_role("button", name="Suggest from photo", exact=True).click()
+    page.get_by_role("button", name="Describe manually", exact=True).click()
+    expect(page.locator("#item")).to_have_value(description)
+    expect(page.locator("#item")).to_be_focused()
+    expect(page.locator("#manual-form")).to_be_hidden()
+    expect(page.locator("#item-kind option")).to_have_count(0)
+    expect(page.locator("#contact")).to_be_hidden()
+    expect(page.locator("#phone")).to_be_hidden()
+    expect(page.locator("#trip-items li")).to_have_count(0)
+    assert len(requests) == 1

@@ -1,0 +1,25 @@
+{
+  "version": "ml-development-v3",
+  "seed": 42,
+  "evidence": "Agent-authored development splits; native and independent review pending",
+  "grouping": "Specific authored object concept; broad material families overlap by design",
+  "inputs": {
+    "source:data/processed/dataset_a.csv": "f7a222a4f3853eafa9e4151235d35b76446d0c6530d43473f36b718004c969f4",
+    "repo:data/mappings/needs_manual_review.csv": "3b2de33c6a2c1f27a2f894402214a00db522d29b518e9e68f113f4c0a7f553c5",
+    "repo:data/ml/v3/items.tsv": "3577c59cbfe366a13586892e6f5a9a4d073cf5941f962197867512dd0208cbff",
+    "repo:data/ml/v3/held.tsv": "c956f6c635f0a439dddd96ef33f4da0d0dc3d2c3f30799d82e93ef00c9c5c92c"
+  },
+  "legacy_mk": "All legacy automatic translations quarantined; not used for fitting",
+  "retained_english": 5004,
+  "sampled_source_english": 390,
+  "exclusions": {
+    "mapping_not_currently_approved": 17257,
+    "material_or_object_not_explicit": 3302,
+    "reserved_development_concept": 148
+  },
+  "outputs": {
+    "rows.json": "05c6aa2250085efa812a425ead5e3b3c454fbe540d6f8860f73c9084d7c99d1d",
+    "retained_english.json": "e3f4a90bec475b4529c5a54c8d7c7422e4d3b1fb05871a268386253ee94220c4",
+    "exclusions.json": "8ca08e6eed8aaeecd6aee53e4d41a648ee5150a5bbfe5ad4a3212cce028f83cf"
+  }
+}

@@ -54,7 +54,7 @@
         "f1": 1.0
       }
     },
-    "p95_predict_ms": 0.33273547887802124,
+    "p95_predict_ms": 0.40411949157714844,
     "errors": []
   },
   "threshold_sweep": [
@@ -105,7 +105,7 @@
           "f1": 1.0
         }
       },
-      "p95_predict_ms": 0.3588646650314331,
+      "p95_predict_ms": 0.5619972944259644,
       "errors": []
     },
     {
@@ -155,7 +155,7 @@
           "f1": 1.0
         }
       },
-      "p95_predict_ms": 0.306934118270874,
+      "p95_predict_ms": 0.4137754440307617,
       "errors": []
     },
     {
@@ -205,7 +205,7 @@
           "f1": 1.0
         }
       },
-      "p95_predict_ms": 0.3180950880050659,
+      "p95_predict_ms": 0.4172399640083313,
       "errors": []
     },
     {
@@ -255,7 +255,7 @@
           "f1": 1.0
         }
       },
-      "p95_predict_ms": 0.33273547887802124,
+      "p95_predict_ms": 0.40411949157714844,
       "errors": []
     },
     {
@@ -305,7 +305,7 @@
           "f1": 1.0
         }
       },
-      "p95_predict_ms": 0.3375336527824402,
+      "p95_predict_ms": 0.41531771421432495,
       "errors": [
         {
           "text": "clean office paper",
@@ -371,7 +371,7 @@
           "f1": 1.0
         }
       },
-      "p95_predict_ms": 0.31673163175582886,
+      "p95_predict_ms": 0.4402473568916321,
       "errors": [
         {
           "text": "clean office paper",
@@ -437,7 +437,7 @@
           "f1": 1.0
         }
       },
-      "p95_predict_ms": 0.3364384174346924,
+      "p95_predict_ms": 0.40636956691741943,
       "errors": [
         {
           "text": "clean office paper",
@@ -518,7 +518,7 @@
         "f1": 0.8461538461538461
       }
     },
-    "p95_predict_ms": 0.3614872694015503,
+    "p95_predict_ms": 0.4202648997306824,
     "errors": [
       {
         "text": "green glass olive jar",
@@ -716,6 +716,6 @@
     "manual_test.csv": "4e4e65a86f6af9fb786bec75af2830542daad16d4f50f7e45d30837ca2c82b20",
     "manual_test_review.csv": "d205ec71d377349a56f44b415ad0a631f20bf31843fe445aca10e5e0b91268e6"
   },
-  "code_sha256": "a9d4cf1300ea85aedee481325d9c3874ca90715ea1b096283e6b54cb3a131311",
+  "code_sha256": "db4d3996b863ddcfb5b5259b5e0bd16dbea7f48c4d9e69d4d789bbae959a02c7",
   "policy_sha256": "febbbe10e0a4aab9c7f83cdfb042c5c6101e0bf6bd9ec4b67f17fb0013b966d7"
 }

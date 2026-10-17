@@ -106,10 +106,23 @@ def test_manual_specialist_selection_is_not_model_confidence() -> None:
 
 
 def test_generic_materials_and_mixed_items_need_clarification() -> None:
-    for text in ("glass", "plastic", "a jar", "glass bottle and plastic bottle"):
+    for text in ("glass", "plastic", "a jar"):
         body = client.post("/api/v1/classify", json={"text": text}).json()
         assert body["status"] == "clarify"
         assert body["category"] is None
+    for confirmed in (False, True):
+        body = client.post(
+            "/api/v1/classify",
+            json={
+                "text": "glass bottle and plastic bottle",
+                "manual_kind": "empty_plastic_bottle",
+                "condition_confirmed": confirmed,
+            },
+        ).json()
+        assert body["status"] == "held"
+        assert body["category"] is None
+        assert not body["routing_available"]
+        assert body["facility_ids"] == []
 
 
 def test_learned_category_is_only_a_broad_suggestion() -> None:

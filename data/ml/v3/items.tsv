@@ -1,0 +1,217 @@
+role	label	en	mk
+train	glass	glass wine bottle	стаклено шише од вино
+train	glass	glass beer bottle	стаклено шише од пиво
+train	glass	glass jam jar	стаклена тегла од џем
+train	glass	glass honey jar	стаклена тегла од мед
+train	glass	glass olive oil bottle	стаклено шише од маслиново масло
+train	glass	glass juice bottle	стаклено шише од сок
+train	glass	glass coffee jar	стаклена тегла од кафе
+train	glass	glass pickle jar	стаклена тегла од кисели краставички
+train	glass	glass vinegar bottle	стаклено шише од оцет
+train	glass	glass perfume bottle	стаклено шише од парфем
+train	glass	glass milk bottle	стаклено шише од млеко
+train	glass	glass water bottle	стаклено шише од вода
+train	plastic_metal	plastic water bottle	пластично шише од вода
+train	plastic_metal	plastic shampoo bottle	пластично шише од шампон
+train	plastic_metal	plastic detergent bottle	пластично шише од детергент
+train	plastic_metal	plastic milk bottle	пластично шише од млеко
+train	plastic_metal	plastic juice bottle	пластично шише од сок
+train	plastic_metal	plastic soda bottle	пластично шише од газиран пијалак
+train	plastic_metal	aluminium drink can	алуминиумска лименка од пијалак
+train	plastic_metal	metal food can	метална конзерва од храна
+train	plastic_metal	steel soup can	челична конзерва од супа
+train	plastic_metal	metal tuna tin	метална конзерва од туна
+train	plastic_metal	aluminium beer can	алуминиумска лименка од пиво
+train	plastic_metal	plastic cooking oil bottle	пластично шише од масло за готвење
+train	paper_tetrapak	cardboard shipping box	картонска кутија за пратки
+train	paper_tetrapak	newspaper	весник
+train	paper_tetrapak	magazine	списание
+train	paper_tetrapak	printer paper	хартија за печатач
+train	paper_tetrapak	paper notebook	хартиена тетратка
+train	paper_tetrapak	cardboard cereal box	картонска кутија од житарки
+train	paper_tetrapak	paper envelope	хартиен плик
+train	paper_tetrapak	paper leaflet	хартиен леток
+train	paper_tetrapak	Tetra Pak milk carton	тетрапак од млеко
+train	paper_tetrapak	Tetra Pak juice carton	тетрапак од сок
+train	paper_tetrapak	cardboard shoe box	картонска кутија од чевли
+train	paper_tetrapak	paper shopping bag	хартиена кеса за пазарење
+train	special_unsupported	AA battery	батерија АА
+train	special_unsupported	button battery	копчеста батерија
+train	special_unsupported	car battery	автомобилски акумулатор
+train	special_unsupported	leftover medicine	преостанат лек
+train	special_unsupported	paint thinner	разредувач за боја
+train	special_unsupported	pesticide	пестицид
+train	special_unsupported	fluorescent tube	флуоресцентна цевка
+train	special_unsupported	mercury thermometer	живин термометар
+train	special_unsupported	used syringe	употребен шприц
+train	special_unsupported	motor oil	моторно масло
+train	special_unsupported	chemical solvent	хемиски растворувач
+train	special_unsupported	aerosol paint	боја во спреј
+train	clothes	shirt	кошула
+train	clothes	jeans	фармерки
+train	clothes	jacket	јакна
+train	clothes	coat	палто
+train	clothes	sweater	џемпер
+train	clothes	dress	фустан
+train	clothes	socks	чорапи
+train	clothes	scarf	шал
+train	clothes	gloves	ракавици
+train	clothes	boots	чизми
+train	clothes	sneakers	патики
+train	clothes	trousers	панталони
+train	electronics	phone charger	полнач за телефон
+train	electronics	laptop charger	полнач за лаптоп
+train	electronics	smartphone	паметен телефон
+train	electronics	television	телевизор
+train	electronics	laptop computer	лаптоп
+train	electronics	electric kettle	електричен бокал
+train	electronics	toaster	тостер
+train	electronics	headphones	слушалки
+train	electronics	USB cable	УСБ кабел
+train	electronics	computer monitor	компјутерски монитор
+train	electronics	washing machine	машина за перење
+train	electronics	Wi-Fi router	безжичен рутер
+tune	glass	glass mustard jar	стаклена тегла од сенф
+tune	glass	glass tomato sauce jar	стаклена тегла од доматен сос
+tune	glass	glass lemonade bottle	стаклено шише од лимонада
+tune	glass	glass mineral water bottle	стаклено шише од минерална вода
+tune	glass	glass spice jar	стаклена тегла од зачини
+tune	glass	glass chocolate spread jar	стаклена тегла од чоколаден крем
+tune	glass	glass cider bottle	стаклено шише од јаболков пијалак
+tune	glass	glass yoghurt bottle	стаклено шише од јогурт
+tune	plastic_metal	plastic conditioner bottle	пластично шише од регенератор
+tune	plastic_metal	plastic shower gel bottle	пластично шише од гел за туширање
+tune	plastic_metal	plastic mineral water bottle	пластично шише од минерална вода
+tune	plastic_metal	plastic yoghurt bottle	пластично шише од јогурт
+tune	plastic_metal	aluminium energy drink can	алуминиумска лименка од енергетски пијалак
+tune	plastic_metal	metal bean can	метална конзерва од грав
+tune	plastic_metal	steel corn can	челична конзерва од пченка
+tune	plastic_metal	metal coffee tin	метална кутија од кафе
+tune	paper_tetrapak	paper catalogue	хартиен каталог
+tune	paper_tetrapak	paper textbook	хартиен учебник
+tune	paper_tetrapak	cardboard biscuit box	картонска кутија од бисквити
+tune	paper_tetrapak	cardboard pasta box	картонска кутија од тестенини
+tune	paper_tetrapak	paper drawing pad	хартиен блок за цртање
+tune	paper_tetrapak	Tetra Pak soup carton	тетрапак од супа
+tune	paper_tetrapak	paper folder	хартиена папка
+tune	paper_tetrapak	cardboard tube	картонска цевка
+tune	special_unsupported	AAA battery	батерија ААА
+tune	special_unsupported	rechargeable battery	батерија на полнење
+tune	special_unsupported	expired tablets	таблети со истечен рок
+tune	special_unsupported	weed killer	средство против плевел
+tune	special_unsupported	fluorescent light bulb	флуоресцентна сијалица
+tune	special_unsupported	used medical needle	употребена медицинска игла
+tune	special_unsupported	leftover paint	преостаната боја
+tune	special_unsupported	bleach chemical	хемиско белило
+tune	clothes	hoodie	дукс со качулка
+tune	clothes	skirt	здолниште
+tune	clothes	shorts	кратки панталони
+tune	clothes	cardigan	плетена блуза
+tune	clothes	sandals	сандали
+tune	clothes	pajamas	пижами
+tune	clothes	winter hat	зимска капа
+tune	clothes	waistcoat	елек
+tune	electronics	tablet computer	таблет
+tune	electronics	computer keyboard	компјутерска тастатура
+tune	electronics	computer mouse	компјутерски глушец
+tune	electronics	vacuum cleaner	правосмукалка
+tune	electronics	microwave oven	микробранова печка
+tune	electronics	electric fan	електричен вентилатор
+tune	electronics	printer	печатач
+tune	electronics	digital camera	дигитален фотоапарат
+calibration	glass	glass peanut butter jar	стаклена тегла од путер од кикирики
+calibration	glass	glass marmalade jar	стаклена тегла од мармалад
+calibration	glass	glass sparkling water bottle	стаклено шише од газирана вода
+calibration	glass	glass hot sauce bottle	стаклено шише од лут сос
+calibration	glass	glass ketchup bottle	стаклено шише од кечап
+calibration	glass	glass coconut oil jar	стаклена тегла од кокосово масло
+calibration	glass	glass lemon juice bottle	стаклено шише од сок од лимон
+calibration	glass	glass caper jar	стаклена тегла од капари
+calibration	plastic_metal	plastic hand soap bottle	пластично шише од течен сапун
+calibration	plastic_metal	plastic iced tea bottle	пластично шише од ладен чај
+calibration	plastic_metal	plastic body lotion bottle	пластично шише од лосион за тело
+calibration	plastic_metal	plastic dishwashing liquid bottle	пластично шише од средство за садови
+calibration	plastic_metal	aluminium soda can	алуминиумска лименка од газиран пијалак
+calibration	plastic_metal	metal sardine can	метална конзерва од сардини
+calibration	plastic_metal	metal tomato can	метална конзерва од домати
+calibration	plastic_metal	steel pea can	челична конзерва од грашок
+calibration	paper_tetrapak	paper calendar	хартиен календар
+calibration	paper_tetrapak	paper brochure	хартиена брошура
+calibration	paper_tetrapak	cardboard tea box	картонска кутија од чај
+calibration	paper_tetrapak	cardboard tissue box	картонска кутија од марамчиња
+calibration	paper_tetrapak	paper gift bag	хартиена кеса за подарок
+calibration	paper_tetrapak	Tetra Pak cream carton	тетрапак од павлака
+calibration	paper_tetrapak	cardboard moving box	картонска кутија за преселување
+calibration	paper_tetrapak	paper exercise book	хартиена вежбанка
+calibration	special_unsupported	lithium battery	литиумска батерија
+calibration	special_unsupported	watch battery	батерија за часовник
+calibration	special_unsupported	expired cough medicine	сируп за кашлица со истечен рок
+calibration	special_unsupported	insecticide	инсектицид
+calibration	special_unsupported	mercury-containing lamp	светилка што содржи жива
+calibration	special_unsupported	used injection needle	употребена игла за инјекција
+calibration	special_unsupported	nail polish remover	средство за отстранување лак
+calibration	special_unsupported	drain cleaning chemical	хемиско средство за одзатнување одвод
+calibration	clothes	blouse	блуза
+calibration	clothes	tracksuit	тренерки
+calibration	clothes	leggings	хеланки
+calibration	clothes	raincoat	мантил за дожд
+calibration	clothes	slippers	влечки
+calibration	clothes	mittens	зимски ракавици
+calibration	clothes	suit	костум
+calibration	clothes	tights	хулахопки
+calibration	electronics	hair dryer	фен за коса
+calibration	electronics	electric iron	електрична пегла
+calibration	electronics	blender	блендер
+calibration	electronics	coffee machine	машина за кафе
+calibration	electronics	game console	конзола за игри
+calibration	electronics	portable speaker	преносен звучник
+calibration	electronics	television remote control	далечински управувач за телевизор
+calibration	electronics	electric toothbrush	електрична четка за заби
+test	glass	glass pesto jar	стаклена тегла од песто
+test	glass	glass mayonnaise jar	стаклена тегла од мајонез
+test	glass	glass maple syrup bottle	стаклено шише од јаворов сируп
+test	glass	glass soy sauce bottle	стаклено шише од соја сос
+test	glass	glass pickled pepper jar	стаклена тегла од кисели пиперки
+test	glass	glass baby food jar	стаклена тегла од бебешка храна
+test	glass	glass salad dressing bottle	стаклено шише од прелив за салата
+test	glass	glass apple juice bottle	стаклено шише од сок од јаболко
+test	plastic_metal	plastic fabric softener bottle	пластично шише од омекнувач
+test	plastic_metal	plastic hair gel bottle	пластично шише од гел за коса
+test	plastic_metal	plastic sparkling water bottle	пластично шише од газирана вода
+test	plastic_metal	plastic tomato sauce bottle	пластично шише од доматен сос
+test	plastic_metal	aluminium iced coffee can	алуминиумска лименка од ладно кафе
+test	plastic_metal	metal chickpea can	метална конзерва од наут
+test	plastic_metal	metal mushroom can	метална конзерва од печурки
+test	plastic_metal	steel peach can	челична конзерва од праски
+test	paper_tetrapak	paper instruction booklet	хартиено упатство
+test	paper_tetrapak	paper music score	хартиени ноти
+test	paper_tetrapak	cardboard chocolate box	картонска кутија од чоколади
+test	paper_tetrapak	cardboard egg carton	картонска кутија за јајца
+test	paper_tetrapak	paper mailing envelope	хартиен плик за писма
+test	paper_tetrapak	Tetra Pak oat drink carton	тетрапак од овесен пијалак
+test	paper_tetrapak	corrugated cardboard sheet	лист од брановиден картон
+test	paper_tetrapak	paper wrapping sheet	хартија за завиткување
+test	special_unsupported	hearing aid battery	батерија за слушно помагало
+test	special_unsupported	camera battery	батерија за фотоапарат
+test	special_unsupported	expired antibiotic	антибиотик со истечен рок
+test	special_unsupported	rat poison	отров за глувци
+test	special_unsupported	compact fluorescent lamp	компактна флуоресцентна светилка
+test	special_unsupported	used insulin needle	употребена игла за инсулин
+test	special_unsupported	wood varnish solvent	растворувач за лак за дрво
+test	special_unsupported	antifreeze chemical	антифриз
+test	clothes	polo shirt	поло маица
+test	clothes	denim shorts	кратки фармерки
+test	clothes	fleece vest	елек од флис
+test	clothes	sports jersey	спортски дрес
+test	clothes	ballet flats	балетанки
+test	clothes	swimsuit	костим за капење
+test	clothes	bathrobe	бањарка
+test	clothes	woollen cap	волнена капа
+test	electronics	rice cooker	електричен апарат за ориз
+test	electronics	sewing machine	машина за шиење
+test	electronics	electric shaver	електрична машинка за бричење
+test	electronics	digital alarm clock	дигитален будилник
+test	electronics	electronic kitchen scale	електронска кујнска вага
+test	electronics	DVD player	ДВД плеер
+test	electronics	computer hard drive	компјутерски хард диск
+test	electronics	wireless computer adapter	безжичен компјутерски адаптер
