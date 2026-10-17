@@ -181,7 +181,7 @@ Configured means a nonempty key is present, not that provider quota/auth is vali
 }
 ```
 
-Mode is `walking` or `driving`; 1-6 items, strict JSON booleans and finite WGS84
+Mode is `walking`, `driving` or `transit`; 1-6 items, strict JSON booleans and finite WGS84
 coordinates are required. Extra request fields are rejected. The entire basket is
 validated before provider use. Description-based items are revalidated against
 item-level policy and asset acceptance. Known-waste cards can instead submit stream
@@ -223,6 +223,25 @@ routes; 429 for process/provider quota; 503 for missing credentials, provider au
 unavailability or timeouts; 502 for invalid provider data. Schema errors use the
 standard FastAPI 422 shape. All trip responses use `Cache-Control: no-store`.
 
+
+For `transit`, optional `departure_at` is an ISO timestamp with timezone offset;
+blank means now plus one minute. The server accepts up to seven days ahead within
+available service calendars. Response `provider` is `jsp_gtfs_openrouteservice`,
+`profile` is `jsp-scheduled-bus+foot-walking`, and top-level `geometry` is null.
+Use separate `legs` with mode `walking|bus`, `from_name`, `to_name`, longitude-first
+`from_point`/`to_point`, departure/arrival timestamps, duration/distance, nullable
+geometry and destination `site_id`. Bus legs also include `line`, `headsign` and
+`stop_count`. Missing shape distance is zero and disclosed; it is not a zero-length ride.
+Totals include scheduled waits and intermediate drop-off allowances. Metadata includes
+`departure_at`, `arrival_at`, `transit_feed_version`, `transit_fetched_at`,
+`transit_service_end` and `transit_source`. Road-mode fields retain their meanings.
+
+Transit errors use the same no-store `{detail: {code, message}}` envelope:
+`transit_unavailable` (503), `transit_departure`, `transit_expired`,
+`transit_no_service`, `transit_no_route` or `transit_connection` (422).
+Existing provider errors/quotas apply to walking connections. `/api/v1/routing`
+advertises all three modes; `configured` describes the ORS key, not feed health.
+See [TRANSIT.md](TRANSIT.md) for search/freshness limits.
 
 ## `GET /api/v1/coverage`
 

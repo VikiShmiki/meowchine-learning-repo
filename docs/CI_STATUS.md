@@ -2,6 +2,13 @@
 
 Updated: 2026-10-17
 
+The JSP delivery is [PR #2](https://github.com/VikiShmiki/meowchine-learning-repo/pull/2).
+Its [checks](https://github.com/VikiShmiki/meowchine-learning-repo/pull/2/checks)
+include the new transit tests alongside all existing regression/browser checks and
+the container smoke test. A successful check on the current PR revision is the
+merge gate; a cancelled superseded/duplicate run is not pass evidence. The local
+key and real GTFS cache remain ignored and are not available to CI.
+
 This private repository has its own [Actions runs](https://github.com/VikiShmiki/meowchine-learning-repo/actions).
 The checked-in workflow runs quality checks and a container smoke test on pushes
 and pull requests. No hosted pass is claimed until those jobs complete successfully.

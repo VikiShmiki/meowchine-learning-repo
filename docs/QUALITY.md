@@ -1,5 +1,29 @@
 # Quality
 
+## JSP scheduled transit — October 17, 2026
+
+The 24 new backend cases and seven new browser cases pass locally. They cover
+direct buses, same-stop transfers, missed connections, calendar exceptions,
+overnight/DST service, pickup/direction restrictions, invalid/stale feeds, missing
+shapes, disconnected walking, multi-item disposal and short walking-only trips.
+Browser checks use the real API/catalog with a synthetic timetable and walking
+provider: English/Macedonian at 320/390/1280 px, bus/walk map lines, trip completion,
+post-trip reporting, a full facility excluded for another visitor, outage retry,
+departure invalidation and switching back to Walking. Narrow screenshots were
+visually inspected; this does not establish native-language or physical-phone QA.
+
+Lock validation (including CI's uv 0.12.17), lint, formatting, JavaScript syntax,
+19 Node tests, seed/infrastructure/geography checks and exact coverage/upgrade
+reproduction pass. `/health` confirms both models on the local app; routing
+configuration advertises Walking, Driving and Transit. An opt-in live JSP/ORS
+request returned buses 18 and 8 with walking and transfer legs to Karpoš yard.
+See [TRANSIT.md](TRANSIT.md) for what that evidence establishes and its limits.
+
+The full Python/browser suite and Linux/container workflow are delivery gates.
+Their final revision-specific outcomes are on
+[PR #2](https://github.com/VikiShmiki/meowchine-learning-repo/pull/2/checks).
+No real feed archive, secret or personal route is committed.
+
 ## Trip completion and immediate full-container exclusions — October 17, 2026
 
 The complete `SRA_BROWSER_TESTS=1 pytest` regression run passed locally on Windows.

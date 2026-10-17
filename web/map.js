@@ -190,7 +190,7 @@
     $("map-shell").classList.toggle("is-picking", picking);
     $("map-shell").classList.toggle("has-route", Boolean(activeRoute));
     $("map-context-label").textContent = picking ? "Choose a starting point" : activeRoute
-      ? `${activeRoute.mode === "walking" ? "Walking" : "Driving"} route` : "Skopje · Collection points";
+      ? `${{walking: "Walking", driving: "Driving", transit: "JSP bus"}[activeRoute.mode]} route` : "Skopje · Collection points";
     const bounds = map.getBounds();
     const inView = visible.filter(({ site }) => bounds.contains([site.latitude, site.longitude]));
     $("map-view-count").textContent = picking ? "Location is not shared yet" : activeRoute && !showOtherSites
@@ -405,7 +405,7 @@
     $("fit-route").disabled = !map;
     $("route-controls").hidden = !activeRoute;
     $("route-map-key").dataset.mode = activeRoute?.mode || "";
-    $("route-mode-label").textContent = activeRoute?.mode === "walking" ? "Walking" : "Driving";
+    $("route-mode-label").textContent = activeRoute?.mode === "transit" ? "JSP bus + walking" : activeRoute?.mode === "walking" ? "Walking" : "Driving";
     $("map-heading").textContent = activeRoute ? "Route & stops" : "Collection points";
     $("show-other-sites").textContent = showOtherSites ? "Hide other collection points" : "Show other collection points";
     $("show-other-sites").setAttribute("aria-pressed", String(showOtherSites));
@@ -428,7 +428,9 @@
     if (!activeRoute) return;
     $("site-details").hidden = true;
     selectedId = null;
-    $("route-summary").textContent = `${activeRoute.mode === "walking" ? "Walking" : "Driving"} | ${(activeRoute.distance_m / 1000).toFixed(2)} km | about ${Math.ceil(activeRoute.duration_s / 60)} min | ${activeRoute.stops.length} ${activeRoute.stops.length === 1 ? "stop" : "stops"}. Finish at the last stop. Access gaps are unverified.`;
+    $("route-summary").textContent = activeRoute.mode === "transit"
+      ? `JSP bus + walking | about ${Math.ceil(activeRoute.duration_s / 60)} minutes including waits. Scheduled service, not live tracking.`
+      : `${activeRoute.mode === "walking" ? "Walking" : "Driving"} | ${(activeRoute.distance_m / 1000).toFixed(2)} km | about ${Math.ceil(activeRoute.duration_s / 60)} min | ${activeRoute.stops.length} ${activeRoute.stops.length === 1 ? "stop" : "stops"}. Finish at the last stop. Access gaps are unverified.`;
     drawRoute();
   });
   function drawRoute() {
@@ -436,12 +438,22 @@
     routeLayer?.remove();
     routeRenderer ||= L.svg();
     routeLayer = L.featureGroup().addTo(map);
-    L.geoJSON(activeRoute.geometry, { renderer: routeRenderer, interactive: false, style: { color: "#fff", weight: 10, opacity: 0.95 } }).addTo(routeLayer);
-    L.geoJSON(activeRoute.geometry, { renderer: routeRenderer, interactive: false, style: {
-      className: "trip-route-line", color: "#2f4d35", weight: 5, opacity: 1,
-      lineCap: "round", lineJoin: "round",
-      dashArray: activeRoute.mode === "walking" ? "8 10" : null,
-    } }).addTo(routeLayer);
+    const segments = activeRoute.mode === "transit" ? activeRoute.legs : [{geometry: activeRoute.geometry, mode: activeRoute.mode}];
+    for (const segment of segments) {
+      if (segment.geometry) {
+        L.geoJSON(segment.geometry, { renderer: routeRenderer, interactive: false, style: { color: "#fff", weight: 10, opacity: 0.95 } }).addTo(routeLayer);
+        L.geoJSON(segment.geometry, { renderer: routeRenderer, interactive: false, style: {
+          className: `trip-route-line ${segment.mode === "bus" ? "bus-route-line" : ""}`, color: segment.mode === "bus" ? "#305d9b" : "#2f4d35", weight: 5, opacity: 1,
+          lineCap: "round", lineJoin: "round", dashArray: segment.mode === "walking" ? "8 10" : null,
+        } }).addTo(routeLayer);
+      }
+      if (segment.mode === "bus") {
+        for (const [point, name] of [[segment.from_point, segment.from_name], [segment.to_point, segment.to_name]]) {
+          L.circleMarker([point[1], point[0]], {radius: 5, color: "#305d9b", fillColor: "#fff", fillOpacity: 1, renderer: routeRenderer})
+            .bindTooltip(text("span", `${segment.line} · ${name}`)).addTo(routeLayer);
+        }
+      }
+    }
     activeRoute.stops.forEach((stop, index) => {
       const badge = text("span", String(index + 1));
       badge.className = "route-stop-number";

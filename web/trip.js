@@ -178,7 +178,11 @@
       invalidate();
     }
   });
-  $("trip-mode").addEventListener("change", invalidate);
+  $("trip-mode").addEventListener("change", () => {
+    $("transit-options").hidden = travelMode() !== "transit";
+    invalidate();
+  });
+  $("transit-departure").addEventListener("change", invalidate);
   document.addEventListener("container-status-change", event => {
     if (!currentRoute || !currentRoute.stops.some(stop => !completedStops.has(stop) && stop.asset_ids?.some(id => event.detail.includes(id)))) return;
     const notice = $("route-condition-notice");
@@ -195,21 +199,28 @@
     const current = generation;
     const controller = new AbortController();
     pending = controller;
-    const timer = setTimeout(() => controller.abort(), 40000);
+    const timer = setTimeout(() => controller.abort(), travelMode() === "transit" ? 75000 : 40000);
     updatePlanButton();
     $("trip-status").textContent = "Finding compatible sites and a network route…";
     try {
+      const departure = travelMode() === "transit" && $("transit-departure").value
+        ? new Date($("transit-departure").value).toISOString() : null;
       const response = await (globalThis.GoodsortI18n?.fetch || fetch)("/api/v1/trips", {
         method: "POST", headers: { "Content-Type": "application/json" }, signal: controller.signal,
-        body: JSON.stringify({ origin, mode: travelMode(), items: basket, share_coordinates: true }),
+        body: JSON.stringify({ origin, mode: travelMode(), items: basket, share_coordinates: true,
+          ...(departure ? {departure_at: departure} : {}) }),
       });
       const body = await response.json();
       if (current !== generation) return;
       if (!response.ok) throw new Error(body.detail?.message || "Could not plan this trip. Check the items and try again.");
       currentRoute = body;
       const result = $("trip-result");
-      result.replaceChildren(node("h3", `${body.mode === "walking" ? "Walking" : "Driving"} trip`));
-      result.append(node("p", `${(body.distance_m / 1000).toFixed(2)} km · about ${Math.ceil(body.duration_s / 60)} minutes on the network. Ends at the last stop.`));
+      result.replaceChildren(node("h3", `${{walking: "Walking", driving: "Driving", transit: "JSP bus"}[body.mode]} trip`));
+      if (body.mode === "transit") {
+        result.append(node("p", `About ${Math.ceil(body.duration_s / 60)} minutes including walking, waiting and intermediate drop-offs.`));
+        result.append(node("p", "Scheduled times · Europe/Skopje. Check JSP notices for disruptions."));
+        result.append(node("p", `Timetable checked: ${transitTime(body.transit_fetched_at)}. Service through: ${body.transit_service_end}.`));
+      } else result.append(node("p", `${(body.distance_m / 1000).toFixed(2)} km · about ${Math.ceil(body.duration_s / 60)} minutes on the network. Ends at the last stop.`));
       const viewMap = node("a", "View route on map");
       viewMap.href = "#site-map";
       result.append(viewMap);
@@ -234,6 +245,7 @@
         row.style.setProperty("--stop-ink", appearance.color);
         row.dataset.materials = appearance.materials.join(" ");
         row.append(node("strong", stop.name), node("p", `Drop off: ${stop.item_kinds.map((kind) => kindNames[kind] || kind).join(", ")}`));
+        if (body.mode === "transit") row.append(transitItinerary(body.legs.filter(leg => leg.site_id === stop.site_id)));
         const stopKey = [...(stop.asset_ids || [])].sort().join("|");
         const visitLabel = node("label", ""); visitLabel.className = "stop-visited";
         const visited = document.createElement("input"); visited.type = "checkbox";
@@ -323,6 +335,27 @@
       if (current === generation) { pending = null; updatePlanButton(); }
     }
   });
+  function transitTime(value) {
+    return new Intl.DateTimeFormat("en-GB", {timeZone: "Europe/Skopje", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23"}).format(new Date(value));
+  }
+  function transitItinerary(legs) {
+    const list = node("ol", ""); list.className = "transit-legs";
+    let previous = null;
+    for (const leg of legs) {
+      const row = node("li", ""); row.dataset.mode = leg.mode;
+      if (previous && new Date(leg.departure_at) > new Date(previous)) {
+        row.append(node("p", `Wait about ${Math.ceil((new Date(leg.departure_at) - new Date(previous)) / 60000)} minutes.`));
+      }
+      if (leg.mode === "bus") {
+        row.append(node("strong", `Bus ${leg.line} · ${leg.headsign}`));
+        row.append(node("p", `Board: ${leg.from_name}`), node("p", `Get off: ${leg.to_name}`));
+        row.append(node("p", `${leg.stop_count} bus stops`));
+      } else row.append(node("strong", `Walk about ${Math.ceil(leg.duration_s / 60)} minutes`), node("p", `${leg.from_name} → ${leg.to_name}`));
+      row.append(node("p", `${transitTime(leg.departure_at)} → ${transitTime(leg.arrival_at)}`));
+      list.append(row); previous = leg.arrival_at;
+    }
+    return list;
+  }
   async function checkAvailability() {
     $("retry-routing").hidden = true;
     $("routing-availability").textContent = "Checking routing availability...";

@@ -8,7 +8,7 @@
     <title>Smart Recycling Access</title>
     <link rel="stylesheet" href="/static/vendor/leaflet/leaflet.css" />
     <link rel="stylesheet" href="/static/styles.css" />
-    <link rel="stylesheet" href="/static/citizen.css?v=trip-checkin-2" />
+    <link rel="stylesheet" href="/static/citizen.css?v=jsp-1" />
     <link rel="stylesheet" href="/static/community.css?v=trip-checkin-2" />
     <link rel="stylesheet" href="/static/account.css?v=2" />
   </head>
@@ -116,7 +116,14 @@
         <fieldset id="trip-mode"><legend class="sr-only">Travel mode</legend>
           <label><input type="radio" name="travel-mode" value="walking" checked /> Walking</label>
           <label><input type="radio" name="travel-mode" value="driving" /> Driving</label>
+          <label><input type="radio" name="travel-mode" value="transit" /> JSP bus</label>
         </fieldset>
+        <div id="transit-options" hidden>
+          <label for="transit-departure">Departure (your local time)</label>
+          <input id="transit-departure" type="datetime-local" aria-describedby="transit-note" />
+          <p id="transit-note">Leave blank to depart now. Scheduled buses, not live arrivals. Up to 15 minutes walking per connection and one transfer per drop-off.</p>
+          <a href="https://skopjebus.mk/mk/schedule/" target="_blank" rel="noopener noreferrer">JSP timetables & notices</a>
+        </div>
         <p id="sharing-note">Route location shared with openrouteservice. Not saved here.</p>
         <p id="routing-availability" role="status">Checking routing availability…</p>
         <button id="retry-routing" type="button" class="secondary" hidden>Retry routing connection</button>
@@ -199,8 +206,8 @@
     <script src="/static/site-data.js?v=stop-colors-1" defer></script>
     <script src="/static/community.js?v=trip-checkin-1" defer></script>
     <script src="/static/account.js?v=3" defer></script>
-    <script src="/static/map.js?v=community-1" defer></script>
-    <script src="/static/trip.js?v=trip-checkin-1" defer></script>
+    <script src="/static/map.js?v=jsp-1" defer></script>
+    <script src="/static/trip.js?v=jsp-1" defer></script>
     <script src="/static/path.js?trip-flow-1" defer></script>
   </body>
 </html>

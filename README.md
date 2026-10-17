@@ -8,6 +8,8 @@ Goodsort helps a resident identify an item, confirm its condition, and find a su
 
 > **Scope and evidence.** This is a Skopje hackathon prototype, not a universal disposal authority. Site acceptance comes from a versioned local snapshot; operation and access can change. The app asks for item/condition confirmation and shows uncertainty rather than silently guessing. The technical report explains the methods, measurements, and limits.
 
+**JSP buses are supported:** plan scheduled public-transport journeys with walking connections, bus numbers, boarding/exit stops and transfers. See [JSP setup and limits](docs/TRANSIT.md).
+
 ## Why Goodsort matters
 
 Knowing that an item is recyclable is not enough if the nearby container does not

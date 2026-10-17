@@ -5,7 +5,7 @@ to confirm condition and add the selected streams together. Every selected card 
 the same green outline/checkmark. Optional text/photo help still uses item-level
 review and confirmation; electronics can use documented accepting centres, while
 other specialist items receive disposal guidance. Select a
-starting point and walking/driving, then **Find my route**; the adjacent disclosure
+starting point and Walking, Driving or JSP bus, then **Find my route**; the adjacent disclosure
 explains coordinate sharing. Up to six basket entries are supported. Trips finish
 at the last collection point, with no return leg.
 Mark each visited stop explicitly or use **Dropped these off** after disposal.
@@ -93,7 +93,10 @@ logs contain request ID, mode, outcome, duration and dataset version, not coordi
 descriptions or credentials. Trip responses, including validation errors, use
 `Cache-Control: no-store`; basket/origin/geometry remain in memory only.
 
-At most one matrix and one directions request per plan; no automatic retries.
+Walking/driving use at most one matrix and one directions request per plan; no automatic retries.
+JSP uses a bounded walking matrix and up to 12 walking directions requests, with
+a 75-second client timeout. See [TRANSIT.md](TRANSIT.md) for scheduled journeys,
+source freshness, transfer/walking limits and the different optimization objective.
 The process permits two concurrent plans and 20 starts/minute. This is a demo budget,
 not a distributed quota or account daily-limit guarantee. Provider requests use
 10-second HTTP timeouts, a 2 MB response cap and a 12-second elapsed budget checked

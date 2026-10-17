@@ -42,6 +42,8 @@ from smart_recycling.repository import load_sites
 from smart_recycling.routing import RoutingService
 from smart_recycling.routing_models import RoutingError, TripRequest, TripResponse
 from smart_recycling.settings import PROJECT_ROOT, Settings
+from smart_recycling.transit import TransitPlanner
+from smart_recycling.transit_feed import TransitFeedStore
 from smart_recycling.upgrades import Material, load_upgrades, payload
 from smart_recycling.vision import (
     MAX_UPLOAD_BYTES,
@@ -100,6 +102,9 @@ route_service = RoutingService(
     SiteSnapshot.model_validate_json(snapshots["citizen"].body),
     classifier,
     ORSProvider(settings.ors_api_key),
+    transit=TransitPlanner(
+        TransitFeedStore(PROJECT_ROOT / "runtime/jsp-gtfs.zip"), ORSProvider(settings.ors_api_key)
+    ),
 )
 vision_service = VisionService(
     OpenAIVisionProvider(settings.openai_api_key, settings.openai_vision_model),
@@ -428,7 +433,7 @@ def routing_status() -> dict:
     return {
         "configured": bool(settings.ors_api_key),
         "max_items": 6,
-        "modes": ["walking", "driving"],
+        "modes": ["walking", "driving", "transit"],
         "provider": "openrouteservice",
     }
 

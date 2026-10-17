@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.11, <3.13"
 resolution-markers = [
     "python_full_version >= '3.12' and sys_platform != 'darwin'",
@@ -1705,6 +1705,7 @@ dependencies = [
     { name = "sentence-transformers" },
     { name = "torch", version = "2.14.0", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "sys_platform == 'darwin'" },
     { name = "torch", version = "2.14.0+cpu", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "sys_platform != 'darwin'" },
+    { name = "tzdata" },
     { name = "uvicorn", extra = ["standard"] },
 ]
 
@@ -1752,6 +1753,7 @@ requires-dist = [
     { name = "scikit-learn", specifier = ">=1.5,<2" },
     { name = "sentence-transformers", specifier = ">=5,<6" },
     { name = "torch", specifier = ">=2,<3", index = "https://download.pytorch.org/whl/cpu" },
+    { name = "tzdata", specifier = ">=2025.2" },
     { name = "uvicorn", extras = ["standard"], specifier = ">=0.30,<1" },
 ]
 
