@@ -34,8 +34,7 @@ COPY --from=builder /app/.venv /app/.venv
 COPY --from=builder /app/runtime-models /app/runtime-models
 COPY artifacts/models/minilm_frozen_four_class_development.joblib ./artifacts/models/minilm_frozen_four_class_development.joblib
 COPY artifacts/models/minilm_frozen_four_class_development.metadata.json ./artifacts/models/minilm_frozen_four_class_development.metadata.json
-COPY artifacts/models/bilingual_v2_seed42/en/frozen_english_minilm_logistic.joblib ./artifacts/models/bilingual_v2_seed42/en/frozen_english_minilm_logistic.joblib
-COPY artifacts/models/bilingual_v2_seed42/mk/frozen_multilingual_minilm_logistic.joblib ./artifacts/models/bilingual_v2_seed42/mk/frozen_multilingual_minilm_logistic.joblib
+COPY artifacts/models/ml_v3_audit ./artifacts/models/ml_v3_audit
 COPY data/seed ./data/seed
 COPY data/infrastructure ./data/infrastructure
 COPY data/policy ./data/policy

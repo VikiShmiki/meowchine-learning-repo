@@ -248,6 +248,20 @@ class GuidanceClassifier:
             subtype = "electronics" if manual_kind == "small_electronics" else manual_kind
         base = {"policy_version": self.policy["version"]}
         choices = [Choice(id=key, label=value[0]) for key, value in CHOICES.items()]
+        # A manual choice confirms one item; it must not discard another recognized
+        # recyclable from the original description. Preserve hazardous-item guidance.
+        if (
+            subtype not in {"batteries", "other_specialist"}
+            and sum(bool(re.search(pattern, text, re.I)) for pattern in KIND_PATTERNS.values()) > 1
+        ):
+            return GuidanceResponse(
+                **base,
+                category=None,
+                confidence=0,
+                abstained=True,
+                status="held",
+                message="Describe each item separately so every item gets a suitable stop.",
+            )
         if subtype == "electronics" and not re.search(HELD, text, re.I):
             # Electronics stay a specialist category, with explicitly accepting destinations.
             # Don't silently discard an additional recyclable from a mixed description.

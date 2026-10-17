@@ -8,6 +8,11 @@ Goodsort helps a resident identify an item, confirm its condition, and find a su
 
 > **Scope and evidence.** This is a Skopje hackathon prototype, not a universal disposal authority. Site acceptance comes from a versioned local snapshot; operation and access can change. The app asks for item/condition confirmation and shows uncertainty rather than silently guessing. The technical report explains the methods, measurements, and limits.
 
+**ML update:** The app now uses development-v3-audit suggestion heads with abstention,
+portable weights and repaired data splits. [Measured results and limitations](docs/ML.md)
+supersede the historical model section of the PDF; native and independent user
+validation remain outstanding.
+
 **JSP buses are supported:** plan scheduled public-transport journeys with walking connections, bus numbers, boarding/exit stops and transfers. See [JSP setup and limits](docs/TRANSIT.md).
 
 **Driving can include parking:** choose **Park and walk to drop-offs** for mapped public parking, walking connections and returning to the car between stops. The bundled Skopje snapshot contains 144 parking points; available spaces are unknown. See [parking sources and limits](docs/PARKING.md).

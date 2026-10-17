@@ -40,3 +40,6 @@ runtime/
 *.sqlite3-shm
 
 # Keep deterministic development fixtures in data/seed/.
+
+!artifacts/models/ml_v3/
+!artifacts/models/ml_v3_audit/

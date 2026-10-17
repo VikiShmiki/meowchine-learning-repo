@@ -1,0 +1,5076 @@
+{
+  "scope": "Historical diagnostic, not an independent final test",
+  "languages": {
+    "en": {
+      "provenance": {
+        "head_sha256": "efc4917d533f48f0fb64dacf6d1058e054c1dcb7aa01d42ad3b46af8787e3879",
+        "dataset_manifest_sha256": "e15db09e627e7150cb1d68808dcbb9c3d6990815a443dfb8709da16b158bd4cd",
+        "training_rows_sha256": "05c6aa2250085efa812a425ead5e3b3c454fbe540d6f8860f73c9084d7c99d1d"
+      },
+      "evaluation_inputs_sha256": {
+        "manual_test_review.csv": "d205ec71d377349a56f44b415ad0a631f20bf31843fe445aca10e5e0b91268e6",
+        "manual_test.csv": "4e4e65a86f6af9fb786bec75af2830542daad16d4f50f7e45d30837ca2c82b20"
+      },
+      "training_rows_sha256": "05c6aa2250085efa812a425ead5e3b3c454fbe540d6f8860f73c9084d7c99d1d",
+      "exact_training_overlap": [
+        "plastic shampoo bottle"
+      ],
+      "excluding_exact_overlap": {
+        "old": {
+          "glass": {
+            "precision": 0.6842105263157895,
+            "recall": 1.0,
+            "f1-score": 0.8125,
+            "support": 13.0
+          },
+          "plastic_metal": {
+            "precision": 1.0,
+            "recall": 0.5714285714285714,
+            "f1-score": 0.7272727272727273,
+            "support": 14.0
+          },
+          "paper_tetrapak": {
+            "precision": 1.0,
+            "recall": 0.7777777777777778,
+            "f1-score": 0.875,
+            "support": 18.0
+          },
+          "special_unsupported": {
+            "precision": 0.7647058823529411,
+            "recall": 1.0,
+            "f1-score": 0.8666666666666667,
+            "support": 13.0
+          },
+          "accuracy": 0.8275862068965517,
+          "macro avg": {
+            "precision": 0.8622291021671826,
+            "recall": 0.8373015873015873,
+            "f1-score": 0.8203598484848486,
+            "support": 58.0
+          },
+          "weighted avg": {
+            "precision": 0.8764812640119568,
+            "recall": 0.8275862068965517,
+            "f1-score": 0.8234652560083594,
+            "support": 58.0
+          }
+        },
+        "new": {
+          "glass": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 13.0
+          },
+          "plastic_metal": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 14.0
+          },
+          "paper_tetrapak": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 18.0
+          },
+          "special_unsupported": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 13.0
+          },
+          "accuracy": 1.0,
+          "macro avg": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 58.0
+          },
+          "weighted avg": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 58.0
+          }
+        }
+      },
+      "old": {
+        "glass": {
+          "precision": 0.65,
+          "recall": 1.0,
+          "f1-score": 0.7878787878787878,
+          "support": 13.0
+        },
+        "plastic_metal": {
+          "precision": 1.0,
+          "recall": 0.5333333333333333,
+          "f1-score": 0.6956521739130435,
+          "support": 15.0
+        },
+        "paper_tetrapak": {
+          "precision": 1.0,
+          "recall": 0.7777777777777778,
+          "f1-score": 0.875,
+          "support": 18.0
+        },
+        "special_unsupported": {
+          "precision": 0.7647058823529411,
+          "recall": 1.0,
+          "f1-score": 0.8666666666666667,
+          "support": 13.0
+        },
+        "accuracy": 0.8135593220338984,
+        "macro avg": {
+          "precision": 0.8536764705882353,
+          "recall": 0.8277777777777777,
+          "f1-score": 0.8062994071146244,
+          "support": 59.0
+        },
+        "weighted avg": {
+          "precision": 0.871036889332004,
+          "recall": 0.8135593220338984,
+          "f1-score": 0.8083707375896027,
+          "support": 59.0
+        }
+      },
+      "new": {
+        "glass": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 13.0
+        },
+        "plastic_metal": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 15.0
+        },
+        "paper_tetrapak": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 18.0
+        },
+        "special_unsupported": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 13.0
+        },
+        "accuracy": 1.0,
+        "macro avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 59.0
+        },
+        "weighted avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 59.0
+        }
+      },
+      "accepted_rows": 48,
+      "held_suggestions": 6,
+      "manual_serving": {
+        "scope": "Development diagnostic; suggestions are not disposal decisions",
+        "overall": {
+          "rows": 100,
+          "concept_groups": 100,
+          "policy_handled_rows": 49,
+          "fallback_rows": 51,
+          "fallback_concepts": 51,
+          "fallback_supported_rows": 23,
+          "fallback_held_rows": 28,
+          "accepted_suggestions": 18,
+          "correct_suggestions": 16,
+          "held_false_suggestions": 2,
+          "supported_coverage": 0.6956521739130435,
+          "accepted_accuracy": 0.8888888888888888,
+          "rules_supported_correct": 34,
+          "rules_plus_suggestions_supported_correct": 50,
+          "concept_weighted": {
+            "supported_coverage": 0.6956521739130435,
+            "accepted_accuracy": 0.8888888888888888
+          }
+        },
+        "by_variant": {
+          "0": {
+            "rows": 100,
+            "concept_groups": 100,
+            "policy_handled_rows": 49,
+            "fallback_rows": 51,
+            "fallback_concepts": 51,
+            "fallback_supported_rows": 23,
+            "fallback_held_rows": 28,
+            "accepted_suggestions": 18,
+            "correct_suggestions": 16,
+            "held_false_suggestions": 2,
+            "supported_coverage": 0.6956521739130435,
+            "accepted_accuracy": 0.8888888888888888,
+            "rules_supported_correct": 34,
+            "rules_plus_suggestions_supported_correct": 50,
+            "concept_weighted": {
+              "supported_coverage": 0.6956521739130435,
+              "accepted_accuracy": 0.8888888888888888
+            }
+          }
+        },
+        "records": [
+          {
+            "text": "wine bottle from dinner",
+            "group": "manual-001",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "empty beer bottle made of glass",
+            "group": "manual-002",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "clear pasta sauce jar",
+            "group": "manual-003",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "green glass olive jar",
+            "group": "manual-004",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "glass",
+            "suggestion_score": 1.0
+          },
+          {
+            "text": "where tf do I throw this wine bottle",
+            "group": "manual-005",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "got an empty glass beer bottle",
+            "group": "manual-006",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "is this jam jar recyclable?",
+            "group": "manual-007",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "what bin takes a glass ketchup bottle?",
+            "group": "manual-008",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "glass",
+            "suggestion_score": 0.998266
+          },
+          {
+            "text": "where does my empty pickle jar go",
+            "group": "manual-009",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "brown glass medicine-free bottle",
+            "group": "manual-010",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "can the glass jar from baby food be recycled",
+            "group": "manual-011",
+            "variant": "0",
+            "label": "",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "empty sparkling-water glass bottle",
+            "group": "manual-012",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "I finished a jar of tomato sauce",
+            "group": "manual-013",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "which container is for glass perfume bottles?",
+            "group": "manual-014",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "glass",
+            "suggestion_score": 1.0
+          },
+          {
+            "text": "glass bottle no cap",
+            "group": "manual-015",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "where should this empty mason jar go",
+            "group": "manual-016",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "recycle an empty vinegar bottle made of glass",
+            "group": "manual-017",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "glass",
+            "suggestion_score": 0.999997
+          },
+          {
+            "text": "old glass preserve jar",
+            "group": "manual-018",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "glass",
+            "suggestion_score": 1.0
+          },
+          {
+            "text": "where can I leave a glass juice bottle?",
+            "group": "manual-019",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "glass",
+            "suggestion_score": 0.999997
+          },
+          {
+            "text": "clean glass honey jar",
+            "group": "manual-020",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "glass",
+            "suggestion_score": 0.99999
+          },
+          {
+            "text": "plastic shampoo bottle",
+            "group": "manual-021",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "got an empty coke can",
+            "group": "manual-022",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "rinsed detergent bottle",
+            "group": "manual-023",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "aluminium sparkling-water can",
+            "group": "manual-024",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "plastic_metal",
+            "suggestion_score": 0.999893
+          },
+          {
+            "text": "where does a plastic milk bottle go?",
+            "group": "manual-025",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "plastic_metal",
+            "suggestion_score": 0.999964
+          },
+          {
+            "text": "empty body-wash container",
+            "group": "manual-026",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "can this soda can be recycled",
+            "group": "manual-027",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "yellow bin for a water bottle?",
+            "group": "manual-028",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "metal food tin with no food left",
+            "group": "manual-029",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "plastic_metal",
+            "suggestion_score": 0.999957
+          },
+          {
+            "text": "empty plastic cleaning-product bottle",
+            "group": "manual-030",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "plastic_metal",
+            "suggestion_score": 0.999996
+          },
+          {
+            "text": "what about this energy drink can",
+            "group": "manual-031",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "rinsed fabric-softener container",
+            "group": "manual-032",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "where should an empty hand-soap bottle go",
+            "group": "manual-033",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "plastic juice bottle no cap",
+            "group": "manual-034",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "plastic_metal",
+            "suggestion_score": 0.999972
+          },
+          {
+            "text": "clean canned-beans tin",
+            "group": "manual-035",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "empty aluminium tomato can",
+            "group": "manual-036",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "plastic_metal",
+            "suggestion_score": 0.999999
+          },
+          {
+            "text": "can I recycle my conditioner bottle?",
+            "group": "manual-037",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "where do I put a metal drink can",
+            "group": "manual-038",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "rinsed plastic bleach container",
+            "group": "manual-039",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "empty iced-tea bottle made of plastic",
+            "group": "manual-040",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "plastic_metal",
+            "suggestion_score": 0.999986
+          },
+          {
+            "text": "old magazines from last year",
+            "group": "manual-041",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "amazon cardboard delivery box",
+            "group": "manual-042",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "empty milk Tetra Pak",
+            "group": "manual-043",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "bundle of clean newspapers",
+            "group": "manual-044",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "where should my school notebook go",
+            "group": "manual-045",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "flattened cereal cardboard box",
+            "group": "manual-046",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "clean brown paper bag",
+            "group": "manual-047",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "what about old magazines?",
+            "group": "manual-048",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "juice carton marked Tetra Pak",
+            "group": "manual-049",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "office printer paper",
+            "group": "manual-050",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "cardboard sleeve from a parcel",
+            "group": "manual-051",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "can I recycle a clean shoe box",
+            "group": "manual-052",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "old paperback notebook pages",
+            "group": "manual-053",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "paper_tetrapak",
+            "suggestion_score": 0.999998
+          },
+          {
+            "text": "where do flattened packing boxes go",
+            "group": "manual-054",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "paper_tetrapak",
+            "suggestion_score": 1.0
+          },
+          {
+            "text": "empty aseptic soup carton",
+            "group": "manual-055",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "stack of advertising leaflets",
+            "group": "manual-056",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "clean paper envelope without plastic",
+            "group": "manual-057",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "cardboard tube from kitchen roll",
+            "group": "manual-058",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "paper packaging from a dry product",
+            "group": "manual-059",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "where should this empty drink carton go?",
+            "group": "manual-060",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "used plastic toothbrush",
+            "group": "manual-061",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "dirty kitchen sponge",
+            "group": "manual-062",
+            "variant": "0",
+            "label": "",
+            "rules_status": "held",
+            "rules_label": "",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "greasy used tissue",
+            "group": "manual-063",
+            "variant": "0",
+            "label": "",
+            "rules_status": "held",
+            "rules_label": "",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "broken ceramic coffee mug",
+            "group": "manual-064",
+            "variant": "0",
+            "label": "",
+            "rules_status": "held",
+            "rules_label": "",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "disposable plastic fork",
+            "group": "manual-065",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "used face mask",
+            "group": "manual-066",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "tea bag after brewing",
+            "group": "manual-067",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "cigarette butt",
+            "group": "manual-068",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "wooden ice-cream stick",
+            "group": "manual-069",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "food leftovers with no compost bin",
+            "group": "manual-070",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "dirty cling film",
+            "group": "manual-071",
+            "variant": "0",
+            "label": "",
+            "rules_status": "held",
+            "rules_label": "",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "plastic drinking straw",
+            "group": "manual-072",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "plastic_metal",
+            "suggestion_score": 0.999995
+          },
+          {
+            "text": "crumbled bathroom tissue",
+            "group": "manual-073",
+            "variant": "0",
+            "label": "",
+            "rules_status": "held",
+            "rules_label": "",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "old dishwashing sponge",
+            "group": "manual-074",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "used disposable glove",
+            "group": "manual-075",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "where does a broken dinner plate go?",
+            "group": "manual-076",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "chewed wooden toothpick",
+            "group": "manual-077",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "empty snack wrapper with foil lining",
+            "group": "manual-078",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "dust and vacuum cleaner dirt",
+            "group": "manual-079",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "used cotton swab",
+            "group": "manual-080",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "AA batteries from a remote",
+            "group": "manual-081",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "broken laptop computer",
+            "group": "manual-082",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "confirm_condition",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "where should this old charger go",
+            "group": "manual-083",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "confirm_condition",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "expired prescription medication",
+            "group": "manual-084",
+            "variant": "0",
+            "label": "",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "swollen phone battery",
+            "group": "manual-085",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "dead fluorescent tube",
+            "group": "manual-086",
+            "variant": "0",
+            "label": "",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "old Android smartphone",
+            "group": "manual-087",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "confirm_condition",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "unused household pesticide",
+            "group": "manual-088",
+            "variant": "0",
+            "label": "",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "broken tablet device",
+            "group": "manual-089",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "small bottle of paint thinner",
+            "group": "manual-090",
+            "variant": "0",
+            "label": "",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "button-cell watch battery",
+            "group": "manual-091",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "damaged power bank",
+            "group": "manual-092",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "where do computer cables go?",
+            "group": "manual-093",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "confirm_condition",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "old Wi-Fi router",
+            "group": "manual-094",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "special_unsupported",
+            "suggestion_score": 0.999997
+          },
+          {
+            "text": "half-full chemical cleaner",
+            "group": "manual-095",
+            "variant": "0",
+            "label": "",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "burnt-out compact fluorescent bulb",
+            "group": "manual-096",
+            "variant": "0",
+            "label": "",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "broken electronic headphones",
+            "group": "manual-097",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "confirm_condition",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "unused medicine tablets",
+            "group": "manual-098",
+            "variant": "0",
+            "label": "",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "leaking rechargeable battery",
+            "group": "manual-099",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "obsolete laptop power adapter",
+            "group": "manual-100",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "confirm_condition",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          }
+        ]
+      },
+      "development_test_serving": {
+        "scope": "Development diagnostic; suggestions are not disposal decisions",
+        "overall": {
+          "rows": 60,
+          "concept_groups": 60,
+          "policy_handled_rows": 19,
+          "fallback_rows": 41,
+          "fallback_concepts": 41,
+          "fallback_supported_rows": 30,
+          "fallback_held_rows": 11,
+          "accepted_suggestions": 18,
+          "correct_suggestions": 18,
+          "held_false_suggestions": 0,
+          "supported_coverage": 0.6,
+          "accepted_accuracy": 1.0,
+          "rules_supported_correct": 18,
+          "rules_plus_suggestions_supported_correct": 36,
+          "concept_weighted": {
+            "supported_coverage": 0.6,
+            "accepted_accuracy": 1.0
+          }
+        },
+        "by_variant": {
+          "0": {
+            "rows": 60,
+            "concept_groups": 60,
+            "policy_handled_rows": 19,
+            "fallback_rows": 41,
+            "fallback_concepts": 41,
+            "fallback_supported_rows": 30,
+            "fallback_held_rows": 11,
+            "accepted_suggestions": 18,
+            "correct_suggestions": 18,
+            "held_false_suggestions": 0,
+            "supported_coverage": 0.6,
+            "accepted_accuracy": 1.0,
+            "rules_supported_correct": 18,
+            "rules_plus_suggestions_supported_correct": 36,
+            "concept_weighted": {
+              "supported_coverage": 0.6,
+              "accepted_accuracy": 1.0
+            }
+          }
+        },
+        "records": [
+          {
+            "text": "glass pesto jar",
+            "group": "f871d5c16e626aa7c4b8",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "glass",
+            "suggestion_score": 0.999995
+          },
+          {
+            "text": "glass mayonnaise jar",
+            "group": "d20694e215ee721c0f25",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "glass",
+            "suggestion_score": 0.999998
+          },
+          {
+            "text": "glass maple syrup bottle",
+            "group": "894b11e35149c9ac7eec",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "glass",
+            "suggestion_score": 0.999816
+          },
+          {
+            "text": "glass soy sauce bottle",
+            "group": "88c2f839ebd943d0faa2",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "glass",
+            "suggestion_score": 0.99988
+          },
+          {
+            "text": "glass pickled pepper jar",
+            "group": "7de4acb74d3b4056a2c6",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "glass",
+            "suggestion_score": 0.999999
+          },
+          {
+            "text": "glass baby food jar",
+            "group": "ef6186d43e86cae7c7a1",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "glass",
+            "suggestion_score": 0.999999
+          },
+          {
+            "text": "glass salad dressing bottle",
+            "group": "4c72f809cefd9c38b7c2",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "glass",
+            "suggestion_score": 1.0
+          },
+          {
+            "text": "glass apple juice bottle",
+            "group": "aebdf42d69f7627f40d5",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "glass",
+            "suggestion_score": 0.999999
+          },
+          {
+            "text": "plastic fabric softener bottle",
+            "group": "32e15caa5172251516ca",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "plastic_metal",
+            "suggestion_score": 0.999999
+          },
+          {
+            "text": "plastic hair gel bottle",
+            "group": "75c6ccaca8a60304f177",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "plastic_metal",
+            "suggestion_score": 0.999995
+          },
+          {
+            "text": "plastic sparkling water bottle",
+            "group": "5b35763bfcf1036d161a",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "plastic_metal",
+            "suggestion_score": 0.999864
+          },
+          {
+            "text": "plastic tomato sauce bottle",
+            "group": "b7588ce64d4added5808",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "plastic_metal",
+            "suggestion_score": 0.999993
+          },
+          {
+            "text": "aluminium iced coffee can",
+            "group": "fc61ac5b9a9ff950cc76",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "plastic_metal",
+            "suggestion_score": 0.99999
+          },
+          {
+            "text": "metal chickpea can",
+            "group": "f7e34545582458c00883",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "plastic_metal",
+            "suggestion_score": 0.999986
+          },
+          {
+            "text": "metal mushroom can",
+            "group": "645178abbf4ee7d12e36",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "plastic_metal",
+            "suggestion_score": 0.999989
+          },
+          {
+            "text": "steel peach can",
+            "group": "33ca64b8c4907f6be050",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "plastic_metal",
+            "suggestion_score": 0.999985
+          },
+          {
+            "text": "paper instruction booklet",
+            "group": "19e357bdc21bb25733ea",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "paper music score",
+            "group": "5dd40a77e2d7696e55d8",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "cardboard chocolate box",
+            "group": "d95098b171b9ce763bcb",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "cardboard egg carton",
+            "group": "ab0069f8e0baee312a74",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "paper mailing envelope",
+            "group": "0a5bf12eb4734ad96d62",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "Tetra Pak oat drink carton",
+            "group": "024129f33843d1ae25eb",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "corrugated cardboard sheet",
+            "group": "2ad61921a12350bf38f5",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "paper wrapping sheet",
+            "group": "073ae35defa1bf9b02db",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "hearing aid battery",
+            "group": "2888a61626ce4dc49c75",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "camera battery",
+            "group": "543c646802d54944d630",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "expired antibiotic",
+            "group": "e53480636f94d3b4b3ce",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "rat poison",
+            "group": "41453b87ebbe6652aa0e",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "compact fluorescent lamp",
+            "group": "a2ba30f812758fa00a3e",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "used insulin needle",
+            "group": "2ef415ec6d611cf513f0",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "wood varnish solvent",
+            "group": "fb0c17cd712e036e903c",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "antifreeze chemical",
+            "group": "a1a704118672e42e5669",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "polo shirt",
+            "group": "b15a1756a82313bf4f19",
+            "variant": "0",
+            "label": "clothes",
+            "rules_status": "confirm_condition",
+            "rules_label": "clothes",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "denim shorts",
+            "group": "7f94d15dc722a3bab7e9",
+            "variant": "0",
+            "label": "clothes",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "clothes",
+            "suggestion_score": 1.0
+          },
+          {
+            "text": "fleece vest",
+            "group": "a0990437da17b560edb0",
+            "variant": "0",
+            "label": "clothes",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "sports jersey",
+            "group": "883349886138393a5073",
+            "variant": "0",
+            "label": "clothes",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "ballet flats",
+            "group": "391d0742128454a1c84c",
+            "variant": "0",
+            "label": "clothes",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "swimsuit",
+            "group": "d6c0822cf8ac0a05a7b7",
+            "variant": "0",
+            "label": "clothes",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "bathrobe",
+            "group": "6eb046bd858bc63de7c6",
+            "variant": "0",
+            "label": "clothes",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "woollen cap",
+            "group": "9213f7029f128fbb1716",
+            "variant": "0",
+            "label": "clothes",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "rice cooker",
+            "group": "4175f8e700d46dd1ea62",
+            "variant": "0",
+            "label": "electronics",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "sewing machine",
+            "group": "1654b422a217755d33b2",
+            "variant": "0",
+            "label": "electronics",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "electronics",
+            "suggestion_score": 0.993827
+          },
+          {
+            "text": "electric shaver",
+            "group": "88e0877b20b3e148a707",
+            "variant": "0",
+            "label": "electronics",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "digital alarm clock",
+            "group": "0e48d7be08b648c906db",
+            "variant": "0",
+            "label": "electronics",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "electronic kitchen scale",
+            "group": "3cc318c056e759fec50f",
+            "variant": "0",
+            "label": "electronics",
+            "rules_status": "confirm_condition",
+            "rules_label": "electronics",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "DVD player",
+            "group": "763e6630a2c9095865e2",
+            "variant": "0",
+            "label": "electronics",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "computer hard drive",
+            "group": "9f5330621664f2afb45d",
+            "variant": "0",
+            "label": "electronics",
+            "rules_status": "confirm_condition",
+            "rules_label": "electronics",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "wireless computer adapter",
+            "group": "0f7095811cea2cda62e7",
+            "variant": "0",
+            "label": "electronics",
+            "rules_status": "confirm_condition",
+            "rules_label": "electronics",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "an object without a description",
+            "group": "8fef6b3563d0dbffc319",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "a container of unknown material",
+            "group": "9fec1ab1eba9338b44de",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "mixed materials in one bag",
+            "group": "059939f04fb2eee8786d",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "an apple core",
+            "group": "d7f10cb375ecc6fb6baa",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "a wooden shelf",
+            "group": "aaec70bdd6486f3dccf1",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "a porcelain bowl",
+            "group": "4f7b894908613087ce61",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "random leftovers",
+            "group": "48a2e9ccee38c4654fda",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "things from cleaning the cellar",
+            "group": "752e49af47181bba5014",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "a sealed container",
+            "group": "4ae627b4a679abc44f7a",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "a shirt and an aluminium can",
+            "group": "0c126a0eb38c4387d435",
+            "variant": "0",
+            "label": "",
+            "rules_status": "held",
+            "rules_label": "",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "environmentally friendly wrapping",
+            "group": "5b24286592bea38c8488",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "compostable packaging",
+            "group": "719595e513c291e1a123",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          }
+        ]
+      },
+      "policy_boundary_checks": [
+        {
+          "query": "ne e cista obleka",
+          "status": "held"
+        },
+        {
+          "query": "valkana kosula",
+          "status": "held"
+        },
+        {
+          "query": "mokra maica",
+          "status": "held"
+        },
+        {
+          "query": "glass bottle and a phone",
+          "status": "held"
+        },
+        {
+          "query": "unknown material container",
+          "status": "clarify"
+        }
+      ]
+    },
+    "mk": {
+      "provenance": {
+        "head_sha256": "98b3a4a253ff8981362372efef0c3365d571c236c3d772680e3e14887fa0911c",
+        "dataset_manifest_sha256": "e15db09e627e7150cb1d68808dcbb9c3d6990815a443dfb8709da16b158bd4cd",
+        "training_rows_sha256": "05c6aa2250085efa812a425ead5e3b3c454fbe540d6f8860f73c9084d7c99d1d"
+      },
+      "evaluation_inputs_sha256": {
+        "manual_test_review.csv": "d205ec71d377349a56f44b415ad0a631f20bf31843fe445aca10e5e0b91268e6",
+        "manual_test_mk.csv": "46d6c77c9c66c058a6eb8c155cb16f2fd867e18e8a56879b4352d4ee282b1c28",
+        "manual_test.csv": "4e4e65a86f6af9fb786bec75af2830542daad16d4f50f7e45d30837ca2c82b20"
+      },
+      "training_rows_sha256": "05c6aa2250085efa812a425ead5e3b3c454fbe540d6f8860f73c9084d7c99d1d",
+      "exact_training_overlap": [
+        "\u043f\u043b\u0430\u0441\u0442\u0438\u0447\u043d\u043e \u0448\u0438\u0448\u0435 \u043e\u0434 \u0448\u0430\u043c\u043f\u043e\u043d"
+      ],
+      "excluding_exact_overlap": {
+        "old": {
+          "glass": {
+            "precision": 0.5909090909090909,
+            "recall": 1.0,
+            "f1-score": 0.7428571428571429,
+            "support": 13.0
+          },
+          "plastic_metal": {
+            "precision": 0.5,
+            "recall": 0.21428571428571427,
+            "f1-score": 0.3,
+            "support": 14.0
+          },
+          "paper_tetrapak": {
+            "precision": 1.0,
+            "recall": 0.6111111111111112,
+            "f1-score": 0.7586206896551724,
+            "support": 18.0
+          },
+          "special_unsupported": {
+            "precision": 0.6842105263157895,
+            "recall": 1.0,
+            "f1-score": 0.8125,
+            "support": 13.0
+          },
+          "accuracy": 0.6896551724137931,
+          "macro avg": {
+            "precision": 0.69377990430622,
+            "recall": 0.7063492063492063,
+            "f1-score": 0.6534944581280788,
+            "support": 58.0
+          },
+          "weighted avg": {
+            "precision": 0.716837155584887,
+            "recall": 0.6896551724137931,
+            "f1-score": 0.6564623322575165,
+            "support": 58.0
+          }
+        },
+        "new": {
+          "glass": {
+            "precision": 0.7647058823529411,
+            "recall": 1.0,
+            "f1-score": 0.8666666666666667,
+            "support": 13.0
+          },
+          "plastic_metal": {
+            "precision": 0.9,
+            "recall": 0.6428571428571429,
+            "f1-score": 0.75,
+            "support": 14.0
+          },
+          "paper_tetrapak": {
+            "precision": 0.9444444444444444,
+            "recall": 0.9444444444444444,
+            "f1-score": 0.9444444444444444,
+            "support": 18.0
+          },
+          "special_unsupported": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 13.0
+          },
+          "accuracy": 0.896551724137931,
+          "macro avg": {
+            "precision": 0.9022875816993463,
+            "recall": 0.8968253968253967,
+            "f1-score": 0.8902777777777777,
+            "support": 58.0
+          },
+          "weighted avg": {
+            "precision": 0.9058823529411765,
+            "recall": 0.896551724137931,
+            "f1-score": 0.8925287356321839,
+            "support": 58.0
+          }
+        }
+      },
+      "old": {
+        "glass": {
+          "precision": 0.5652173913043478,
+          "recall": 1.0,
+          "f1-score": 0.7222222222222222,
+          "support": 13.0
+        },
+        "plastic_metal": {
+          "precision": 0.5,
+          "recall": 0.2,
+          "f1-score": 0.2857142857142857,
+          "support": 15.0
+        },
+        "paper_tetrapak": {
+          "precision": 1.0,
+          "recall": 0.6111111111111112,
+          "f1-score": 0.7586206896551724,
+          "support": 18.0
+        },
+        "special_unsupported": {
+          "precision": 0.6842105263157895,
+          "recall": 1.0,
+          "f1-score": 0.8125,
+          "support": 13.0
+        },
+        "accuracy": 0.6779661016949152,
+        "macro avg": {
+          "precision": 0.6873569794050343,
+          "recall": 0.7027777777777777,
+          "f1-score": 0.6447642993979201,
+          "support": 59.0
+        },
+        "weighted avg": {
+          "precision": 0.7075010665942676,
+          "recall": 0.6779661016949152,
+          "f1-score": 0.6422419591253605,
+          "support": 59.0
+        }
+      },
+      "new": {
+        "glass": {
+          "precision": 0.7647058823529411,
+          "recall": 1.0,
+          "f1-score": 0.8666666666666667,
+          "support": 13.0
+        },
+        "plastic_metal": {
+          "precision": 0.9090909090909091,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.7692307692307693,
+          "support": 15.0
+        },
+        "paper_tetrapak": {
+          "precision": 0.9444444444444444,
+          "recall": 0.9444444444444444,
+          "f1-score": 0.9444444444444444,
+          "support": 18.0
+        },
+        "special_unsupported": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 13.0
+        },
+        "accuracy": 0.8983050847457628,
+        "macro avg": {
+          "precision": 0.9045603089720737,
+          "recall": 0.9027777777777777,
+          "f1-score": 0.89508547008547,
+          "support": 59.0
+        },
+        "weighted avg": {
+          "precision": 0.9080939001178283,
+          "recall": 0.8983050847457628,
+          "f1-score": 0.8950021729682747,
+          "support": 59.0
+        }
+      },
+      "accepted_rows": 48,
+      "held_suggestions": 6,
+      "manual_serving": {
+        "scope": "Development diagnostic; suggestions are not disposal decisions",
+        "overall": {
+          "rows": 100,
+          "concept_groups": 100,
+          "policy_handled_rows": 62,
+          "fallback_rows": 38,
+          "fallback_concepts": 38,
+          "fallback_supported_rows": 15,
+          "fallback_held_rows": 23,
+          "accepted_suggestions": 13,
+          "correct_suggestions": 10,
+          "held_false_suggestions": 3,
+          "supported_coverage": 0.6666666666666666,
+          "accepted_accuracy": 0.7692307692307693,
+          "rules_supported_correct": 42,
+          "rules_plus_suggestions_supported_correct": 52,
+          "concept_weighted": {
+            "supported_coverage": 0.6666666666666666,
+            "accepted_accuracy": 0.7692307692307693
+          }
+        },
+        "by_variant": {
+          "0": {
+            "rows": 100,
+            "concept_groups": 100,
+            "policy_handled_rows": 62,
+            "fallback_rows": 38,
+            "fallback_concepts": 38,
+            "fallback_supported_rows": 15,
+            "fallback_held_rows": 23,
+            "accepted_suggestions": 13,
+            "correct_suggestions": 10,
+            "held_false_suggestions": 3,
+            "supported_coverage": 0.6666666666666666,
+            "accepted_accuracy": 0.7692307692307693,
+            "rules_supported_correct": 42,
+            "rules_plus_suggestions_supported_correct": 52,
+            "concept_weighted": {
+              "supported_coverage": 0.6666666666666666,
+              "accepted_accuracy": 0.7692307692307693
+            }
+          }
+        },
+        "records": [
+          {
+            "text": "\u0448\u0438\u0448\u0435 \u043e\u0434 \u0432\u0438\u043d\u043e \u043e\u0434 \u0432\u0435\u0447\u0435\u0440\u0430\u0442\u0430",
+            "group": "manual-001",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043f\u0440\u0430\u0437\u043d\u043e \u0448\u0438\u0448\u0435 \u043e\u0434 \u043f\u0438\u0432\u043e \u043d\u0430\u043f\u0440\u0430\u0432\u0435\u043d\u043e \u043e\u0434 \u0441\u0442\u0430\u043a\u043b\u043e",
+            "group": "manual-002",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043f\u0440\u043e\u0455\u0438\u0440\u043d\u0430 \u0442\u0435\u0433\u043b\u0430 \u043e\u0434 \u0441\u043e\u0441 \u0437\u0430 \u0442\u0435\u0441\u0442\u0435\u043d\u0438\u043d\u0438",
+            "group": "manual-003",
+            "variant": "0",
+            "label": "",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0437\u0435\u043b\u0435\u043d\u0430 \u0441\u0442\u0430\u043a\u043b\u0435\u043d\u0430 \u0442\u0435\u0433\u043b\u0430 \u043e\u0434 \u043c\u0430\u0441\u043b\u0438\u043d\u043a\u0438",
+            "group": "manual-004",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u0430\u0434\u0435 \u043f\u043e \u0453\u0430\u0432\u043e\u043b\u0438\u0442\u0435 \u0434\u0430 \u0433\u043e \u0444\u0440\u043b\u0430\u043c \u043e\u0432\u0430 \u0448\u0438\u0448\u0435 \u043e\u0434 \u0432\u0438\u043d\u043e",
+            "group": "manual-005",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0438\u043c\u0430\u043c \u043f\u0440\u0430\u0437\u043d\u043e \u0441\u0442\u0430\u043a\u043b\u0435\u043d\u043e \u0448\u0438\u0448\u0435 \u043e\u0434 \u043f\u0438\u0432\u043e",
+            "group": "manual-006",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0434\u0430\u043b\u0438 \u043e\u0432\u0430\u0430 \u0442\u0435\u0433\u043b\u0430 \u043e\u0434 \u045f\u0435\u043c \u0441\u0435 \u0440\u0435\u0446\u0438\u043a\u043b\u0438\u0440\u0430?",
+            "group": "manual-007",
+            "variant": "0",
+            "label": "",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u043e\u0458 \u043a\u043e\u043d\u0442\u0435\u0458\u043d\u0435\u0440 \u043f\u0440\u0438\u0444\u0430\u045c\u0430 \u0441\u0442\u0430\u043a\u043b\u0435\u043d\u043e \u0448\u0438\u0448\u0435 \u043e\u0434 \u043a\u0435\u0447\u0430\u043f?",
+            "group": "manual-008",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u0430\u0434\u0435 \u043e\u0434\u0438 \u043c\u043e\u0458\u0430\u0442\u0430 \u043f\u0440\u0430\u0437\u043d\u0430 \u0442\u0435\u0433\u043b\u0430 \u043e\u0434 \u043a\u0438\u0441\u0435\u043b\u0438 \u043a\u0440\u0430\u0441\u0442\u0430\u0432\u0438\u0447\u043a\u0438",
+            "group": "manual-009",
+            "variant": "0",
+            "label": "",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u0430\u0444\u0435\u0430\u0432\u043e \u0441\u0442\u0430\u043a\u043b\u0435\u043d\u043e \u0448\u0438\u0448\u0435 \u0431\u0435\u0437 \u043b\u0435\u043a\u043e\u0432\u0438",
+            "group": "manual-010",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043c\u043e\u0436\u0435 \u043b\u0438 \u0434\u0430 \u0441\u0435 \u0440\u0435\u0446\u0438\u043a\u043b\u0438\u0440\u0430 \u0441\u0442\u0430\u043a\u043b\u0435\u043d\u0430\u0442\u0430 \u0442\u0435\u0433\u043b\u0430 \u043e\u0434 \u0431\u0435\u0431\u0435\u0448\u043a\u0430 \u0445\u0440\u0430\u043d\u0430",
+            "group": "manual-011",
+            "variant": "0",
+            "label": "",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043f\u0440\u0430\u0437\u043d\u043e \u0441\u0442\u0430\u043a\u043b\u0435\u043d\u043e \u0448\u0438\u0448\u0435 \u043e\u0434 \u0433\u0430\u0437\u0438\u0440\u0430\u043d\u0430 \u0432\u043e\u0434\u0430",
+            "group": "manual-012",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0458\u0430 \u043f\u043e\u0442\u0440\u043e\u0448\u0438\u0432 \u0442\u0435\u0433\u043b\u0430\u0442\u0430 \u0441\u043e \u0441\u043e\u0441 \u043e\u0434 \u0434\u043e\u043c\u0430\u0442\u0438",
+            "group": "manual-013",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u043e\u0458 \u043a\u043e\u043d\u0442\u0435\u0458\u043d\u0435\u0440 \u0435 \u0437\u0430 \u0441\u0442\u0430\u043a\u043b\u0435\u043d\u0438 \u0448\u0438\u0448\u0438\u045a\u0430 \u043e\u0434 \u043f\u0430\u0440\u0444\u0435\u043c?",
+            "group": "manual-014",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0441\u0442\u0430\u043a\u043b\u0435\u043d\u043e \u0448\u0438\u0448\u0435 \u0431\u0435\u0437 \u043a\u0430\u043f\u0430\u0447\u0435",
+            "group": "manual-015",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u0430\u0434\u0435 \u0442\u0440\u0435\u0431\u0430 \u0434\u0430 \u043e\u0434\u0438 \u043e\u0432\u0430\u0430 \u043f\u0440\u0430\u0437\u043d\u0430 \u0442\u0435\u0433\u043b\u0430 \u0437\u0430 \u0437\u0438\u043c\u043d\u0438\u0446\u0430",
+            "group": "manual-016",
+            "variant": "0",
+            "label": "",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0440\u0435\u0446\u0438\u043a\u043b\u0438\u0440\u0430\u0458 \u043f\u0440\u0430\u0437\u043d\u043e \u0448\u0438\u0448\u0435 \u043e\u0434 \u043e\u0446\u0435\u0442 \u043d\u0430\u043f\u0440\u0430\u0432\u0435\u043d\u043e \u043e\u0434 \u0441\u0442\u0430\u043a\u043b\u043e",
+            "group": "manual-017",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "glass",
+            "suggestion_score": 0.986012
+          },
+          {
+            "text": "\u0441\u0442\u0430\u0440\u0430 \u0441\u0442\u0430\u043a\u043b\u0435\u043d\u0430 \u0442\u0435\u0433\u043b\u0430 \u043e\u0434 \u0437\u0438\u043c\u043d\u0438\u0446\u0430",
+            "group": "manual-018",
+            "variant": "0",
+            "label": "",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u0430\u0434\u0435 \u043c\u043e\u0436\u0430\u043c \u0434\u0430 \u043e\u0441\u0442\u0430\u0432\u0430\u043c \u0441\u0442\u0430\u043a\u043b\u0435\u043d\u043e \u0448\u0438\u0448\u0435 \u043e\u0434 \u0441\u043e\u043a?",
+            "group": "manual-019",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0447\u0438\u0441\u0442\u0430 \u0441\u0442\u0430\u043a\u043b\u0435\u043d\u0430 \u0442\u0435\u0433\u043b\u0430 \u043e\u0434 \u043c\u0435\u0434",
+            "group": "manual-020",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043f\u043b\u0430\u0441\u0442\u0438\u0447\u043d\u043e \u0448\u0438\u0448\u0435 \u043e\u0434 \u0448\u0430\u043c\u043f\u043e\u043d",
+            "group": "manual-021",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0438\u043c\u0430\u043c \u043f\u0440\u0430\u0437\u043d\u0430 \u043b\u0438\u043c\u0435\u043d\u043a\u0430 \u043e\u0434 \u043a\u043e\u043a\u0430-\u043a\u043e\u043b\u0430",
+            "group": "manual-022",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0438\u0441\u043f\u043b\u0430\u043a\u043d\u0430\u0442\u043e \u0448\u0438\u0448\u0435 \u043e\u0434 \u0434\u0435\u0442\u0435\u0440\u0433\u0435\u043d\u0442",
+            "group": "manual-023",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0430\u043b\u0443\u043c\u0438\u043d\u0438\u0443\u043c\u0441\u043a\u0430 \u043b\u0438\u043c\u0435\u043d\u043a\u0430 \u043e\u0434 \u0433\u0430\u0437\u0438\u0440\u0430\u043d\u0430 \u0432\u043e\u0434\u0430",
+            "group": "manual-024",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u0430\u0434\u0435 \u043e\u0434\u0438 \u043f\u043b\u0430\u0441\u0442\u0438\u0447\u043d\u043e \u0448\u0438\u0448\u0435 \u043e\u0434 \u043c\u043b\u0435\u043a\u043e?",
+            "group": "manual-025",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043f\u0440\u0430\u0437\u043d\u0430 \u0430\u043c\u0431\u0430\u043b\u0430\u0436\u0430 \u043e\u0434 \u0433\u0435\u043b \u0437\u0430 \u0442\u0443\u0448\u0438\u0440\u0430\u045a\u0435",
+            "group": "manual-026",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043c\u043e\u0436\u0435 \u043b\u0438 \u043e\u0432\u0430\u0430 \u043b\u0438\u043c\u0435\u043d\u043a\u0430 \u043e\u0434 \u0433\u0430\u0437\u0438\u0440\u0430\u043d \u043f\u0438\u0458\u0430\u043b\u0430\u043a \u0434\u0430 \u0441\u0435 \u0440\u0435\u0446\u0438\u043a\u043b\u0438\u0440\u0430",
+            "group": "manual-027",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0436\u043e\u043b\u0442 \u043a\u043e\u043d\u0442\u0435\u0458\u043d\u0435\u0440 \u0437\u0430 \u0448\u0438\u0448\u0435 \u043e\u0434 \u0432\u043e\u0434\u0430?",
+            "group": "manual-028",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043c\u0435\u0442\u0430\u043b\u043d\u0430 \u043a\u043e\u043d\u0437\u0435\u0440\u0432\u0430 \u043e\u0434 \u0445\u0440\u0430\u043d\u0430 \u0431\u0435\u0437 \u043e\u0441\u0442\u0430\u0442\u043e\u0446\u0438",
+            "group": "manual-029",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043f\u0440\u0430\u0437\u043d\u043e \u043f\u043b\u0430\u0441\u0442\u0438\u0447\u043d\u043e \u0448\u0438\u0448\u0435 \u043e\u0434 \u0441\u0440\u0435\u0434\u0441\u0442\u0432\u043e \u0437\u0430 \u0447\u0438\u0441\u0442\u0435\u045a\u0435",
+            "group": "manual-030",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0448\u0442\u043e \u0441\u043e \u043e\u0432\u0430\u0430 \u043b\u0438\u043c\u0435\u043d\u043a\u0430 \u043e\u0434 \u0435\u043d\u0435\u0440\u0433\u0435\u0442\u0441\u043a\u0438 \u043f\u0438\u0458\u0430\u043b\u0430\u043a",
+            "group": "manual-031",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0438\u0441\u043f\u043b\u0430\u043a\u043d\u0430\u0442\u0430 \u0430\u043c\u0431\u0430\u043b\u0430\u0436\u0430 \u043e\u0434 \u043e\u043c\u0435\u043a\u043d\u0443\u0432\u0430\u0447",
+            "group": "manual-032",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u0430\u0434\u0435 \u0442\u0440\u0435\u0431\u0430 \u0434\u0430 \u043e\u0434\u0438 \u043f\u0440\u0430\u0437\u043d\u043e \u0448\u0438\u0448\u0435 \u043e\u0434 \u0442\u0435\u0447\u0435\u043d \u0441\u0430\u043f\u0443\u043d",
+            "group": "manual-033",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043f\u043b\u0430\u0441\u0442\u0438\u0447\u043d\u043e \u0448\u0438\u0448\u0435 \u043e\u0434 \u0441\u043e\u043a \u0431\u0435\u0437 \u043a\u0430\u043f\u0430\u0447\u0435",
+            "group": "manual-034",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0447\u0438\u0441\u0442\u0430 \u043a\u043e\u043d\u0437\u0435\u0440\u0432\u0430 \u043e\u0434 \u0433\u0440\u0430\u0432",
+            "group": "manual-035",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043f\u0440\u0430\u0437\u043d\u0430 \u0430\u043b\u0443\u043c\u0438\u043d\u0438\u0443\u043c\u0441\u043a\u0430 \u043a\u043e\u043d\u0437\u0435\u0440\u0432\u0430 \u043e\u0434 \u0434\u043e\u043c\u0430\u0442\u0438",
+            "group": "manual-036",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043c\u043e\u0436\u0430\u043c \u043b\u0438 \u0434\u0430 \u0433\u043e \u0440\u0435\u0446\u0438\u043a\u043b\u0438\u0440\u0430\u043c \u0448\u0438\u0448\u0435\u0442\u043e \u043e\u0434 \u0440\u0435\u0433\u0435\u043d\u0435\u0440\u0430\u0442\u043e\u0440 \u0437\u0430 \u043a\u043e\u0441\u0430?",
+            "group": "manual-037",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u0430\u0434\u0435 \u0434\u0430 \u0441\u0442\u0430\u0432\u0430\u043c \u043c\u0435\u0442\u0430\u043b\u043d\u0430 \u043b\u0438\u043c\u0435\u043d\u043a\u0430 \u043e\u0434 \u043f\u0438\u0458\u0430\u043b\u0430\u043a",
+            "group": "manual-038",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0438\u0441\u043f\u043b\u0430\u043a\u043d\u0430\u0442\u0430 \u043f\u043b\u0430\u0441\u0442\u0438\u0447\u043d\u0430 \u0430\u043c\u0431\u0430\u043b\u0430\u0436\u0430 \u043e\u0434 \u0431\u0435\u043b\u0438\u043b\u043e",
+            "group": "manual-039",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043f\u0440\u0430\u0437\u043d\u043e \u0448\u0438\u0448\u0435 \u043e\u0434 \u043b\u0430\u0434\u0435\u043d \u0447\u0430\u0458 \u043d\u0430\u043f\u0440\u0430\u0432\u0435\u043d\u043e \u043e\u0434 \u043f\u043b\u0430\u0441\u0442\u0438\u043a\u0430",
+            "group": "manual-040",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "plastic_metal",
+            "suggestion_score": 0.972468
+          },
+          {
+            "text": "\u0441\u0442\u0430\u0440\u0438 \u0441\u043f\u0438\u0441\u0430\u043d\u0438\u0458\u0430 \u043e\u0434 \u043c\u0438\u043d\u0430\u0442\u0430\u0442\u0430 \u0433\u043e\u0434\u0438\u043d\u0430",
+            "group": "manual-041",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u0430\u0440\u0442\u043e\u043d\u0441\u043a\u0430 \u043a\u0443\u0442\u0438\u0458\u0430 \u043e\u0434 \u0434\u043e\u0441\u0442\u0430\u0432\u0430 \u043e\u0434 Amazon",
+            "group": "manual-042",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043f\u0440\u0430\u0437\u0435\u043d Tetra Pak \u043e\u0434 \u043c\u043b\u0435\u043a\u043e",
+            "group": "manual-043",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0441\u043d\u043e\u043f \u0447\u0438\u0441\u0442\u0438 \u0432\u0435\u0441\u043d\u0438\u0446\u0438",
+            "group": "manual-044",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u0430\u0434\u0435 \u0442\u0440\u0435\u0431\u0430 \u0434\u0430 \u043e\u0434\u0438 \u043c\u043e\u0458\u0430\u0442\u0430 \u0443\u0447\u0438\u043b\u0438\u0448\u043d\u0430 \u0442\u0435\u0442\u0440\u0430\u0442\u043a\u0430",
+            "group": "manual-045",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "paper_tetrapak",
+            "suggestion_score": 0.99
+          },
+          {
+            "text": "\u0441\u043f\u043b\u0435\u0441\u043a\u0430\u043d\u0430 \u043a\u0430\u0440\u0442\u043e\u043d\u0441\u043a\u0430 \u043a\u0443\u0442\u0438\u0458\u0430 \u043e\u0434 \u0436\u0438\u0442\u0430\u0440\u043a\u0438",
+            "group": "manual-046",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0447\u0438\u0441\u0442\u0430 \u043a\u0430\u0444\u0435\u0430\u0432\u0430 \u0445\u0430\u0440\u0442\u0438\u0435\u043d\u0430 \u043a\u0435\u0441\u0430",
+            "group": "manual-047",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "paper_tetrapak",
+            "suggestion_score": 0.978128
+          },
+          {
+            "text": "\u0448\u0442\u043e \u0441\u043e \u0441\u0442\u0430\u0440\u0438\u0442\u0435 \u0441\u043f\u0438\u0441\u0430\u043d\u0438\u0458\u0430?",
+            "group": "manual-048",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0430\u043c\u0431\u0430\u043b\u0430\u0436\u0430 \u043e\u0434 \u0441\u043e\u043a \u0441\u043e \u043e\u0437\u043d\u0430\u043a\u0430 Tetra Pak",
+            "group": "manual-049",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u0430\u043d\u0446\u0435\u043b\u0430\u0440\u0438\u0441\u043a\u0430 \u0445\u0430\u0440\u0442\u0438\u0458\u0430 \u0437\u0430 \u043f\u0435\u0447\u0430\u0442\u0430\u0447",
+            "group": "manual-050",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u0430\u0440\u0442\u043e\u043d\u0441\u043a\u0430 \u043e\u0431\u0432\u0438\u0432\u043a\u0430 \u043e\u0434 \u043f\u0440\u0430\u0442\u043a\u0430",
+            "group": "manual-051",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "paper_tetrapak",
+            "suggestion_score": 0.951906
+          },
+          {
+            "text": "\u043c\u043e\u0436\u0430\u043c \u043b\u0438 \u0434\u0430 \u0440\u0435\u0446\u0438\u043a\u043b\u0438\u0440\u0430\u043c \u0447\u0438\u0441\u0442\u0430 \u043a\u0443\u0442\u0438\u0458\u0430 \u043e\u0434 \u0447\u0435\u0432\u043b\u0438",
+            "group": "manual-052",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0438 \u043e\u0434 \u0441\u0442\u0430\u0440\u0430 \u0442\u0435\u0442\u0440\u0430\u0442\u043a\u0430 \u0441\u043e \u043c\u0435\u043a\u0438 \u043a\u043e\u0440\u0438\u0446\u0438",
+            "group": "manual-053",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "paper_tetrapak",
+            "suggestion_score": 0.984197
+          },
+          {
+            "text": "\u043a\u0430\u0434\u0435 \u043e\u0434\u0430\u0442 \u0441\u043f\u043b\u0435\u0441\u043a\u0430\u043d\u0438\u0442\u0435 \u043a\u0443\u0442\u0438\u0438 \u0437\u0430 \u043f\u0430\u043a\u0443\u0432\u0430\u045a\u0435",
+            "group": "manual-054",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "paper_tetrapak",
+            "suggestion_score": 0.9848
+          },
+          {
+            "text": "\u043f\u0440\u0430\u0437\u043d\u0430 \u0430\u0441\u0435\u043f\u0442\u0438\u0447\u043d\u0430 \u043a\u0430\u0440\u0442\u043e\u043d\u0441\u043a\u0430 \u0430\u043c\u0431\u0430\u043b\u0430\u0436\u0430 \u043e\u0434 \u0441\u0443\u043f\u0430",
+            "group": "manual-055",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "plastic_metal",
+            "suggestion_score": 0.987499
+          },
+          {
+            "text": "\u043a\u0443\u043f \u0440\u0435\u043a\u043b\u0430\u043c\u043d\u0438 \u043b\u0435\u0442\u043e\u0446\u0438",
+            "group": "manual-056",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0447\u0438\u0441\u0442 \u0445\u0430\u0440\u0442\u0438\u0435\u043d \u043f\u043b\u0438\u043a \u0431\u0435\u0437 \u043f\u043b\u0430\u0441\u0442\u0438\u043a\u0430",
+            "group": "manual-057",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u0430\u0440\u0442\u043e\u043d\u0441\u043a\u0430 \u0446\u0435\u0432\u043a\u0430 \u043e\u0434 \u043a\u0443\u0458\u043d\u0441\u043a\u0430 \u0440\u043e\u043b\u043d\u0430",
+            "group": "manual-058",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0445\u0430\u0440\u0442\u0438\u0435\u043d\u0430 \u0430\u043c\u0431\u0430\u043b\u0430\u0436\u0430 \u043e\u0434 \u0441\u0443\u0432 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434",
+            "group": "manual-059",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "paper_tetrapak",
+            "suggestion_score": 0.969623
+          },
+          {
+            "text": "\u043a\u0430\u0434\u0435 \u0442\u0440\u0435\u0431\u0430 \u0434\u0430 \u043e\u0434\u0438 \u043e\u0432\u0430\u0430 \u043f\u0440\u0430\u0437\u043d\u0430 \u043a\u0430\u0440\u0442\u043e\u043d\u0441\u043a\u0430 \u0430\u043c\u0431\u0430\u043b\u0430\u0436\u0430 \u043e\u0434 \u043f\u0438\u0458\u0430\u043b\u0430\u043a?",
+            "group": "manual-060",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0443\u043f\u043e\u0442\u0440\u0435\u0431\u0435\u043d\u0430 \u043f\u043b\u0430\u0441\u0442\u0438\u0447\u043d\u0430 \u0447\u0435\u0442\u043a\u0430 \u0437\u0430 \u0437\u0430\u0431\u0438",
+            "group": "manual-061",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0432\u0430\u043b\u043a\u0430\u043d \u043a\u0443\u0458\u043d\u0441\u043a\u0438 \u0441\u0443\u043d\u0453\u0435\u0440",
+            "group": "manual-062",
+            "variant": "0",
+            "label": "",
+            "rules_status": "held",
+            "rules_label": "",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043c\u0440\u0441\u043d\u043e \u0443\u043f\u043e\u0442\u0440\u0435\u0431\u0435\u043d\u043e \u043c\u0430\u0440\u0430\u043c\u0447\u0435",
+            "group": "manual-063",
+            "variant": "0",
+            "label": "",
+            "rules_status": "held",
+            "rules_label": "",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0441\u043a\u0440\u0448\u0435\u043d\u0430 \u043a\u0435\u0440\u0430\u043c\u0438\u0447\u043a\u0430 \u0448\u043e\u043b\u0458\u0430 \u0437\u0430 \u043a\u0430\u0444\u0435",
+            "group": "manual-064",
+            "variant": "0",
+            "label": "",
+            "rules_status": "held",
+            "rules_label": "",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043f\u043b\u0430\u0441\u0442\u0438\u0447\u043d\u0430 \u0432\u0438\u0459\u0443\u0448\u043a\u0430 \u0437\u0430 \u0435\u0434\u043d\u043e\u043a\u0440\u0430\u0442\u043d\u0430 \u0443\u043f\u043e\u0442\u0440\u0435\u0431\u0430",
+            "group": "manual-065",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "plastic_metal",
+            "suggestion_score": 0.960499
+          },
+          {
+            "text": "\u0443\u043f\u043e\u0442\u0440\u0435\u0431\u0435\u043d\u0430 \u043c\u0430\u0441\u043a\u0430 \u0437\u0430 \u043b\u0438\u0446\u0435",
+            "group": "manual-066",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u0435\u0441\u0438\u0447\u043a\u0430 \u0447\u0430\u0458 \u043f\u043e \u0432\u0430\u0440\u0435\u045a\u0435",
+            "group": "manual-067",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043e\u0442\u043f\u0443\u0448\u043e\u043a \u043e\u0434 \u0446\u0438\u0433\u0430\u0440\u0430",
+            "group": "manual-068",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0434\u0440\u0432\u0435\u043d\u043e \u0441\u0442\u0430\u043f\u0447\u0435 \u043e\u0434 \u0441\u043b\u0430\u0434\u043e\u043b\u0435\u0434",
+            "group": "manual-069",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043e\u0441\u0442\u0430\u0442\u043e\u0446\u0438 \u043e\u0434 \u0445\u0440\u0430\u043d\u0430 \u0431\u0435\u0437 \u043a\u043e\u043d\u0442\u0435\u0458\u043d\u0435\u0440 \u0437\u0430 \u043a\u043e\u043c\u043f\u043e\u0441\u0442",
+            "group": "manual-070",
+            "variant": "0",
+            "label": "",
+            "rules_status": "held",
+            "rules_label": "",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0432\u0430\u043b\u043a\u0430\u043d\u0430 \u043f\u0440\u043e\u0455\u0438\u0440\u043d\u0430 \u0444\u043e\u043b\u0438\u0458\u0430 \u0437\u0430 \u0445\u0440\u0430\u043d\u0430",
+            "group": "manual-071",
+            "variant": "0",
+            "label": "",
+            "rules_status": "held",
+            "rules_label": "",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043f\u043b\u0430\u0441\u0442\u0438\u0447\u043d\u0430 \u0441\u043b\u0430\u043c\u043a\u0430 \u0437\u0430 \u043f\u0438\u0435\u045a\u0435",
+            "group": "manual-072",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "plastic_metal",
+            "suggestion_score": 0.967868
+          },
+          {
+            "text": "\u0441\u0442\u0443\u0442\u043a\u0430\u043d\u0430 \u0442\u043e\u0430\u043b\u0435\u0442\u043d\u0430 \u0445\u0430\u0440\u0442\u0438\u0458\u0430",
+            "group": "manual-073",
+            "variant": "0",
+            "label": "",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0441\u0442\u0430\u0440 \u0441\u0443\u043d\u0453\u0435\u0440 \u0437\u0430 \u043c\u0438\u0435\u045a\u0435 \u0441\u0430\u0434\u043e\u0432\u0438",
+            "group": "manual-074",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0443\u043f\u043e\u0442\u0440\u0435\u0431\u0435\u043d\u0430 \u0440\u0430\u043a\u0430\u0432\u0438\u0446\u0430 \u0437\u0430 \u0435\u0434\u043d\u043e\u043a\u0440\u0430\u0442\u043d\u0430 \u0443\u043f\u043e\u0442\u0440\u0435\u0431\u0430",
+            "group": "manual-075",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u0430\u0434\u0435 \u043e\u0434\u0438 \u0441\u043a\u0440\u0448\u0435\u043d\u0430 \u0447\u0438\u043d\u0438\u0458\u0430 \u0437\u0430 \u0458\u0430\u0434\u0435\u045a\u0435?",
+            "group": "manual-076",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0438\u0437\u045f\u0432\u0430\u043a\u0430\u043d\u0430 \u0434\u0440\u0432\u0435\u043d\u0430 \u0447\u0435\u043f\u043a\u0430\u043b\u043a\u0430 \u0437\u0430 \u0437\u0430\u0431\u0438",
+            "group": "manual-077",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043f\u0440\u0430\u0437\u043d\u0430 \u043e\u0431\u0432\u0438\u0432\u043a\u0430 \u043e\u0434 \u0433\u0440\u0438\u0446\u043a\u0438 \u0441\u043e \u0432\u043d\u0430\u0442\u0440\u0435\u0448\u043d\u0430 \u0444\u043e\u043b\u0438\u0458\u0430",
+            "group": "manual-078",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043f\u0440\u0430\u0448\u0438\u043d\u0430 \u0438 \u043d\u0435\u0447\u0438\u0441\u0442\u043e\u0442\u0438\u0458\u0430 \u043e\u0434 \u043f\u0440\u0430\u0432\u043e\u0441\u043c\u0443\u043a\u0430\u043b\u043a\u0430",
+            "group": "manual-079",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0443\u043f\u043e\u0442\u0440\u0435\u0431\u0435\u043d\u043e \u043f\u0430\u043c\u0443\u0447\u043d\u043e \u0441\u0442\u0430\u043f\u0447\u0435",
+            "group": "manual-080",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "AA \u0431\u0430\u0442\u0435\u0440\u0438\u0438 \u043e\u0434 \u0434\u0430\u043b\u0435\u0447\u0438\u043d\u0441\u043a\u0438 \u0443\u043f\u0440\u0430\u0432\u0443\u0432\u0430\u0447",
+            "group": "manual-081",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0440\u0430\u0441\u0438\u043f\u0430\u043d \u043b\u0430\u043f\u0442\u043e\u043f \u043a\u043e\u043c\u043f\u0458\u0443\u0442\u0435\u0440",
+            "group": "manual-082",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "confirm_condition",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u0430\u0434\u0435 \u0442\u0440\u0435\u0431\u0430 \u0434\u0430 \u043e\u0434\u0438 \u043e\u0432\u043e\u0458 \u0441\u0442\u0430\u0440 \u043f\u043e\u043b\u043d\u0430\u0447",
+            "group": "manual-083",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "confirm_condition",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043b\u0435\u043a \u043d\u0430 \u0440\u0435\u0446\u0435\u043f\u0442 \u0441\u043e \u0438\u0441\u0442\u0435\u0447\u0435\u043d \u0440\u043e\u043a",
+            "group": "manual-084",
+            "variant": "0",
+            "label": "",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043d\u0430\u0434\u0443\u0435\u043d\u0430 \u0431\u0430\u0442\u0435\u0440\u0438\u0458\u0430 \u043e\u0434 \u0442\u0435\u043b\u0435\u0444\u043e\u043d",
+            "group": "manual-085",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043f\u0440\u0435\u0433\u043e\u0440\u0435\u043d\u0430 \u0444\u043b\u0443\u043e\u0440\u0435\u0441\u0446\u0435\u043d\u0442\u043d\u0430 \u0446\u0435\u0432\u043a\u0430",
+            "group": "manual-086",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0441\u0442\u0430\u0440 \u043f\u0430\u043c\u0435\u0442\u0435\u043d \u0442\u0435\u043b\u0435\u0444\u043e\u043d Android",
+            "group": "manual-087",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "confirm_condition",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043d\u0435\u0443\u043f\u043e\u0442\u0440\u0435\u0431\u0435\u043d \u0434\u043e\u043c\u0430\u0448\u0435\u043d \u043f\u0435\u0441\u0442\u0438\u0446\u0438\u0434",
+            "group": "manual-088",
+            "variant": "0",
+            "label": "",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0440\u0430\u0441\u0438\u043f\u0430\u043d \u0442\u0430\u0431\u043b\u0435\u0442 \u0443\u0440\u0435\u0434",
+            "group": "manual-089",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "special_unsupported",
+            "suggestion_score": 0.992986
+          },
+          {
+            "text": "\u043c\u0430\u043b\u043e \u0448\u0438\u0448\u0435 \u0441\u043e \u0440\u0430\u0437\u0440\u0435\u0434\u0443\u0432\u0430\u0447 \u0437\u0430 \u0431\u043e\u0458\u0430",
+            "group": "manual-090",
+            "variant": "0",
+            "label": "",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u043e\u043f\u0447\u0435\u0441\u0442\u0430 \u0431\u0430\u0442\u0435\u0440\u0438\u0458\u0430 \u043e\u0434 \u0447\u0430\u0441\u043e\u0432\u043d\u0438\u043a",
+            "group": "manual-091",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043e\u0448\u0442\u0435\u0442\u0435\u043d\u0430 \u043f\u0440\u0435\u043d\u043e\u0441\u043d\u0430 \u0431\u0430\u0442\u0435\u0440\u0438\u0458\u0430",
+            "group": "manual-092",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u0430\u0434\u0435 \u043e\u0434\u0430\u0442 \u043a\u043e\u043c\u043f\u0458\u0443\u0442\u0435\u0440\u0441\u043a\u0438 \u043a\u0430\u0431\u043b\u0438?",
+            "group": "manual-093",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "confirm_condition",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0441\u0442\u0430\u0440 Wi-Fi \u0440\u0443\u0442\u0435\u0440",
+            "group": "manual-094",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "special_unsupported",
+            "suggestion_score": 0.980909
+          },
+          {
+            "text": "\u043f\u043e\u043b\u0443\u043f\u043e\u043b\u043d\u043e \u0445\u0435\u043c\u0438\u0441\u043a\u043e \u0441\u0440\u0435\u0434\u0441\u0442\u0432\u043e \u0437\u0430 \u0447\u0438\u0441\u0442\u0435\u045a\u0435",
+            "group": "manual-095",
+            "variant": "0",
+            "label": "",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043f\u0440\u0435\u0433\u043e\u0440\u0435\u043d\u0430 \u043a\u043e\u043c\u043f\u0430\u043a\u0442\u043d\u0430 \u0444\u043b\u0443\u043e\u0440\u0435\u0441\u0446\u0435\u043d\u0442\u043d\u0430 \u0441\u0438\u0458\u0430\u043b\u0438\u0446\u0430",
+            "group": "manual-096",
+            "variant": "0",
+            "label": "",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0440\u0430\u0441\u0438\u043f\u0430\u043d\u0438 \u0435\u043b\u0435\u043a\u0442\u0440\u043e\u043d\u0441\u043a\u0438 \u0441\u043b\u0443\u0448\u0430\u043b\u043a\u0438",
+            "group": "manual-097",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "confirm_condition",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043d\u0435\u0443\u043f\u043e\u0442\u0440\u0435\u0431\u0435\u043d\u0438 \u0442\u0430\u0431\u043b\u0435\u0442\u0438 \u043b\u0435\u043a\u043e\u0432\u0438",
+            "group": "manual-098",
+            "variant": "0",
+            "label": "",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043f\u0440\u043e\u0442\u0435\u0447\u0435\u043d\u0430 \u0431\u0430\u0442\u0435\u0440\u0438\u0458\u0430 \u043d\u0430 \u043f\u043e\u043b\u043d\u0435\u045a\u0435",
+            "group": "manual-099",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0437\u0430\u0441\u0442\u0430\u0440\u0435\u043d \u0430\u0434\u0430\u043f\u0442\u0435\u0440 \u0437\u0430 \u043d\u0430\u043f\u043e\u0458\u0443\u0432\u0430\u045a\u0435 \u043b\u0430\u043f\u0442\u043e\u043f",
+            "group": "manual-100",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "confirm_condition",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          }
+        ]
+      },
+      "development_test_serving": {
+        "scope": "Development diagnostic; suggestions are not disposal decisions",
+        "overall": {
+          "rows": 144,
+          "concept_groups": 60,
+          "policy_handled_rows": 76,
+          "fallback_rows": 68,
+          "fallback_concepts": 30,
+          "fallback_supported_rows": 42,
+          "fallback_held_rows": 26,
+          "accepted_suggestions": 14,
+          "correct_suggestions": 14,
+          "held_false_suggestions": 0,
+          "supported_coverage": 0.3333333333333333,
+          "accepted_accuracy": 1.0,
+          "rules_supported_correct": 73,
+          "rules_plus_suggestions_supported_correct": 87,
+          "concept_weighted": {
+            "supported_coverage": 0.3245614035087719,
+            "accepted_accuracy": 1.0
+          }
+        },
+        "by_variant": {
+          "0": {
+            "rows": 60,
+            "concept_groups": 60,
+            "policy_handled_rows": 30,
+            "fallback_rows": 30,
+            "fallback_concepts": 30,
+            "fallback_supported_rows": 19,
+            "fallback_held_rows": 11,
+            "accepted_suggestions": 6,
+            "correct_suggestions": 6,
+            "held_false_suggestions": 0,
+            "supported_coverage": 0.3157894736842105,
+            "accepted_accuracy": 1.0,
+            "rules_supported_correct": 29,
+            "rules_plus_suggestions_supported_correct": 35,
+            "concept_weighted": {
+              "supported_coverage": 0.3157894736842105,
+              "accepted_accuracy": 1.0
+            }
+          },
+          "1": {
+            "rows": 60,
+            "concept_groups": 60,
+            "policy_handled_rows": 30,
+            "fallback_rows": 30,
+            "fallback_concepts": 30,
+            "fallback_supported_rows": 19,
+            "fallback_held_rows": 11,
+            "accepted_suggestions": 6,
+            "correct_suggestions": 6,
+            "held_false_suggestions": 0,
+            "supported_coverage": 0.3157894736842105,
+            "accepted_accuracy": 1.0,
+            "rules_supported_correct": 29,
+            "rules_plus_suggestions_supported_correct": 35,
+            "concept_weighted": {
+              "supported_coverage": 0.3157894736842105,
+              "accepted_accuracy": 1.0
+            }
+          },
+          "2": {
+            "rows": 24,
+            "concept_groups": 24,
+            "policy_handled_rows": 16,
+            "fallback_rows": 8,
+            "fallback_concepts": 8,
+            "fallback_supported_rows": 4,
+            "fallback_held_rows": 4,
+            "accepted_suggestions": 2,
+            "correct_suggestions": 2,
+            "held_false_suggestions": 0,
+            "supported_coverage": 0.5,
+            "accepted_accuracy": 1.0,
+            "rules_supported_correct": 15,
+            "rules_plus_suggestions_supported_correct": 17,
+            "concept_weighted": {
+              "supported_coverage": 0.5,
+              "accepted_accuracy": 1.0
+            }
+          }
+        },
+        "records": [
+          {
+            "text": "\u0441\u0442\u0430\u043a\u043b\u0435\u043d\u0430 \u0442\u0435\u0433\u043b\u0430 \u043e\u0434 \u043f\u0435\u0441\u0442\u043e",
+            "group": "f871d5c16e626aa7c4b8",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "staklena tegla od pesto",
+            "group": "f871d5c16e626aa7c4b8",
+            "variant": "1",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0441\u0442\u0430\u043a\u043b\u0435\u043d\u0430 \u0442\u0435\u0433\u043b\u0430 \u043e\u0434 \u043c\u0430\u0458\u043e\u043d\u0435\u0437",
+            "group": "d20694e215ee721c0f25",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "staklena tegla od majonez",
+            "group": "d20694e215ee721c0f25",
+            "variant": "1",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0441\u0442\u0430\u043a\u043b\u0435\u043d\u043e \u0448\u0438\u0448\u0435 \u043e\u0434 \u0458\u0430\u0432\u043e\u0440\u043e\u0432 \u0441\u0438\u0440\u0443\u043f",
+            "group": "894b11e35149c9ac7eec",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "stakleno shishe od javorov sirup",
+            "group": "894b11e35149c9ac7eec",
+            "variant": "1",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "stakleno sise od javorov sirup",
+            "group": "894b11e35149c9ac7eec",
+            "variant": "2",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0441\u0442\u0430\u043a\u043b\u0435\u043d\u043e \u0448\u0438\u0448\u0435 \u043e\u0434 \u0441\u043e\u0458\u0430 \u0441\u043e\u0441",
+            "group": "88c2f839ebd943d0faa2",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "stakleno shishe od soja sos",
+            "group": "88c2f839ebd943d0faa2",
+            "variant": "1",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "stakleno sise od soja sos",
+            "group": "88c2f839ebd943d0faa2",
+            "variant": "2",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0441\u0442\u0430\u043a\u043b\u0435\u043d\u0430 \u0442\u0435\u0433\u043b\u0430 \u043e\u0434 \u043a\u0438\u0441\u0435\u043b\u0438 \u043f\u0438\u043f\u0435\u0440\u043a\u0438",
+            "group": "7de4acb74d3b4056a2c6",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "staklena tegla od kiseli piperki",
+            "group": "7de4acb74d3b4056a2c6",
+            "variant": "1",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0441\u0442\u0430\u043a\u043b\u0435\u043d\u0430 \u0442\u0435\u0433\u043b\u0430 \u043e\u0434 \u0431\u0435\u0431\u0435\u0448\u043a\u0430 \u0445\u0440\u0430\u043d\u0430",
+            "group": "ef6186d43e86cae7c7a1",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "staklena tegla od bebeshka hrana",
+            "group": "ef6186d43e86cae7c7a1",
+            "variant": "1",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "staklena tegla od bebeska hrana",
+            "group": "ef6186d43e86cae7c7a1",
+            "variant": "2",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0441\u0442\u0430\u043a\u043b\u0435\u043d\u043e \u0448\u0438\u0448\u0435 \u043e\u0434 \u043f\u0440\u0435\u043b\u0438\u0432 \u0437\u0430 \u0441\u0430\u043b\u0430\u0442\u0430",
+            "group": "4c72f809cefd9c38b7c2",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "stakleno shishe od preliv za salata",
+            "group": "4c72f809cefd9c38b7c2",
+            "variant": "1",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "stakleno sise od preliv za salata",
+            "group": "4c72f809cefd9c38b7c2",
+            "variant": "2",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0441\u0442\u0430\u043a\u043b\u0435\u043d\u043e \u0448\u0438\u0448\u0435 \u043e\u0434 \u0441\u043e\u043a \u043e\u0434 \u0458\u0430\u0431\u043e\u043b\u043a\u043e",
+            "group": "aebdf42d69f7627f40d5",
+            "variant": "0",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "stakleno shishe od sok od jabolko",
+            "group": "aebdf42d69f7627f40d5",
+            "variant": "1",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "stakleno sise od sok od jabolko",
+            "group": "aebdf42d69f7627f40d5",
+            "variant": "2",
+            "label": "glass",
+            "rules_status": "confirm_condition",
+            "rules_label": "glass",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043f\u043b\u0430\u0441\u0442\u0438\u0447\u043d\u043e \u0448\u0438\u0448\u0435 \u043e\u0434 \u043e\u043c\u0435\u043a\u043d\u0443\u0432\u0430\u0447",
+            "group": "32e15caa5172251516ca",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "plastichno shishe od omeknuvach",
+            "group": "32e15caa5172251516ca",
+            "variant": "1",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "plasticno sise od omeknuvac",
+            "group": "32e15caa5172251516ca",
+            "variant": "2",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043f\u043b\u0430\u0441\u0442\u0438\u0447\u043d\u043e \u0448\u0438\u0448\u0435 \u043e\u0434 \u0433\u0435\u043b \u0437\u0430 \u043a\u043e\u0441\u0430",
+            "group": "75c6ccaca8a60304f177",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "plastichno shishe od gel za kosa",
+            "group": "75c6ccaca8a60304f177",
+            "variant": "1",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "plasticno sise od gel za kosa",
+            "group": "75c6ccaca8a60304f177",
+            "variant": "2",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043f\u043b\u0430\u0441\u0442\u0438\u0447\u043d\u043e \u0448\u0438\u0448\u0435 \u043e\u0434 \u0433\u0430\u0437\u0438\u0440\u0430\u043d\u0430 \u0432\u043e\u0434\u0430",
+            "group": "5b35763bfcf1036d161a",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "plastichno shishe od gazirana voda",
+            "group": "5b35763bfcf1036d161a",
+            "variant": "1",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "plasticno sise od gazirana voda",
+            "group": "5b35763bfcf1036d161a",
+            "variant": "2",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043f\u043b\u0430\u0441\u0442\u0438\u0447\u043d\u043e \u0448\u0438\u0448\u0435 \u043e\u0434 \u0434\u043e\u043c\u0430\u0442\u0435\u043d \u0441\u043e\u0441",
+            "group": "b7588ce64d4added5808",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "plastichno shishe od domaten sos",
+            "group": "b7588ce64d4added5808",
+            "variant": "1",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "plasticno sise od domaten sos",
+            "group": "b7588ce64d4added5808",
+            "variant": "2",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0430\u043b\u0443\u043c\u0438\u043d\u0438\u0443\u043c\u0441\u043a\u0430 \u043b\u0438\u043c\u0435\u043d\u043a\u0430 \u043e\u0434 \u043b\u0430\u0434\u043d\u043e \u043a\u0430\u0444\u0435",
+            "group": "fc61ac5b9a9ff950cc76",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "aluminiumska limenka od ladno kafe",
+            "group": "fc61ac5b9a9ff950cc76",
+            "variant": "1",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043c\u0435\u0442\u0430\u043b\u043d\u0430 \u043a\u043e\u043d\u0437\u0435\u0440\u0432\u0430 \u043e\u0434 \u043d\u0430\u0443\u0442",
+            "group": "f7e34545582458c00883",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "metalna konzerva od naut",
+            "group": "f7e34545582458c00883",
+            "variant": "1",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043c\u0435\u0442\u0430\u043b\u043d\u0430 \u043a\u043e\u043d\u0437\u0435\u0440\u0432\u0430 \u043e\u0434 \u043f\u0435\u0447\u0443\u0440\u043a\u0438",
+            "group": "645178abbf4ee7d12e36",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "metalna konzerva od pechurki",
+            "group": "645178abbf4ee7d12e36",
+            "variant": "1",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "metalna konzerva od pecurki",
+            "group": "645178abbf4ee7d12e36",
+            "variant": "2",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0447\u0435\u043b\u0438\u0447\u043d\u0430 \u043a\u043e\u043d\u0437\u0435\u0440\u0432\u0430 \u043e\u0434 \u043f\u0440\u0430\u0441\u043a\u0438",
+            "group": "33ca64b8c4907f6be050",
+            "variant": "0",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "chelichna konzerva od praski",
+            "group": "33ca64b8c4907f6be050",
+            "variant": "1",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "celicna konzerva od praski",
+            "group": "33ca64b8c4907f6be050",
+            "variant": "2",
+            "label": "plastic_metal",
+            "rules_status": "confirm_condition",
+            "rules_label": "plastic_metal",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0445\u0430\u0440\u0442\u0438\u0435\u043d\u043e \u0443\u043f\u0430\u0442\u0441\u0442\u0432\u043e",
+            "group": "19e357bdc21bb25733ea",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "paper_tetrapak",
+            "suggestion_score": 0.998311
+          },
+          {
+            "text": "hartieno upatstvo",
+            "group": "19e357bdc21bb25733ea",
+            "variant": "1",
+            "label": "paper_tetrapak",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0445\u0430\u0440\u0442\u0438\u0435\u043d\u0438 \u043d\u043e\u0442\u0438",
+            "group": "5dd40a77e2d7696e55d8",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "paper_tetrapak",
+            "suggestion_score": 0.99694
+          },
+          {
+            "text": "hartieni noti",
+            "group": "5dd40a77e2d7696e55d8",
+            "variant": "1",
+            "label": "paper_tetrapak",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u0430\u0440\u0442\u043e\u043d\u0441\u043a\u0430 \u043a\u0443\u0442\u0438\u0458\u0430 \u043e\u0434 \u0447\u043e\u043a\u043e\u043b\u0430\u0434\u0438",
+            "group": "d95098b171b9ce763bcb",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "kartonska kutija od chokoladi",
+            "group": "d95098b171b9ce763bcb",
+            "variant": "1",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "kartonska kutija od cokoladi",
+            "group": "d95098b171b9ce763bcb",
+            "variant": "2",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u0430\u0440\u0442\u043e\u043d\u0441\u043a\u0430 \u043a\u0443\u0442\u0438\u0458\u0430 \u0437\u0430 \u0458\u0430\u0458\u0446\u0430",
+            "group": "ab0069f8e0baee312a74",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "kartonska kutija za jajca",
+            "group": "ab0069f8e0baee312a74",
+            "variant": "1",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0445\u0430\u0440\u0442\u0438\u0435\u043d \u043f\u043b\u0438\u043a \u0437\u0430 \u043f\u0438\u0441\u043c\u0430",
+            "group": "0a5bf12eb4734ad96d62",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "paper_tetrapak",
+            "suggestion_score": 0.99973
+          },
+          {
+            "text": "hartien plik za pisma",
+            "group": "0a5bf12eb4734ad96d62",
+            "variant": "1",
+            "label": "paper_tetrapak",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "paper_tetrapak",
+            "suggestion_score": 0.999697
+          },
+          {
+            "text": "\u0442\u0435\u0442\u0440\u0430\u043f\u0430\u043a \u043e\u0434 \u043e\u0432\u0435\u0441\u0435\u043d \u043f\u0438\u0458\u0430\u043b\u0430\u043a",
+            "group": "024129f33843d1ae25eb",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "tetrapak od ovesen pijalak",
+            "group": "024129f33843d1ae25eb",
+            "variant": "1",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043b\u0438\u0441\u0442 \u043e\u0434 \u0431\u0440\u0430\u043d\u043e\u0432\u0438\u0434\u0435\u043d \u043a\u0430\u0440\u0442\u043e\u043d",
+            "group": "2ad61921a12350bf38f5",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "list od branoviden karton",
+            "group": "2ad61921a12350bf38f5",
+            "variant": "1",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0445\u0430\u0440\u0442\u0438\u0458\u0430 \u0437\u0430 \u0437\u0430\u0432\u0438\u0442\u043a\u0443\u0432\u0430\u045a\u0435",
+            "group": "073ae35defa1bf9b02db",
+            "variant": "0",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "hartija za zavitkuvanje",
+            "group": "073ae35defa1bf9b02db",
+            "variant": "1",
+            "label": "paper_tetrapak",
+            "rules_status": "confirm_condition",
+            "rules_label": "paper_tetrapak",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0431\u0430\u0442\u0435\u0440\u0438\u0458\u0430 \u0437\u0430 \u0441\u043b\u0443\u0448\u043d\u043e \u043f\u043e\u043c\u0430\u0433\u0430\u043b\u043e",
+            "group": "2888a61626ce4dc49c75",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "baterija za slushno pomagalo",
+            "group": "2888a61626ce4dc49c75",
+            "variant": "1",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "baterija za slusno pomagalo",
+            "group": "2888a61626ce4dc49c75",
+            "variant": "2",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0431\u0430\u0442\u0435\u0440\u0438\u0458\u0430 \u0437\u0430 \u0444\u043e\u0442\u043e\u0430\u043f\u0430\u0440\u0430\u0442",
+            "group": "543c646802d54944d630",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "baterija za fotoaparat",
+            "group": "543c646802d54944d630",
+            "variant": "1",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0430\u043d\u0442\u0438\u0431\u0438\u043e\u0442\u0438\u043a \u0441\u043e \u0438\u0441\u0442\u0435\u0447\u0435\u043d \u0440\u043e\u043a",
+            "group": "e53480636f94d3b4b3ce",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "antibiotik so istechen rok",
+            "group": "e53480636f94d3b4b3ce",
+            "variant": "1",
+            "label": "special_unsupported",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "antibiotik so istecen rok",
+            "group": "e53480636f94d3b4b3ce",
+            "variant": "2",
+            "label": "special_unsupported",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043e\u0442\u0440\u043e\u0432 \u0437\u0430 \u0433\u043b\u0443\u0432\u0446\u0438",
+            "group": "41453b87ebbe6652aa0e",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "special_unsupported",
+            "suggestion_score": 0.959394
+          },
+          {
+            "text": "otrov za gluvci",
+            "group": "41453b87ebbe6652aa0e",
+            "variant": "1",
+            "label": "special_unsupported",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u043e\u043c\u043f\u0430\u043a\u0442\u043d\u0430 \u0444\u043b\u0443\u043e\u0440\u0435\u0441\u0446\u0435\u043d\u0442\u043d\u0430 \u0441\u0432\u0435\u0442\u0438\u043b\u043a\u0430",
+            "group": "a2ba30f812758fa00a3e",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "kompaktna fluorescentna svetilka",
+            "group": "a2ba30f812758fa00a3e",
+            "variant": "1",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0443\u043f\u043e\u0442\u0440\u0435\u0431\u0435\u043d\u0430 \u0438\u0433\u043b\u0430 \u0437\u0430 \u0438\u043d\u0441\u0443\u043b\u0438\u043d",
+            "group": "2ef415ec6d611cf513f0",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "upotrebena igla za insulin",
+            "group": "2ef415ec6d611cf513f0",
+            "variant": "1",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0440\u0430\u0441\u0442\u0432\u043e\u0440\u0443\u0432\u0430\u0447 \u0437\u0430 \u043b\u0430\u043a \u0437\u0430 \u0434\u0440\u0432\u043e",
+            "group": "fb0c17cd712e036e903c",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "rastvoruvach za lak za drvo",
+            "group": "fb0c17cd712e036e903c",
+            "variant": "1",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "rastvoruvac za lak za drvo",
+            "group": "fb0c17cd712e036e903c",
+            "variant": "2",
+            "label": "special_unsupported",
+            "rules_status": "specialist",
+            "rules_label": "special_unsupported",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0430\u043d\u0442\u0438\u0444\u0440\u0438\u0437",
+            "group": "a1a704118672e42e5669",
+            "variant": "0",
+            "label": "special_unsupported",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "antifriz",
+            "group": "a1a704118672e42e5669",
+            "variant": "1",
+            "label": "special_unsupported",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043f\u043e\u043b\u043e \u043c\u0430\u0438\u0446\u0430",
+            "group": "b15a1756a82313bf4f19",
+            "variant": "0",
+            "label": "clothes",
+            "rules_status": "confirm_condition",
+            "rules_label": "clothes",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "polo maica",
+            "group": "b15a1756a82313bf4f19",
+            "variant": "1",
+            "label": "clothes",
+            "rules_status": "confirm_condition",
+            "rules_label": "clothes",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u0440\u0430\u0442\u043a\u0438 \u0444\u0430\u0440\u043c\u0435\u0440\u043a\u0438",
+            "group": "7f94d15dc722a3bab7e9",
+            "variant": "0",
+            "label": "clothes",
+            "rules_status": "confirm_condition",
+            "rules_label": "clothes",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "kratki farmerki",
+            "group": "7f94d15dc722a3bab7e9",
+            "variant": "1",
+            "label": "clothes",
+            "rules_status": "confirm_condition",
+            "rules_label": "clothes",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0435\u043b\u0435\u043a \u043e\u0434 \u0444\u043b\u0438\u0441",
+            "group": "a0990437da17b560edb0",
+            "variant": "0",
+            "label": "clothes",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "elek od flis",
+            "group": "a0990437da17b560edb0",
+            "variant": "1",
+            "label": "clothes",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0441\u043f\u043e\u0440\u0442\u0441\u043a\u0438 \u0434\u0440\u0435\u0441",
+            "group": "883349886138393a5073",
+            "variant": "0",
+            "label": "clothes",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "sportski dres",
+            "group": "883349886138393a5073",
+            "variant": "1",
+            "label": "clothes",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "clothes",
+            "suggestion_score": 0.970823
+          },
+          {
+            "text": "\u0431\u0430\u043b\u0435\u0442\u0430\u043d\u043a\u0438",
+            "group": "391d0742128454a1c84c",
+            "variant": "0",
+            "label": "clothes",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "baletanki",
+            "group": "391d0742128454a1c84c",
+            "variant": "1",
+            "label": "clothes",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u043e\u0441\u0442\u0438\u043c \u0437\u0430 \u043a\u0430\u043f\u0435\u045a\u0435",
+            "group": "d6c0822cf8ac0a05a7b7",
+            "variant": "0",
+            "label": "clothes",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "kostim za kapenje",
+            "group": "d6c0822cf8ac0a05a7b7",
+            "variant": "1",
+            "label": "clothes",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0431\u0430\u045a\u0430\u0440\u043a\u0430",
+            "group": "6eb046bd858bc63de7c6",
+            "variant": "0",
+            "label": "clothes",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "banjarka",
+            "group": "6eb046bd858bc63de7c6",
+            "variant": "1",
+            "label": "clothes",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0432\u043e\u043b\u043d\u0435\u043d\u0430 \u043a\u0430\u043f\u0430",
+            "group": "9213f7029f128fbb1716",
+            "variant": "0",
+            "label": "clothes",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "volnena kapa",
+            "group": "9213f7029f128fbb1716",
+            "variant": "1",
+            "label": "clothes",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0435\u043b\u0435\u043a\u0442\u0440\u0438\u0447\u0435\u043d \u0430\u043f\u0430\u0440\u0430\u0442 \u0437\u0430 \u043e\u0440\u0438\u0437",
+            "group": "4175f8e700d46dd1ea62",
+            "variant": "0",
+            "label": "electronics",
+            "rules_status": "confirm_condition",
+            "rules_label": "electronics",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "elektrichen aparat za oriz",
+            "group": "4175f8e700d46dd1ea62",
+            "variant": "1",
+            "label": "electronics",
+            "rules_status": "confirm_condition",
+            "rules_label": "electronics",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "elektricen aparat za oriz",
+            "group": "4175f8e700d46dd1ea62",
+            "variant": "2",
+            "label": "electronics",
+            "rules_status": "confirm_condition",
+            "rules_label": "electronics",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043c\u0430\u0448\u0438\u043d\u0430 \u0437\u0430 \u0448\u0438\u0435\u045a\u0435",
+            "group": "1654b422a217755d33b2",
+            "variant": "0",
+            "label": "electronics",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "mashina za shienje",
+            "group": "1654b422a217755d33b2",
+            "variant": "1",
+            "label": "electronics",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "masina za sienje",
+            "group": "1654b422a217755d33b2",
+            "variant": "2",
+            "label": "electronics",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "electronics",
+            "suggestion_score": 0.964848
+          },
+          {
+            "text": "\u0435\u043b\u0435\u043a\u0442\u0440\u0438\u0447\u043d\u0430 \u043c\u0430\u0448\u0438\u043d\u043a\u0430 \u0437\u0430 \u0431\u0440\u0438\u0447\u0435\u045a\u0435",
+            "group": "88e0877b20b3e148a707",
+            "variant": "0",
+            "label": "electronics",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "elektrichna mashinka za brichenje",
+            "group": "88e0877b20b3e148a707",
+            "variant": "1",
+            "label": "electronics",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "electronics",
+            "suggestion_score": 0.95692
+          },
+          {
+            "text": "elektricna masinka za bricenje",
+            "group": "88e0877b20b3e148a707",
+            "variant": "2",
+            "label": "electronics",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0434\u0438\u0433\u0438\u0442\u0430\u043b\u0435\u043d \u0431\u0443\u0434\u0438\u043b\u043d\u0438\u043a",
+            "group": "0e48d7be08b648c906db",
+            "variant": "0",
+            "label": "electronics",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "digitalen budilnik",
+            "group": "0e48d7be08b648c906db",
+            "variant": "1",
+            "label": "electronics",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "electronics",
+            "suggestion_score": 0.998731
+          },
+          {
+            "text": "\u0435\u043b\u0435\u043a\u0442\u0440\u043e\u043d\u0441\u043a\u0430 \u043a\u0443\u0458\u043d\u0441\u043a\u0430 \u0432\u0430\u0433\u0430",
+            "group": "3cc318c056e759fec50f",
+            "variant": "0",
+            "label": "electronics",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "elektronska kujnska vaga",
+            "group": "3cc318c056e759fec50f",
+            "variant": "1",
+            "label": "electronics",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "electronics",
+            "suggestion_score": 0.992456
+          },
+          {
+            "text": "\u0414\u0412\u0414 \u043f\u043b\u0435\u0435\u0440",
+            "group": "763e6630a2c9095865e2",
+            "variant": "0",
+            "label": "electronics",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0414\u0412\u0414 pleer",
+            "group": "763e6630a2c9095865e2",
+            "variant": "1",
+            "label": "electronics",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u043e\u043c\u043f\u0458\u0443\u0442\u0435\u0440\u0441\u043a\u0438 \u0445\u0430\u0440\u0434 \u0434\u0438\u0441\u043a",
+            "group": "9f5330621664f2afb45d",
+            "variant": "0",
+            "label": "electronics",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "electronics",
+            "suggestion_score": 0.986296
+          },
+          {
+            "text": "kompjuterski hard disk",
+            "group": "9f5330621664f2afb45d",
+            "variant": "1",
+            "label": "electronics",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0431\u0435\u0437\u0436\u0438\u0447\u0435\u043d \u043a\u043e\u043c\u043f\u0458\u0443\u0442\u0435\u0440\u0441\u043a\u0438 \u0430\u0434\u0430\u043f\u0442\u0435\u0440",
+            "group": "0f7095811cea2cda62e7",
+            "variant": "0",
+            "label": "electronics",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "electronics",
+            "suggestion_score": 0.998877
+          },
+          {
+            "text": "bezzhichen kompjuterski adapter",
+            "group": "0f7095811cea2cda62e7",
+            "variant": "1",
+            "label": "electronics",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "electronics",
+            "suggestion_score": 0.999635
+          },
+          {
+            "text": "bezzicen kompjuterski adapter",
+            "group": "0f7095811cea2cda62e7",
+            "variant": "2",
+            "label": "electronics",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "electronics",
+            "suggestion_score": 0.999322
+          },
+          {
+            "text": "\u043f\u0440\u0435\u0434\u043c\u0435\u0442 \u0431\u0435\u0437 \u043e\u043f\u0438\u0441",
+            "group": "8fef6b3563d0dbffc319",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "predmet bez opis",
+            "group": "8fef6b3563d0dbffc319",
+            "variant": "1",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0441\u0430\u0434 \u043e\u0434 \u043d\u0435\u043f\u043e\u0437\u043d\u0430\u0442\u0430 \u0441\u0443\u0440\u043e\u0432\u0438\u043d\u0430",
+            "group": "9fec1ab1eba9338b44de",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "sad od nepoznata surovina",
+            "group": "9fec1ab1eba9338b44de",
+            "variant": "1",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0440\u0430\u0437\u043b\u0438\u0447\u043d\u0438 \u043c\u0430\u0442\u0435\u0440\u0438\u0458\u0430\u043b\u0438 \u0432\u043e \u0435\u0434\u043d\u0430 \u043a\u0435\u0441\u0430",
+            "group": "059939f04fb2eee8786d",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "razlichni materijali vo edna kesa",
+            "group": "059939f04fb2eee8786d",
+            "variant": "1",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "razlicni materijali vo edna kesa",
+            "group": "059939f04fb2eee8786d",
+            "variant": "2",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043e\u0441\u0442\u0430\u0442\u043e\u043a \u043e\u0434 \u0458\u0430\u0431\u043e\u043b\u043a\u043e",
+            "group": "d7f10cb375ecc6fb6baa",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "ostatok od jabolko",
+            "group": "d7f10cb375ecc6fb6baa",
+            "variant": "1",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0434\u0440\u0432\u0435\u043d\u0430 \u043f\u043e\u043b\u0438\u0446\u0430",
+            "group": "aaec70bdd6486f3dccf1",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "drvena polica",
+            "group": "aaec70bdd6486f3dccf1",
+            "variant": "1",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043f\u043e\u0440\u0446\u0435\u043b\u0430\u043d\u0441\u043a\u0438 \u0441\u0430\u0434",
+            "group": "4f7b894908613087ce61",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "porcelanski sad",
+            "group": "4f7b894908613087ce61",
+            "variant": "1",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0440\u0430\u0437\u043d\u0438 \u043e\u0441\u0442\u0430\u0442\u043e\u0446\u0438",
+            "group": "48a2e9ccee38c4654fda",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "razni ostatoci",
+            "group": "48a2e9ccee38c4654fda",
+            "variant": "1",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0440\u0430\u0431\u043e\u0442\u0438 \u043e\u0434 \u0447\u0438\u0441\u0442\u0435\u045a\u0435 \u043d\u0430 \u043f\u043e\u0434\u0440\u0443\u043c\u043e\u0442",
+            "group": "752e49af47181bba5014",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "raboti od chistenje na podrumot",
+            "group": "752e49af47181bba5014",
+            "variant": "1",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "raboti od cistenje na podrumot",
+            "group": "752e49af47181bba5014",
+            "variant": "2",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0437\u0430\u0442\u0432\u043e\u0440\u0435\u043d \u0441\u0430\u0434",
+            "group": "4ae627b4a679abc44f7a",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "zatvoren sad",
+            "group": "4ae627b4a679abc44f7a",
+            "variant": "1",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u043a\u043e\u0448\u0443\u043b\u0430 \u0438 \u0430\u043b\u0443\u043c\u0438\u043d\u0438\u0443\u043c\u0441\u043a\u0430 \u043b\u0438\u043c\u0435\u043d\u043a\u0430",
+            "group": "0c126a0eb38c4387d435",
+            "variant": "0",
+            "label": "",
+            "rules_status": "held",
+            "rules_label": "",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "koshula i aluminiumska limenka",
+            "group": "0c126a0eb38c4387d435",
+            "variant": "1",
+            "label": "",
+            "rules_status": "held",
+            "rules_label": "",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "kosula i aluminiumska limenka",
+            "group": "0c126a0eb38c4387d435",
+            "variant": "2",
+            "label": "",
+            "rules_status": "held",
+            "rules_label": "",
+            "ml_called": false,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0435\u043a\u043e\u043b\u043e\u0448\u043a\u0430 \u043e\u0431\u0432\u0438\u0432\u043a\u0430",
+            "group": "5b24286592bea38c8488",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "ekoloshka obvivka",
+            "group": "5b24286592bea38c8488",
+            "variant": "1",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "ekoloska obvivka",
+            "group": "5b24286592bea38c8488",
+            "variant": "2",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "\u0430\u043c\u0431\u0430\u043b\u0430\u0436\u0430 \u0437\u0430 \u043a\u043e\u043c\u043f\u043e\u0441\u0442\u0438\u0440\u0430\u045a\u0435",
+            "group": "719595e513c291e1a123",
+            "variant": "0",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "ambalazha za kompostiranje",
+            "group": "719595e513c291e1a123",
+            "variant": "1",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          },
+          {
+            "text": "ambalaza za kompostiranje",
+            "group": "719595e513c291e1a123",
+            "variant": "2",
+            "label": "",
+            "rules_status": "clarify",
+            "rules_label": "",
+            "ml_called": true,
+            "suggested_label": "",
+            "suggestion_score": null
+          }
+        ]
+      },
+      "policy_boundary_checks": [
+        {
+          "query": "ne e cista obleka",
+          "status": "held"
+        },
+        {
+          "query": "valkana kosula",
+          "status": "held"
+        },
+        {
+          "query": "mokra maica",
+          "status": "held"
+        },
+        {
+          "query": "glass bottle and a phone",
+          "status": "held"
+        },
+        {
+          "query": "unknown material container",
+          "status": "clarify"
+        }
+      ]
+    }
+  },
+  "policy_code_sha256": "db4d3996b863ddcfb5b5259b5e0bd16dbea7f48c4d9e69d4d789bbae959a02c7",
+  "policy_sha256": "febbbe10e0a4aab9c7f83cdfb042c5c6101e0bf6bd9ec4b67f17fb0013b966d7",
+  "policy_threshold": 0.85,
+  "evaluator_sha256": "905d83dfc43e2dbd2821670a60859f6e0c474122e1e11939f3a45746097ed784"
+}

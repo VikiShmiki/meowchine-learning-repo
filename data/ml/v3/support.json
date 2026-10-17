@@ -1,0 +1,177 @@
+{
+  "note": "MK fitting also includes EN train rows; spelling variants are not independent groups",
+  "support": {
+    "train": {
+      "en": {
+        "rows_by_label": {
+          "glass": 72,
+          "plastic_metal": 102,
+          "paper_tetrapak": 132,
+          "special_unsupported": 42,
+          "clothes": 12,
+          "electronics": 102
+        },
+        "concept_groups_by_label": {
+          "clothes": 12,
+          "electronics": 15,
+          "glass": 14,
+          "paper_tetrapak": 16,
+          "plastic_metal": 15,
+          "special_unsupported": 13
+        },
+        "authored_base_strings": 72
+      },
+      "mk": {
+        "rows_by_label": {
+          "glass": 34,
+          "plastic_metal": 32,
+          "paper_tetrapak": 27,
+          "special_unsupported": 29,
+          "clothes": 29,
+          "electronics": 30
+        },
+        "concept_groups_by_label": {
+          "clothes": 12,
+          "electronics": 12,
+          "glass": 12,
+          "paper_tetrapak": 12,
+          "plastic_metal": 12,
+          "special_unsupported": 12
+        },
+        "authored_base_strings": 72
+      }
+    },
+    "tune": {
+      "en": {
+        "rows_by_label": {
+          "glass": 8,
+          "plastic_metal": 8,
+          "paper_tetrapak": 8,
+          "special_unsupported": 8,
+          "clothes": 8,
+          "electronics": 8,
+          "held": 12
+        },
+        "concept_groups_by_label": {
+          "held": 12,
+          "clothes": 8,
+          "electronics": 8,
+          "glass": 8,
+          "paper_tetrapak": 8,
+          "plastic_metal": 8,
+          "special_unsupported": 8
+        },
+        "authored_base_strings": 60
+      },
+      "mk": {
+        "rows_by_label": {
+          "glass": 22,
+          "plastic_metal": 21,
+          "paper_tetrapak": 17,
+          "special_unsupported": 17,
+          "clothes": 19,
+          "electronics": 20,
+          "held": 33
+        },
+        "concept_groups_by_label": {
+          "held": 12,
+          "clothes": 8,
+          "electronics": 8,
+          "glass": 8,
+          "paper_tetrapak": 8,
+          "plastic_metal": 8,
+          "special_unsupported": 8
+        },
+        "authored_base_strings": 60
+      }
+    },
+    "calibration": {
+      "en": {
+        "rows_by_label": {
+          "glass": 8,
+          "plastic_metal": 8,
+          "paper_tetrapak": 8,
+          "special_unsupported": 8,
+          "clothes": 8,
+          "electronics": 8,
+          "held": 12
+        },
+        "concept_groups_by_label": {
+          "held": 12,
+          "clothes": 8,
+          "electronics": 8,
+          "glass": 8,
+          "paper_tetrapak": 8,
+          "plastic_metal": 8,
+          "special_unsupported": 8
+        },
+        "authored_base_strings": 60
+      },
+      "mk": {
+        "rows_by_label": {
+          "glass": 20,
+          "plastic_metal": 21,
+          "paper_tetrapak": 20,
+          "special_unsupported": 19,
+          "clothes": 18,
+          "electronics": 21,
+          "held": 31
+        },
+        "concept_groups_by_label": {
+          "held": 12,
+          "clothes": 8,
+          "electronics": 8,
+          "glass": 8,
+          "paper_tetrapak": 8,
+          "plastic_metal": 8,
+          "special_unsupported": 8
+        },
+        "authored_base_strings": 60
+      }
+    },
+    "test": {
+      "en": {
+        "rows_by_label": {
+          "glass": 8,
+          "plastic_metal": 8,
+          "paper_tetrapak": 8,
+          "special_unsupported": 8,
+          "clothes": 8,
+          "electronics": 8,
+          "held": 12
+        },
+        "concept_groups_by_label": {
+          "held": 12,
+          "clothes": 8,
+          "electronics": 8,
+          "glass": 8,
+          "paper_tetrapak": 8,
+          "plastic_metal": 8,
+          "special_unsupported": 8
+        },
+        "authored_base_strings": 60
+      },
+      "mk": {
+        "rows_by_label": {
+          "glass": 21,
+          "plastic_metal": 22,
+          "paper_tetrapak": 17,
+          "special_unsupported": 19,
+          "clothes": 16,
+          "electronics": 20,
+          "held": 29
+        },
+        "concept_groups_by_label": {
+          "held": 12,
+          "clothes": 8,
+          "electronics": 8,
+          "glass": 8,
+          "paper_tetrapak": 8,
+          "plastic_metal": 8,
+          "special_unsupported": 8
+        },
+        "authored_base_strings": 60
+      }
+    }
+  }
+}

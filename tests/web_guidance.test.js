@@ -31,6 +31,7 @@ function harness() {
   const context = vm.createContext({
     document: { querySelector: element, createElement: () => element(`created-${created++}`) },
     AbortController,
+    Event,
     Option: function (label, id) { this.label = label; this.id = id; },
     setTimeout: () => 1, clearTimeout: () => {},
     fetch: (url, options) => new Promise((resolve, reject) => {
@@ -173,4 +174,42 @@ test("photo analysis sends the raw image and renders reviewable suggestions", as
   assert.equal(h.element("#photo-items").children.length, 1);
   assert.equal(h.element("#photo-items").children[0].children[0].textContent, "clear glass jar");
   assert.equal(h.element("#analyze-photo").disabled, false);
+});
+
+test("photo needing review clears the previous item's confirmation and contacts", () => {
+  const h = harness();
+  h.run(`render(${JSON.stringify({ ...answer, contact_url: "https://example.org/operator", phone: "+38912345678" })})`);
+  assert.equal(h.element("#manual-form").hidden, false);
+  h.run(`usePhotoSuggestion(${JSON.stringify({
+    description: "dirty glass jar", item_kind: "other", category: null,
+    status: "needs_review", reason: "Condition is uncertain.",
+  })})`);
+  assert.equal(h.requests.length, 0);
+  assert.equal(h.element("#item").value, "dirty glass jar");
+  assert.equal(h.element("#item").focused, true);
+  assert.equal(h.element("#manual-form").hidden, true);
+  assert.equal(h.element("#item-kind").value, "");
+  assert.equal(h.element("#condition-label").hidden, true);
+  assert.equal(h.element("#contact").hidden, true);
+  assert.equal(h.element("#phone").hidden, true);
+  assert.equal(h.element("#contact").href, undefined);
+  assert.equal(h.element("#phone").href, undefined);
+  h.run("classify(true)");
+  assert.equal(h.requests.length, 0);
+});
+
+test("valid photo candidate requests review without confirming it", async () => {
+  const h = harness();
+  h.run(`usePhotoSuggestion(${JSON.stringify({
+    description: "glass jar", item_kind: "empty_glass_packaging", category: "glass",
+    status: "candidate", reason: "Visible packaging.",
+  })})`);
+  assert.equal(h.requests.length, 1);
+  const payload = JSON.parse(h.requests[0].options.body);
+  assert.equal(payload.text, "glass jar");
+  assert.equal(payload.manual_kind, "empty_glass_packaging");
+  assert.equal(payload.condition_confirmed, false);
+  resolve(h.requests[0]);
+  await new Promise((done) => setImmediate(done));
+  assert.equal(h.element("#manual-form").hidden, false);
 });

@@ -263,6 +263,15 @@ item.addEventListener("input", () => {
   pending = null;
   item.setCustomValidity("");
   result.hidden = true;
+  manualForm.hidden = true;
+  selection.replaceChildren();
+  selection.value = "";
+  selection.selectedIndex = -1;
+  conditionLabel.hidden = true;
+  question.textContent = "";
+  contact.hidden = phone.hidden = true;
+  contact.removeAttribute("href");
+  phone.removeAttribute("href");
   document.querySelector("#continue-trip").hidden = true;
   document.querySelector("#add-another").hidden = true;
   submit.disabled = manualSubmit.disabled = false;

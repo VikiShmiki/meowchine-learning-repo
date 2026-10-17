@@ -142,3 +142,119 @@ def test_service_derives_safe_statuses_instead_of_trusting_a_category() -> None:
     assert result.items[1].status is SuggestionStatus.NEEDS_REVIEW
     assert result.items[2].category == "special_unsupported"
     assert result.items[2].status is SuggestionStatus.SPECIALIST
+
+
+@pytest.mark.parametrize(
+    "description,kind,reason",
+    [
+        ("glass jar", "empty_glass_packaging", "The jar is dirty."),
+        ("plastic bottle", "empty_plastic_bottle", "It is not empty."),
+        ("paper", "clean_paper", "It is coated."),
+        ("cardboard box", "clean_cardboard", "It is greasy."),
+        ("стаклено шише", "empty_glass_packaging", "валкано"),
+        ("пластично шише", "empty_plastic_bottle", "не е празно"),
+        ("hartija", "clean_paper", "laminirano"),
+        ("plasticno sise", "empty_plastic_bottle", "valkano"),
+        ("glass bottle", "empty_plastic_bottle", "Visible packaging."),
+        ("стаклено шише", "clean_paper", "видлив предмет"),
+        ("glass bottle and plastic bottle", "empty_glass_packaging", "Two items."),
+        ("пластично шише и весник", "empty_plastic_bottle", "видлив предмет"),
+        ("phone and glass bottle", "electronics", "Visible objects."),
+        ("телефон и маица", "small_electronics", "видлив предмет"),
+        ("unknown object", "empty_plastic_bottle", "The shape is unclear."),
+        ("glass jar", "empty_glass_packaging", "A ceramic object is visible too."),
+    ],
+)
+def test_photo_explanation_cannot_be_overridden_by_clean_enum(description, kind, reason):
+    item = ModelPhotoItem(
+        description=description,
+        item_kind=kind,
+        visible_condition=VisibleCondition.APPEARS_EMPTY_CLEAN,
+        reason=reason,
+    )
+    result = VisionService._suggestion(item)
+    assert result.status is SuggestionStatus.NEEDS_REVIEW
+    assert result.category is None
+    assert result.item_kind == "other"
+    assert result.description == description
+    assert result.reason == reason
+
+
+@pytest.mark.parametrize("description", ["dirty glass jar", "валкано стаклено шише"])
+def test_photo_description_condition_is_checked_as_well_as_reason(description):
+    result = VisionService._suggestion(
+        ModelPhotoItem(
+            description=description,
+            item_kind="empty_glass_packaging",
+            visible_condition="appears_empty_clean",
+            reason="Visible packaging.",
+        )
+    )
+    assert result.status is SuggestionStatus.NEEDS_REVIEW
+    assert result.item_kind == "other"
+
+
+@pytest.mark.parametrize(
+    "description,kind,condition",
+    [
+        ("clear glass jar", "empty_glass_packaging", "appears_empty_clean"),
+        ("plastic bottle", "empty_plastic_bottle", "appears_empty_clean"),
+        ("metal can", "empty_metal_can", "appears_empty_clean"),
+        ("clean paper", "clean_paper", "appears_empty_clean"),
+        ("cardboard box", "clean_cardboard", "appears_empty_clean"),
+        ("Tetra Pak", "empty_tetrapak", "appears_empty_clean"),
+        ("стаклено шише", "empty_glass_packaging", "appears_empty_clean"),
+        ("plasticno sise", "empty_plastic_bottle", "appears_empty_clean"),
+        ("phone", "small_electronics", "uncertain"),
+        ("clean shirt", "wearable_clothes", "uncertain"),
+        ("used tissue", "ordinary_residual", "not_empty_or_contaminated"),
+        ("употребена пелена", "ordinary_residual", "not_empty_or_contaminated"),
+    ],
+)
+def test_supported_photo_candidates_keep_explicit_confirmation(description, kind, condition):
+    result = VisionService._suggestion(
+        ModelPhotoItem(
+            description=description,
+            item_kind=kind,
+            visible_condition=condition,
+            reason="Visible object.",
+        )
+    )
+    assert result.status is SuggestionStatus.CANDIDATE
+    assert result.item_kind == kind
+    assert result.category is not None
+
+
+@pytest.mark.parametrize(
+    "reason,expected_kind",
+    [
+        ("Contains pesticide.", "other"),
+        ("содржи хемикалии", "other"),
+        ("A battery is visible inside.", "batteries"),
+    ],
+)
+def test_photo_specialist_hazards_take_precedence_over_conflicting_enum(reason, expected_kind):
+    result = VisionService._suggestion(
+        ModelPhotoItem(
+            description="plastic bottle and glass jar",
+            item_kind="empty_plastic_bottle",
+            visible_condition="appears_empty_clean",
+            reason=reason,
+        )
+    )
+    assert result.status is SuggestionStatus.SPECIALIST
+    assert result.item_kind == expected_kind
+    assert result.category == "special_unsupported"
+
+
+def test_contaminated_electronics_require_review():
+    result = VisionService._suggestion(
+        ModelPhotoItem(
+            description="phone",
+            item_kind="small_electronics",
+            visible_condition="not_empty_or_contaminated",
+            reason="Visible device.",
+        )
+    )
+    assert result.status is SuggestionStatus.NEEDS_REVIEW
+    assert result.item_kind == "other"

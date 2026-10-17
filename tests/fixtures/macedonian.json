@@ -63,7 +63,7 @@
   {"en":"clothes and plastic bottle", "mk":"облека и пластично шише", "kind":null, "status":"held"},
   {"en":"mysterious object", "mk":"непознат предмет", "kind":null, "status":"clarify"},
   {"en":"not a plastic bottle", "mk":"не е пластично шише", "kind":null, "status":"clarify"},
-  {"en":"glass bottle and plastic bottle", "mk":"стаклено шише и пластично шише", "kind":null, "status":"clarify"},
+  {"en":"glass bottle and plastic bottle", "mk":"стаклено шише и пластично шише", "kind":null, "status":"held"},
   {"en":"used tissue and battery", "mk":"употребено марамче и батерија", "kind":"batteries", "status":"specialist"},
   {"en":"medical tissue", "mk":"медицинско марамче", "kind":null, "status":"specialist"},
   {"en":"glass bottle", "mk":"СТАКЛЕНО ШИШЕ", "kind":"empty_glass_packaging", "status":"confirm_condition"}

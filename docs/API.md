@@ -96,6 +96,11 @@ classification itself is not a computed route; use the separate trips endpoint.
 | `specialist` | Show guidance and any evidenced operator contact, never a general-waste route |
 | `held` | Acceptance is unverified; ask for more detail or operator confirmation |
 
+Descriptions matching multiple recyclable item kinds return `held`, including
+when `manual_kind` and `condition_confirmed` are supplied. Describe and confirm each
+item separately before adding it to a trip; selecting one kind cannot silently
+discard another recognized recyclable from the original description.
+
 Confirm a choice with, for example:
 
 ```json
@@ -133,6 +138,11 @@ The response contains up to six `items`, each with `description`, policy-bounded
 `policy_version`, `requires_user_confirmation: true` and a user message. No confidence
 probability or facility acceptance is claimed. Candidates must pass through
 `POST /api/v1/classify` with explicit user confirmation before entering a trip.
+The description and reason are checked for conflicting item kinds, excluded forms
+and condition signals, even when the model claims the item appears empty/clean.
+`needs_review` always returns `category: null` and `item_kind: "other"`; clients
+must request manual clarification rather than preselect a confirmable item.
+Specialist hazards retain priority.
 
 Missing credentials return 503; rejected credentials/provider outages return 503;
 rate limits return 429; invalid/unsupported images return 413, 415 or 422; malformed

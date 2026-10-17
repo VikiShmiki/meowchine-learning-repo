@@ -21,8 +21,9 @@ offline Python training ----------------------> versioned model artifact
 - `api.py`: HTTP validation and orchestration.
 - `domain.py`: shared labels and immutable value objects.
 - `classifier.py`: replaceable baseline/model adapter.
-- `minilm.py`: pinned frozen encoder plus a checksum-verified logistic head; it only
-  proposes a broad stream after policy rules abstain and cannot establish acceptance.
+- `object_models.py` / `linear_head.py`: pinned encoders and portable JSON heads with
+  development-calibrated abstention; they only
+  propose a broad stream after policy rules abstain and cannot establish acceptance.
 - `vision.py`: bounded image preprocessing, OpenAI Responses adapter and typed photo
   suggestions; it cannot establish site acceptance or add trip items.
 - `geo.py`: deterministic geospatial calculations.
@@ -43,7 +44,7 @@ offline Python training ----------------------> versioned model artifact
 Classification is synchronous and initially runs in FastAPI. Keep training out of the
 request process: an explicit training job produces metrics and a versioned artifact,
 and the API loads the evaluated rules plus the development MiniLM head at startup.
-The latter is exposed only as a visibly separate, uncalibrated suggestion because its
+The latter is exposed only as a separate development-model suggestion because its
 authoritative abstention gate failed. Export to ONNX and move
 inference on-device only when offline use, privacy, latency, or cost justifies the
 extra mobile integration and parity testing.

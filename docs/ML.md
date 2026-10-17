@@ -1,5 +1,237 @@
 # ML
 
+## Photo suggestion consistency (17 October 2026)
+
+Photo suggestions now check the model's description **and reason** against the
+same bilingual item/condition vocabulary used by text policy. An empty/clean enum
+cannot override explicit contamination, excluded forms, multiple recyclable kinds,
+or a conflicting item identity. Ordinary packaging candidates need a recognizable
+matching item kind; an unidentifiable object goes to manual review.
+
+Rejected suggestions return `status: needs_review`, `category: null` and
+`item_kind: other`. Specialist hazards retain priority. Valid clothing/electronics
+still require user confirmation; used household tissues/nappies retain their
+separate residual rule. Editing a description or selecting a photo clears the old
+manual selection, confirmation controls and operator links, preventing confirmation
+state from carrying over from the previous item.
+
+This checks consistency of model-generated text, not what the pixels actually show.
+It does not establish photo-model accuracy or extend local acceptance. The frozen
+text-model weights, thresholds and evaluated text-policy code are unchanged.
+
+## Current serving models: development v3 audit correction (17 October 2026)
+
+The current pinned JSON heads are `artifacts/models/ml_v3_audit/{en,mk}.json`.
+The earlier heads and reports under `ml_v3` / `data/ml/v3` are preserved as baseline
+evidence. These remain development suggestions; local policy and item confirmation
+control disposal. A native-reviewed, independently collected user test is still required.
+
+All five follow-up audit goals are implemented:
+
+1. Descriptions matching multiple recyclable item kinds stay held through manual
+   confirmation. The existing localized message asks for separate descriptions;
+   explicit specialist hazards retain their guidance. This is bounded lexical
+   protection, not a general-purpose multi-object parser.
+2. Model selection, temperature fitting and gate selection give each concept total
+   weight one, shared among its distinct spellings. Reports retain raw row metrics,
+   concept-weighted metrics and separate spelling slices. More spellings no longer
+   let a poorly performing concept set pass the 95% observed-accuracy gate.
+3. Gate calibration uses only cases that actually reach ML through the current
+   policy. Full serving replay reports rules-only answers, incremental suggestions,
+   unsupported-input suggestions and coverage on that fallback subset. Policy/code
+   hashes identify the decision flow used for calibration. Test rows are never used
+   to select the settings.
+4. Model-file read failures and suggestion-gate failures use the same optional-model
+   fallback as encoder failures. The affected language loses suggestions; policy
+   guidance and the other language remain available.
+5. Historical evaluation joins reviews by source text hash (including the English
+   source hashes on MK translations), checks labels and one-to-one coverage, and
+   verifies the pinned head → dataset manifest → training rows chain before scoring.
+   Fresh report paths are required so prior evidence is not overwritten.
+
+Actual supported development-test inputs reaching ML:
+
+| Language | Supported fallback rows | Baseline accepted | Corrected accepted | Corrected correct |
+| --- | ---: | ---: | ---: | ---: |
+| English | 30 | 18 (60%) | 18 (60%) | 18 |
+| Macedonian, pooled spellings | 42 | 4 (9.5%) | 14 (33.3%) | 14 |
+
+Neither corrected model suggested a label for the held cases reaching ML in this
+small development test. This does not establish a population accuracy guarantee;
+spellings are correlated and the test was previously inspected. The MK gate is now
+confidence ≥ 0.95 and similarity ≥ 0.4, selected on its fallback calibration subset
+(53 supported and 26 held rows); EN remains 0.99 / 0.6. No test-driven threshold
+adjustment was made. Unknown-input detection and broad MK coverage still need work.
+
+The broader historical manual diagnostic remains imperfect: of the suggestions
+actually shown, EN has 16 correct and 2 held-input suggestions (unchanged); MK has
+10 correct and 3 held-input suggestions, versus 1 correct and 2 held-input
+suggestions with the previous head. These unsupported-case errors remain in the
+report. Better development coverage does not remove the need for fresh negative
+examples, native review and independent evaluation before release.
+
+The [training report](../data/ml/v3_audit/report.json) includes every candidate,
+calibration decision and complete serving replay. The
+[serving report](../data/ml/v3_audit/serving_report.json) independently replays the
+pinned artifacts on all historical manual cases and the authored development test.
+The [baseline replay](../data/ml/v3/audit-serving.json) preserves the preceding heads'
+actual fallback results. These reports distinguish suggestions from routing decisions.
+
+Reproduction uses the commands below with a fresh run directory. The evaluator's
+`--training-rows` must belong to the pinned head. Its sibling `manifest.json` is
+verified by default; `--training-manifest` can identify a relocated manifest. The
+same original v3 corpus is used here. New candidate models require explicit hash
+promotion in `object_models.py`; training never overwrites serving models.
+
+## Preserved baseline: development v3 (17 October 2026)
+
+The v3 heads replace the v2 suggestions. They are **development models, not a
+validated disposal classifier**. Raw weights, encoder revisions, temperature and
+abstention settings are in `artifacts/models/ml_v3/{en,mk}.json`; the loader pins
+both hashes and verifies metadata, dimensions and numerical values. Inference no
+longer unpickles a scikit-learn model. Historical v1/v2 artifacts remain unchanged.
+
+Encoder identity is also enforced: both MiniLM encoders emit 384-dimensional
+vectors, so dimensions alone cannot detect accidentally swapped language models.
+Before loading, the service checks pinned SHA-256 hashes for the weights,
+tokenizer, module/pooling configuration and sentence-embedding settings. The
+allowlist is in `src/smart_recycling/encoder_artifacts.py`. A relocated copy of
+the pinned snapshot works; changed, missing or unexpected inference files are
+rejected. Downloads resolve the fixed revision, pass the same checks, and then
+load locally. Checks run at startup, not on each request.
+New v3 training runs verify those same files before embedding examples and record
+the verifier's code hash. Existing experiment reports retain their original hashes.
+
+An invalid encoder disables suggestions only for that language; `/health` reports
+it as `unavailable`, while policy guidance and clarification continue. Explicit
+`SRA_MINILM_MODEL_PATH` / `SRA_MULTILINGUAL_MODEL_PATH` settings never silently
+fall back to downloads. The Docker cache helpers copy verified upstream bytes
+instead of reserializing them. Older directories created with
+`SentenceTransformer.save()` may have rewritten metadata and must be replaced
+with a fresh verified bundle. To build bundles in new directories:
+
+```bash
+uv run python -c "from pathlib import Path; from smart_recycling.minilm import cache_encoder; cache_encoder(Path('models/verified-english'))"
+uv run python -c "from pathlib import Path; from smart_recycling.multilingual import cache_encoder; cache_encoder(Path('models/verified-macedonian'))"
+```
+
+Configure the corresponding environment variables to those directories. Encoder
+verification binds inference to the evaluated representation; it does not add
+independent accuracy evidence or change the development-only status of the heads.
+
+On the new authored development test, comparing the old and new heads on the
+**same inputs**:
+
+| Slice | Concept support | Old macro-F1 | New macro-F1 |
+| --- | --- | ---: | ---: |
+| English | 8 objects/class, 48 supported objects | 0.732 | 0.979 |
+| Macedonian Cyrillic | Same 48 paired objects | 0.528 | 0.870 |
+| Macedonian, pooled distinct Cyrillic/Latin spellings | Same objects, 115 supported strings | 0.491 | 0.847 |
+
+Spelling variants are correlated, not extra independent samples. Pooled variant
+support differs by class because identical spellings are deduplicated. Use the
+Cyrillic slice for the balanced Macedonian comparison. These explicit-material
+noun phrases are easier than unconstrained user requests. Broad material families
+overlap across splits; the disjoint unit is the specific authored object concept.
+No native review or independent user collection is claimed.
+
+Training retained **5,004** English source examples independently of translation
+quality, including all **978 phone-charger and 594 laptop-charger** descriptions.
+Only 30 deterministically selected phrases per source group enter fitting (390
+source rows), alongside 72 authored training concepts and their language variants.
+All legacy automatic Macedonian translations are quarantined from fitting.
+Current mapping approvals, explicit material/object checks, duplicate checks and
+held-out concept exclusions supersede stale processed approval flags. See
+[BILINGUAL_DATA.md](BILINGUAL_DATA.md) for the corpus contract.
+
+Model selection compares C = 0.1, 1, 10, 100 and uniform versus class/concept-balanced
+weights, using identical rows and tuning sets for frozen embeddings and TF-IDF.
+English selected balanced C=10; Macedonian selected uniform C=100. English-only
+training feeds the English encoder; the multilingual head also receives the
+retained English and authored English training rows. This is a cross-language
+training choice, not a paired-language fairness experiment. TF-IDF's selected
+models scored 0.787 EN / 0.753 pooled MK on this test. Complete candidates and
+per-class metrics are in [`report.json`](../data/ml/v3/report.json); exact row/group
+support is in [`support.json`](../data/ml/v3/support.json).
+
+Temperature is fitted on the tuning set. A separate calibration set selects
+confidence/similarity thresholds for maximum coverage, subject to at least 95%
+observed accepted accuracy and zero suggestions on its held cases. If no setting
+passes, the model abstains on everything. These finite-sample constraints are
+**not population guarantees**; the calibration search can overfit.
+
+On the final development test, EN accepted 29/60 inputs: 28 correct supported
+suggestions and one held-input suggestion (58.3% supported coverage). MK accepted
+20/144 distinct strings: 18 correct supported suggestions and two held-input
+suggestions (15.7% supported coverage). Its Cyrillic slice accepted 8/60, all
+correct. Unknown detection remains incomplete and Latin coverage is weak.
+Do not turn these thresholds into an automatic-routing rule. An accepted model
+suggestion only orders clarification choices; policy, exact-item confirmation and
+facility acceptance still decide disposal. Negated/dirty/damaged Latin-typed
+Macedonian clothing now retains the same holds as Cyrillic.
+
+The false suggestions above are the English and two Latin spellings of “a shirt
+and an aluminium can.” They expose a multi-object limitation in the broad model;
+the policy layer still holds mixed requests. All supported-class errors and held
+false suggestions are retained in [`test_errors.json`](../data/ml/v3/test_errors.json).
+
+The older manual diagnostic has one exact training overlap per language (the
+plastic-shampoo-bottle concept). [`serving_report.json`](../data/ml/v3/serving_report.json)
+shows both raw and overlap-excluded results. After excluding it, four-stream
+macro-F1 is 0.820 → 1.000 EN and 0.653 → 0.890 MK. This maps clothes/electronics
+back to the specialist stream, so it is not comparable to six-class macro-F1.
+It is a historical diagnostic with semantic overlap and previously inspected cases,
+not fresh test evidence. Of its 41 held cases, the new model still suggests a label
+for six EN and two MK inputs; policy remains authoritative.
+
+The test contains only eight concepts per class and twelve held concepts. Even
+8/8 class recall has an exact 95% binomial interval of approximately 63%–100%;
+spelling variants do not narrow that uncertainty.
+A fresh native-reviewed user test, including mixed objects, contamination, spelling
+variation and unsupported objects, remains necessary before a quality claim.
+Do not tune further against this consumed development test.
+
+### Audit corrections to historical interpretation
+
+The historical split has no plastic/metal or specialist test support, only one
+clothing test item, and one training group each for glass and plastic/metal.
+Plastic training is aluminium cans while validation is plastic bottles. Therefore
+six-class macro-F1 and zero seed variation do not establish generalization.
+The original LoRA comparison also changed encoder and/or class weighting: balanced
+logistic regression versus unweighted cross-entropy. It does **not** isolate a
+LoRA effect. The classifier head was trainable; a frozen-head bug was not found.
+V3 compares weighting within each encoder and retains frozen models; it makes no
+new claim that LoRA is intrinsically worse. Historical runs are evidence of those
+configurations only, not a controlled architecture ranking.
+
+### Reproduce without overwriting serving artifacts
+
+After `uv sync --all-groups --locked`, supply the immutable source bundle and
+pinned local Hugging Face cache. Use a fresh run directory:
+
+```bash
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=2 \
+  uv run python scripts/train_ml_v3.py \
+  --source-root /path/to/source-bundle \
+  --encoder-cache /path/to/huggingface/hub \
+  --run-dir data/processed/ml-v3-new-run
+```
+
+The command writes source/exclusion manifests, model-selection decisions before
+test scoring, JSON candidates and a complete report. It refuses an existing run
+directory. Both deployed JSON heads reproduced byte-for-byte in a second run.
+Candidate promotion requires explicit hash updates in `object_models.py`; training
+does not overwrite serving weights. The standard locked runtime needs no PEFT.
+For real-encoder historical/manual and policy-boundary replay:
+
+```bash
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=2 \
+  uv run python scripts/evaluate_ml_v3_serving.py \
+  --encoder-cache /path/to/huggingface/hub \
+  --training-rows data/processed/ml-v3-new-run/data/rows.json \
+  --output data/processed/ml-v3-serving-replay.json
+```
+
 ## V2 five-seed comparison (22 September 2026)
 
 At the user's request, four additional seeds **43–46** ran after the seed-42 v2
@@ -260,7 +492,7 @@ revision, data checksum, split IDs, parameters, seed, metrics, and label map.
 Corrections are review data, not automatic truth: deduplicate, quality-check, and
 version them before the next training run.
 
-## Current extension (22 September 2026)
+## Historical extension (22 September 2026)
 
 `policy-rules-v3` adds a bounded general-waste subset, confirmed electronics routing,
 and clean/wearable clothes donation. `wearable_clothes` remains a specialist item kind,
@@ -312,7 +544,7 @@ hard; some classes have few examples in a split because the source has no finer 
 ID. Treat manual metrics as provisional until every row is reviewed. Do not treat a
 transformer result as release-eligible until mappings and item-family coverage improve.
 
-## Frozen MiniLM suggestion model
+## Historical four-class MiniLM suggestion model
 
 The user-requested next comparison uses the immutable Apache-2.0
 `sentence-transformers/all-MiniLM-L6-v2` revision
@@ -372,7 +604,7 @@ all five canonical classes. The current review has no supported `general` exampl
 completing source/human review is a data prerequisite rather than a model error. Never
 bypass this check with the historical auto-approved dataset.
 
-## Serving and artifacts
+## Historical four-class serving and artifacts
 
 The tracked 7.4 KiB CPU-trained joblib contains only the balanced logistic-regression
 head. A matching metadata file records its immutable encoder revision, labels, data

@@ -27,14 +27,15 @@ not translate arbitrary prose or establish that an item is clean. Existing manua
 confirmation, specialist precedence and asset-level acceptance checks still apply.
 The classifier artifact hashes this lexicon along with the rules.
 
-Learned suggestions now use the hash-pinned, seed-42 six-class frozen MiniLM heads
-selected from the five-seed comparison in [ML.md](ML.md). English uses
+Learned suggestions use the hash-pinned development-v3-audit JSON heads, selected and
+calibrated on separate development splits in [ML.md](ML.md). English uses
 `all-MiniLM-L6-v2`; Macedonian uses the separate
 [`paraphrase-multilingual-MiniLM-L12-v2`](https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2)
 encoder. Both heads predict object labels including `clothes` and `electronics`,
 which map to the app's `special_unsupported` stream and distinct review choices.
 The English head is never applied to multilingual embeddings. Scores are
-uncalibrated closed-set probabilities, not disposal confidence; the classifier
+temperature-scaled development scores, not disposal confidence. A separate
+confidence/similarity gate can abstain; the classifier
 remains abstained until exact-item selection/condition confirmation. No automatic
 general-waste prediction is introduced. The request's selected language chooses
 the head, even when the description uses another script; translation is not applied.

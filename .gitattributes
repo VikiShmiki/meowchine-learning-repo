@@ -15,3 +15,9 @@ data/coverage/**/*.json -text
 data/policy/**/*.json text eol=lf
 
 data/upgrades/**/*.json -text
+
+# Pinned ML heads and provenance use exact bytes across Windows and Linux.
+artifacts/models/ml_v3/**/*.json -text
+artifacts/models/ml_v3_audit/**/*.json -text
+data/ml/**/*.json -text
+data/ml/**/*.tsv -text

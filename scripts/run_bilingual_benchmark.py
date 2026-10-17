@@ -11,6 +11,7 @@ def main() -> None:
     parser.add_argument("--results-dir", type=Path, required=True)
     parser.add_argument("--artifacts-dir", type=Path, required=True)
     parser.add_argument("--data-dir", type=Path)
+    parser.add_argument("--source-root", type=Path, help="Relocated historical source bundle root")
     parser.add_argument("--device", default="cuda")
     parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--epochs", type=int, default=3)
@@ -26,6 +27,7 @@ def main() -> None:
         learning_rate=args.learning_rate,
         data_dir=args.data_dir,
         seed=args.seed,
+        source_root=args.source_root,
     )
     print(f"Completed all six fits in {report['wall_seconds']:.3f}s")
 

@@ -2,6 +2,15 @@
 
 Updated: 2026-10-17
 
+The ML integration brings `fix/ml-data-remediation` onto current main, retaining
+the reporting, JSP and parking features. It fixes the missing Docker v3 model
+bundle, an ambiguous photo-test selector, Windows model-byte preservation and
+portable ML data I/O/source paths. Local model startup and deployment smoke pass
+with the actual v3 audit heads. The final revision's quality/container jobs in
+[Actions](https://github.com/VikiShmiki/meowchine-learning-repo/actions?query=branch%3Afix%2Fml-data-remediation)
+are required before merge. Windows skips only two symlink tests when the OS denies
+the needed privilege; Linux CI runs them. Earlier branch results remain historical.
+
 Parking delivery adds 20 backend and seven browser tests to the same quality gate,
 and the container smoke now verifies the bundled public-parking endpoint. The
 current parking revision's quality and container jobs in

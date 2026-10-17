@@ -7,7 +7,7 @@ normalization; a translated noun never establishes condition or site acceptance.
 import re
 import unicodedata
 
-VERSION = "mk-lexicon-v1"
+VERSION = "mk-lexicon-v2"
 _LATIN = dict(
     zip(
         "абвгдѓежзѕијклљмнњопрстќуфхцчџш",
@@ -165,6 +165,19 @@ FORMS = {
 }
 _WORDS = {form: target for target, forms in FORMS.items() for form in forms.split("|")}
 _WORDS.update({latin(form): target for form, target in list(_WORDS.items()) if len(form) > 2})
+# Real keyboard input also uses c/s/z instead of ch/sh/zh. Build whole-word
+# aliases only; never rewrite arbitrary user text or discard unknown tokens.
+_aliases: dict[str, set[str]] = {}
+for _form, _target in list(_WORDS.items()):
+    _plain = latin(_form).replace("ch", "c").replace("sh", "s").replace("zh", "z")
+    if len(_plain) > 2:
+        _aliases.setdefault(_plain, set()).add(_target)
+for _form, _targets in _aliases.items():
+    if len(_targets) == 1 and _form not in _WORDS:
+        _WORDS[_form] = next(iter(_targets))
+# Short negation is safety-relevant and intentionally exempt from the length
+# filter. Word boundaries prevent matching it inside names or unknown words.
+_WORDS["ne"] = "not"
 _PATTERN = re.compile(
     r"(?<!\w)(?:"
     + "|".join(re.escape(form) for form in sorted(_WORDS, key=len, reverse=True))

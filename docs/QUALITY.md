@@ -1,5 +1,103 @@
 # Quality
 
+## Combined ML integration (October 17, 2026)
+
+The merge retains the current reporting, JSP and parking regression coverage.
+Local checks passed: 735 backend tests, 21 Node cases, nine photo browser cases
+and 52 Macedonian/reporting/transit/parking browser cases. Two encoder symlink
+cases require Windows Developer Mode/privilege and are exercised in Linux CI.
+The final combined Linux suite and Docker smoke are the merge gates; their exact
+counts/results are recorded on the delivery PR. Actual pinned v3 audit models load
+in both languages, and deployment smoke checks accepted suggestions plus abstention.
+Model weights/checksums remain Oliver's; integration fixes cover Docker packaging,
+portable artifact bytes/UTF-8/source paths, and the photo submit-button selector.
+
+## Photo consistency and confirmation-state verification (October 17, 2026)
+
+Goal achieved: prevent contradictory model descriptions/conditions from producing
+confirmable photo candidates, and clear confirmation state when the input changes.
+Final `make check` passed: 677 Python tests, 391 opt-in skips, 11 dependency warnings,
+21 Node tests, lock validation, lint and formatting. Whitespace checks passed.
+
+The 34 new Python cases include English, Cyrillic and Latin Macedonian condition
+signals; description/reason contradictions; excluded forms and mixed kinds;
+unrecognized packaging; supported candidates; residual exceptions; contaminated
+electronics; and specialist precedence. Two Node regressions check that manual
+review clears a previous confirmation and contacts without issuing a classify
+request, while valid photo candidates still request review without confirmation.
+No paid AI calls or new model training were used.
+
+Three targeted real Chromium checks (valid photo confirmation and EN/MK stale-state
+regressions) were attempted but failed before launching: the host lacks
+`libatk-1.0.so.0`. Their assertions are committed for a browser-equipped environment.
+No browser/device or visual-model accuracy verification is claimed for this change.
+These are policy-consistency and UI-state checks, not a photo-quality benchmark.
+
+## Five ML audit fixes verified (October 17, 2026)
+
+Final `make check` passed: 643 Python tests, 389 expected opt-in skips, 11 dependency
+warnings, 19 Node tests, locked dependencies, Ruff lint and formatting (181 files).
+API TestClient tests ran outside the sandbox with model downloads disabled. The
+first full run identified two bilingual fixture expectations for the old mixed-item
+status; those now require `held`, including the manual-override assertion.
+
+The regressions cover bilingual mixed-item holds and separate-item recovery,
+independent-language startup with unreadable model files, failed suggestion gates,
+concept-weighted calibration, actual policy fallback measurement, identity-based
+label joins and the model/manifest/rows checksum chain. Reordering review and test
+CSV files preserves label association; missing, duplicated or mismatched cases fail.
+
+Both pinned encoders ran offline. A repeat training run reproduced the numerical
+weights, temperatures and selected gates exactly; its final metadata records the
+current policy digest. Installed-head replay agrees with training-time serving
+metrics, and report/model/policy/training-code checksums were checked. The new heads
+and reports use `ml_v3_audit`; previous artifacts remain intact. The Docker recipe
+copies the new heads, but a container build was not performed.
+
+MK correct suggestions on supported fallback development inputs increased from
+4/42 to 14/42; EN remained 18/30. Historical manual replay still exposes unsupported
+suggestions (2 EN, 3 MK). These results do not constitute native review, independent
+field evaluation, browser/device testing or release sign-off. Full reports and
+reproduction instructions are in [ML.md](ML.md).
+
+## Verified encoder compatibility (October 17, 2026)
+
+Final `make check` passed with 619 Python tests, 389 expected opt-in skips,
+11 dependency warnings and 19 Node tests; lock validation, lint and formatting
+(176 files) passed. The suite ran outside the sandbox because its TestClient
+thread communication stalls inside it. Seed, infrastructure and geography
+validators and whitespace checks also passed.
+
+The 35 new regressions cover swapped/missing/changed encoder assets, unexpected
+loading inputs, relocated snapshots, offline resolution, bundle export, rejected
+training inputs and independent language startup fallback. Both real pinned
+encoders exported and reloaded with networking disabled. On five English and five
+Macedonian probes, embeddings and head scores matched the original snapshots
+exactly (maximum embedding difference 0); both real encoder swaps were rejected.
+These are compatibility checks, not new accuracy measurements. No fresh browser,
+container, hosted or physical-device verification is claimed. Bundle migration and
+the development-model limits are documented in [ML.md](ML.md).
+
+## ML/data remediation verification (October 17, 2026)
+
+`make check` passed in the locked Linux environment: 617 Python tests, 389 expected
+opt-in skips, 11 dependency warnings, and 19 Node tests; lock, Ruff and formatting
+also passed. TestClient hangs under this tool sandbox but passes outside it; the
+full successful suite used unrestricted local execution, without network model
+loading. Targeted tests cover Latin negation/condition holds, data separation,
+source relocation/checksums, JSON/sklearn prediction parity, corrupt head rejection,
+calibration abstention and actual pinned head loading. Real cached-encoder replay
+also checks mixed-object/unknown/negative-condition policy boundaries.
+
+The final integrated run includes concurrent encoder-byte verification and
+invalid-path startup regression tests. Both actual cached encoders passed their
+full pinned inference-file checksum checks. Both new heads reproduced byte-for-byte. Development test support, held-input
+errors and source exclusions are retained in `data/ml/v3/report.json`; historical
+manual replay records exact overlaps separately. Native/independent validation,
+container execution, fresh browser runs and physical-device testing are not claimed.
+The PDF and older sections below describe historical model evidence; current ML
+results and reproduction commands are in [ML.md](ML.md).
+
 ## JSP scheduled transit — October 17, 2026
 
 The 24 new backend cases and seven new browser cases pass locally. They cover

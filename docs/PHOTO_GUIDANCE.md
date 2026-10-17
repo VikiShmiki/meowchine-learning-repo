@@ -25,14 +25,25 @@ suggestions without affecting manual guidance, maps, City Mode or routing.
    metadata-free JPEG in memory. The service never writes the image to disk.
 4. The backend sends the processed image to the OpenAI Responses API with low image
    detail, structured output, a 30-second timeout and `store: false`.
-5. The backend derives canonical categories from its own item-kind table. The model
-   does not select collection sites or establish local acceptance.
-6. The user reviews one suggestion through the existing policy guidance and confirms
+5. The backend derives canonical categories from its own item-kind table and checks
+   the description and reason against bilingual text-policy signals. Conflicting
+   material, mixed items or excluded/contaminated forms cannot become candidates
+   just because the model also reports an empty/clean condition. Unrecognized
+   ordinary packaging forms require review. The model does not select collection
+   sites or establish local acceptance.
+6. Rejected suggestions have no category and use `item_kind: other`. Selecting a
+   suggestion or editing the description clears the previous item's confirmation
+   controls and contacts. A rejected suggestion opens manual editing without an
+   automatic classification request or a preselected item.
+7. The user reviews one suggestion through the existing policy guidance and confirms
    the item type and condition before it can enter a trip.
 
 OpenAI is still an external processor. Do not photograph faces, addresses, documents,
 vehicle plates or other unnecessary personal information. The operation requires a
 network connection and consumes API quota.
+
+These are consistency checks on model-generated descriptions, not independent
+verification of image contents. Photo-model quality still requires the manual set below.
 
 ## Manual test set
 

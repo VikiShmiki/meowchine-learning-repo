@@ -59,13 +59,21 @@ def main():
             args.url,
             "/api/v1/classify",
             {
-                "text": "Листови од стара тетратка",
+                "text": "хартиено упатство",
                 "language": "mk",
             },
         )
         assert suggestion["suggestion_model_version"] == health["macedonian_suggestion_model"]
+        assert suggestion["suggested_category"] == "paper_tetrapak"
         assert suggestion["status"] == "clarify" and suggestion["category"] is None
         assert suggestion["choices"][0]["label"] != "Clean, uncoated paper"
+        uncertain = get(
+            args.url,
+            "/api/v1/classify",
+            {"text": "Листови од стара тетратка", "language": "mk"},
+        )
+        assert uncertain["status"] == "clarify" and uncertain["category"] is None
+        assert uncertain["suggested_category"] is None  # The v3 gate may decline a suggestion.
         confirmed = get(
             args.url,
             "/api/v1/classify",

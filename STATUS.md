@@ -2,6 +2,91 @@
 
 Updated: 2026-10-17
 
+## Integration — ML remediation with current app features
+
+Oliver's `fix/ml-data-remediation` branch is integrated with the reporting, JSP
+and parking changes. Documentation retains both development histories. Docker
+includes the pinned v3 audit heads and the current startup/readiness fixes; photo
+browser tests select the form's submit button explicitly. Pinned model/evidence
+bytes survive Windows checkout; training/evaluation JSON uses UTF-8 and LF, and
+relocated source manifests support both Windows and POSIX paths. Model weights
+and pinned checksums are unchanged. The smoke test verifies an accepted Macedonian
+suggestion and an abstained example. Combined regression and container gates are
+required before merging; see the delivery PR and CI status.
+Earlier test counts below describe their original branch revisions.
+
+## Photo consistency improvement (Codex)
+
+Goal: prevent contradictory AI photo suggestions and stale prior-item confirmation
+from entering the review flow. Description/reason checks now reuse bilingual text
+policy signals; rejected suggestions have no category or preselected item. Editing
+or selecting another description clears the previous confirmation and contacts.
+Positive candidates, specialist hazards and the residual exception are preserved.
+Goal achieved. `make check` passed: 677 Python tests, 391 opt-in skips, 21 Node tests,
+lock/lint/format. The 34 new Python cases cover rejected contradictions, supported
+candidates and specialist precedence; two Node regressions cover photo review and
+stale confirmation. Three targeted Chromium checks could not launch because the
+host lacks `libatk-1.0.so.0`. Text model weights and thresholds are unchanged.
+See [photo flow](docs/PHOTO_GUIDANCE.md) and [verification](docs/QUALITY.md).
+
+## ML follow-up audit — five goals implemented (Codex)
+
+The mixed-item confirmation guard, equal-concept calibration, actual-fallback
+serving evaluation, unreadable-model fallback, and label/provenance verification
+are implemented. New development-v3-audit heads preserve the earlier artifacts.
+On the existing development test, MK suggestions cover 14/42 supported fallback
+inputs (previously 4/42), all correct; EN remains 18/30, all correct. Thresholds
+were selected only on calibration data. Native review and independent user data
+remain necessary. Verification and report links: [ML.md](docs/ML.md).
+
+All five goals completed. Final `make check` passed: 643 Python tests, 389 expected
+opt-in skips, 19 Node tests, lock/lint/format. Both real encoders replayed offline;
+a second training run reproduced weights, temperatures and gates. Historical
+manual replay still has 2 EN / 3 MK held-input suggestions; these remain reported.
+See [verification details](docs/QUALITY.md).
+
+## Completed improvement — verified serving encoders (Codex)
+
+Serving and future v3 training verify pinned encoder weights, tokenizer and
+configuration before use. Swapped, incomplete or changed encoders fail closed;
+only the affected language loses suggestions and policy guidance remains available.
+Offline bundle export preserves verified bytes and upstream attribution.
+
+`make check` passed: 619 Python tests, 389 opt-in skips, 19 Node tests, lock/lint/format.
+Seed/infrastructure/geography validation passed. Both real encoder bundles reloaded
+offline with identical embeddings and scores on ten probes; both swaps were rejected.
+Historical models/evaluations are unchanged. Older reserialized encoder directories
+need rebuilding; see [ML.md](docs/ML.md) and [verification details](docs/QUALITY.md).
+
+## Completed — ML/data remediation (Codex)
+
+User-authorized audit follow-through implemented and verified. Serving now uses
+hash-pinned development-v3 JSON heads with abstention; policy/confirmation retains
+control. Latin-typed Macedonian negation/dirty-clothing holds are repaired.
+
+- Retained 5,004 English source examples independently of translations, including
+  all 1,572 phone/laptop charger descriptions; sampled 390 template phrases for
+  fitting. Quarantined legacy MK translations and ambiguous source text.
+- Added paired, explicitly agent-authored train/tune/calibration/test concept
+  groups covering all six classes, held cases and Latin spelling variants. These
+  are development diagnostics, not independent or native-reviewed user evidence.
+- Tuned frozen and TF-IDF candidates on the tuning set; selected abstention on a
+  separate calibration set. New heads reproduce byte-for-byte. Historical v1/v2
+  artifacts remain unchanged; source-root relocation preserves checksum checks.
+- Same-input development test macro-F1: EN 0.732 → 0.979; MK Cyrillic 0.528 → 0.870;
+  pooled MK spellings 0.491 → 0.847. Unknown-input errors and low MK suggestion
+  coverage remain visible. No automatic disposal or production-quality claim.
+- `make check`: 617 Python tests passed, 389 opt-in skips, 19 Node tests passed;
+  lock/lint/format pass. Real encoders also preserve policy holds. The sandbox
+  blocked API TestClient event-loop behavior; the full suite passed outside it.
+
+Results, limitations and reproduction: [ML.md](docs/ML.md),
+[BILINGUAL_DATA.md](docs/BILINGUAL_DATA.md), and `data/ml/v3/`.
+External native review and a newly collected independent user test remain required.
+Historical LoRA results do not isolate architecture effects; the new controlled
+comparisons cover weighting and regularization for frozen/TF-IDF models, not a new
+LoRA experiment. No hosted/browser/device/container verification is claimed here.
+
 ## Implemented — parking-assisted driving
 
 Owner: Codex, user-requested October 17, 2026. Driving now offers optional mapped
@@ -49,10 +134,10 @@ Local handoff checks passed: 564 Python tests, 19 Node tests, lock/lint/format a
 seed/infrastructure/geography validation. The 389 opt-in skips and verification
 limits are recorded in [QUALITY.md](docs/QUALITY.md).
 
-## Completed capability — bilingual model integration
+## Historical capability — v2 bilingual model integration
 
 The corrected six-class bilingual dataset has five completed seed-42–46 runs (30
-fits). Frozen MiniLM is the strongest of the tested methods on both languages:
+fits). Frozen MiniLM had the highest scores in those confounded configurations:
 English manual macro-F1 0.696 ± 0.000 and Macedonian 0.507 ± 0.000; grouped-test
 macro-F1 is 0.505 ± 0.000 and 0.552 ± 0.000. These are sample SDs over seeds on
 one fixed split, not independent test uncertainty. Full comparisons, timings and

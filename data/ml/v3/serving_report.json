@@ -1,0 +1,381 @@
+{
+  "scope": "Historical diagnostic, not an independent final test",
+  "languages": {
+    "en": {
+      "training_rows_sha256": "05c6aa2250085efa812a425ead5e3b3c454fbe540d6f8860f73c9084d7c99d1d",
+      "exact_training_overlap": [
+        "plastic shampoo bottle"
+      ],
+      "excluding_exact_overlap": {
+        "old": {
+          "glass": {
+            "precision": 0.6842105263157895,
+            "recall": 1.0,
+            "f1-score": 0.8125,
+            "support": 13.0
+          },
+          "plastic_metal": {
+            "precision": 1.0,
+            "recall": 0.5714285714285714,
+            "f1-score": 0.7272727272727273,
+            "support": 14.0
+          },
+          "paper_tetrapak": {
+            "precision": 1.0,
+            "recall": 0.7777777777777778,
+            "f1-score": 0.875,
+            "support": 18.0
+          },
+          "special_unsupported": {
+            "precision": 0.7647058823529411,
+            "recall": 1.0,
+            "f1-score": 0.8666666666666667,
+            "support": 13.0
+          },
+          "accuracy": 0.8275862068965517,
+          "macro avg": {
+            "precision": 0.8622291021671826,
+            "recall": 0.8373015873015873,
+            "f1-score": 0.8203598484848486,
+            "support": 58.0
+          },
+          "weighted avg": {
+            "precision": 0.8764812640119568,
+            "recall": 0.8275862068965517,
+            "f1-score": 0.8234652560083594,
+            "support": 58.0
+          }
+        },
+        "new": {
+          "glass": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 13.0
+          },
+          "plastic_metal": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 14.0
+          },
+          "paper_tetrapak": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 18.0
+          },
+          "special_unsupported": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 13.0
+          },
+          "accuracy": 1.0,
+          "macro avg": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 58.0
+          },
+          "weighted avg": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 58.0
+          }
+        }
+      },
+      "old": {
+        "glass": {
+          "precision": 0.65,
+          "recall": 1.0,
+          "f1-score": 0.7878787878787878,
+          "support": 13.0
+        },
+        "plastic_metal": {
+          "precision": 1.0,
+          "recall": 0.5333333333333333,
+          "f1-score": 0.6956521739130435,
+          "support": 15.0
+        },
+        "paper_tetrapak": {
+          "precision": 1.0,
+          "recall": 0.7777777777777778,
+          "f1-score": 0.875,
+          "support": 18.0
+        },
+        "special_unsupported": {
+          "precision": 0.7647058823529411,
+          "recall": 1.0,
+          "f1-score": 0.8666666666666667,
+          "support": 13.0
+        },
+        "accuracy": 0.8135593220338984,
+        "macro avg": {
+          "precision": 0.8536764705882353,
+          "recall": 0.8277777777777777,
+          "f1-score": 0.8062994071146244,
+          "support": 59.0
+        },
+        "weighted avg": {
+          "precision": 0.871036889332004,
+          "recall": 0.8135593220338984,
+          "f1-score": 0.8083707375896027,
+          "support": 59.0
+        }
+      },
+      "new": {
+        "glass": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 13.0
+        },
+        "plastic_metal": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 15.0
+        },
+        "paper_tetrapak": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 18.0
+        },
+        "special_unsupported": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 13.0
+        },
+        "accuracy": 1.0,
+        "macro avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 59.0
+        },
+        "weighted avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 59.0
+        }
+      },
+      "accepted_rows": 48,
+      "held_suggestions": 6,
+      "policy_boundary_checks": [
+        {
+          "query": "ne e cista obleka",
+          "status": "held"
+        },
+        {
+          "query": "valkana kosula",
+          "status": "held"
+        },
+        {
+          "query": "mokra maica",
+          "status": "held"
+        },
+        {
+          "query": "glass bottle and a phone",
+          "status": "held"
+        },
+        {
+          "query": "unknown material container",
+          "status": "clarify"
+        }
+      ]
+    },
+    "mk": {
+      "training_rows_sha256": "05c6aa2250085efa812a425ead5e3b3c454fbe540d6f8860f73c9084d7c99d1d",
+      "exact_training_overlap": [
+        "\u043f\u043b\u0430\u0441\u0442\u0438\u0447\u043d\u043e \u0448\u0438\u0448\u0435 \u043e\u0434 \u0448\u0430\u043c\u043f\u043e\u043d"
+      ],
+      "excluding_exact_overlap": {
+        "old": {
+          "glass": {
+            "precision": 0.5909090909090909,
+            "recall": 1.0,
+            "f1-score": 0.7428571428571429,
+            "support": 13.0
+          },
+          "plastic_metal": {
+            "precision": 0.5,
+            "recall": 0.21428571428571427,
+            "f1-score": 0.3,
+            "support": 14.0
+          },
+          "paper_tetrapak": {
+            "precision": 1.0,
+            "recall": 0.6111111111111112,
+            "f1-score": 0.7586206896551724,
+            "support": 18.0
+          },
+          "special_unsupported": {
+            "precision": 0.6842105263157895,
+            "recall": 1.0,
+            "f1-score": 0.8125,
+            "support": 13.0
+          },
+          "accuracy": 0.6896551724137931,
+          "macro avg": {
+            "precision": 0.69377990430622,
+            "recall": 0.7063492063492063,
+            "f1-score": 0.6534944581280788,
+            "support": 58.0
+          },
+          "weighted avg": {
+            "precision": 0.716837155584887,
+            "recall": 0.6896551724137931,
+            "f1-score": 0.6564623322575165,
+            "support": 58.0
+          }
+        },
+        "new": {
+          "glass": {
+            "precision": 0.7647058823529411,
+            "recall": 1.0,
+            "f1-score": 0.8666666666666667,
+            "support": 13.0
+          },
+          "plastic_metal": {
+            "precision": 0.9,
+            "recall": 0.6428571428571429,
+            "f1-score": 0.75,
+            "support": 14.0
+          },
+          "paper_tetrapak": {
+            "precision": 0.9444444444444444,
+            "recall": 0.9444444444444444,
+            "f1-score": 0.9444444444444444,
+            "support": 18.0
+          },
+          "special_unsupported": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 13.0
+          },
+          "accuracy": 0.896551724137931,
+          "macro avg": {
+            "precision": 0.9022875816993463,
+            "recall": 0.8968253968253967,
+            "f1-score": 0.8902777777777777,
+            "support": 58.0
+          },
+          "weighted avg": {
+            "precision": 0.9058823529411765,
+            "recall": 0.896551724137931,
+            "f1-score": 0.8925287356321839,
+            "support": 58.0
+          }
+        }
+      },
+      "old": {
+        "glass": {
+          "precision": 0.5652173913043478,
+          "recall": 1.0,
+          "f1-score": 0.7222222222222222,
+          "support": 13.0
+        },
+        "plastic_metal": {
+          "precision": 0.5,
+          "recall": 0.2,
+          "f1-score": 0.2857142857142857,
+          "support": 15.0
+        },
+        "paper_tetrapak": {
+          "precision": 1.0,
+          "recall": 0.6111111111111112,
+          "f1-score": 0.7586206896551724,
+          "support": 18.0
+        },
+        "special_unsupported": {
+          "precision": 0.6842105263157895,
+          "recall": 1.0,
+          "f1-score": 0.8125,
+          "support": 13.0
+        },
+        "accuracy": 0.6779661016949152,
+        "macro avg": {
+          "precision": 0.6873569794050343,
+          "recall": 0.7027777777777777,
+          "f1-score": 0.6447642993979201,
+          "support": 59.0
+        },
+        "weighted avg": {
+          "precision": 0.7075010665942676,
+          "recall": 0.6779661016949152,
+          "f1-score": 0.6422419591253605,
+          "support": 59.0
+        }
+      },
+      "new": {
+        "glass": {
+          "precision": 0.7647058823529411,
+          "recall": 1.0,
+          "f1-score": 0.8666666666666667,
+          "support": 13.0
+        },
+        "plastic_metal": {
+          "precision": 0.9090909090909091,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.7692307692307693,
+          "support": 15.0
+        },
+        "paper_tetrapak": {
+          "precision": 0.9444444444444444,
+          "recall": 0.9444444444444444,
+          "f1-score": 0.9444444444444444,
+          "support": 18.0
+        },
+        "special_unsupported": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 13.0
+        },
+        "accuracy": 0.8983050847457628,
+        "macro avg": {
+          "precision": 0.9045603089720737,
+          "recall": 0.9027777777777777,
+          "f1-score": 0.89508547008547,
+          "support": 59.0
+        },
+        "weighted avg": {
+          "precision": 0.9080939001178283,
+          "recall": 0.8983050847457628,
+          "f1-score": 0.8950021729682747,
+          "support": 59.0
+        }
+      },
+      "accepted_rows": 13,
+      "held_suggestions": 2,
+      "policy_boundary_checks": [
+        {
+          "query": "ne e cista obleka",
+          "status": "held"
+        },
+        {
+          "query": "valkana kosula",
+          "status": "held"
+        },
+        {
+          "query": "mokra maica",
+          "status": "held"
+        },
+        {
+          "query": "glass bottle and a phone",
+          "status": "held"
+        },
+        {
+          "query": "unknown material container",
+          "status": "clarify"
+        }
+      ]
+    }
+  }
+}

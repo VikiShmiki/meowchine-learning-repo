@@ -1,6 +1,48 @@
 # Macedonian dataset translations
 
-## Current corrected dataset: v2 object classes
+## Current fitting corpus: development v3
+
+`data/ml/v3/items.tsv` defines 72 train and 48 each tuning/calibration/test
+object concepts, paired in English and Macedonian. Every role has all six object
+classes. `held.tsv` adds 12 ambiguous, mixed or out-of-scope concepts per evaluation
+role. Concept groups and normalized text cannot cross roles. Macedonian canonical
+and simplified Latin spellings stay in the same group as Cyrillic; they are not
+independent observations. These are agent-authored diagnostics requiring native
+review, not collected user data or authoritative local disposal labels.
+
+`src/smart_recycling/data/ml_v3.py` reconstructs fitting data from the immutable
+`data/processed/dataset_a.csv` in an explicitly supplied source bundle. It uses
+current mapping approvals, requires explicit material/object signals, protects
+held-out authored concepts, and checks normalized-text/group separation. It keeps
+English independently of translation availability: all 978 phone and 594 laptop
+charger phrases survive. Of 25,711 source rows, 5,004 survive screening; 17,257
+have no currently approved mapping, 3,302 lack explicit material/object evidence,
+and 148 contain reserved development concepts. These conservative exclusions
+include potentially valid descriptions; they are quarantines, not asserted errors.
+
+Fitting samples at most 30 phrases per original source group to limit template
+dominance. All legacy automatic Macedonian translations are excluded from fitting,
+including the erroneous apple-charger and water-pump translations. English/source
+approvals remain agent source review; authored Macedonian remains
+`agent_authored_needs_native_review`. A positive training label identifies an
+object stream, never the item's cleanliness or a site's acceptance.
+
+Each run writes `rows.json`, the full retained-English inventory, hashed exclusion
+records and a manifest with relative `source:`/`repo:` inputs and content hashes.
+Raw/derived source text stays ignored under `data/processed/`; only authored
+fixtures, model weights and aggregate evidence are tracked. Old v1/v2 packages
+and their reports are unchanged. Historical v2 verification now accepts
+`--source-root` to relocate its source bundle while checking every original hash
+and rejecting path traversal or escaping symlinks.
+
+For native review, review the paired TSVs with role/group assignments frozen;
+record reviewer, date, accepted/corrected/ambiguous status and reason. Corrections
+create a new version. Collect a separate user-query test without showing users
+model output; include uncertainty and mixed items. Do not relabel this consumed
+agent-authored test as independent evidence. Reproduction and results are in
+[ML.md](ML.md).
+
+## Historical dataset: v2 object classes
 
 At the user's request, `data/processed/bilingual_mk_v2/` adds explicit `clothes`
 and `electronics` labels alongside the original five. The full English/Macedonian

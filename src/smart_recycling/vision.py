@@ -5,6 +5,7 @@ from __future__ import annotations
 import base64
 import io
 import json
+import re
 from enum import StrEnum
 from typing import Any, Literal
 
@@ -15,12 +16,16 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationError
 from smart_recycling.domain import WasteCategory
 from smart_recycling.guidance import (
     CHOICES,
+    CLOTHES,
+    HELD,
+    KIND_PATTERNS,
     ItemKind,
     is_residual,
     is_small_electronics,
     is_wearable_clothing,
     specialist_type,
 )
+from smart_recycling.language import policy_text
 from smart_recycling.localization import request_language, translate
 
 MAX_UPLOAD_BYTES = 8 * 1024 * 1024
@@ -363,6 +368,9 @@ class VisionService:
             kind = "batteries" if hazard == "batteries" else "other"
         elif item.item_kind == "batteries":
             status = SuggestionStatus.SPECIALIST
+        elif _photo_policy_conflict(item):
+            status = SuggestionStatus.NEEDS_REVIEW
+            category = None
         elif item.item_kind == "wearable_clothes":
             suitable = is_wearable_clothing(item.description + " " + item.reason)
             status = (
@@ -393,9 +401,32 @@ class VisionService:
             status = SuggestionStatus.CANDIDATE
         return PhotoSuggestion(
             description=item.description,
-            item_kind=kind,
+            item_kind="other" if status == SuggestionStatus.NEEDS_REVIEW else kind,
             category=category,
             visible_condition=item.visible_condition,
             status=status,
             reason=item.reason,
         )
+
+
+def _photo_policy_conflict(item: ModelPhotoItem) -> bool:
+    """Model enums cannot override condition or item signals in its own explanation.
+
+    Reuse the bilingual text-policy vocabulary. Unknown forms still need the
+    existing explicit review; this is not a general-purpose image classifier.
+    """
+    text = policy_text(item.description + " " + item.reason)
+    kinds = {kind for kind, pattern in KIND_PATTERNS.items() if re.search(pattern, text, re.I)}
+    if item.item_kind in KIND_PATTERNS and kinds != {item.item_kind}:
+        return True
+    if kinds and (len(kinds) > 1 or item.item_kind not in kinds):
+        return True
+    if re.search(CLOTHES, text, re.I) and item.item_kind != "wearable_clothes":
+        return True
+    # Used household tissues/nappies are intentionally not empty/clean packaging.
+    # Their bounded identity and specialist hazards are checked by _suggestion.
+    if item.item_kind != "ordinary_residual":
+        return bool(re.search(HELD, text, re.I)) or (
+            item.visible_condition == VisibleCondition.NOT_EMPTY_OR_CONTAMINATED
+        )
+    return False

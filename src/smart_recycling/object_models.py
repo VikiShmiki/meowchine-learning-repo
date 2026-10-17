@@ -1,10 +1,10 @@
-"""Pinned six-class English and Macedonian frozen-head suggestions."""
+"""Pinned six-class suggestions with development-calibrated abstention."""
 
+import json
 import math
 import threading
 from pathlib import Path
 
-import joblib
 import numpy as np
 
 from smart_recycling.domain import WasteCategory
@@ -33,18 +33,28 @@ HEADS = {
     ),
 }
 
+OBJECT_HEAD_VERSION = "object-development-v3-audit"
+JSON_HEAD_DIRECTORY = "artifacts/models/ml_v3_audit"
+
+JSON_HEAD_HASHES = {
+    "en": "efc4917d533f48f0fb64dacf6d1058e054c1dcb7aa01d42ad3b46af8787e3879",
+    "mk": "98b3a4a253ff8981362372efef0c3365d571c236c3d772680e3e14887fa0911c",
+}
+
 
 class ObjectSuggester:
-    """Uncalibrated object label mapped to the existing conservative policy contract."""
+    """Object suggestions never authorize a disposal route or item acceptance."""
 
     def __init__(self, classifier, encoder, language: str):
         self.classifier = classifier
         self.encoder = encoder
         self.language = language
         self.lock = threading.Lock()
-        self.model_version = f"frozen-minilm-six-class-{language}-seed42-v2"
+        self.model_version = (
+            f"frozen-minilm-six-class-{language}-{OBJECT_HEAD_VERSION.removeprefix('object-')}"
+        )
 
-    def suggest(self, text: str) -> CategorySuggestion:
+    def suggest(self, text: str) -> CategorySuggestion | None:
         try:
             with self.lock:
                 vector = np.asarray(
@@ -69,6 +79,14 @@ class ObjectSuggester:
             or not math.isclose(float(scores.sum()), 1, abs_tol=1e-6)
         ):
             raise MiniLMError("Object model returned invalid values")
+        try:
+            if (
+                hasattr(self.classifier, "accepts")
+                and not self.classifier.accepts(vector, scores)[0]
+            ):
+                return None
+        except Exception as error:
+            raise MiniLMError("Object suggestion gate failed") from error
         winner = int(scores[0].argmax())
         label = str(self.classifier.classes_[winner])
         kind = {"clothes": "wearable_clothes", "electronics": "electronics"}.get(label)
@@ -81,23 +99,25 @@ class ObjectSuggester:
 def load_object_suggester(
     root: Path, language: str, model_path: Path | None = None, *, encoder=None
 ) -> ObjectSuggester:
-    """Load only a hash-pinned local artifact; never unpickle user input."""
+    """Load hash-pinned JSON weights with the matching pinned encoder."""
     if language not in HEADS:
         raise MiniLMError("Unsupported object model language")
-    relative, digest, model_id, revision = HEADS[language]
-    artifact = root / "artifacts/models/bilingual_v2_seed42" / relative
-    if not artifact.is_file() or _sha256(artifact) != digest:
-        raise MiniLMError("Pinned object head is missing or has changed")
+    _, _, model_id, revision = HEADS[language]
+    digest = JSON_HEAD_HASHES[language]
+    artifact = root / JSON_HEAD_DIRECTORY / f"{language}.json"
     try:
-        payload = joblib.load(artifact)
-        classifier = payload["classifier"]
+        if not artifact.is_file() or _sha256(artifact) != digest:
+            raise MiniLMError("Pinned object head is missing or has changed")
+        from smart_recycling.linear_head import LinearHead
+
+        payload = json.loads(artifact.read_text(encoding="utf-8"))
         if (
-            tuple(payload["labels"]) != LABELS
-            or payload["encoder"] != {"id": model_id, "revision": revision}
-            or tuple(classifier.classes_) != tuple(sorted(LABELS))
-            or classifier.coef_.shape != (6, 384)
+            payload.get("version") != OBJECT_HEAD_VERSION
+            or payload.get("language") != language
+            or payload.get("encoder") != {"id": model_id, "revision": revision}
         ):
-            raise MiniLMError("Object head metadata or dimensions differ")
+            raise MiniLMError("Object head metadata differs")
+        classifier = LinearHead(payload)
         if encoder is None:
             if language == "en":
                 from smart_recycling.minilm import load_encoder

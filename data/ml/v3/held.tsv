@@ -1,0 +1,37 @@
+role	en	mk
+tune	a bottle	шише
+tune	something recyclable	нешто за рециклирање
+tune	mixed rubbish	мешан отпад
+tune	a banana peel	лушпа од банана
+tune	a wooden chair	дрвен стол
+tune	a ceramic plate	керамичка чинија
+tune	a bag of assorted items	кеса со разни предмети
+tune	an old item	стар предмет
+tune	a box with unknown contents	кутија со непозната содржина
+tune	a glass bottle and a phone	стаклено шише и телефон
+tune	recyclable packaging	амбалажа за рециклирање
+tune	sustainable packaging	одржлива амбалажа
+calibration	an unspecified container	сад од непознат материјал
+calibration	a recyclable thing	предмет што се рециклира
+calibration	several different materials	неколку различни материјали
+calibration	leftover cooked rice	остатоци од варен ориз
+calibration	a wooden table	дрвена маса
+calibration	a ceramic mug	керамичка шолја
+calibration	old household things	стари домашни работи
+calibration	something from the garage	нешто од гаражата
+calibration	a closed package	затворен пакет
+calibration	a newspaper and a battery	весник и батерија
+calibration	eco-friendly packaging	еколошка амбалажа
+calibration	biodegradable packaging	биоразградлива амбалажа
+test	an object without a description	предмет без опис
+test	a container of unknown material	сад од непозната суровина
+test	mixed materials in one bag	различни материјали во една кеса
+test	an apple core	остаток од јаболко
+test	a wooden shelf	дрвена полица
+test	a porcelain bowl	порцелански сад
+test	random leftovers	разни остатоци
+test	things from cleaning the cellar	работи од чистење на подрумот
+test	a sealed container	затворен сад
+test	a shirt and an aluminium can	кошула и алуминиумска лименка
+test	environmentally friendly wrapping	еколошка обвивка
+test	compostable packaging	амбалажа за компостирање

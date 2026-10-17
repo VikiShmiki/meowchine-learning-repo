@@ -10,6 +10,7 @@ __pycache__
 artifacts/*
 !artifacts/models
 artifacts/models/*
+!artifacts/models/ml_v3_audit/
 !artifacts/models/minilm_frozen_four_class_development.joblib
 !artifacts/models/minilm_frozen_four_class_development.metadata.json
 !artifacts/models/bilingual_v2_seed42/
