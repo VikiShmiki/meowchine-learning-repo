@@ -42,7 +42,9 @@ def test_report_container_recalculates_without_losing_items(page, web_url, width
     assert row.locator("select").bounding_box()["width"] >= 140
     row.locator("select").select_option("full")
     row.get_by_role("button", name="Report condition", exact=True).click()
-    expect(row.get_by_role("status")).to_have_text("Saved · awaiting review")
+    expect(row.get_by_role("status")).to_have_text(
+        "Reported full · excluded from everyone's routes for up to 12 hours."
+    )
     expect(page.locator("#route-condition-notice")).to_be_visible()
     expect(page.locator("#request-route-update")).to_be_hidden()
     expect(page.locator("#trip-items li")).to_have_count(1)

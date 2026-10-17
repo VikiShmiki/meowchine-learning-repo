@@ -29,14 +29,18 @@ use the ASGI peer address; users on the same network can share an allowance.
 
 - Anonymous visitors receive a signed, HttpOnly, SameSite=Strict cookie (one day;
   Secure on HTTPS). A pseudonymous browser identifier owns pending reports.
-- A pending negative report immediately excludes that container for its reporter.
-  Everyone else sees only reviewed reports. Cookie deletion loses personal pending
-  exclusions but does not reset network usage limits.
+- A full report immediately excludes that container from everyone's new routes,
+  without a photo or prior approval. It is labeled an unreviewed community report,
+  not verified live telemetry. Reviewers can reject/mark duplicate a false report.
+  Pending damaged/inaccessible reports affect only their reporter until approved.
+  Cookie deletion does not remove shared full reports or reset network usage limits.
 - Review accepts available/full/inaccessible/damaged. Full expires after 12 hours,
   inaccessible after 24, damaged after 72, available after 12, measured from submission.
-  The newest unexpired reviewed report wins. Newer personal negative reports can
-  override it only for that reporter. Personal positive reports cannot reopen a
-  reviewed problem, and no report can reopen a source-closed container.
+  The newest unexpired approved report or pending full report wins. A newer reviewed
+  available report can supersede an older full report. Newer personal negative
+  reports can override the shared status only for that reporter. Unreviewed positive
+  reports cannot reopen a shared problem, and no report can reopen a source-closed
+  container. Expiry without another current report means unknown, not available.
 - Conditions are asset-scoped, not site-scoped. Filtering happens before the nearby
   shortlist and provider matrix. The existing bounded-shortlist optimizer remains;
   this is not a newly claimed city-wide best route.
@@ -49,6 +53,29 @@ use the ASGI peer address; users on the same network can share an allowance.
 - No alternative returns an explicit error; no waste is silently omitted.
 - Container conditions are in the route-stop and map-details disclosures. Source
   status remains distinct from current community reports.
+
+## End-of-trip check-in
+
+Route stops offer **I visited this stop**, **Dropped these off**, and **Report a
+problem**. Marking a drop-off also marks that stop visited. Multi-stop trips remain
+open after individual drop-offs, and **Finish trip** lets a resident end early.
+The last drop-off ends the trip automatically and clears its route from the map.
+Ending early preserves uncompleted basket items and does not award drop-off activity.
+
+After completion, the optional check-in lists only containers at explicitly visited
+or completed stops, deduplicated across replans. Each container starts at **Didn't
+check / skip**; nothing is submitted automatically. Residents choose a condition
+and send each report, or dismiss the remaining check-in. The same report endpoint
+is used during and after a trip; full reports take effect immediately for everyone.
+No container-photo upload or GPS attendance proof is required. Visit/check-in state
+stays in page memory and is cleared when the trip ends; it is not a stored location
+history. Refreshing or leaving the page loses that unfinished trip state.
+
+Successful reports cannot be submitted twice from the same form. A failed submission
+keeps the selection for retry; server-side duplicate suppression remains in force.
+A failed status refresh after a successful submission does not turn it into a failed
+report. Existing quotas, moderation and expiry remain active; photos for separate
+dumping reports are unchanged.
 
 ## Dumping reports
 
@@ -100,6 +127,8 @@ edge protections and stronger identity are needed before a wide public launch.
 
 - `GET /api/v1/container-statuses`: personalized current overlays + revision, no-store.
 - `POST /api/v1/container-reports`: asset_id and condition, returns pending report.
+  A pending `full` report already affects public route eligibility; status source
+  `community_report` distinguishes it from `reviewed_community` and `your_report`.
 - `POST /api/v1/dumping-reports`: latitude, longitude, description.
 - `POST /api/v1/dumping-reports/{id}/photo`: raw image owned by current visitor.
 - `GET /api/v1/dumping-reports`: approved/cleared points, never photos/identities.

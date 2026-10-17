@@ -26,3 +26,21 @@
 .review-card { margin: 16px 0; overflow-wrap: anywhere; }
 .review-card img { display: block; max-width: 100%; max-height: 300px; margin-top: 12px; }
 .review-card .button-row { flex-wrap: wrap; }
+.condition-freshness { font-size: 12px; line-height: 1.5; color: #52624d; }
+.condition-form select, .condition-form button { min-height: 44px; max-width: 100%; }
+.trip-completion { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin: 24px 0; }
+.trip-completion p { flex: 1 1 260px; max-width: 65ch; }
+.trip-completion button { min-height: 44px; }
+.trip-checkin { margin-top: 24px; max-width: 720px; padding: 24px; border: 1px solid #c9d8c2; border-radius: 16px; background: #f4f8ef; }
+.trip-checkin h2 { margin-top: 0; }
+.trip-checkin > p { line-height: 1.6; }
+.trip-checkin .condition-row { padding: 18px 0; }
+.trip-checkin > button { margin-top: 18px; min-height: 44px; }
+.trip-completion[hidden], .trip-checkin[hidden] { display: none; }
+.stop-visited { display: flex; align-items: center; gap: 10px; min-height: 44px; margin: 10px 0; cursor: pointer; }
+.citizen .stop-visited input[type=checkbox] { flex: 0 0 20px; width: 20px; height: 20px; min-height: 20px; margin: 0; padding: 0; accent-color: #2f4d35; }
+.route-stop-list li[data-completed=true] { border-color: #7c9e6d !important; }
+@media (max-width: 480px) {
+  .trip-checkin { padding: 16px; }
+  .trip-completion button { width: 100%; }
+}

@@ -8,6 +8,14 @@ other specialist items receive disposal guidance. Select a
 starting point and walking/driving, then **Find my route**; the adjacent disclosure
 explains coordinate sharing. Up to six basket entries are supported. Trips finish
 at the last collection point, with no return leg.
+Mark each visited stop explicitly or use **Dropped these off** after disposal.
+Individual drop-offs keep a multi-stop route open; the last drop-off ends it.
+**Finish trip** ends early without marking remaining items disposed. Both endings
+clear the route and offer an optional status check-in for visited containers only.
+Reporting a container full immediately excludes that asset from everyone's new
+routes for up to 12 hours; other assets at the same site stay eligible. Existing
+routes show a change notice on the next status refresh and offer explicit replanning.
+See [COMMUNITY.md](COMMUNITY.md) for expiry, review and privacy behavior.
 Electronics offers an optional "Only phones, chargers, cables or earbuds" selection.
 That subset can use Karpos or East Gate Mall; unchecked generic devices remain
 Karpos-only. East Gate routes end at the mall entrance, with a visible instruction

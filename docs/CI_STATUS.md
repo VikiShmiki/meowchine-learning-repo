@@ -6,6 +6,12 @@ This private repository has its own [Actions runs](https://github.com/VikiShmiki
 The checked-in workflow runs quality checks and a container smoke test on pushes
 and pull requests. No hosted pass is claimed until those jobs complete successfully.
 
+The [initial private-repository run](https://github.com/VikiShmiki/meowchine-learning-repo/actions/runs/39022132656)
+executed its jobs: Docker failed because `.dockerignore` excluded the bilingual
+model heads, and six browser cases failed on narrow-screen layouts. The trip-check-in
+delivery fixes both causes. Its own quality/container results should be read from
+the latest run on the delivery revision, independently of those historical results.
+
 The source repository's earlier account restriction and paused workflow are
 historical evidence, preserved in [UPSTREAM_CI_STATUS.md](UPSTREAM_CI_STATUS.md).
 They do not establish the status of this repository or its owner's account.

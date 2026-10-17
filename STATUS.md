@@ -2,7 +2,20 @@
 
 Updated: 2026-10-17
 
-## Current handoff — October 17, 2026
+## Completed — trip completion and container check-ins
+
+Implemented the user-requested optional post-trip check-in without photos. Full
+reports now exclude the specific asset from everyone's routes immediately, with a
+12-hour expiry and reviewer rejection. Visited stops are tracked in memory across
+replans; individual drop-offs keep multi-stop trips open and the final drop-off ends
+the trip. Early completion keeps unfinished basket items. Both English and Macedonian
+copy are included. Full browser-enabled regression checks pass, followed by 41
+focused browser checks on the final interface, 28 community/backend tests, and 19
+Node tests. Lock, lint, formatting, seed/infrastructure/geography validators and
+visual checks at 320/360/1280 px passed. See [QUALITY.md](docs/QUALITY.md).
+No further feature task is active; hosted CI is tracked in [CI_STATUS.md](docs/CI_STATUS.md).
+
+## Previous handoff — initial private-repository edition
 
 Private repository edition prepared with a fresh initial commit, current project
 documentation and a rebuilt technical report. Source data and historical experiment
