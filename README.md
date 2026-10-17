@@ -10,6 +10,8 @@ Goodsort helps a resident identify an item, confirm its condition, and find a su
 
 **JSP buses are supported:** plan scheduled public-transport journeys with walking connections, bus numbers, boarding/exit stops and transfers. See [JSP setup and limits](docs/TRANSIT.md).
 
+**Driving can include parking:** choose **Park and walk to drop-offs** for mapped public parking, walking connections and returning to the car between stops. The bundled Skopje snapshot contains 144 parking points; available spaces are unknown. See [parking sources and limits](docs/PARKING.md).
+
 ## Why Goodsort matters
 
 Knowing that an item is recyclable is not enough if the nearby container does not

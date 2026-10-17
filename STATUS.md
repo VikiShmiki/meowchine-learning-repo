@@ -2,6 +2,17 @@
 
 Updated: 2026-10-17
 
+## Implemented — parking-assisted driving
+
+Owner: Codex, user-requested October 17, 2026. Driving now offers optional mapped
+parking plus walking to containers, including return-to-car walks between stops.
+The licensed, reproducible OSM/Geofabrik snapshot contains 144 public parking points;
+space availability stays unknown. English/Macedonian UI, distinct parking markers,
+source details and full-container exclusions are covered by 20 backend and seven
+focused browser tests. A live ORS two-drop-off journey also succeeded. Full
+regression/container delivery gates are recorded in [CI_STATUS.md](docs/CI_STATUS.md).
+See [PARKING.md](docs/PARKING.md) for source refresh, access and timing limits.
+
 ## Implemented — JSP public transport
 
 Owner: Codex, user-requested October 17, 2026. Implemented scheduled JSP journeys,

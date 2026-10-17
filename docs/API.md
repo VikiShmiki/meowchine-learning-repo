@@ -243,6 +243,36 @@ Existing provider errors/quotas apply to walking connections. `/api/v1/routing`
 advertises all three modes; `configured` describes the ORS key, not feed health.
 See [TRANSIT.md](TRANSIT.md) for search/freshness limits.
 
+## Parking-assisted driving
+
+For `POST /api/v1/trips`, optional `include_parking: true` is accepted only with
+`mode: "driving"`. It is a strict JSON boolean, default false; the direct-driving
+contract remains unchanged when omitted. Existing consent and item validation apply.
+
+Parking responses use `profile: "driving-car+foot-walking"`. Top-level `geometry`
+contains the car path; total `duration_s` / `distance_m` include driving and walking.
+`driving_duration_s` and `walking_duration_s` break down time. `parking` is ordered
+with `stops`, with one entry per drop-off: `site_id`, `parking_id`, name, coordinates,
+`access`, `fee` / `opening_hours` (source strings or `"unknown"`), `point_kind` (`mapped_point` or
+`driveway_crossing`), OSM `source_url`, `drive_access_gap_m`, and always
+`availability: "unknown"`. Each `walk_to` and optional `walk_back` contains network
+duration/distance, nullable LineString `geometry`, and start/end access gaps. A null
+walk geometry means coincident network points, not verified zero physical distance.
+`walk_back` exists at intermediate stops only. The trip ends at the last drop-off,
+leaving the car at its last parking location; the final return is not included.
+`parking_dataset_version` and `parking_source_as_of` disclose source version/age.
+
+Parking-specific errors: `parking_unavailable` (503), `parking_no_route` and
+`parking_connection` (422). Provider errors and no-store semantics still apply.
+There is no direct-driving fallback. [PARKING.md](PARKING.md) defines bounds and
+timing; source fees/hours are not verified live prices/opening decisions.
+
+`GET /api/v1/parking` accepts no location and returns the full licensed snapshot:
+schema/version, source timestamp/URL/SHA-256, canonical record checksum, ODbL
+license/attribution and `places`. It uses `Cache-Control: public, max-age=3600`.
+Missing, corrupt or stale data returns 503. Parking information is not an occupancy
+or reservation service.
+
 ## `GET /api/v1/coverage`
 
 Returns the prepared `CoverageReport` used by `/city`. No location input or provider

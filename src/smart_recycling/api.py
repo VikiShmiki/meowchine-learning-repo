@@ -38,6 +38,8 @@ from smart_recycling.minilm import MiniLMError
 from smart_recycling.multilingual import BilingualSuggester, suggestion_language
 from smart_recycling.object_models import load_object_suggester
 from smart_recycling.ors import ORSProvider
+from smart_recycling.parking import ParkingPlanner
+from smart_recycling.parking_data import ParkingCatalog
 from smart_recycling.repository import load_sites
 from smart_recycling.routing import RoutingService
 from smart_recycling.routing_models import RoutingError, TripRequest, TripResponse
@@ -98,6 +100,7 @@ snapshots["citizen"] = add_clothing_sites(
     PROJECT_ROOT / "data/infrastructure/clothes-2026-09-22",
     settings.guidance_policy_path,
 )
+parking_catalog = ParkingCatalog(PROJECT_ROOT / "data/parking/skopje-v1/parking.json")
 route_service = RoutingService(
     SiteSnapshot.model_validate_json(snapshots["citizen"].body),
     classifier,
@@ -105,6 +108,7 @@ route_service = RoutingService(
     transit=TransitPlanner(
         TransitFeedStore(PROJECT_ROOT / "runtime/jsp-gtfs.zip"), ORSProvider(settings.ors_api_key)
     ),
+    parking=ParkingPlanner(parking_catalog, ORSProvider(settings.ors_api_key)),
 )
 vision_service = VisionService(
     OpenAIVisionProvider(settings.openai_api_key, settings.openai_vision_model),
@@ -464,6 +468,19 @@ def plan_trip(payload: TripRequest, response: Response, request: Request) -> Tri
             detail={"code": error.code, "message": error.message},
             headers={"Cache-Control": "no-store"},
         ) from error
+
+
+@app.get("/api/v1/parking")
+def parking_snapshot(response: Response):
+    """Redistributable ODbL-derived parking database, with provenance and no live occupancy."""
+    try:
+        snapshot = parking_catalog.get()
+    except RoutingError as error:
+        raise HTTPException(
+            status_code=error.status, detail={"code": error.code, "message": error.message}
+        ) from error
+    response.headers["Cache-Control"] = "public, max-age=3600"
+    return snapshot
 
 
 @app.get("/city", include_in_schema=False)

@@ -7,7 +7,11 @@ review and confirmation; electronics can use documented accepting centres, while
 other specialist items receive disposal guidance. Select a
 starting point and Walking, Driving or JSP bus, then **Find my route**; the adjacent disclosure
 explains coordinate sharing. Up to six basket entries are supported. Trips finish
-at the last collection point, with no return leg.
+at the last collection point, with no final return leg. Driving optionally offers
+**Park and walk to drop-offs**: park at a mapped public location and walk to the
+container, returning to the car between stops. The final walk back is excluded and
+the car's final location is shown. See [PARKING.md](PARKING.md) for the source,
+unknown space availability, walking limits and separate provider budget.
 Mark each visited stop explicitly or use **Dropped these off** after disposal.
 Individual drop-offs keep a multi-stop route open; the last drop-off ends it.
 **Finish trip** ends early without marking remaining items disposed. Both endings
@@ -93,7 +97,9 @@ logs contain request ID, mode, outcome, duration and dataset version, not coordi
 descriptions or credentials. Trip responses, including validation errors, use
 `Cache-Control: no-store`; basket/origin/geometry remain in memory only.
 
-Walking/driving use at most one matrix and one directions request per plan; no automatic retries.
+Walking/direct driving use at most one matrix and one directions request per plan;
+parking-assisted driving uses at most two matrices and twelve directions requests.
+There are no automatic retries. Parking uses a 75-second client timeout.
 JSP uses a bounded walking matrix and up to 12 walking directions requests, with
 a 75-second client timeout. See [TRANSIT.md](TRANSIT.md) for scheduled journeys,
 source freshness, transfer/walking limits and the different optimization objective.

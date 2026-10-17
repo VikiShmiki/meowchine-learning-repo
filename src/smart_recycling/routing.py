@@ -25,9 +25,11 @@ class RoutingService:
         classifier: GuidanceClassifier,
         provider: ORSProvider,
         transit=None,
+        parking=None,
     ):
         self.snapshot, self.classifier, self.provider = snapshot, classifier, provider
         self.transit = transit
+        self.parking = parking
         self._lock = threading.Lock()
         self._started: deque[float] = deque()
         self._active = 0
@@ -132,6 +134,17 @@ class RoutingService:
                         "transit_unavailable", "JSP timetable is unavailable. Retry shortly.", 503
                     )
                 indices, route, extra = self.transit.plan(request, candidates, kinds)
+            elif request.include_parking:
+                if self.parking is None:
+                    raise RoutingError(
+                        "parking_unavailable",
+                        (
+                            "Parking data is unavailable or needs refreshing. "
+                            "Try another travel option."
+                        ),
+                        503,
+                    )
+                indices, route, extra = self.parking.plan(request, candidates, kinds)
             else:
                 durations = self.provider.matrix(request.mode, points)
                 indices = solve(masks, durations, (1 << len(kinds)) - 1)
@@ -201,7 +214,7 @@ class RoutingService:
                 "do not cross barriers or private land.",
                 *(
                     []
-                    if request.mode == "transit"
+                    if request.mode == "transit" or request.include_parking
                     else [
                         "Time and distance cover the routed network only, "
                         "excluding access gaps, disposal time, parking and live traffic."

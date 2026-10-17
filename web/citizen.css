@@ -92,6 +92,16 @@
 #transit-options { margin: 14px 0; padding: 14px; background: var(--soft); border-radius: 10px; }
 #transit-options input { width: 100%; min-width: 0; max-width: 100%; box-sizing: border-box; }
 #transit-options p, #transit-options a { font-size: 13px; line-height: 1.6; }
+#parking-options { margin: 14px 0; padding: 14px; background: var(--soft); border-radius: 10px; }
+#parking-options label { display: flex; gap: 10px; align-items: center; min-height: 44px; }
+.citizen #parking-options input { width: 20px; min-height: 20px; flex: none; }
+#parking-options p, .parking-visit p, .parking-visit a { font-size: 13px; line-height: 1.6; }
+.parking-visit { border-left: 3px solid #305d9b; padding: 0 0 0 12px; margin: 16px 0; overflow-wrap: anywhere; }
+.parking-visit h4 { margin: 0 0 8px; }
+.parking-map-badge { display: grid; place-items: center; width: 36px; height: 28px; color: #fff; background: #305d9b; border: 2px solid white; border-radius: 5px; font-weight: 700; box-shadow: 0 1px 5px #0005; }
+.parking-map-badge::after { content: ""; position: absolute; left: 17px; top: 28px; height: 22px; border-left: 2px solid #305d9b; }
+.parking-details { margin-top: 12px; }
+.parking-details summary { min-height: 44px; cursor: pointer; font-size: 13px; font-weight: 600; }
 .transit-legs { list-style: none; padding: 0; margin: 16px 0; }
 .citizen #trip-result .transit-legs li { border-left: 3px dashed #2f4d35; padding: 8px 0 8px 10px; overflow-wrap: anywhere; }
 .citizen #trip-result .transit-legs li[data-mode=bus] { border-left: 3px solid #305d9b; }

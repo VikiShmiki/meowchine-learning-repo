@@ -2,6 +2,13 @@
 
 Updated: 2026-10-17
 
+Parking delivery adds 20 backend and seven browser tests to the same quality gate,
+and the container smoke now verifies the bundled public-parking endpoint. The
+current parking revision's quality and container jobs in
+[Actions](https://github.com/VikiShmiki/meowchine-learning-repo/actions?query=branch%3Afeat%2Fparking-routes)
+are the merge gate. Focused local checks and a live ORS parking journey passed;
+these do not substitute for those complete gates or field access checks.
+
 The JSP delivery is [PR #2](https://github.com/VikiShmiki/meowchine-learning-repo/pull/2).
 Its [checks](https://github.com/VikiShmiki/meowchine-learning-repo/pull/2/checks)
 include the new transit tests alongside all existing regression/browser checks and
