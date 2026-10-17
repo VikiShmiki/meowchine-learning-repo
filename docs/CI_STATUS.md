@@ -6,6 +6,25 @@ This private repository has its own [Actions runs](https://github.com/VikiShmiki
 The checked-in workflow runs quality checks and a container smoke test on pushes
 and pull requests. No hosted pass is claimed until those jobs complete successfully.
 
+The [initial private-repository run](https://github.com/VikiShmiki/meowchine-learning-repo/actions/runs/39022132656)
+executed its jobs: Docker failed because `.dockerignore` excluded the bilingual
+model heads, and six browser cases failed on narrow-screen layouts. The trip-check-in
+delivery fixes both causes. Its own quality/container results should be read from
+the latest run on the delivery revision, independently of those historical results.
+The first feature run built the image but exposed an early connection reset before
+the app was ready. The smoke test's bounded startup wait now handles that transient
+failure, with six regression tests; it still fails if readiness never arrives.
+The next run exposed a runtime import failure: model-cache commands had resynced
+the installed package into editable mode. They now use `uv run --no-sync` to retain
+the non-editable installation. Bundled model files receive explicit read permissions
+for the runtime user; the runtime build loads both encoders as that non-root user,
+verifying the package, file access and model serialization together.
+That container check passed on revision `ec3f8a6`. The Linux browser run also
+identified 320 px map-control overlap and Macedonian status-summary overflow;
+fixed-width control space and wrapping status labels address these. The 22 focused
+local layout checks pass with system and wider Verdana fonts. Final combined CI
+remains the latest delivery revision's quality and container jobs.
+
 The source repository's earlier account restriction and paused workflow are
 historical evidence, preserved in [UPSTREAM_CI_STATUS.md](UPSTREAM_CI_STATUS.md).
 They do not establish the status of this repository or its owner's account.

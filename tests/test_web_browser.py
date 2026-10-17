@@ -1325,7 +1325,13 @@ def test_expanded_panels_share_layout_without_overflow(page, web_url, width):
 
 
 @pytest.mark.parametrize("width", [320, 360, 390, 768, 1280])
-def test_map_close_start_overlay_controls_and_individual_sites(page, web_url, width):
+@pytest.mark.parametrize("font", ["system", "Verdana"])
+def test_map_close_start_overlay_controls_and_individual_sites(page, web_url, width, font):
+    if font != "system":
+        page.add_init_script(
+            "document.addEventListener('DOMContentLoaded', "
+            "() => document.body.style.fontFamily = 'Verdana, sans-serif')"
+        )
     page.set_viewport_size({"width": width, "height": 900})
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))

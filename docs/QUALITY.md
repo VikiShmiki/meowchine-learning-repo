@@ -1,5 +1,34 @@
 # Quality
 
+## Trip completion and immediate full-container exclusions — October 17, 2026
+
+The complete `SRA_BROWSER_TESTS=1 pytest` regression run passed locally on Windows.
+After the final timing/layout refinements, all **41** focused browser tests in
+`test_trip_checkin_browser.py`, `test_community_browser.py`, and
+`test_accounts_browser.py` passed with zero skips/failures. This includes 13 new
+check-in scenarios across 320/360/1280-pixel layouts and both travel modes.
+The 28 community/backend tests and 19 Node tests passed. Lock validation, Ruff lint,
+formatting, whitespace checks and seed/infrastructure/geography
+validators passed. The system/Macedonian browser regression selection also passed.
+
+Covered: no unsolicited reports; skip/early finish; per-asset full exclusions for
+another visitor; expiry/reviewer rejection; pending availability cannot reopen a
+problem; remaining basket items; multi-stop completion; visit preservation and
+deduplication across replans; a fresh trip resets visits; failed submission retry;
+late status responses and failed refresh after a successful write; guest/account
+activity; English/Macedonian switching. Mobile and desktop check-in screenshots
+were visually inspected. Routes and map tiles use test transports; these results
+do not claim physical-device, native-speaker, or live-provider verification.
+
+The initial private-repository CI exposed an existing Docker ignore rule excluding
+both bilingual model heads, plus Linux narrow-screen card/navigation layout failures.
+The delivery includes explicit Docker model-file exceptions and responsive grid/nav
+fixes. The next container run built successfully and exposed a transient connection
+reset in the smoke test's startup wait. The wait now retries connection resets and
+early HTTP disconnects within its existing deadline; six focused readiness tests
+pass, including terminal timeout and malformed-payload failures. Hosted results are
+tracked in [CI_STATUS.md](CI_STATUS.md).
+
 ## October 17, 2026 private-repository edition
 
 The PowerShell equivalent of `make check` passed locally on Windows with Python

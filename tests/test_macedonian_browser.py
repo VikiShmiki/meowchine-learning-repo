@@ -27,7 +27,15 @@ def switch(page, language):
 
 @pytest.mark.parametrize("width", [320, 390, 1280])
 @pytest.mark.parametrize("mode", ["walking", "driving"])
-def test_macedonian_text_route_and_bidirectional_switch_preserve_state(page, web_url, width, mode):
+@pytest.mark.parametrize("font", ["system", "Verdana"])
+def test_macedonian_text_route_and_bidirectional_switch_preserve_state(
+    page, web_url, width, mode, font
+):
+    if font != "system":
+        page.add_init_script(
+            "document.addEventListener('DOMContentLoaded', "
+            "() => document.body.style.fontFamily = 'Verdana, sans-serif')"
+        )
     page.set_viewport_size({"width": width, "height": 900})
     page.goto(web_url)
     switch(page, "mk")

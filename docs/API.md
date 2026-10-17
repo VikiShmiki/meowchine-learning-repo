@@ -3,6 +3,23 @@
 JSON errors use FastAPI's standard validation response. Text is limited to 200
 characters; coordinates must be valid WGS84 values.
 
+## Container observations
+
+`POST /api/v1/container-reports` accepts an existing `asset_id` and `condition`
+(`available`, `full`, `inaccessible`, or `damaged`). It returns a pending report;
+`full` immediately excludes that individual asset from everyone's new routes,
+without an image or account. Full reports expire 12 hours after submission.
+Unreviewed availability cannot reopen a shared problem or a source-closed asset.
+
+`GET /api/v1/container-statuses` returns `statuses` and a revision `version`, with
+`Cache-Control: no-store`. Each overlay contains `condition`, `reported_at`,
+`expires`, and `source`: `community_report` for an unreviewed shared full report,
+`reviewed_community` for an approved observation, or `your_report` for another
+personal pending problem. No overlay means unknown, not confirmed available.
+Existing routes recheck this revision; browser clients refresh every 30 seconds
+and offer explicit replanning. [Community contracts](COMMUNITY.md) cover moderation,
+rate limits, expiry, and the optional post-trip check-in.
+
 ## `GET /health`
 
 Returns service state, rule version, real City `site_count` (1,583), real

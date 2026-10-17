@@ -7,6 +7,9 @@
   let unconfirmedPicks = false;
   let editingOrigin = false;
   let currentRoute = null;
+  const visitedStops = new Map();
+  const completedStops = new Set();
+  let savingDropoffs = 0;
   const kindNames = { empty_glass_packaging: "Glass bottle/jar", empty_plastic_bottle: "Plastic bottle",
     empty_metal_can: "Metal can", clean_paper: "Clean paper", clean_cardboard: "Clean cardboard",
     empty_tetrapak: "Tetra Pak carton", glass: "Glass bottles & jars",
@@ -31,12 +34,15 @@
     return "";
   }
   function updatePlanButton() {
-    $("plan-trip").disabled = !configured || !basket.length || !origin || Boolean(pending) || unconfirmedPicks || editingOrigin;
+    $("plan-trip").disabled = !configured || !basket.length || !origin || Boolean(pending) || Boolean(savingDropoffs) || unconfirmedPicks || editingOrigin;
     $("plan-trip").textContent = pending ? "Finding route…" : "Find my route";
     $("plan-trip").setAttribute("aria-busy", String(Boolean(pending)));
+    $("trip-completion").hidden = !currentRoute && !visitedStops.size;
+    $("finish-trip").disabled = Boolean(savingDropoffs || pending);
   }
   function invalidate() {
     currentRoute = null;
+    completedStops.clear();
     generation += 1;
     pending?.abort();
     pending = null;
@@ -46,6 +52,34 @@
     document.dispatchEvent(new CustomEvent("trip-route", { detail: null }));
     $("trip-status").textContent = readiness();
   }
+  function finishTrip({ allDropped = false, saved = false } = {}) {
+    if (savingDropoffs) return;
+    const ids = [...new Set([...visitedStops.values()].flat())];
+    visitedStops.clear();
+    invalidate();
+    const panel = $("trip-checkin");
+    const heading = node("h2", "Trip finished"); heading.id = "checkin-heading"; heading.tabIndex = -1;
+    panel.replaceChildren(heading);
+    if (ids.length) {
+      panel.append(node("p", "How were the containers you visited?"));
+      panel.append(node("p", "Optional: report only what you saw. A full container is immediately excluded from everyone's routes for up to 12 hours. No photo needed."));
+      panel.append(CommunityUI.checkIn(ids));
+    } else {
+      panel.append(node("p", "No stops were marked visited. No container reports have been sent."));
+    }
+    const done = node("button", "Done / skip remaining"); done.type = "button"; done.className = "secondary";
+    done.addEventListener("click", () => {
+      panel.hidden = true; panel.replaceChildren();
+      $("basket-add-item").focus({preventScroll: true});
+      $("trip-panel").scrollIntoView({block: "start"});
+    });
+    panel.append(done); panel.hidden = false;
+    $("trip-status").textContent = allDropped ? "All items marked dropped off."
+      : "Trip ended. Items not marked dropped off are still in your basket.";
+    if (saved) $("trip-status").textContent += " Saved to My activity.";
+    heading.focus({preventScroll: true}); panel.scrollIntoView({block: "start"});
+  }
+  $("finish-trip").addEventListener("click", () => finishTrip());
   function renderBasket() {
     $("trip-items").replaceChildren();
     basket.forEach((item, index) => {
@@ -146,17 +180,18 @@
   });
   $("trip-mode").addEventListener("change", invalidate);
   document.addEventListener("container-status-change", event => {
-    if (!currentRoute || !currentRoute.stops.some(stop => stop.asset_ids?.some(id => event.detail.includes(id)))) return;
+    if (!currentRoute || !currentRoute.stops.some(stop => !completedStops.has(stop) && stop.asset_ids?.some(id => event.detail.includes(id)))) return;
     const notice = $("route-condition-notice");
-    if (notice) { notice.hidden = false; notice.querySelector("strong").textContent = "Container conditions changed · update your route"; $("request-route-update").hidden = true; }
+    if (notice) { notice.hidden = false; notice.querySelector("strong").textContent = "Container conditions changed · find an alternative route"; $("request-route-update").hidden = true; }
     document.dispatchEvent(new CustomEvent("trip-route", {detail: null}));
   });
   $("plan-trip").addEventListener("click", async () => {
-    if (pending || !configured || !basket.length || !origin || unconfirmedPicks || editingOrigin) {
+    if (pending || savingDropoffs || !configured || !basket.length || !origin || unconfirmedPicks || editingOrigin) {
       $("trip-status").textContent = readiness();
       return;
     }
     invalidate();
+    $("trip-checkin").hidden = true; $("trip-checkin").replaceChildren();
     const current = generation;
     const controller = new AbortController();
     pending = controller;
@@ -199,26 +234,58 @@
         row.style.setProperty("--stop-ink", appearance.color);
         row.dataset.materials = appearance.materials.join(" ");
         row.append(node("strong", stop.name), node("p", `Drop off: ${stop.item_kinds.map((kind) => kindNames[kind] || kind).join(", ")}`));
-        if (globalThis.CommunityUI && stop.asset_ids?.length) row.append(CommunityUI.containerControl(stop.asset_ids));
+        const stopKey = [...(stop.asset_ids || [])].sort().join("|");
+        const visitLabel = node("label", ""); visitLabel.className = "stop-visited";
+        const visited = document.createElement("input"); visited.type = "checkbox";
+        visited.checked = visitedStops.has(stopKey);
+        visited.addEventListener("change", () => {
+          if (visited.checked) visitedStops.set(stopKey, [...stop.asset_ids]);
+          else visitedStops.delete(stopKey);
+          updatePlanButton();
+        });
+        visitLabel.append(visited, node("span", "I visited this stop")); row.append(visitLabel);
+        if (globalThis.CommunityUI && stop.asset_ids?.length) {
+          const conditions = CommunityUI.containerControl(stop.asset_ids);
+          const reportProblem = node("button", "Report a problem"); reportProblem.type = "button"; reportProblem.className = "secondary";
+          reportProblem.addEventListener("click", () => {
+            conditions.open = true;
+            conditions.querySelector("summary").focus();
+          });
+          row.append(reportProblem, conditions);
+        }
         const completed = node("button", "Dropped these off"); completed.className = "secondary"; completed.type = "button";
         const skipSave = node("button", "Mark without saving"); skipSave.type = "button"; skipSave.className = "secondary"; skipSave.hidden = true;
         const saveMessage = node("p", ""); saveMessage.setAttribute("role", "status");
         function finish(saved = false) {
-          if (current !== generation) return;
+          if (current !== generation || completedStops.has(stop)) return;
+          completedStops.add(stop);
+          visitedStops.set(stopKey, [...stop.asset_ids]);
+          visited.checked = true; visited.disabled = true;
           basket = basket.filter(item => !stop.item_kinds.includes(item.material === "clothes" ? "wearable_clothes" : item.material ? item.small_only ? "small_electronics" : item.material : item.manual_kind));
-          invalidate(); renderBasket();
-          $("trip-status").textContent = basket.length ? "Remaining items kept. Choose your current starting point, then find a route." : "All items marked dropped off.";
-          if (basket.length) $("change-origin").click();
-          if (saved) $("trip-status").textContent += " Saved to My activity.";
-          $("trip-panel").scrollIntoView({block: "start"});
+          completed.disabled = true; completed.textContent = "Drop-off completed"; skipSave.hidden = true;
+          row.dataset.completed = "true";
+          saveMessage.textContent = saved ? "Saved to My activity." : "Marked dropped off.";
+          renderBasket();
+          if (!basket.length) finishTrip({allDropped: true, saved});
+          else $("trip-status").textContent = "Stop completed. Continue to your next stop, or finish your trip.";
         }
         completed.addEventListener("click", async () => {
+          if (completedStops.has(stop) || savingDropoffs) return;
+          savingDropoffs += 1; updatePlanButton();
           completed.disabled = true; skipSave.hidden = true; saveMessage.textContent = "";
-          try { finish(globalThis.AccountUI ? await AccountUI.saveDropoff(stop.completion_ticket) : false); }
+          try {
+            const saved = globalThis.AccountUI ? await AccountUI.saveDropoff(stop.completion_ticket) : false;
+            savingDropoffs -= 1;
+            finish(saved);
+          }
           catch (error) { saveMessage.textContent = error.message || "Could not save. Retry."; skipSave.hidden = false; }
-          finally { completed.disabled = false; }
+          finally {
+            savingDropoffs = 0;
+            if (current === generation) completed.disabled = completedStops.has(stop);
+            updatePlanButton();
+          }
         });
-        skipSave.addEventListener("click", () => finish());
+        skipSave.addEventListener("click", () => { if (!savingDropoffs) finish(); });
         row.append(completed, skipSave, saveMessage);
         for (const note of stop.arrival_notes || []) row.append(node("p", note));
         if (stop.unverified_materials?.includes("general")) {

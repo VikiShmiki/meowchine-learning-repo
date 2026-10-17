@@ -40,6 +40,13 @@ The [demo video](docs/assets/demo-app-video.mp4) shows the product; it is a walk
 
 ## What the prototype does
 
+**Finish a trip, help the next person.** Mark visited stops or completed drop-offs,
+then finish the trip to optionally report each container's condition. Full reports
+immediately exclude that container from route recommendations for everyone, for up
+to 12 hours, without a photo. Reports stay labeled as community observations;
+reviewers can reject them. Unfinished items remain in the basket, and skipping the
+check-in sends nothing. [Reporting and expiry rules](docs/COMMUNITY.md).
+
 | Capability | How it works | Evidence and limits |
 | --- | --- | --- |
 | Bilingual guidance | English/Macedonian UI and API copy; language-selected, six-class frozen MiniLM suggestion heads, with policy-based item recognition | [Language contract and five-seed evaluation](docs/LANGUAGES.md). Suggestions are not authoritative disposal decisions. |

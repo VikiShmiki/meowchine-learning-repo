@@ -20,7 +20,7 @@
 .section-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
 .step { display: inline-grid; place-items: center; width: 25px; height: 25px; border: 1px solid #c7cec0; border-radius: 50%; font-size: 10px; line-height: 1; letter-spacing: 0; margin-right: 8px; vertical-align: 2px; color: #74806b; }
 .citizen .small-note { font-size: 11px; color: #657267; line-height: 1.6; }
-.waste-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; flex: 1; }
+.waste-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-auto-rows: 1fr; gap: 12px; flex: 1; }
 .citizen .waste-card { position: relative; min-height: 186px; padding: 18px 22px; display: flex; flex-direction: column; align-items: flex-start; border: 2px solid transparent; border-radius: 18px; color: #334332; text-align: left; transition: transform .15s, border-color .15s; }
 .waste-card:hover { transform: translateY(-2px); }
 .waste-card.glass { background: #f1ecc1; }
@@ -256,11 +256,11 @@
 .citizen .leaflet-tooltip { width: max-content; max-width: 240px; white-space: normal; padding: 8px 10px; background: var(--surface); border-color: var(--border); border-radius: 8px; color: var(--ink); font-family: inherit; font-size: 12px; box-shadow: 0 3px 12px #263c3020; }
 @media (max-width: 760px) {
   .citizen .map-shell #site-map { height: 490px; }
-  .map-context { top: 10px; left: 10px; max-width: calc(100% - 142px); padding: 9px 10px; }
+  .map-context { top: 10px; left: 10px; max-width: calc(100% - 165px); padding: 9px 10px; overflow-wrap: anywhere; }
   .map-context strong { font-size: 11px; }
   .map-context span { font-size: 10px; }
-  .map-view-tools { top: 10px; right: 10px; gap: 5px; }
-  .citizen .map-view-tools button { padding: 8px 10px; font-size: 11px; }
+  .map-view-tools { top: 10px; right: 10px; width: 135px; gap: 5px; }
+  .citizen .map-view-tools button { flex: 1; min-width: 0; padding: 8px 4px; font-size: 11px; overflow-wrap: anywhere; }
   .citizen .map-shell .legend { width: 210px; bottom: 28px; left: 10px; padding: 10px; gap: 7px 8px; font-size: 10px; }
   .map-shell .legend > small { font-size: 9px; }
   .route-map-key { left: 10px; gap: 12px; }
@@ -324,7 +324,7 @@
 @media (max-width: 480px) {
   .citizen .site-header { flex-wrap: wrap; gap: 16px; }
   .citizen .flow-nav { width: 100%; }
-  .citizen .flow-nav a { flex: 1; }
+  .citizen .flow-nav a { flex: 1; min-width: 0; white-space: normal; overflow-wrap: anywhere; text-align: center; }
   .hero { margin-top: 26px; }
 }
 @media (max-width: 380px) {
