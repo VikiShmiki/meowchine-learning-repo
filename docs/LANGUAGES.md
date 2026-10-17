@@ -1,8 +1,9 @@
 # English and Macedonian
 
-Goodsort supports `en` and `mk`. The header selector switches both ways without a
+Najdi Frli supports `en` and `mk`. The header selector switches both ways without a
 reload, retaining input, selected item kinds, basket, origin, route and open panels.
-The choice is stored as `goodsort-language` and survives page navigation/reload.
+The choice is stored as `najdi-frli-language` and survives page navigation/reload.
+Existing `goodsort-language` preferences are migrated for compatibility.
 English is the default. Citizen, City, account/activity, community and reviewer copy,
 accessible labels, placeholders and validation messages have Macedonian translations.
 If the catalog cannot load, the page keeps English controls and displays a retry notice.

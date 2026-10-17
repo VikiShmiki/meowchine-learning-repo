@@ -19,6 +19,48 @@ from smart_recycling.community import CommunityStore
 from smart_recycling.multilingual import BilingualSuggester, prototype_sha256
 
 
+@pytest.mark.parametrize(
+    "path,payload,status",
+    [
+        ("/api/v1/classify", {"text": "glass bottle"}, 200),
+        ("/api/v1/classify", {"text": "private description" * 20}, 422),
+        (
+            "/api/v1/nearest",
+            {"material": "glass", "latitude": 41.99, "longitude": 21.43},
+            200,
+        ),
+        (
+            "/api/v1/nearest",
+            {"material": "invalid", "latitude": 41.9912345, "longitude": 21.4312345},
+            422,
+        ),
+    ],
+)
+def test_personal_guidance_and_coordinates_are_never_cacheable(path, payload, status):
+    response = TestClient(api.app).post(path, json=payload)
+    assert response.status_code == status
+    assert response.headers["cache-control"] == "no-store"
+
+
+@pytest.mark.parametrize(
+    "path",
+    [
+        "/api/v1/account/register",
+        "/api/v1/container-reports",
+        "/api/v1/dumping-reports",
+    ],
+)
+@pytest.mark.parametrize("failure", ["origin", "size"])
+def test_early_private_request_failures_are_never_cacheable(path, failure):
+    response = TestClient(api.app).post(
+        path,
+        headers={"Origin": "https://example.invalid"} if failure == "origin" else {},
+        content=b"{}" if failure == "origin" else b"x" * 16385,
+    )
+    assert response.status_code == (403 if failure == "origin" else 413)
+    assert response.headers["cache-control"] == "no-store"
+
+
 def test_database_reads_do_not_wait_for_unrelated_writer(tmp_path):
     store = CommunityStore(tmp_path / "test.sqlite3")
     expected = store.client_key("test")

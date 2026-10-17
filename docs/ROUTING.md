@@ -1,6 +1,6 @@
-# Citizen trips (T07)
+# Citizen trips
 
-Select known waste directly using the five material cards, then **Add to route**
+Select known waste directly using the six material cards, then **Add to route**
 to confirm condition and add the selected streams together. Every selected card has
 the same green outline/checkmark. Optional text/photo help still uses item-level
 review and confirmation; electronics can use documented accepting centres, while
@@ -42,7 +42,7 @@ gold, plastic/metal green, paper/cartons blue, general waste gray, electronics t
 clothes donation mauve. Exact item kinds
 map to the same palette as quick-pick streams. A stop assigned multiple streams uses
 those colors around a neutral number; it does not introduce a mixed-waste category.
-The five-stream legend stays visible with routes; fit-route leaves room for both
+The material legend stays visible with routes; fit-route leaves room for both
 keys on small screens. The unused purple mixed-material entry has been removed:
 every site in the current City snapshot has just one recorded material stream.
 Editing the basket, origin or mode clears the old route and cancels stale
@@ -62,15 +62,16 @@ requires condition confirmation and an explicit API opt-in to unverified accepta
 which the UI sends for a selected general-waste stream. It matches recorded
 mixed-municipal-waste drop-off containers only. The warning appears at general-waste
 route stops, not in the selection panel. This supports general alone
-or mixed baskets such as glass + general, in either travel mode. It does not create
+or mixed baskets such as glass + general, in all three travel modes. It does not create
 an acceptance profile or establish permission to dispose of hazardous, medical or
 bulky waste. Confirmed `ordinary_residual` items use those same recorded bins;
 electronics matches only assets explicitly accepting `electronics`, never all specialist
 waste. See [bounded guidance and evidence](GENERAL_AND_ELECTRONICS.md).
 City coverage/upgrade calculations and original training/evaluation review holds are unchanged.
 
-Choose the three nearest compatible source sites per unique item type by straight-line
-distance, then deduplicate (at most 18 candidates). This is a heuristic shortlist,
+For direct walking/driving, choose the three nearest compatible source sites per
+unique item type by straight-line distance, then deduplicate (at most 18 candidates).
+This is a heuristic shortlist,
 not a city-wide optimum. ORS supplies a directed travel-time matrix including the
 origin. Null/unreachable edges and candidates snapped over 100 m are excluded.
 A shortest-path search over (covered item types, last site) minimizes matrix travel
@@ -91,8 +92,9 @@ environment, then restart. Existing environment variables override `.env`.
 The key is server-only; configuration responses expose only whether it is set.
 Do not commit the file or paste the key into issues, logs or chat.
 
-Only clicking the disclosed **Plan trip & share location** action sends origin and candidate coordinates through our
-API to ORS. Item descriptions go to our API for policy checks, never ORS. Application
+Only clicking **Find my route**, beside its coordinate-sharing disclosure, sends
+origin and candidate coordinates through our API to ORS. Item descriptions go to
+our API for policy checks, never ORS. Application
 logs contain request ID, mode, outcome, duration and dataset version, not coordinates,
 descriptions or credentials. Trip responses, including validation errors, use
 `Cache-Control: no-store`; basket/origin/geometry remain in memory only.
@@ -103,11 +105,12 @@ There are no automatic retries. Parking uses a 75-second client timeout.
 JSP uses a bounded walking matrix and up to 12 walking directions requests, with
 a 75-second client timeout. See [TRANSIT.md](TRANSIT.md) for scheduled journeys,
 source freshness, transfer/walking limits and the different optimization objective.
-The process permits two concurrent plans and 20 starts/minute. This is a demo budget,
+The process permits two concurrent plans and 20 starts/minute. This is a prototype budget,
 not a distributed quota or account daily-limit guarantee. Provider requests use
 10-second HTTP timeouts, a 2 MB response cap and a 12-second elapsed budget checked
-between streamed chunks. The client cancels after 40 seconds; cancellation does not
-guarantee an already-started server/provider request stops. Quota/auth/network/invalid
+between streamed chunks. For direct walking/driving, the client cancels after 40
+seconds; cancellation does not guarantee an already-started server/provider request
+stops. Quota/auth/network/invalid
 response failures are explicit. No invented route or straight-line fallback is used.
 
 Official contracts consulted for this integration:
@@ -142,7 +145,7 @@ Opt-in live test with fixed public coordinates, never a personal location:
 uv run python scripts/smoke_routing.py --live
 ```
 
-Default report is ignored `.git/t07-live.json`. On 2026-09-20, a three-material trip
+Default report is ignored `runtime/routing-live.json`. On 2026-09-20, a three-material trip
 from 41.9965, 21.4314 returned three stops: walking 2477.4 m / 1783.7 s; driving
 3127.7 m / 556.8 s. Nine candidates were considered. A Maksim Gorki one-way probe
 (OSM way 360141020 in the pinned extract) returned walking 78.4 m in each direction,

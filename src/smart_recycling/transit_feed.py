@@ -23,6 +23,7 @@ JSP_FEED_URL = (
 SKOPJE = ZoneInfo("Europe/Skopje")
 MAX_ZIP = 10_000_000
 MAX_EXPANDED = 80_000_000
+WEEKDAYS = ("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday")
 
 
 def gtfs_date(value):
@@ -153,11 +154,17 @@ class TransitFeed:
                 )
             self.calendars = rows("calendar.txt", False)
             self.exceptions = rows("calendar_dates.txt", False)
+            if len({r["service_id"] for r in self.calendars}) != len(self.calendars):
+                raise ValueError("Duplicate calendar service")
+            if len({(r["service_id"], r["date"]) for r in self.exceptions}) != len(self.exceptions):
+                raise ValueError("Duplicate service-day exception")
             for row in self.exceptions:
                 gtfs_date(row["date"])
             for row in self.calendars:
                 if gtfs_date(row["start_date"]) > gtfs_date(row["end_date"]):
                     raise ValueError("Reversed service dates")
+                if any(row[weekday] not in {"0", "1"} for weekday in WEEKDAYS):
+                    raise ValueError("Invalid weekday service flag")
             known_services = {r["service_id"] for r in self.calendars + self.exceptions}
             if any(t.service not in known_services for t in self.trips):
                 raise ValueError("Unknown service")
@@ -191,9 +198,7 @@ class TransitFeed:
             )
 
     def services(self, day: date) -> set[str]:
-        weekday = ("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday")[
-            day.weekday()
-        ]
+        weekday = WEEKDAYS[day.weekday()]
         active = {
             r["service_id"]
             for r in self.calendars

@@ -5,7 +5,7 @@
   const names = { glass: "Glass", plastic_metal: "Plastic & cans", paper_tetrapak: "Paper & cartons", general: "General waste", electronics: "Electronics", clothes: "Clothes" };
   let state = { user: null }, generation = 0, busy = false, signup = false;
   let activePane = "overview", historyFilter = "all", displayedUser = null;
-  const formatDate = timestamp => new Date(timestamp * 1000).toLocaleDateString(globalThis.GoodsortI18n?.locale || "en-GB", {day: "numeric", month: "short", year: "numeric"});
+  const formatDate = timestamp => new Date(timestamp * 1000).toLocaleDateString(globalThis.NajdiFrliI18n?.locale || "en-GB", {day: "numeric", month: "short", year: "numeric"});
   const badgeArt = {
     first_dropoff: '<circle class="badge-base" cx="50" cy="48" r="36"/><circle class="badge-rim" cx="50" cy="48" r="30"/><g class="badge-symbol"><path class="badge-detail" d="M37 60C29 42 44 31 64 32c1 21-8 34-27 28Z M35 65l21-24"/></g>',
     ten_dropoffs: '<path class="badge-base" d="M50 8 85 28v40L50 88 15 68V28z"/><path class="badge-rim" d="m50 16 28 16v32L50 80 22 64V32z"/><g class="badge-symbol"><text x="50" y="48">10</text><path class="badge-detail" d="M43 66h14"/></g>',
@@ -23,15 +23,15 @@
     <div id="account-guest"><div class="account-tabs"><button type="button" id="account-login-tab" aria-pressed="true">Sign in</button><button type="button" id="account-register-tab" aria-pressed="false">Create account</button></div>
     <form id="account-form"><label for="account-username">Username</label><input id="account-username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" minlength="3" maxlength="24" pattern="[A-Za-z0-9_]{3,24}" title="3–24 letters, digits or underscores" required>
     <label for="account-password">Password</label><input id="account-password" name="password" type="password" autocomplete="current-password" minlength="15" maxlength="128" required>
-    <p id="account-password-note" hidden>15+ characters. Use a unique password; this demo has no password recovery.</p><button type="submit" id="account-submit">Sign in</button></form>
+    <p id="account-password-note" hidden>15+ characters. Use a unique password; password recovery is unavailable.</p><button type="submit" id="account-submit">Sign in</button></form>
     <p class="account-privacy">Optional. Save your drop-offs and badges. No email or location history.</p></div>
     <div id="account-member" hidden></div><p id="account-message" role="status"></p>`;
   document.body.append(dialog);
   const $ = id => document.getElementById(id);
   const form = $("account-form"), message = $("account-message");
   async function request(path, method = "GET", body) {
-    const response = await (globalThis.GoodsortI18n?.fetch || fetch)("/api/v1/account" + path, { method, cache: "no-store", signal: AbortSignal.timeout(15000),
-      headers: { "Content-Type": "application/json", "X-Goodsort-Action": "1" }, ...(body ? { body: JSON.stringify(body) } : {}) });
+    const response = await (globalThis.NajdiFrliI18n?.fetch || fetch)("/api/v1/account" + path, { method, cache: "no-store", signal: AbortSignal.timeout(15000),
+      headers: { "Content-Type": "application/json", "X-Najdi-Frli-Action": "1" }, ...(body ? { body: JSON.stringify(body) } : {}) });
     const data = response.status === 204 ? {} : await response.json();
     if (!response.ok) throw new Error(data.detail || "Account unavailable. Please retry.");
     return data;
@@ -77,7 +77,7 @@
       const days = el("div", "", "activity-days");
       for (const day of state.activity.days) {
         const cell = el("span"); cell.dataset.level = String(Math.min(day.count, 3));
-        const label = `${new Date(day.date * 1000).toLocaleDateString(globalThis.GoodsortI18n?.locale || "en-GB", {day: "numeric", month: "short", timeZone: "UTC"})}: ${day.count} recycling drop-offs`;
+        const label = `${new Date(day.date * 1000).toLocaleDateString(globalThis.NajdiFrliI18n?.locale || "en-GB", {day: "numeric", month: "short", timeZone: "UTC"})}: ${day.count} recycling drop-offs`;
         cell.title = label; cell.setAttribute("role", "img"); cell.setAttribute("aria-label", label); days.append(cell);
       }
       const legend = el("div", "", "activity-legend"); legend.append(el("span", "No drop-offs"));

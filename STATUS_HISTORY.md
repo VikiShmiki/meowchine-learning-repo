@@ -1,9 +1,179 @@
 # Historical delivery log
 
-Archived on 2026-09-22. Entries below describe their original point in time;
-current priorities and verification are in [STATUS.md](STATUS.md).
+Entries retain their original dates and revision-specific measurements. Statements
+about unfinished work, CI restrictions or model versions describe that time only.
+Current capabilities and verification are in [STATUS.md](STATUS.md),
+[CI status](docs/CI_STATUS.md) and [quality checks](docs/QUALITY.md).
 
-# Status
+## October 17, 2026 implementation notes, archived after integration
+
+### Original status — October 17, 2026
+
+Updated: 2026-10-17
+
+## Integration — ML remediation with current app features
+
+Oliver's `fix/ml-data-remediation` branch is integrated with the reporting, JSP
+and parking changes. Documentation retains both development histories. Docker
+includes the pinned v3 audit heads and the current startup/readiness fixes; photo
+browser tests select the form's submit button explicitly. Pinned model/evidence
+bytes survive Windows checkout; training/evaluation JSON uses UTF-8 and LF, and
+relocated source manifests support both Windows and POSIX paths. Model weights
+and pinned checksums are unchanged. The smoke test verifies an accepted Macedonian
+suggestion and an abstained example. Combined regression and container gates are
+required before merging; see the delivery PR and CI status.
+Earlier test counts below describe their original branch revisions.
+
+## Photo consistency improvement (Codex)
+
+Goal: prevent contradictory AI photo suggestions and stale prior-item confirmation
+from entering the review flow. Description/reason checks now reuse bilingual text
+policy signals; rejected suggestions have no category or preselected item. Editing
+or selecting another description clears the previous confirmation and contacts.
+Positive candidates, specialist hazards and the residual exception are preserved.
+Goal achieved. `make check` passed: 677 Python tests, 391 opt-in skips, 21 Node tests,
+lock/lint/format. The 34 new Python cases cover rejected contradictions, supported
+candidates and specialist precedence; two Node regressions cover photo review and
+stale confirmation. Three targeted Chromium checks could not launch because the
+host lacks `libatk-1.0.so.0`. Text model weights and thresholds are unchanged.
+See [photo flow](docs/PHOTO_GUIDANCE.md) and [verification](docs/QUALITY.md).
+
+## ML follow-up audit — five goals implemented (Codex)
+
+The mixed-item confirmation guard, equal-concept calibration, actual-fallback
+serving evaluation, unreadable-model fallback, and label/provenance verification
+are implemented. New development-v3-audit heads preserve the earlier artifacts.
+On the existing development test, MK suggestions cover 14/42 supported fallback
+inputs (previously 4/42), all correct; EN remains 18/30, all correct. Thresholds
+were selected only on calibration data. Native review and independent user data
+remain necessary. Verification and report links: [ML.md](docs/ML.md).
+
+All five goals completed. Final `make check` passed: 643 Python tests, 389 expected
+opt-in skips, 19 Node tests, lock/lint/format. Both real encoders replayed offline;
+a second training run reproduced weights, temperatures and gates. Historical
+manual replay still has 2 EN / 3 MK held-input suggestions; these remain reported.
+See [verification details](docs/QUALITY.md).
+
+## Completed improvement — verified serving encoders (Codex)
+
+Serving and future v3 training verify pinned encoder weights, tokenizer and
+configuration before use. Swapped, incomplete or changed encoders fail closed;
+only the affected language loses suggestions and policy guidance remains available.
+Offline bundle export preserves verified bytes and upstream attribution.
+
+`make check` passed: 619 Python tests, 389 opt-in skips, 19 Node tests, lock/lint/format.
+Seed/infrastructure/geography validation passed. Both real encoder bundles reloaded
+offline with identical embeddings and scores on ten probes; both swaps were rejected.
+Historical models/evaluations are unchanged. Older reserialized encoder directories
+need rebuilding; see [ML.md](docs/ML.md) and [verification details](docs/QUALITY.md).
+
+## Completed — ML/data remediation (Codex)
+
+User-authorized audit follow-through implemented and verified. Serving now uses
+hash-pinned development-v3 JSON heads with abstention; policy/confirmation retains
+control. Latin-typed Macedonian negation/dirty-clothing holds are repaired.
+
+- Retained 5,004 English source examples independently of translations, including
+  all 1,572 phone/laptop charger descriptions; sampled 390 template phrases for
+  fitting. Quarantined legacy MK translations and ambiguous source text.
+- Added paired, explicitly agent-authored train/tune/calibration/test concept
+  groups covering all six classes, held cases and Latin spelling variants. These
+  are development diagnostics, not independent or native-reviewed user evidence.
+- Tuned frozen and TF-IDF candidates on the tuning set; selected abstention on a
+  separate calibration set. New heads reproduce byte-for-byte. Historical v1/v2
+  artifacts remain unchanged; source-root relocation preserves checksum checks.
+- Same-input development test macro-F1: EN 0.732 → 0.979; MK Cyrillic 0.528 → 0.870;
+  pooled MK spellings 0.491 → 0.847. Unknown-input errors and low MK suggestion
+  coverage remain visible. No automatic disposal or production-quality claim.
+- `make check`: 617 Python tests passed, 389 opt-in skips, 19 Node tests passed;
+  lock/lint/format pass. Real encoders also preserve policy holds. The sandbox
+  blocked API TestClient event-loop behavior; the full suite passed outside it.
+
+Results, limitations and reproduction: [ML.md](docs/ML.md),
+[BILINGUAL_DATA.md](docs/BILINGUAL_DATA.md), and `data/ml/v3/`.
+External native review and a newly collected independent user test remain required.
+Historical LoRA results do not isolate architecture effects; the new controlled
+comparisons cover weighting and regularization for frozen/TF-IDF models, not a new
+LoRA experiment. No hosted/browser/device/container verification is claimed here.
+
+## Implemented — parking-assisted driving
+
+Owner: Codex, user-requested October 17, 2026. Driving now offers optional mapped
+parking plus walking to containers, including return-to-car walks between stops.
+The licensed, reproducible OSM/Geofabrik snapshot contains 144 public parking points;
+space availability stays unknown. English/Macedonian UI, distinct parking markers,
+source details and full-container exclusions are covered by 20 backend and seven
+focused browser tests. A live ORS two-drop-off journey also succeeded. Full
+regression/container delivery gates are recorded in [CI_STATUS.md](docs/CI_STATUS.md).
+See [PARKING.md](docs/PARKING.md) for source refresh, access and timing limits.
+
+## Implemented — JSP public transport
+
+Owner: Codex, user-requested October 17, 2026. Implemented scheduled JSP journeys,
+ORS walking connections, one same-stop transfer per collection leg, departure
+selection and bilingual itinerary/map UI. Full-container exclusions and post-trip
+check-ins apply. The live JSP/ORS smoke returned buses 18 and 8 to Karpoš yard.
+The 24 backend and seven focused browser cases pass at 320/390/1280 px. Lock,
+lint, formatting, 19 Node tests and all snapshot/coverage/upgrade reproduction
+checks pass. The local app loads both language models with routing configured.
+Delivery and full-regression gate results are recorded on
+[PR #2](https://github.com/VikiShmiki/meowchine-learning-repo/pull/2) and in
+[CI_STATUS.md](docs/CI_STATUS.md). See [TRANSIT.md](docs/TRANSIT.md) for limits.
+
+## Completed — trip completion and container check-ins
+
+Implemented the user-requested optional post-trip check-in without photos. Full
+reports now exclude the specific asset from everyone's routes immediately, with a
+12-hour expiry and reviewer rejection. Visited stops are tracked in memory across
+replans; individual drop-offs keep multi-stop trips open and the final drop-off ends
+the trip. Early completion keeps unfinished basket items. Both English and Macedonian
+copy are included. Full browser-enabled regression checks pass, followed by 41
+focused browser checks on the final interface, 28 community/backend tests, and 19
+Node tests. Lock, lint, formatting, seed/infrastructure/geography validators and
+visual checks at 320/360/1280 px passed. See [QUALITY.md](docs/QUALITY.md).
+Hosted CI is tracked in [CI_STATUS.md](docs/CI_STATUS.md).
+
+## Previous handoff — initial private-repository edition
+
+Private repository edition prepared with a fresh initial commit, current project
+documentation and a rebuilt technical report. Source data and historical experiment
+evidence keep their original dates. No pending feature work is activated.
+
+Local handoff checks passed: 564 Python tests, 19 Node tests, lock/lint/format and
+seed/infrastructure/geography validation. The 389 opt-in skips and verification
+limits are recorded in [QUALITY.md](docs/QUALITY.md).
+
+## Historical capability — v2 bilingual model integration
+
+The corrected six-class bilingual dataset has five completed seed-42–46 runs (30
+fits). Frozen MiniLM had the highest scores in those confounded configurations:
+English manual macro-F1 0.696 ± 0.000 and Macedonian 0.507 ± 0.000; grouped-test
+macro-F1 is 0.505 ± 0.000 and 0.552 ± 0.000. These are sample SDs over seeds on
+one fixed split, not independent test uncertainty. Full comparisons, timings and
+limitations are in [ML.md](docs/ML.md); dataset provenance is in
+[BILINGUAL_DATA.md](docs/BILINGUAL_DATA.md). Source artifacts and translations
+still need human/native review. Model outputs are suggestions only; policy and
+exact-item confirmation retain authority.
+
+## Previous delivery — verified audit fixes (PR #24)
+
+The colleague's audited application changes and documentation are preserved. These
+include English/Macedonian UI, six disposal journeys, real collection-point routing,
+City coverage/upgrades, moderated community reports and optional accounts. The
+audit fixed blocking database calls, unnecessary SQLite writes, independent model
+health, localized API errors, evaluation provenance, environment-file ignores and
+stale documentation. See [AUDIT_FIXES.md](docs/AUDIT_FIXES.md) and
+[QUALITY.md](docs/QUALITY.md) for the original verification and remaining limits.
+
+## Reference
+
+- [Quality and validation](docs/QUALITY.md)
+- [Language/model contracts](docs/LANGUAGES.md)
+- [Delivery scope](docs/DELIVERY_PLAN.md)
+- [Historical delivery evidence](STATUS_HISTORY.md)
+
+
+## September 22, 2026 archive
 
 Updated: 2026-09-22 | Phase: English/Macedonian implemented and locally verified
 
@@ -130,7 +300,7 @@ Validation: 243 Python cases and 12 Node tests pass; Ruff, lock, whitespace and
 MiniLM-required local deployment smoke pass. Live Recycle and saved responsive
 screenshots were visually reviewed; physical-device sign-off remains outstanding.
 
-City visual consistency follow-up: uses Recycle's Goodsort header, shared citizen
+City visual consistency follow-up: uses Recycle's Najdi Frli header, shared citizen
 palette/type/controls, numbered sections and rounded panels. Coverage metrics lead;
 municipalities and upgrade planning share a responsive dashboard. Removed idle copy
 and moved source/method details, access-gap lists and impact tables into disclosures.
@@ -267,7 +437,7 @@ provider calls; test reports stayed in isolated databases. The new community bro
 module is included in the still-disabled CI workflow. See docs/QUALITY.md.
 
 Latest user direction: keep dumping reports only in City coverage and do a local
-desktop demo review of container reporting/rerouting and dumping moderation.
+desktop prototype review of container reporting/rerouting and dumping moderation.
 Hosting and physical-phone testing are explicitly deferred; do not pursue them.
 This does not imply those checks passed. Accounts/badges remain deferred.
 Local review completed: dumping appears only in City coverage, container reporting
@@ -277,7 +447,7 @@ City display pass. Visual review fixed a cramped condition dropdown and redundan
 reroute button on narrow screens. Latest checks: 319 default Python tests passed
 (244 opt-in cases skipped there), 10 focused browser journeys passed separately,
 18 Node tests, Ruff, lock and whitespace checks passed. Paid providers were simulated;
-no synthetic reports were added to the running demo database. Broader browser suite
+no synthetic reports were added to the running prototype database. Broader browser suite
 was not rerun for this small follow-up; previous full run remains recorded below.
 
 Mentor follow-up, owned by Codex: implement persistent provider allowances,
@@ -771,8 +941,8 @@ No new application behavior is claimed by this documentation task.
 
 - Validate source-to-app capability mappings and confirm outstanding reuse terms.
 - Confirm the local policy for composite/contaminated packaging and specialist waste.
-- Verify iPhone Home Screen installation on the actual demo device; select HTTPS hosting.
-- Proposed free demo stack: ORS Standard, interactive OSM tiles, Render Free.
+- Verify iPhone Home Screen installation on the actual prototype device; select HTTPS hosting.
+- Proposed free prototype stack: ORS Standard, interactive OSM tiles, Render Free.
   Authenticated routes passed T07; confirm account quotas and hosted performance before release.
 - Threshold is now validation-selected; independent quality and human review remain open.
 

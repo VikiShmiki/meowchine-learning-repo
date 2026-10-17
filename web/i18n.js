@@ -4,7 +4,15 @@
   const attributes = ["aria-label", "aria-description", "placeholder", "title", "alt"];
   const records = new WeakMap();
   let language = "en", catalog = {}, reverse = {}, patterns = [], observer, loaded = false;
-  try { language = localStorage.getItem("goodsort-language") === "mk" ? "mk" : "en"; } catch {}
+  try {
+    // Keep the preference chosen before the product rename, then migrate once.
+    const saved = localStorage.getItem("najdi-frli-language") ?? localStorage.getItem("goodsort-language");
+    language = saved === "mk" ? "mk" : "en";
+    if (saved !== null) {
+      localStorage.setItem("najdi-frli-language", language);
+      localStorage.removeItem("goodsort-language");
+    }
+  } catch {}
   const normalize = value => value.replace(/\s+/g, " ").trim();
   const escape = value => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   function translate(value, depth = 0) {
@@ -55,7 +63,7 @@
     if (value === "mk" && !loaded) { refresh(); return; }
     language = value;
     document.querySelectorAll("input,select,textarea").forEach(control => control.setCustomValidity(""));
-    try { localStorage.setItem("goodsort-language", language); } catch {}
+    try { localStorage.setItem("najdi-frli-language", language); } catch {}
     refresh();
     document.dispatchEvent(new CustomEvent("languagechange", { detail: { language } }));
   }
@@ -83,7 +91,7 @@
   }).catch(() => {
     language = "en";
   });
-  window.GoodsortI18n = { translate, setLanguage, fetch: localizedFetch, get language() { return language; },
+  window.NajdiFrliI18n = { translate, setLanguage, fetch: localizedFetch, get language() { return language; },
     get locale() { return language === "mk" ? "mk-MK" : "en-GB"; },
     original(node) { return records.get(node)?.text?.original || node?.nodeValue || node?.textContent; }, ready };
   document.addEventListener("input", event => event.target.setCustomValidity?.(""));

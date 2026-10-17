@@ -2,6 +2,7 @@ import asyncio
 import base64
 import io
 import json
+import threading
 
 import httpx
 import pytest
@@ -99,6 +100,62 @@ def test_openai_provider_uses_private_structured_image_request() -> None:
 
     result = asyncio.run(run())
     assert result.items[0].item_kind == "empty_glass_packaging"
+
+
+@pytest.mark.parametrize(
+    "body",
+    [
+        {"output": [None]},
+        {"output": "invalid"},
+        {"output": [{"type": "message", "content": [None]}]},
+        {"output": [{"type": "message", "content": "invalid"}]},
+    ],
+)
+def test_malformed_provider_envelope_returns_safe_error(body):
+    async def run():
+        async with httpx.AsyncClient(
+            transport=httpx.MockTransport(lambda request: httpx.Response(200, json=body))
+        ) as client:
+            with pytest.raises(VisionError) as failure:
+                await OpenAIVisionProvider("test-key", "fixture", client=client).analyze(
+                    "data:image/jpeg;base64,fixture"
+                )
+            assert failure.value.code == "invalid_vision_response"
+            assert failure.value.status == 502
+
+    asyncio.run(run())
+
+
+def test_photo_preprocessing_does_not_block_other_async_requests(monkeypatch):
+    entered, release = threading.Event(), threading.Event()
+
+    def slow_prepare(raw, content_type):
+        entered.set()
+        release.wait(3)
+        return "data:image/jpeg;base64,fixture"
+
+    class Provider:
+        configured = True
+        model = "fixture"
+
+        async def analyze(self, image):
+            assert release.is_set()
+            return ModelPhotoAnalysis(items=[])
+
+    monkeypatch.setattr("smart_recycling.vision.prepare_image", slow_prepare)
+
+    async def run():
+        task = asyncio.create_task(VisionService(Provider(), "test").suggest(b"image", "image/png"))
+        try:
+            assert await asyncio.to_thread(entered.wait, 2)
+            assert not task.done()
+            assert not release.is_set()
+        finally:
+            release.set()
+            result = await task
+        assert result.items == []
+
+    asyncio.run(run())
 
 
 def test_service_derives_safe_statuses_instead_of_trusting_a_category() -> None:

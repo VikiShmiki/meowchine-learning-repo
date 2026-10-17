@@ -87,7 +87,9 @@ def main():
         assert confirmed["status"] == "ready_for_site_matching"
         assert confirmed["message"].startswith("Деталите")
     for path, marker in [("/", b"Recycling routes"), ("/city", b"10-minute walking access")]:
-        assert marker in get(args.url, path), path
+        page = get(args.url, path)
+        assert marker in page and b"Najdi Frli" in page, path
+    assert get(args.url, "/openapi.json")["info"]["title"] == "Najdi Frli"
     for path in (
         "/static/i18n.js",
         "/static/locales/mk.json",

@@ -36,8 +36,9 @@ reviewed disposal rules as well as a broad predicted category.
   `reuse_status` or `publication_eligible`, or establish public redistribution rights.
 - Locations have not been field-verified; unknown operational status is not active
   status. Fullness readings are dated observations, not live availability.
-- These exports feed the real `/api/v1/sites` snapshot endpoint. The legacy citizen
-  nearest-point lookup still uses synthetic seeds until item-specific integration.
+- These exports feed the real `/api/v1/sites` endpoint, citizen discovery and
+  confirmed-item trips. Only the unused legacy `/api/v1/nearest` API still uses
+  synthetic seed points; it does not supply the current citizen interface.
 - Population weights, neighborhood boundaries, and a pedestrian routing graph are
   not included. Collection-point counts cannot establish population coverage.
 

@@ -1,4 +1,4 @@
-# Smart Recycling Access
+# Najdi Frli
 
 Mobile-first guidance for correct disposal, plus city tools for finding and closing
 recycling-access gaps. The canonical product brief is [PROJECT_BRIEF.md](PROJECT_BRIEF.md).
@@ -7,7 +7,7 @@ recycling-access gaps. The canonical product brief is [PROJECT_BRIEF.md](PROJECT
 
 1. Read [STATUS.md](STATUS.md) for current work and blockers.
    Follow its active task when one is listed; otherwise use the current state and
-   the user's request. Do not start pending implementation tasks.
+   the user's request. Historical task entries are not new work assignments.
    Apply [docs/ENGINEERING.md](docs/ENGINEERING.md) to every change and consult
    [docs/DELIVERY_PLAN.md](docs/DELIVERY_PLAN.md) for scope and acceptance criteria.
 2. Open only the document relevant to the task:
@@ -24,7 +24,7 @@ recycling-access gaps. The canonical product brief is [PROJECT_BRIEF.md](PROJECT
    - City coverage and upgrades: [docs/CITY_MODE.md](docs/CITY_MODE.md)
    - Reports and accounts: [docs/COMMUNITY.md](docs/COMMUNITY.md) and
      [docs/ACCOUNTS.md](docs/ACCOUNTS.md)
-   - Hosted CI exception: [docs/CI_STATUS.md](docs/CI_STATUS.md)
+   - Current CI evidence: [docs/CI_STATUS.md](docs/CI_STATUS.md)
 
 ## Working rules
 

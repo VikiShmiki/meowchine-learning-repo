@@ -24,9 +24,10 @@ rate limits, expiry, and the optional post-trip check-in.
 
 Returns service state, rule version, real City `site_count` (1,583), real
 `asset_count` (1,596), `legacy_seed_site_count` (4), and
-`nearest_data_source: "synthetic"`. `text_suggestion_model` reports the loaded MiniLM
-suggestion version or `unavailable`. Counts describe published records, not verified
-operating facilities.
+`nearest_data_source: "synthetic"` for the legacy nearest endpoint.
+`text_suggestion_model` and `macedonian_suggestion_model` report each loaded
+MiniLM suggestion version or `unavailable`; `supported_languages` is `"en,mk"`.
+Counts describe published records, not verified operating facilities.
 
 ## `GET /api/v1/sites?scope=city`
 
@@ -115,9 +116,11 @@ An uncertain response returns `category: null`; scores are heuristic, not calibr
 probabilities. Manual selections use `confidence_kind: manual_selection` and score 0.
 When reviewed rules cannot identify an exact item form, the optional frozen MiniLM
 fallback can populate the three `suggestion_*` fields and order matching exact-item
-choices first. Its score is an uncalibrated closed-set logistic output, not
-`confidence`; the response remains `status: clarify` and `abstained: true`. The model
-cannot output `general`, and specialist/held rules take precedence. Set
+choices first. Its score is temperature-scaled on development data and subject to
+a separate confidence/similarity gate; it is not disposal `confidence` or a
+population accuracy guarantee. The response remains `status: clarify` and
+`abstained: true`. Specialist/held rules take precedence. Current six-object heads
+include clothes/electronics but no `general` object label; see [ML.md](ML.md). Set
 `SRA_MINILM_SUGGESTIONS=false` to disable it.
 Classification responses have `routing_available: false` and no facility IDs:
 classification alone does not establish a route. Use `/api/v1/routing` for provider
@@ -166,13 +169,12 @@ needs guidance rather than an ordinary collection site; a missing material retur
 should perform basic nearest-site lookup locally. Precise coordinates must not be
 written to application logs or feedback records.
 
-Planned demo endpoint: candidate upgrades. Current coverage is described below. Clarification/guidance is part of classification above.
 Specialist routing requires item-specific acceptance evidence, not the broad
-`special_unsupported` label. The existing nearest endpoint remains as documented
-until a reviewed contract replaces it. No verified facility means guidance and an
-explicit unavailable result, never general-waste fallback. Feedback/voting are
-deferred beyond the current edition. Add endpoints with schemas, privacy decisions, and
-contract tests.
+`special_unsupported` label. Use confirmed-item `/api/v1/trips` for real routes;
+the legacy nearest endpoint is not a disposal recommendation. No compatible
+facility means guidance and an explicit unavailable result, never a general-waste
+fallback. Coverage and upgrade endpoints are implemented below; community reports
+and accounts are documented separately.
 
 
 ## `GET /api/v1/routing`
@@ -211,8 +213,11 @@ asks the user to locate the collection point at the information desk.
 ]
 ```
 
-Stream materials are `glass`, `plastic_metal`, `paper_tetrapak`, and `general`.
-Recycling streams require one asset accepting every supported subtype in the stream.
+Stream materials are `glass`, `plastic_metal`, `paper_tetrapak`, `general`,
+`electronics` and `clothes`. Clothing requires confirmed clean, washed, wearable
+condition and matches documented donation venues. Electronics uses the explicit
+size/acceptance rules above. The three recycling streams require one asset accepting
+every supported subtype in that stream.
 General waste requires explicit `accept_unverified: true` and matches only recorded
 mixed-municipal-waste drop-off containers, excluding closed/unavailable assets. It
 is navigation to a recorded bin, not verified item acceptance. Missing acknowledgement

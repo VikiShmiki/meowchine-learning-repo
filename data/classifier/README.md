@@ -78,5 +78,7 @@ and condition confirmation and an accepting asset profile during later integrati
 
 Backend contracts and six DOM-controller scenarios are automated. Actual visual
 browser and iPhone verification remains outstanding: browser runtime setup failed
-and no enabled browser surface was available during T05. Verify those flows during
-T06 integration and on the demo device before T10 release sign-off.
+and no enabled browser surface was available during that original T05 check.
+Later integrated browser and Docker checks are recorded in
+[CI_STATUS.md](../../docs/CI_STATUS.md). Physical-device and independent quality
+review remain outstanding; historical evaluation is not a device sign-off.

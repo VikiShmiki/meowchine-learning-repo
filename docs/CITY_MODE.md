@@ -49,7 +49,7 @@ Missing inputs must be stated explicitly. Any fallback must be labeled as an
 approximation with its different metric and limitations; never silently substitute
 Euclidean distance or unweighted sample-point coverage.
 
-Citizen routing separately supports walking and driving, starts from a current or
+Citizen routing separately supports walking, driving and scheduled JSP buses, starts from a current or
 selected location, and ends at the last collection point. Driving routes do not
 change City Mode's walking-accessibility objective.
 

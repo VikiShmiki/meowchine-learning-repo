@@ -1,4 +1,4 @@
-"""HTTP adapter for the Smart Recycling Access domain."""
+"""HTTP adapter for the Najdi Frli domain."""
 
 import logging
 import os
@@ -129,7 +129,7 @@ try:
 except (OSError, ValueError):
     upgrade_report = None
 
-app = FastAPI(title="Smart Recycling Access", version="0.1.0")
+app = FastAPI(title="Najdi Frli", version="0.1.0")
 app.mount("/static", StaticFiles(directory=PROJECT_ROOT / "web"), name="static")
 community_store = CommunityStore(
     Path(os.getenv("SRA_COMMUNITY_DB", PROJECT_ROOT / "runtime/community.sqlite3"))
@@ -206,10 +206,6 @@ async def community_boundary(request: Request, call_next):
             secure=request.url.scheme == "https",
             samesite="strict",
         )
-    if path.startswith(
-        ("/api/v1/container", "/api/v1/dumping", "/api/v1/review", "/api/v1/account")
-    ):
-        response.headers["Cache-Control"] = "no-store"
     return response
 
 
@@ -236,10 +232,17 @@ def reserve_provider(request: Request, service: str):
 
 
 @app.middleware("http")
-async def private_trip_responses(request: Request, call_next):
-    """Validation failures may echo submitted coordinates; never cache those either."""
+async def private_responses(request: Request, call_next):
+    """Protect personal responses, including validation and early middleware failures."""
     response = await call_next(request)
-    if request.url.path in {"/api/v1/trips", "/api/v1/photo-suggestions"}:
+    if request.url.path in {
+        "/api/v1/trips",
+        "/api/v1/photo-suggestions",
+        "/api/v1/classify",
+        "/api/v1/nearest",
+    } or request.url.path.startswith(
+        ("/api/v1/container", "/api/v1/dumping", "/api/v1/review", "/api/v1/account")
+    ):
         response.headers["Cache-Control"] = "no-store"
     return response
 

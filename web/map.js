@@ -278,7 +278,7 @@
         tiles.redraw();
       });
       tiles.on("load", () => {
-        if (!tileErrors && (globalThis.GoodsortI18n?.original($("map-status").firstChild) || $("map-status").textContent) === "Retrying map tiles…") {
+        if (!tileErrors && (globalThis.NajdiFrliI18n?.original($("map-status").firstChild) || $("map-status").textContent) === "Retrying map tiles…") {
           $("map-status").textContent = "";
           $("retry-map").hidden = true;
         }

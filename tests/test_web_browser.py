@@ -826,7 +826,7 @@ def test_city_shared_layout_and_expanded_results(page, web_url, width):
     page.on("pageerror", lambda error: errors.append(str(error)))
     page.goto(web_url + "/city")
     expect(page.get_by_role("heading", level=1)).to_have_text("City coverage")
-    expect(page.locator(".brand")).to_have_text("goodsort.")
+    expect(page.locator(".brand")).to_have_text("Najdi Frli")
     expect(page.locator("#coverage-summary")).to_contain_text("58.1%")
     expect(page.locator("#city-status")).to_be_empty()
     expect(page.locator("#municipality-chart .chart-row")).to_have_count(10)
@@ -1134,14 +1134,20 @@ def test_city_upgrades_stale_response_cannot_replace_new_selection(page, web_url
     expect(page.locator("#recommend-upgrades")).to_be_enabled()
 
 
-@pytest.mark.parametrize("width", [360, 390, 1280])
+@pytest.mark.parametrize("width", [320, 390, 1280])
 @pytest.mark.parametrize("path", ["/", "/city"])
-def test_brand_visible_lettering_is_centered(page, web_url, tmp_path, width, path):
+@pytest.mark.parametrize("language", ["en", "mk"])
+def test_brand_visible_lettering_is_centered(page, web_url, tmp_path, width, path, language):
     page.set_viewport_size({"width": width, "height": 900})
     page.goto(web_url + path)
-    brand = page.get_by_role("link", name="Goodsort home")
-    expect(brand).to_have_text("goodsort.")
+    page.locator(".language-switch").select_option(language)
+    expect(page.locator("html")).to_have_attribute("lang", language)
+    brand = page.get_by_role(
+        "link", name="Najdi Frli home" if language == "en" else "Почетна страница на Najdi Frli"
+    )
+    expect(brand).to_have_text("Najdi Frli")
     expect(brand).to_have_attribute("href", "/")
+    assert "Najdi Frli" in page.title()
     circle = brand.locator(".brand-mark").bounding_box()
     arrow = brand.locator("svg").bounding_box()
     for axis, size in (("x", "width"), ("y", "height")):
@@ -1167,7 +1173,7 @@ def test_brand_visible_lettering_is_centered(page, web_url, tmp_path, width, pat
     screenshot_dir = os.getenv("SRA_LAYOUT_SCREENSHOTS")
     if screenshot_dir:
         name = "city" if path == "/city" else "recycle"
-        brand.screenshot(path=str(Path(screenshot_dir) / f"logo-{name}-{width}.png"))
+        page.screenshot(path=str(Path(screenshot_dir) / f"brand-{name}-{language}-{width}.png"))
 
 
 @pytest.mark.parametrize("width", [360, 390, 1280])

@@ -1,178 +1,65 @@
-# Status
+# Najdi Frli status
 
 Updated: 2026-10-17
 
-## Integration — ML remediation with current app features
+## Current application
 
-Oliver's `fix/ml-data-remediation` branch is integrated with the reporting, JSP
-and parking changes. Documentation retains both development histories. Docker
-includes the pinned v3 audit heads and the current startup/readiness fixes; photo
-browser tests select the form's submit button explicitly. Pinned model/evidence
-bytes survive Windows checkout; training/evaluation JSON uses UTF-8 and LF, and
-relocated source manifests support both Windows and POSIX paths. Model weights
-and pinned checksums are unchanged. The smoke test verifies an accepted Macedonian
-suggestion and an abstained example. Combined regression and container gates are
-required before merging; see the delivery PR and CI status.
-Earlier test counts below describe their original branch revisions.
+The private repository's `main` includes Oliver's ML remediation and the container
+check-in, JSP bus and parking integrations. The product is named **Najdi Frli**;
+the repository URL, Python imports and `SRA_*` settings remain unchanged.
 
-## Photo consistency improvement (Codex)
+- English/Macedonian citizen guidance, map and six confirmed disposal flows.
+- Walking, direct driving, scheduled JSP buses and optional parking-assisted driving.
+- Optional post-trip container observations; full assets are immediately excluded
+  for everyone for up to 12 hours, with reviewer rejection and expiry.
+- Population-weighted City coverage and prepared upgrade scenarios.
+- Optional accounts, material-only activity and self-reported badges.
+- Hash-pinned development-v3-audit suggestion heads for each language. Policy,
+  exact-item confirmation and asset acceptance remain authoritative.
 
-Goal: prevent contradictory AI photo suggestions and stale prior-item confirmation
-from entering the review flow. Description/reason checks now reuse bilingual text
-policy signals; rejected suggestions have no category or preselected item. Editing
-or selecting another description clears the previous confirmation and contacts.
-Positive candidates, specialist hazards and the residual exception are preserved.
-Goal achieved. `make check` passed: 677 Python tests, 391 opt-in skips, 21 Node tests,
-lock/lint/format. The 34 new Python cases cover rejected contradictions, supported
-candidates and specialist precedence; two Node regressions cover photo review and
-stale confirmation. Three targeted Chromium checks could not launch because the
-host lacks `libatk-1.0.so.0`. Text model weights and thresholds are unchanged.
-See [photo flow](docs/PHOTO_GUIDANCE.md) and [verification](docs/QUALITY.md).
+Start locally with `uv run python scripts/run_local.py`. Route planning requires
+`SRA_ORS_API_KEY`; optional photo analysis requires `OPENAI_API_KEY`. Both belong
+in ignored `.env` or server configuration. See [README.md](README.md).
 
-## ML follow-up audit — five goals implemented (Codex)
+## October 17 maintenance audit
 
-The mixed-item confirmation guard, equal-concept calibration, actual-fallback
-serving evaluation, unreadable-model fallback, and label/provenance verification
-are implemented. New development-v3-audit heads preserve the earlier artifacts.
-On the existing development test, MK suggestions cover 14/42 supported fallback
-inputs (previously 4/42), all correct; EN remains 18/30, all correct. Thresholds
-were selected only on calibration data. Native review and independent user data
-remain necessary. Verification and report links: [ML.md](docs/ML.md).
+Renamed the app, documentation, package and API to Najdi Frli; removed the stale
+walkthrough asset and its links. Current contracts are consolidated, with dated
+evidence retained in the history documents. Fixed private-response caching,
+malformed photo output, blocking image preprocessing, ambiguous JSP calendars,
+reviewer/report races, duplicate photo retries and relative launcher configuration.
+Docker now includes only the current serving heads.
 
-All five goals completed. Final `make check` passed: 643 Python tests, 389 expected
-opt-in skips, 19 Node tests, lock/lint/format. Both real encoders replayed offline;
-a second training run reproduced weights, temperatures and gates. Historical
-manual replay still has 2 EN / 3 MK held-input suggestions; these remain reported.
-See [verification details](docs/QUALITY.md).
+Local checks passed: 757 backend tests (two OS-dependent symlink skips), 21 Node
+tests, 46 distinct focused browser cases, lock/lint/format checks and deployment
+smoke with both real language models. See [QUALITY.md](docs/QUALITY.md) for scope
+and the [Actions workflow](https://github.com/VikiShmiki/meowchine-learning-repo/actions)
+for the full Linux/browser/container gate on each revision.
 
-## Completed improvement — verified serving encoders (Codex)
+## Earlier merged baseline
 
-Serving and future v3 training verify pinned encoder weights, tokenizer and
-configuration before use. Swapped, incomplete or changed encoders fail closed;
-only the affected language loses suggestions and policy guidance remains available.
-Offline bundle export preserves verified bytes and upstream attribution.
+[PR #4](https://github.com/VikiShmiki/meowchine-learning-repo/pull/4) merged at
+`c626c8d`. Its [successful CI run](https://github.com/VikiShmiki/meowchine-learning-repo/actions/runs/39031926188)
+passed 737 backend tests, 429 browser cases, 21 Node tests and the Docker smoke gate.
+This evidence belongs to that revision; later changes must pass their own checks.
+The local app also loaded both v3 audit language models. CI is active in this
+private repository; upstream account restrictions are historical.
 
-`make check` passed: 619 Python tests, 389 opt-in skips, 19 Node tests, lock/lint/format.
-Seed/infrastructure/geography validation passed. Both real encoder bundles reloaded
-offline with identical embeddings and scores on ten probes; both swaps were rejected.
-Historical models/evaluations are unchanged. Older reserialized encoder directories
-need rebuilding; see [ML.md](docs/ML.md) and [verification details](docs/QUALITY.md).
+Live October 17 checks exercised JSP/ORS and parking/ORS integration using public
+test coordinates. They do not establish live arrivals, vacant parking spaces or
+physical site access. See [TRANSIT.md](docs/TRANSIT.md) and [PARKING.md](docs/PARKING.md).
 
-## Completed — ML/data remediation (Codex)
+## Remaining boundaries
 
-User-authorized audit follow-through implemented and verified. Serving now uses
-hash-pinned development-v3 JSON heads with abstention; policy/confirmation retains
-control. Latin-typed Macedonian negation/dirty-clothing holds are repaired.
+- Native Macedonian review and independent user/model evaluation are outstanding.
+- Source dates, unknown operating/access status and policy evidence holds remain
+  visible. The parking snapshot needs refresh before its 90-day freshness limit;
+  JSP calendars refresh through the runtime feed cache.
+- Hosted deployment, iPhone testing and Home Screen installation are user-deferred.
+  Desktop browser checks and Docker smoke are not physical-device verification.
+- Public voting, correction-feedback training, account recovery and live vehicle
+  tracking are not implemented. Accounts and badges are not production identity
+  or verified reward infrastructure.
 
-- Retained 5,004 English source examples independently of translations, including
-  all 1,572 phone/laptop charger descriptions; sampled 390 template phrases for
-  fitting. Quarantined legacy MK translations and ambiguous source text.
-- Added paired, explicitly agent-authored train/tune/calibration/test concept
-  groups covering all six classes, held cases and Latin spelling variants. These
-  are development diagnostics, not independent or native-reviewed user evidence.
-- Tuned frozen and TF-IDF candidates on the tuning set; selected abstention on a
-  separate calibration set. New heads reproduce byte-for-byte. Historical v1/v2
-  artifacts remain unchanged; source-root relocation preserves checksum checks.
-- Same-input development test macro-F1: EN 0.732 → 0.979; MK Cyrillic 0.528 → 0.870;
-  pooled MK spellings 0.491 → 0.847. Unknown-input errors and low MK suggestion
-  coverage remain visible. No automatic disposal or production-quality claim.
-- `make check`: 617 Python tests passed, 389 opt-in skips, 19 Node tests passed;
-  lock/lint/format pass. Real encoders also preserve policy holds. The sandbox
-  blocked API TestClient event-loop behavior; the full suite passed outside it.
-
-Results, limitations and reproduction: [ML.md](docs/ML.md),
-[BILINGUAL_DATA.md](docs/BILINGUAL_DATA.md), and `data/ml/v3/`.
-External native review and a newly collected independent user test remain required.
-Historical LoRA results do not isolate architecture effects; the new controlled
-comparisons cover weighting and regularization for frozen/TF-IDF models, not a new
-LoRA experiment. No hosted/browser/device/container verification is claimed here.
-
-## Implemented — parking-assisted driving
-
-Owner: Codex, user-requested October 17, 2026. Driving now offers optional mapped
-parking plus walking to containers, including return-to-car walks between stops.
-The licensed, reproducible OSM/Geofabrik snapshot contains 144 public parking points;
-space availability stays unknown. English/Macedonian UI, distinct parking markers,
-source details and full-container exclusions are covered by 20 backend and seven
-focused browser tests. A live ORS two-drop-off journey also succeeded. Full
-regression/container delivery gates are recorded in [CI_STATUS.md](docs/CI_STATUS.md).
-See [PARKING.md](docs/PARKING.md) for source refresh, access and timing limits.
-
-## Implemented — JSP public transport
-
-Owner: Codex, user-requested October 17, 2026. Implemented scheduled JSP journeys,
-ORS walking connections, one same-stop transfer per collection leg, departure
-selection and bilingual itinerary/map UI. Full-container exclusions and post-trip
-check-ins apply. The live JSP/ORS smoke returned buses 18 and 8 to Karpoš yard.
-The 24 backend and seven focused browser cases pass at 320/390/1280 px. Lock,
-lint, formatting, 19 Node tests and all snapshot/coverage/upgrade reproduction
-checks pass. The local app loads both language models with routing configured.
-Delivery and full-regression gate results are recorded on
-[PR #2](https://github.com/VikiShmiki/meowchine-learning-repo/pull/2) and in
-[CI_STATUS.md](docs/CI_STATUS.md). See [TRANSIT.md](docs/TRANSIT.md) for limits.
-
-## Completed — trip completion and container check-ins
-
-Implemented the user-requested optional post-trip check-in without photos. Full
-reports now exclude the specific asset from everyone's routes immediately, with a
-12-hour expiry and reviewer rejection. Visited stops are tracked in memory across
-replans; individual drop-offs keep multi-stop trips open and the final drop-off ends
-the trip. Early completion keeps unfinished basket items. Both English and Macedonian
-copy are included. Full browser-enabled regression checks pass, followed by 41
-focused browser checks on the final interface, 28 community/backend tests, and 19
-Node tests. Lock, lint, formatting, seed/infrastructure/geography validators and
-visual checks at 320/360/1280 px passed. See [QUALITY.md](docs/QUALITY.md).
-Hosted CI is tracked in [CI_STATUS.md](docs/CI_STATUS.md).
-
-## Previous handoff — initial private-repository edition
-
-Private repository edition prepared with a fresh initial commit, current project
-documentation and a rebuilt technical report. Source data and historical experiment
-evidence keep their original dates. No pending feature work is activated.
-
-Local handoff checks passed: 564 Python tests, 19 Node tests, lock/lint/format and
-seed/infrastructure/geography validation. The 389 opt-in skips and verification
-limits are recorded in [QUALITY.md](docs/QUALITY.md).
-
-## Historical capability — v2 bilingual model integration
-
-The corrected six-class bilingual dataset has five completed seed-42–46 runs (30
-fits). Frozen MiniLM had the highest scores in those confounded configurations:
-English manual macro-F1 0.696 ± 0.000 and Macedonian 0.507 ± 0.000; grouped-test
-macro-F1 is 0.505 ± 0.000 and 0.552 ± 0.000. These are sample SDs over seeds on
-one fixed split, not independent test uncertainty. Full comparisons, timings and
-limitations are in [ML.md](docs/ML.md); dataset provenance is in
-[BILINGUAL_DATA.md](docs/BILINGUAL_DATA.md). Source artifacts and translations
-still need human/native review. Model outputs are suggestions only; policy and
-exact-item confirmation retain authority.
-
-## Current state — documentation and demo handoff
-
-The refreshed [README.md](README.md) links the source-backed
-[technical report](docs/technical-report.pdf), its [LaTeX source](docs/technical-report.tex)
-and the owner's [demo video](docs/assets/demo-app-video.mp4). The report documents
-architecture, model evidence, route/City methods, validation limits and workflow.
-This short file carries live state; [STATUS_HISTORY.md](STATUS_HISTORY.md) carries
-earlier milestones.
-
-The remaining release evidence is native Macedonian review, independent field/site
-checks and hosted/container/physical-phone verification. CI for this private
-repository is tracked separately from the historical source-repository restriction.
-See [CI_STATUS.md](docs/CI_STATUS.md).
-
-## Previous delivery — verified audit fixes (PR #24)
-
-The colleague's audited application changes and documentation are preserved. These
-include English/Macedonian UI, six disposal journeys, real collection-point routing,
-City coverage/upgrades, moderated community reports and optional accounts. The
-audit fixed blocking database calls, unnecessary SQLite writes, independent model
-health, localized API errors, evaluation provenance, environment-file ignores and
-stale documentation. See [AUDIT_FIXES.md](docs/AUDIT_FIXES.md) and
-[QUALITY.md](docs/QUALITY.md) for the original verification and remaining limits.
-
-## Reference
-
-- [Quality and validation](docs/QUALITY.md)
-- [Language/model contracts](docs/LANGUAGES.md)
-- [Delivery scope](docs/DELIVERY_PLAN.md)
-- [Historical delivery evidence](STATUS_HISTORY.md)
+See [QUALITY.md](docs/QUALITY.md) for checks, [DELIVERY_PLAN.md](docs/DELIVERY_PLAN.md)
+for scope and [STATUS_HISTORY.md](STATUS_HISTORY.md) for dated implementation notes.

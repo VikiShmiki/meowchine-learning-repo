@@ -12,7 +12,7 @@ def main() -> None:
     """Exercise both provider profiles and write only a credential-free report."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--live", action="store_true", required=True)
-    parser.add_argument("--out", type=Path, default=Path(".git/t07-live.json"))
+    parser.add_argument("--out", type=Path, default=Path("runtime/routing-live.json"))
     args = parser.parse_args()
     reports = {}
     for mode in ("walking", "driving"):

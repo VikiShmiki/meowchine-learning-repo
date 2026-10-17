@@ -1,61 +1,57 @@
-# Smart Recycling Access ? project brief
+# Najdi Frli project brief
 
-## Confirmed demo
+Najdi Frli supports correct disposal and access to collection points in Skopje,
+in English and Macedonian. Its delivered scope combines item guidance, a real-site
+map, multi-item journeys, population-weighted City coverage and upgrade suggestions.
+Hosting and physical-phone verification remain user-deferred.
 
-The October 17, 2026 edition includes all five core features: classification, real collection
-points on a map, multi-item routes, City Mode coverage, and container recommendations.
-The local demo supports Skopje in English and Macedonian; keep region and language
-configuration extensible. Hosting, iPhone rehearsal and Home Screen installation
-remain deferred. Prefer free/free-tier services for any future deployment and check
-current quotas before choosing providers. Paid services require a budget decision.
+## Citizen journey
 
-## Citizen flow
+Residents can pick a known stream or use text/optional photo guidance, confirm the
+item and its condition, then plan for up to six items from a device, map or manual
+origin. Walking, driving, scheduled JSP buses and optional parking-assisted driving
+are supported. Trips end at the last collection point. Parking journeys include
+return walks between drop-offs, but exclude the final return to the car.
 
-Classify each described item as `glass`, `plastic_metal`, `paper_tetrapak`, `general`,
-or `special_unsupported`. A broad category does not prove site compatibility: a
-bottle-only machine must not be recommended for every plastic/metal item.
+The five internal policy categories are `glass`, `plastic_metal`, `paper_tetrapak`,
+`general` and `special_unsupported`. Electronics and wearable-clothes donation are
+distinct citizen flows with their own item and destination evidence. Learned object
+labels and broad map categories do not establish acceptance.
 
-Uncertainty requires a clarification question or manual selection. Select abstention
-thresholds and calibration on validation data. Never present heuristic scores as
-calibrated probabilities. Never default uncertainty or hazardous items to general
-waste. Specialist items receive guidance and only facilities explicitly accepting
-that specific waste type. If no verified facility exists, say so. Manual selection
-must not bypass known hazardous-item restrictions.
+Uncertainty requires clarification or manual selection. Specialist/unsafe signals
+cannot be overridden by selecting an ordinary bin. General-waste navigation requires
+explicit acknowledgment of unverified acceptance and is never an automatic fallback.
+When no compatible destination or route exists, explain the gap rather than invent one.
 
-Support current location and manual starting points. Multi-item routes support
-walking and driving, ending at the final collection point. Use actual travel networks,
-consolidate shared stops, respect access/direction restrictions, and disclose
-unreachable items or approximate optimization.
+After a journey, residents may report visited containers without photos. A full
+report immediately excludes that asset for everyone for up to 12 hours, subject to
+reviewer rejection. Skipping the check-in submits nothing. Optional accounts save
+material-only activity and self-reported badges; guests retain the core flows.
 
-## Infrastructure
+## Infrastructure and City Mode
 
-The shared snapshot contains 1,596 City assets at 1,583 coordinate-defined sites:
-538 Pakomak recycling assets and 1,058 general-waste assets. Recycling includes
-407 glass assets, 124 accepting bottles/cans, and 7 paper assets. One metro asset
-is separate. Counts describe source records, not verified operational availability.
-See [snapshot documentation](data/infrastructure/skopje-2026-09-19/README.md) for
-provenance and limitations. The real snapshot API, citizen map and confirmed-item routing use the versioned
-local infrastructure and acceptance policy.
+The City snapshot has 1,596 assets at 1,583 coordinate-defined sites: 538 Pakomak
+recycling assets and 1,058 general-waste assets. One metro asset is separate.
+Citizen routing adds documented electronics/clothing destinations. Counts describe
+source records, not current operating facilities. See the
+[snapshot documentation](data/infrastructure/skopje-2026-09-19/README.md).
 
-## City Mode
+City Mode reports the modeled population within a ten-minute pedestrian-network
+walk of a compatible site. It compares additive upgrades at existing general-waste
+sites without removing their service, with material and municipal coverage,
+percentage-point gains, shortfalls and solver limits. Unknown population and
+unverified access connectors remain explicit. See [CITY_MODE.md](docs/CITY_MODE.md).
 
-For each material, measure the percentage of the City's population within a 10-minute
-walk of a compatible site along the pedestrian network. Recommend N upgrades at
-existing general-waste sites without removing their existing service. Apply the
-configurable municipal equity policy in [CITY_MODE.md](docs/CITY_MODE.md).
+## Engineering and evidence
 
-Show current/projected coverage, percentage-point gain, recommended sites, municipal
-shortfalls, and underserved areas. Acquire and validate population, boundaries, and
-network inputs. Never silently substitute straight-line or unweighted coverage;
-state missing data and label approximations explicitly.
+One FastAPI service serves a build-free client, versioned policy/data and optional
+development models. Training and geographic preparation happen offline. Preserve
+source dates, checksums, measured evaluation history and licensing limitations.
+Never represent source-recorded access, scheduled arrivals or parking spaces as live
+verified availability. Follow [ENGINEERING.md](docs/ENGINEERING.md).
 
-## Delivery boundaries
-
-Correction feedback and public voting remain deferred beyond this edition.
-Optional accounts, material-only activity and self-reported badges are implemented.
-Live truck tracking and native App Store distribution remain outside the demo plan. Installation does not promise offline routing or classification.
-
-Use one FastAPI service, a replaceable classifier, reviewed local mappings, and
-repeatable rule/TF-IDF evaluation before transformers. Follow
-[ENGINEERING.md](docs/ENGINEERING.md) and [DELIVERY_PLAN.md](docs/DELIVERY_PLAN.md).
-Requirements are not implemented capabilities; STATUS.md records what actually works.
+Independent model/native-language review, physical site checks and deployment/device
+evidence remain separate from automated checks. Public voting, correction-feedback
+training, live vehicle tracking and native app distribution are outside delivered
+scope. [STATUS.md](STATUS.md) and [DELIVERY_PLAN.md](docs/DELIVERY_PLAN.md) record the
+current delivery boundaries.

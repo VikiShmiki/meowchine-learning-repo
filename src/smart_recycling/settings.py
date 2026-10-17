@@ -35,12 +35,6 @@ class Settings:
     openai_api_key: str = field(repr=False, default="")
     openai_vision_model: str = "gpt-5.6-luna"
     minilm_suggestions_enabled: bool = True
-    minilm_artifact_path: Path = Path(
-        "artifacts/models/minilm_frozen_four_class_development.joblib"
-    )
-    minilm_metadata_path: Path = Path(
-        "artifacts/models/minilm_frozen_four_class_development.metadata.json"
-    )
     minilm_model_path: Path | None = None
 
     @classmethod
@@ -63,18 +57,6 @@ class Settings:
             )
         )
         policy = Path(os.getenv("SRA_POLICY_PATH", "data/policy/skopje_v1.json"))
-        minilm_artifact = Path(
-            os.getenv(
-                "SRA_MINILM_ARTIFACT_PATH",
-                "artifacts/models/minilm_frozen_four_class_development.joblib",
-            )
-        )
-        minilm_metadata = Path(
-            os.getenv(
-                "SRA_MINILM_METADATA_PATH",
-                "artifacts/models/minilm_frozen_four_class_development.metadata.json",
-            )
-        )
         configured_model_path = os.getenv("SRA_MINILM_MODEL_PATH", "").strip()
 
         return cls(
@@ -93,12 +75,6 @@ class Settings:
             openai_api_key=os.getenv("OPENAI_API_KEY", "").strip(),
             openai_vision_model=os.getenv("SRA_OPENAI_VISION_MODEL", "gpt-5.6-luna").strip(),
             minilm_suggestions_enabled=_enabled("SRA_MINILM_SUGGESTIONS", True),
-            minilm_artifact_path=(
-                minilm_artifact if minilm_artifact.is_absolute() else PROJECT_ROOT / minilm_artifact
-            ),
-            minilm_metadata_path=(
-                minilm_metadata if minilm_metadata.is_absolute() else PROJECT_ROOT / minilm_metadata
-            ),
             minilm_model_path=(
                 (PROJECT_ROOT / configured_model_path).resolve() if configured_model_path else None
             ),

@@ -146,7 +146,7 @@ def test_language_switch_updates_dynamic_errors_and_keeps_form_input(page, web_u
 
 def test_static_localization_has_no_untranslated_app_copy(page, web_url):
     allowed = re.compile(
-        r"^(goodsort|English|Македонски|Leaflet|OpenStreetMap|©|Nula Otpad|"
+        r"^(Najdi Frli|English|Македонски|Leaflet|OpenStreetMap|©|Nula Otpad|"
         r"WorldPop|Tetra Pak|\W*\d)"
     )
     for path in ["/", "/city", "/review"]:
@@ -177,6 +177,22 @@ def test_catalog_failure_keeps_english_controls_and_explains_retry(page, web_url
     page.locator(".language-switch").select_option("mk")
     expect(page.locator("html")).to_have_attribute("lang", "en")
     expect(page.get_by_role("button", name="Sign in", exact=True)).to_be_visible()
+
+
+def test_rename_preserves_existing_language_preference(page, web_url):
+    page.goto(web_url)
+    page.evaluate("""() => {
+        localStorage.setItem('goodsort-language', 'mk');
+        localStorage.removeItem('najdi-frli-language');
+    }""")
+    page.reload()
+    expect(page.locator("html")).to_have_attribute("lang", "mk")
+    assert page.evaluate("localStorage.getItem('najdi-frli-language')") == "mk"
+    assert page.evaluate("localStorage.getItem('goodsort-language')") is None
+    switch(page, "en")
+    page.reload()
+    expect(page.locator("html")).to_have_attribute("lang", "en")
+    assert page.evaluate("localStorage.getItem('najdi-frli-language')") == "en"
 
 
 def test_cyrillic_location_search_and_language_switch_keep_query(page, web_url):

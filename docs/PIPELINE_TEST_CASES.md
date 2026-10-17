@@ -81,4 +81,4 @@ The test keeps the server's configured vision model; it does not train or switch
 
 See [recorded results and limitations](PIPELINE_TEST_RESULTS.md). Synthetic images are
 smoke-test examples, not an independent accuracy benchmark. Rehearse with consenting real
-phone photos and the actual demo device before claiming production reliability.
+phone photos and the actual prototype device before claiming production reliability.

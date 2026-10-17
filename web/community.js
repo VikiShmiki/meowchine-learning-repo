@@ -13,7 +13,7 @@
     return node;
   };
   async function request(url, options = {}) {
-    const response = await (globalThis.GoodsortI18n?.fetch || fetch)(url, { ...options, signal: options.signal || AbortSignal.timeout(15000), cache: "no-store" });
+    const response = await (globalThis.NajdiFrliI18n?.fetch || fetch)(url, { ...options, signal: options.signal || AbortSignal.timeout(15000), cache: "no-store" });
     const data = response.status === 204 ? {} : await response.json();
     if (!response.ok) {
       const error = new Error(typeof data.detail === "string" ? data.detail : data.detail?.message || "Could not save. Please retry.");
@@ -74,7 +74,7 @@
         const source = value.source === "reviewed_community" ? "Reviewed community report"
           : value.source === "community_report" ? "Community report · not yet reviewed" : "Your report · awaiting review";
         freshness.append(el("span", source), document.createTextNode(" · "));
-        const time = el("time", new Date(value.reported_at * 1000).toLocaleString(globalThis.GoodsortI18n?.locale || "en-GB"));
+        const time = el("time", new Date(value.reported_at * 1000).toLocaleString(globalThis.NajdiFrliI18n?.locale || "en-GB"));
         time.dateTime = new Date(value.reported_at * 1000).toISOString();
         time.setAttribute("translate", "no"); freshness.append(time);
       }

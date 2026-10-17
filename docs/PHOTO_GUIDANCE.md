@@ -6,14 +6,14 @@ reviewed disposal policy or the existing text guidance.
 
 ## Configuration
 
-Set the mentor-provided key in the ignored project-root `.env` file:
+Set your server-side key in the ignored project-root `.env` file:
 
 ```dotenv
 OPENAI_API_KEY=replace-with-the-project-key
 SRA_OPENAI_VISION_MODEL=gpt-5.6-luna
 ```
 
-Restart `make run` after changing the file. The key is read only by FastAPI and is
+Restart the local launcher/server after changing the file. The key is read only by FastAPI and is
 never included in the HTML or API responses. A missing/rejected key disables photo
 suggestions without affecting manual guidance, maps, City Mode or routing.
 
@@ -47,7 +47,7 @@ verification of image contents. Photo-model quality still requires the manual se
 
 ## Manual test set
 
-Use phone photos from the expected demo environment where possible. Keep each original
+Use phone photos from the expected prototype environment where possible. Keep each original
 and expected observation outside Git unless its license and consent are documented.
 
 | Photo | Expected behavior |
@@ -68,4 +68,4 @@ and expected observation outside Git unless its license and consent are document
 
 Record incorrect-stream suggestions, missed items, latency and API errors. Generated or
 stock images are useful for UI smoke tests, but should not replace real phone photos for
-the demo decision.
+the prototype decision.

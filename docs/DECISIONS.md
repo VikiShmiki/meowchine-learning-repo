@@ -1,6 +1,23 @@
 # Decisions
 
-## D-010 — Confirmed demo scope (2026-09-19)
+Entries are dated decisions, not an active backlog. Later entries supersede earlier
+scope or delivery assumptions; current behavior is in [PRODUCT.md](PRODUCT.md).
+
+## 2026-10-17: Najdi Frli name and current delivery scope
+
+Rename the app, distribution and documentation to Najdi Frli; preserve the GitHub
+repository URL, `smart_recycling` import path and `SRA_*` settings for compatibility.
+Walking/driving, scheduled JSP, parking, reports and optional accounts are delivered.
+Public hosting and physical-phone/installation work remain user-deferred.
+
+## 2026-10-17: Suggestions remain subordinate to acceptance
+
+Current six-object development-v3-audit heads use verified encoders and separate
+calibration with abstention. Their suggestions do not replace five-category policy,
+exact-item/condition confirmation or asset acceptance. Preserve historical artifacts
+and review holds; require fresh independent/native-reviewed evidence for quality claims.
+
+## D-010 — Confirmed prototype scope (2026-09-19)
 
 Skopje in English by September 22; all five core capabilities are required.
 Citizen routes support walking and driving and end at the last collection point.
@@ -20,9 +37,9 @@ one line of consequence.
 
 ## D-001 — Mobile client, one backend service (2026-09-19)
 
-A mobile client calls FastAPI over HTTPS; the build-free PWA is the reference client
+A mobile client calls FastAPI over HTTPS; the build-free web page is the reference client
 until an installable app is required. Revisit client technology or service splits only
-after the validated demo exposes a concrete limitation.
+after the validated prototype exposes a concrete limitation.
 
 ## D-002 — Baselines before transformers (2026-09-19)
 
@@ -67,12 +84,13 @@ ground truth.
 All variants of one normalized item stay in one split. Accept imperfect per-class
 ratios rather than inflate evaluation through template or item leakage.
 
-## D-013 ? iPhone and free-tier demo delivery (2026-09-19)
+## D-013 — Original iPhone and free-tier delivery target (2026-09-19)
 
-Demo on iPhone with HTTPS and Safari Home Screen installation; no hosting exists yet.
+Original target: iPhone with HTTPS and Safari Home Screen installation; hosting
+was unavailable. This target is now user-deferred, as recorded above.
 Prefer free/free-tier hosting/maps/routing; defer feedback and voting beyond September 22.
 
-## D-014 ? Uncertainty and specialist acceptance (2026-09-19)
+## D-014 — Uncertainty and specialist acceptance (2026-09-19)
 
 Uncertain items require clarification/manual selection; specialist items get guidance.
 Only explicitly accepting specialist facilities may be shown; no general-waste fallback.
