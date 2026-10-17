@@ -24,8 +24,9 @@ navigation needs explicit acknowledgment of unverified acceptance and is never a
 fallback for held items. Source and method details are expandable; essential
 confirmation, uncertainty and location-sharing notices remain beside their actions.
 
-Visited stops can be marked and the journey finished. Optional post-trip reports
-cover only visited containers; full reports remove the asset from public routing
+Numbered, material-colored stops offer drop-off completion or problem reporting.
+An optional popup asks whether there is still space after disposal; full reports
+remove the asset from public routing
 for up to 12 hours, subject to review. Guests can use the core flow. Accounts add
 material-only activity and self-reported badges without recording location history.
 

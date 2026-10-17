@@ -264,7 +264,9 @@ def test_general_and_electronics_complete_journey(page, web_url, tmp_path, width
     electronics = next(stop for stop in trip["stops"] if "electronics" in stop["item_kinds"])
     assert electronics["site_id"] == "ewaste-karpos-yard"
     expect(page.locator("#trip-result")).to_contain_text("Karpos recycling yard")
-    expect(page.locator("#trip-result")).to_contain_text("Drop off: Electronics")
+    expect(
+        page.locator("#trip-result .stop-material-chips").get_by_text("Electronics", exact=True)
+    ).to_be_visible()
     assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
     assert not errors
 

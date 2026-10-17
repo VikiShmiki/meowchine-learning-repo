@@ -65,14 +65,13 @@ def test_parking_map_walk_completion_and_full_exclusion(page, web_url, width, la
             )
         )
     page.get_by_role(
-        "button", name="Dropped these off" if language == "en" else "Ги предадов", exact=True
+        "button", name="Dropped off" if language == "en" else "Ги предадов", exact=True
     ).click()
     expect(page.locator("#trip-checkin")).to_be_visible()
-    row = page.locator("#trip-checkin .condition-row").first
+    row = page.locator("#stop-report-dialog .stop-report-container")
     asset = row.get_attribute("data-asset-id")
-    row.locator("select").select_option("full")
-    row.locator("button").click()
-    expect(row.locator("button")).to_be_disabled()
+    with page.expect_response("**/api/v1/container-reports"):
+        row.locator("button[data-condition=full]").click()
     result = page.request.post(
         web_url + "/api/v1/trips",
         data={

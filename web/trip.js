@@ -7,7 +7,6 @@
   let unconfirmedPicks = false;
   let editingOrigin = false;
   let currentRoute = null;
-  const visitedStops = new Map();
   const completedStops = new Set();
   let savingDropoffs = 0;
   const kindNames = { empty_glass_packaging: "Glass bottle/jar", empty_plastic_bottle: "Plastic bottle",
@@ -38,7 +37,7 @@
     $("plan-trip").disabled = !configured || !basket.length || !origin || Boolean(pending) || Boolean(savingDropoffs) || unconfirmedPicks || editingOrigin;
     $("plan-trip").textContent = pending ? "Finding route…" : "Find my route";
     $("plan-trip").setAttribute("aria-busy", String(Boolean(pending)));
-    $("trip-completion").hidden = !currentRoute && !visitedStops.size;
+    $("trip-completion").hidden = !currentRoute;
     $("finish-trip").disabled = Boolean(savingDropoffs || pending);
   }
   function invalidate() {
@@ -55,20 +54,11 @@
   }
   function finishTrip({ allDropped = false, saved = false } = {}) {
     if (savingDropoffs) return;
-    const ids = [...new Set([...visitedStops.values()].flat())];
-    visitedStops.clear();
     invalidate();
     const panel = $("trip-checkin");
     const heading = node("h2", "Trip finished"); heading.id = "checkin-heading"; heading.tabIndex = -1;
     panel.replaceChildren(heading);
-    if (ids.length) {
-      panel.append(node("p", "How were the containers you visited?"));
-      panel.append(node("p", "Optional: report only what you saw. A full container is immediately excluded from everyone's routes for up to 12 hours. No photo needed."));
-      panel.append(CommunityUI.checkIn(ids));
-    } else {
-      panel.append(node("p", "No stops were marked visited. No container reports have been sent."));
-    }
-    const done = node("button", "Done / skip remaining"); done.type = "button"; done.className = "secondary";
+    const done = node("button", "Done"); done.type = "button"; done.className = "secondary";
     done.addEventListener("click", () => {
       panel.hidden = true; panel.replaceChildren();
       $("basket-add-item").focus({preventScroll: true});
@@ -250,39 +240,39 @@
         row.tabIndex = -1;
         const appearance = SiteData.stopAppearance(stop.item_kinds);
         row.style.setProperty("--stop-fill", appearance.background);
+        row.style.setProperty("--stop-surface", appearance.surface);
         row.style.setProperty("--stop-ink", appearance.color);
         row.dataset.materials = appearance.materials.join(" ");
-        row.append(node("strong", stop.name), node("p", `Drop off: ${stop.item_kinds.map((kind) => kindNames[kind] || kind).join(", ")}`));
+        const title = node("div", ""); title.className = "stop-card-heading";
+        const number = node("span", String(index + 1)); number.className = "stop-card-number";
+        title.append(number, node("strong", stop.name)); row.append(title);
+        const materials = node("div", ""); materials.className = "stop-material-chips";
+        for (const kind of stop.item_kinds) {
+          const chip = node("span", kindNames[kind] || kind);
+          const style = SiteData.stopAppearance([kind]);
+          chip.style.setProperty("--material-color", SiteData.materialColors[style.materials[0]]);
+          materials.append(chip);
+        }
+        row.append(materials);
         if (body.mode === "transit") row.append(transitItinerary(body.legs.filter(leg => leg.site_id === stop.site_id)));
         const parking = body.parking?.find(visit => visit.site_id === stop.site_id);
         if (parking) row.append(parkingItinerary(parking, index));
-        const stopKey = [...(stop.asset_ids || [])].sort().join("|");
-        const visitLabel = node("label", ""); visitLabel.className = "stop-visited";
-        const visited = document.createElement("input"); visited.type = "checkbox";
-        visited.checked = visitedStops.has(stopKey);
-        visited.addEventListener("change", () => {
-          if (visited.checked) visitedStops.set(stopKey, [...stop.asset_ids]);
-          else visitedStops.delete(stopKey);
-          updatePlanButton();
-        });
-        visitLabel.append(visited, node("span", "I visited this stop")); row.append(visitLabel);
-        if (globalThis.CommunityUI && stop.asset_ids?.length) {
-          const conditions = CommunityUI.containerControl(stop.asset_ids);
-          const reportProblem = node("button", "Report a problem"); reportProblem.type = "button"; reportProblem.className = "secondary";
-          reportProblem.addEventListener("click", () => {
-            conditions.open = true;
-            conditions.querySelector("summary").focus();
-          });
-          row.append(reportProblem, conditions);
-        }
-        const completed = node("button", "Dropped these off"); completed.className = "secondary"; completed.type = "button";
+        const actions = node("div", ""); actions.className = "stop-actions";
+        const completed = node("button", "Dropped off"); completed.type = "button";
+        const reportProblem = node("button", "Report a problem"); reportProblem.type = "button"; reportProblem.className = "secondary report-problem-button";
+        reportProblem.setAttribute("aria-haspopup", "dialog");
+        completed.setAttribute("aria-haspopup", "dialog");
+        const report = (problem, opener) => {
+          if (globalThis.CommunityUI && stop.asset_ids?.length) CommunityUI.reportStop(stop.asset_ids,
+            {problem, number: index + 1, appearance, opener});
+        };
+        reportProblem.addEventListener("click", () => report(true, reportProblem));
+        actions.append(completed, reportProblem);
         const skipSave = node("button", "Mark without saving"); skipSave.type = "button"; skipSave.className = "secondary"; skipSave.hidden = true;
         const saveMessage = node("p", ""); saveMessage.setAttribute("role", "status");
         function finish(saved = false) {
           if (current !== generation || completedStops.has(stop)) return;
           completedStops.add(stop);
-          visitedStops.set(stopKey, [...stop.asset_ids]);
-          visited.checked = true; visited.disabled = true;
           basket = basket.filter(item => !stop.item_kinds.includes(item.material === "clothes" ? "wearable_clothes" : item.material ? item.small_only ? "small_electronics" : item.material : item.manual_kind));
           completed.disabled = true; completed.textContent = "Drop-off completed"; skipSave.hidden = true;
           row.dataset.completed = "true";
@@ -290,6 +280,7 @@
           renderBasket();
           if (!basket.length) finishTrip({allDropped: true, saved});
           else $("trip-status").textContent = "Stop completed. Continue to your next stop, or finish your trip.";
+          report(false, basket.length ? reportProblem : $("checkin-heading"));
         }
         completed.addEventListener("click", async () => {
           if (completedStops.has(stop) || savingDropoffs) return;
@@ -308,18 +299,17 @@
           }
         });
         skipSave.addEventListener("click", () => { if (!savingDropoffs) finish(); });
-        row.append(completed, skipSave, saveMessage);
-        for (const note of stop.arrival_notes || []) row.append(node("p", note));
+        row.append(actions, skipSave, saveMessage);
         if (stop.unverified_materials?.includes("general")) {
           const warning = node("p", "General waste: acceptance unverified. Follow bin instructions. No hazardous, medical or bulky waste.");
-          warning.className = "acceptance-warning";
-          row.append(warning);
+          warning.className = "acceptance-warning"; row.append(warning);
         }
-        row.append(node("p", `Recorded site is ${stop.network_access_gap_m} m from the route endpoint; access is unverified.`));
         const limits = document.createElement("details");
-        limits.append(node("summary", "Documented acceptance"));
+        limits.append(node("summary", "Stop details"));
+        for (const note of stop.arrival_notes || []) limits.append(node("p", note));
+        limits.append(node("p", `Recorded site is ${stop.network_access_gap_m} m from the route endpoint; access is unverified.`));
         for (const limit of stop.acceptance_limits) limits.append(node("p", limit));
-        if (stop.acceptance_limits.length) row.append(limits);
+        row.append(limits);
         stops.append(row);
       }
       result.append(stops);

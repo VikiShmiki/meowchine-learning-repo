@@ -13,8 +13,8 @@
 .citizen .container-condition > summary { flex-wrap: wrap; overflow-wrap: anywhere; gap: 8px; }
 .condition-row { display: grid; gap: 8px; padding: 14px 0; border-top: 1px solid #dce1d5; }
 .condition-row strong, .condition-material { overflow-wrap: anywhere; }
-.condition-material { font-size: 12px; }
-.condition-badge { width: fit-content; border-radius: 20px; padding: 5px 10px; background: #eef0e9; font-size: 12px; }
+.condition-material { font-size: 14px; color: #344b37; }
+.condition-badge { width: fit-content; border-radius: 20px; padding: 6px 12px; background: #eef0e9; color: #263c30; font-size: 14px; font-weight: 700; }
 .condition-badge[data-condition=available] { background: #e2edd4; color: #294a34; }
 .condition-badge[data-condition=full], .condition-badge[data-condition=damaged], .condition-badge[data-condition=inaccessible] { background: #f7e6dc; color: #793c28; }
 .condition-form { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -28,6 +28,13 @@
 .review-card img { display: block; max-width: 100%; max-height: 300px; margin-top: 12px; }
 .review-card .button-row { flex-wrap: wrap; }
 .condition-freshness { font-size: 12px; line-height: 1.5; color: #52624d; }
+.citizen .condition-row > strong { font-size: 16px; line-height: 1.4; }
+.citizen .condition-row .condition-freshness, .citizen #trip-result .condition-row .condition-freshness,
+.citizen .condition-row [role=status], .citizen #trip-result .condition-row [role=status] { margin: 4px 0; color: #344b37; font-size: 14px; line-height: 1.5; }
+.citizen .condition-form select, .citizen .condition-form button { font-size: 16px; min-height: 48px; }
+.citizen .condition-row .condition-form { margin: 8px 0; }
+.citizen .condition-report-details > summary { font-size: 14px; color: #344b37; }
+.citizen .condition-row .condition-history, .citizen #trip-result .condition-row .condition-history { font-size: 13px; line-height: 1.6; color: #344b37; }
 .condition-form select, .condition-form button { min-height: 44px; max-width: 100%; }
 .trip-completion { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin: 24px 0; }
 .trip-completion p { flex: 1 1 260px; max-width: 65ch; }
@@ -38,10 +45,33 @@
 .trip-checkin .condition-row { padding: 18px 0; }
 .trip-checkin > button { margin-top: 18px; min-height: 44px; }
 .trip-completion[hidden], .trip-checkin[hidden] { display: none; }
-.stop-visited { display: flex; align-items: center; gap: 10px; min-height: 44px; margin: 10px 0; cursor: pointer; }
-.citizen .stop-visited input[type=checkbox] { flex: 0 0 20px; width: 20px; height: 20px; min-height: 20px; margin: 0; padding: 0; accent-color: #2f4d35; }
+/* Compact trip cards and the optional per-container check-in. */
+.citizen #trip-result .route-stop-list > li { padding: 18px; background: var(--stop-surface, #fffefa); }
+.citizen .route-stop-list > li::before { content: none; }
+.stop-card-heading, .stop-report-heading { display: flex; align-items: center; gap: 12px; }
+.stop-card-heading > strong { font-size: 18px; line-height: 1.35; overflow-wrap: anywhere; }
+.stop-card-number { display: grid; place-items: center; flex: 0 0 40px; height: 40px; border-radius: 50%; background: var(--stop-fill); color: var(--stop-ink); font-size: 20px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.stop-material-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+.stop-material-chips > span { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border: 1px solid var(--material-color); border-radius: 9px; color: #263c30; background: #fffefa; font-size: 14px; font-weight: 650; }
+.stop-material-chips > span::before { content: ""; flex: 0 0 10px; height: 10px; border-radius: 50%; background: var(--material-color); }
+.stop-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.citizen .stop-actions button { flex: 1 1 140px; min-height: 44px; padding: 10px 12px; font-size: 14px; font-weight: 700; }
+.citizen .stop-actions .report-problem-button { background: #fff0e5; color: #87391f; border-color: #d9a084; }
+.citizen #trip-result .route-stop-list p:empty { display: none; }
+.citizen #trip-result .route-stop-list details { margin-top: 12px; }
+.stop-report-dialog { box-sizing: border-box; width: min(420px, calc(100% - 24px)); max-height: calc(100dvh - 32px); overflow-y: auto; padding: 24px; border: 1px solid #dce1d5; border-radius: 20px; background: #fffefa; color: #263c30; box-shadow: 0 18px 70px #182b2838; }
+.stop-report-dialog::backdrop { background: #182b2866; }
+.citizen .stop-report-dialog h2 { font-size: 23px; line-height: 1.25; margin: 0; }
+.citizen .stop-report-dialog p { font-size: 15px; line-height: 1.5; overflow-wrap: anywhere; }
+.stop-report-materials { font-weight: 700; }
+.stop-report-choices { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 12px; }
+.citizen .stop-report-choices button { flex: 1 1 130px; min-height: 52px; padding: 12px; font-size: 17px; font-weight: 700; }
+.citizen .stop-report-choices [data-condition=full], .citizen .stop-report-choices [data-condition=damaged], .citizen .stop-report-choices [data-condition=inaccessible] { background: #a34227; color: white; border-color: #a34227; }
+.citizen .stop-report-dialog > button { width: 100%; min-height: 44px; }
+.stop-report-dialog [role=status]:empty { display: none; }
 .route-stop-list li[data-completed=true] { border-color: #7c9e6d !important; }
 @media (max-width: 480px) {
   .trip-checkin { padding: 16px; }
   .trip-completion button { width: 100%; }
+  .stop-report-dialog { padding: 18px; }
 }

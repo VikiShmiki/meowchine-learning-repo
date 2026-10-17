@@ -236,14 +236,24 @@ class CommunityStore:
             return row[0] if row else None
 
     def statuses(self, client: str = "") -> tuple[dict, str]:
+        values, _, version = self.status_snapshot(client)
+        return values, version
+
+    def status_snapshot(self, client: str = "") -> tuple[dict, dict, str]:
+        """Keep reviewed clearances after expiry so resolved problems stay resolved.
+
+        Stale observations are context for a new check, never routing exclusions
+        or evidence that collection happened. No reporter identities are exposed.
+        """
+        now = time.time()
         with self.connection() as db:
             rows = db.execute(
-                """SELECT * FROM reports WHERE kind='container' AND expires>?
+                """SELECT * FROM reports WHERE kind='container'
                 AND (state='approved' OR (state='pending' AND (client=? OR condition='full')))
                 ORDER BY created,id""",
-                (time.time(), client),
+                (client,),
             ).fetchall()
-        accepted, personal = {}, {}
+        accepted, personal, history, personal_history, cleared_at = {}, {}, {}, {}, {}
         for row in rows:
             value = {
                 "condition": row["condition"],
@@ -260,13 +270,30 @@ class CommunityStore:
             # Pending full reports are public exclusions, not verified observations.
             # A newer reviewed availability report can reopen an older full report.
             shared = row["state"] == "approved" or row["condition"] == "full"
-            (accepted if shared else personal)[row["asset_id"]] = value
+            asset_id = row["asset_id"]
+            if shared:
+                history[asset_id] = value
+                if value["condition"] == "available":
+                    # A reviewed clearance resolves older issues even after its
+                    # own freshness window ends. It cannot prove current availability.
+                    cleared_at[asset_id] = value["reported_at"]
+                    accepted.pop(asset_id, None)
+                if value["expires"] > now:
+                    accepted[asset_id] = value
+            elif value["condition"] != "available":
+                personal_history[asset_id] = value
+                if value["expires"] > now:
+                    personal[asset_id] = value
         for asset_id, value in personal.items():
             # Personal positive reports cannot reopen a globally reported problem.
-            if (
-                value["condition"] != "available"
-                and value["reported_at"] > accepted.get(asset_id, {"reported_at": 0})["reported_at"]
+            if value["reported_at"] > max(
+                accepted.get(asset_id, {"reported_at": 0})["reported_at"],
+                cleared_at.get(asset_id, 0),
             ):
                 accepted[asset_id] = value
+        for asset_id, value in personal_history.items():
+            if value["reported_at"] > history.get(asset_id, {"reported_at": 0})["reported_at"]:
+                history[asset_id] = value
+        rechecks = {key: value for key, value in history.items() if key not in accepted}
         version = hashlib.sha256(json.dumps(accepted, sort_keys=True).encode()).hexdigest()[:16]
-        return accepted, version
+        return accepted, rechecks, version

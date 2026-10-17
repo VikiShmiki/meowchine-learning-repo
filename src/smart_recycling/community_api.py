@@ -63,8 +63,8 @@ def router(store: CommunityStore, assets: dict) -> APIRouter:
     @result.get("/api/v1/container-statuses")
     def statuses(request: Request, response: Response):
         response.headers["Cache-Control"] = "no-store"
-        values, version = store.statuses(peer_key(store, request))
-        return {"statuses": values, "version": version}
+        values, rechecks, version = store.status_snapshot(peer_key(store, request))
+        return {"statuses": values, "rechecks": rechecks, "version": version}
 
     @result.post("/api/v1/container-reports", status_code=201)
     def container(payload: ContainerReport, request: Request):
