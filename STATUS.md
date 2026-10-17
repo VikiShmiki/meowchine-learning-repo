@@ -23,6 +23,13 @@ in ignored `.env` or server configuration. See [README.md](README.md).
 
 ## October 17 maintenance audit
 
+New app identity: a generated recycling-loop/location-pin icon replaces the
+header arrow in Recycle and City coverage. Matching browser-tab and Apple touch
+icons are linked on all three pages. Source artwork and generation prompt are in
+`assets/brand/`; web-size exports are in `web/brand/`. All 12 bilingual header
+layout checks pass at 320, 390 and 1280 px; the mobile preview and small-size
+exports were visually inspected.
+
 Trip reporting now uses numbered, material-colored cards with two actions:
 **Dropped off** and **Report a problem**. Drop-offs open a small optional
 **Still space / Full** dialog, one identified container at a time. The old visit

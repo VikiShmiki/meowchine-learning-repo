@@ -1149,7 +1149,10 @@ def test_brand_visible_lettering_is_centered(page, web_url, tmp_path, width, pat
     expect(brand).to_have_attribute("href", "/")
     assert "Najdi Frli" in page.title()
     circle = brand.locator(".brand-mark").bounding_box()
-    arrow = brand.locator("svg").bounding_box()
+    icon = brand.locator("img")
+    expect(icon).to_be_visible()
+    assert icon.evaluate("img => img.complete && img.naturalWidth > 0")
+    arrow = icon.bounding_box()
     for axis, size in (("x", "width"), ("y", "height")):
         assert abs(circle[axis] + circle[size] / 2 - arrow[axis] - arrow[size] / 2) < 0.6
 

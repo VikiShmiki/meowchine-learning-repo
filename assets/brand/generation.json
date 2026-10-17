@@ -1,0 +1,11 @@
+{
+  "tool": "built-in image_gen",
+  "master": "najdi-frli-master.png",
+  "exports": {
+    "favicon-32.png": 32,
+    "logo-96.png": 96,
+    "apple-touch-icon.png": 180,
+    "app-icon-512.png": 512
+  },
+  "prompt": "Use case: logo-brand. Create ONE polished production app icon for Najdi Frli, a friendly Skopje app that helps people find recycling drop-off points. Square 1024x1024 canvas. A striking, original, extremely simple emblem: a bold continuous dark forest-green loop shaped as a rounded map location pin, subtly becoming a clockwise circular arrow at its top-right, conveying finding a place and reuse. A single clean warm-ivory leaf-shaped negative space in the center. Flat vector-like geometry, confident thick shapes, soft corners, precise optical balance, memorable silhouette, premium contemporary civic app identity. Full-bleed solid warm pale butter-yellow background (#f1ecc1), forest green mark (#2f4d35), ivory negative space (#fffefa). Emblem centered and occupies about 65% of canvas, generous safe area for a circular or rounded-square OS mask. No lettering, no text, no wordmark, no mockup, no phone, no grid, no border, no extruded 3D, no gradients, no texture, no shadow, no extra symbols, no multiple designs. The final icon must remain clear at 32px. Output only the square icon artwork."
+}
