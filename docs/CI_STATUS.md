@@ -11,6 +11,9 @@ executed its jobs: Docker failed because `.dockerignore` excluded the bilingual
 model heads, and six browser cases failed on narrow-screen layouts. The trip-check-in
 delivery fixes both causes. Its own quality/container results should be read from
 the latest run on the delivery revision, independently of those historical results.
+The first feature run built the image but exposed an early connection reset before
+the app was ready. The smoke test's bounded startup wait now handles that transient
+failure, with six regression tests; it still fails if readiness never arrives.
 
 The source repository's earlier account restriction and paused workflow are
 historical evidence, preserved in [UPSTREAM_CI_STATUS.md](UPSTREAM_CI_STATUS.md).

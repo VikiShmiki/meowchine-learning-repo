@@ -3,6 +3,7 @@
 import argparse
 import json
 import time
+from http.client import HTTPException
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
@@ -19,6 +20,18 @@ def get(base, path, payload=None):
         )
 
 
+def wait_for_health(url, wait_seconds):
+    """Allow connection resets while a container's app is still starting."""
+    deadline = time.monotonic() + wait_seconds
+    while True:
+        try:
+            return get(url, "/health")
+        except (URLError, TimeoutError, ConnectionError, HTTPException):
+            if time.monotonic() >= deadline:
+                raise SystemExit("FAIL: application did not become healthy") from None
+            time.sleep(1)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--url", default="http://127.0.0.1:8000")
@@ -26,15 +39,7 @@ def main():
     parser.add_argument("--require-minilm", action="store_true")
     parser.add_argument("--require-macedonian", action="store_true")
     args = parser.parse_args()
-    deadline = time.monotonic() + args.wait_seconds
-    while True:
-        try:
-            health = get(args.url, "/health")
-            break
-        except (URLError, TimeoutError):
-            if time.monotonic() >= deadline:
-                raise SystemExit("FAIL: application did not become healthy") from None
-            time.sleep(1)
+    health = wait_for_health(args.url, args.wait_seconds)
     assert health["status"] == "ok" and health["site_count"] > 0
     if args.require_minilm:
         assert health["text_suggestion_model"] != "unavailable", "MiniLM failed to load"
