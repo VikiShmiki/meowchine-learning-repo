@@ -42,6 +42,7 @@ COPY data/policy ./data/policy
 COPY data/classifier ./data/classifier
 COPY data/coverage ./data/coverage
 COPY data/upgrades ./data/upgrades
+COPY data/parking ./data/parking
 COPY web ./web
 
 RUN groupadd --system app && useradd --system --gid app --home /app --no-create-home app \

@@ -27,6 +27,7 @@
     return element;
   }
   const travelMode = () => $("trip-mode").querySelector("input:checked").value;
+  const includeParking = () => travelMode() === "driving" && $("include-parking").checked;
   function readiness() {
     if (unconfirmedPicks) return "Add your selected items to the route first.";
     if (editingOrigin && origin) return "Finish choosing your starting point.";
@@ -180,9 +181,11 @@
   });
   $("trip-mode").addEventListener("change", () => {
     $("transit-options").hidden = travelMode() !== "transit";
+    $("parking-options").hidden = travelMode() !== "driving";
     invalidate();
   });
   $("transit-departure").addEventListener("change", invalidate);
+  $("include-parking").addEventListener("change", invalidate);
   document.addEventListener("container-status-change", event => {
     if (!currentRoute || !currentRoute.stops.some(stop => !completedStops.has(stop) && stop.asset_ids?.some(id => event.detail.includes(id)))) return;
     const notice = $("route-condition-notice");
@@ -199,7 +202,7 @@
     const current = generation;
     const controller = new AbortController();
     pending = controller;
-    const timer = setTimeout(() => controller.abort(), travelMode() === "transit" ? 75000 : 40000);
+    const timer = setTimeout(() => controller.abort(), travelMode() === "transit" || includeParking() ? 75000 : 40000);
     updatePlanButton();
     $("trip-status").textContent = "Finding compatible sites and a network route…";
     try {
@@ -208,6 +211,7 @@
       const response = await (globalThis.GoodsortI18n?.fetch || fetch)("/api/v1/trips", {
         method: "POST", headers: { "Content-Type": "application/json" }, signal: controller.signal,
         body: JSON.stringify({ origin, mode: travelMode(), items: basket, share_coordinates: true,
+          ...(includeParking() ? {include_parking: true} : {}),
           ...(departure ? {departure_at: departure} : {}) }),
       });
       const body = await response.json();
@@ -220,6 +224,10 @@
         result.append(node("p", `About ${Math.ceil(body.duration_s / 60)} minutes including walking, waiting and intermediate drop-offs.`));
         result.append(node("p", "Scheduled times · Europe/Skopje. Check JSP notices for disruptions."));
         result.append(node("p", `Timetable checked: ${transitTime(body.transit_fetched_at)}. Service through: ${body.transit_service_end}.`));
+      } else if (body.parking?.length) {
+        result.append(node("p", `About ${Math.ceil(body.driving_duration_s / 60)} minutes driving + ${Math.ceil(body.walking_duration_s / 60)} minutes walking.`));
+        result.append(node("p", "Includes walking back to the car between drop-offs. Excludes time finding a space, payment and disposal."));
+        result.append(node("p", `Parking map dated ${body.parking_source_as_of.slice(0, 10)}. Space availability is unknown.`));
       } else result.append(node("p", `${(body.distance_m / 1000).toFixed(2)} km · about ${Math.ceil(body.duration_s / 60)} minutes on the network. Ends at the last stop.`));
       const viewMap = node("a", "View route on map");
       viewMap.href = "#site-map";
@@ -246,6 +254,8 @@
         row.dataset.materials = appearance.materials.join(" ");
         row.append(node("strong", stop.name), node("p", `Drop off: ${stop.item_kinds.map((kind) => kindNames[kind] || kind).join(", ")}`));
         if (body.mode === "transit") row.append(transitItinerary(body.legs.filter(leg => leg.site_id === stop.site_id)));
+        const parking = body.parking?.find(visit => visit.site_id === stop.site_id);
+        if (parking) row.append(parkingItinerary(parking, index));
         const stopKey = [...(stop.asset_ids || [])].sort().join("|");
         const visitLabel = node("label", ""); visitLabel.className = "stop-visited";
         const visited = document.createElement("input"); visited.type = "checkbox";
@@ -337,6 +347,28 @@
   });
   function transitTime(value) {
     return new Intl.DateTimeFormat("en-GB", {timeZone: "Europe/Skopje", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23"}).format(new Date(value));
+  }
+  function parkingItinerary(visit, index) {
+    const panel = node("section", ""); panel.className = "parking-visit";
+    panel.id = `parking-stop-${index + 1}`; panel.tabIndex = -1;
+    panel.append(node("h4", `Park: ${visit.name}`));
+    panel.append(node("p", "Space availability: unknown. Check signs before parking."));
+    const details = node("details", ""); details.className = "parking-details";
+    details.append(node("summary", "Parking details"));
+    const fee = visit.fee === "yes" ? "Paid parking recorded" : visit.fee === "no" ? "No fee recorded" : visit.fee === "unknown" ? "Fee unknown" : `Recorded fee: ${visit.fee}`;
+    details.append(node("p", fee), node("p", visit.opening_hours === "unknown" ? "Opening hours unknown" : `Recorded hours: ${visit.opening_hours}`));
+    details.append(node("p", visit.point_kind === "driveway_crossing" ? "Mapped driveway crossing; entrance and access are unverified." : "Mapped parking point; entrance and access are unverified."));
+    panel.append(node("strong", visit.walk_to.distance_m < 1
+      ? "Parking and drop-off use the same network point. Check access on foot."
+      : `Walk ${Math.round(visit.walk_to.distance_m)} m · about ${Math.ceil(visit.walk_to.duration_s / 60)} minutes to the drop-off.`));
+    details.append(node("p", `Unverified walking access gaps: ${Math.round(visit.walk_to.start_gap_m)} m at parking, ${Math.round(visit.walk_to.end_gap_m)} m at the drop-off.`));
+    details.append(node("p", `Driving endpoint is ${Math.round(visit.drive_access_gap_m)} m from the mapped parking point. Access is unverified.`));
+    if (visit.walk_back) panel.append(node("p", `After disposal, walk back ${Math.round(visit.walk_back.distance_m)} m · about ${Math.ceil(visit.walk_back.duration_s / 60)} minutes to your car before the next drive.`));
+    else panel.append(node("p", "Final drop-off: your car remains at this parking location. The final walk back is not included."));
+    const source = node("a", "View parking on OpenStreetMap"); source.href = visit.source_url; source.target = "_blank"; source.rel = "noopener noreferrer";
+    const data = node("a", "Parking data & license"); data.href = "/api/v1/parking"; data.target = "_blank"; data.rel = "noopener noreferrer";
+    details.append(source, node("span", " · "), data); panel.append(details);
+    return panel;
   }
   function transitItinerary(legs) {
     const list = node("ol", ""); list.className = "transit-legs";

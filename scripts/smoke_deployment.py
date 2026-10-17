@@ -96,6 +96,9 @@ def main():
         assert len(get(args.url, path)) > 100, path
     sites = get(args.url, "/api/v1/sites")
     assert len(sites["sites"]) == health["site_count"]
+    parking = get(args.url, "/api/v1/parking")
+    assert parking["license"] == "ODbL-1.0" and parking["places"]
+    assert all(place["access"] in {"yes", "permissive"} for place in parking["places"])
     result = get(
         args.url,
         "/api/v1/classify",

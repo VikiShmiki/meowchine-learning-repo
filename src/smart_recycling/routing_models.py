@@ -71,6 +71,13 @@ class TripRequest(BaseModel):
     items: Annotated[list[TripItem | TripStream], Field(min_length=1, max_length=6)]
     share_coordinates: StrictBool
     departure_at: AwareDatetime | None = None
+    include_parking: StrictBool = False
+
+    @model_validator(mode="after")
+    def parking_mode(self):
+        if self.include_parking and self.mode != "driving":
+            raise ValueError("Parking applies only to driving trips")
+        return self
 
 
 class Stop(Coordinates):
@@ -120,6 +127,34 @@ class TripResponse(BaseModel):
     transit_fetched_at: AwareDatetime | None = None
     transit_service_end: str | None = None
     transit_source: str | None = None
+    parking: list["ParkingVisit"] = Field(default_factory=list)
+    parking_dataset_version: str | None = None
+    parking_source_as_of: str | None = None
+    driving_duration_s: Finite | None = None
+    walking_duration_s: Finite | None = None
+
+
+class ParkingWalk(BaseModel):
+    distance_m: Finite
+    duration_s: Finite
+    geometry: LineString | None
+    start_gap_m: Finite
+    end_gap_m: Finite
+
+
+class ParkingVisit(Coordinates):
+    site_id: str
+    parking_id: str
+    name: str
+    access: Literal["yes", "permissive"]
+    fee: str
+    opening_hours: str
+    point_kind: Literal["mapped_point", "driveway_crossing"]
+    source_url: str
+    availability: Literal["unknown"] = "unknown"
+    drive_access_gap_m: Finite
+    walk_to: ParkingWalk
+    walk_back: ParkingWalk | None
 
 
 class TransitLeg(BaseModel):

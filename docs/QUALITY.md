@@ -313,6 +313,15 @@ for these device checks.
 
 ## Completion criteria
 
+Parking-assisted driving (October 17, 2026): 20 focused backend cases and seven
+browser cases pass. The latter exercise both languages at 320/390/1280 px, mapped
+parking and walking, full-container exclusion after check-in, unavailable data,
+retry and returning to direct driving/walking. Visual checks cover narrow-screen
+copy and visible parking/bin markers. The derived 144-point snapshot reproduces
+from its pinned PBF; a live ORS glass/electronics journey verifies integration.
+Full regression/container results belong to the delivery revision's CI gate;
+no field access or vacant-space accuracy is claimed. See [PARKING.md](PARKING.md).
+
 Municipality-chart regressions verify descending rank, source percentage fidelity,
 fixed 0–100% scale, report-derived floor, material updates, inline percentage labels,
 responsive bounds and unknown/no-population values remaining distinct from zero.

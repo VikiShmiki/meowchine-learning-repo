@@ -405,7 +405,7 @@
     $("fit-route").disabled = !map;
     $("route-controls").hidden = !activeRoute;
     $("route-map-key").dataset.mode = activeRoute?.mode || "";
-    $("route-mode-label").textContent = activeRoute?.mode === "transit" ? "JSP bus + walking" : activeRoute?.mode === "walking" ? "Walking" : "Driving";
+    $("route-mode-label").textContent = activeRoute?.parking?.length ? "Driving + parking walk" : activeRoute?.mode === "transit" ? "JSP bus + walking" : activeRoute?.mode === "walking" ? "Walking" : "Driving";
     $("map-heading").textContent = activeRoute ? "Route & stops" : "Collection points";
     $("show-other-sites").textContent = showOtherSites ? "Hide other collection points" : "Show other collection points";
     $("show-other-sites").setAttribute("aria-pressed", String(showOtherSites));
@@ -428,7 +428,9 @@
     if (!activeRoute) return;
     $("site-details").hidden = true;
     selectedId = null;
-    $("route-summary").textContent = activeRoute.mode === "transit"
+    $("route-summary").textContent = activeRoute.parking?.length
+      ? `Driving + parking walk | about ${Math.ceil(activeRoute.duration_s / 60)} minutes on the network. Parking spaces are not guaranteed.`
+      : activeRoute.mode === "transit"
       ? `JSP bus + walking | about ${Math.ceil(activeRoute.duration_s / 60)} minutes including waits. Scheduled service, not live tracking.`
       : `${activeRoute.mode === "walking" ? "Walking" : "Driving"} | ${(activeRoute.distance_m / 1000).toFixed(2)} km | about ${Math.ceil(activeRoute.duration_s / 60)} min | ${activeRoute.stops.length} ${activeRoute.stops.length === 1 ? "stop" : "stops"}. Finish at the last stop. Access gaps are unverified.`;
     drawRoute();
@@ -439,6 +441,10 @@
     routeRenderer ||= L.svg();
     routeLayer = L.featureGroup().addTo(map);
     const segments = activeRoute.mode === "transit" ? activeRoute.legs : [{geometry: activeRoute.geometry, mode: activeRoute.mode}];
+    for (const visit of activeRoute.parking || []) {
+      segments.push({geometry: visit.walk_to.geometry, mode: "walking"});
+      if (visit.walk_back) segments.push({geometry: visit.walk_back.geometry, mode: "walking"});
+    }
     for (const segment of segments) {
       if (segment.geometry) {
         L.geoJSON(segment.geometry, { renderer: routeRenderer, interactive: false, style: { color: "#fff", weight: 10, opacity: 0.95 } }).addTo(routeLayer);
@@ -454,6 +460,15 @@
         }
       }
     }
+    (activeRoute.parking || []).forEach((visit, index) => {
+      const badge = text("span", `P${index + 1}`); badge.className = "parking-map-badge";
+      const label = `Parking ${index + 1}: ${visit.name}`;
+      const marker = L.marker([visit.latitude, visit.longitude], {
+        icon: L.divIcon({className: "parking-map-marker", html: badge, iconSize: [36, 28], iconAnchor: [18, 50]}),
+        title: label, zIndexOffset: 500,
+      }).bindTooltip(text("span", label)).on("click", () => $("parking-stop-" + (index + 1))?.focus()).addTo(routeLayer);
+      marker.getElement().setAttribute("aria-label", label); keyboardActivate(marker);
+    });
     activeRoute.stops.forEach((stop, index) => {
       const badge = text("span", String(index + 1));
       badge.className = "route-stop-number";

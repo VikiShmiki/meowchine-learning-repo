@@ -117,7 +117,9 @@ class ORSProvider:
                 "provider_invalid", "Routing provider returned unusable data.", 502
             ) from error
 
-    def matrix(self, mode: Mode, points: list[list[float]]) -> list[list[float | None]]:
+    def matrix(
+        self, mode: Mode, points: list[list[float]], *, require_origin: bool = True
+    ) -> list[list[float | None]]:
         """Keep directionality/null paths and reject excessively snapped candidates."""
         data = self._post(
             f"matrix/{PROFILES[mode]}", {"locations": points, "metrics": ["duration"]}
@@ -138,7 +140,7 @@ class ORSProvider:
                         endpoint is not None
                         and gap(points[index], endpoint["location"]) <= MAX_SNAP_M
                     )
-            if not usable[0]:
+            if require_origin and not usable[0]:
                 raise RoutingError(
                     "origin_access",
                     "Starting point is more than 100 m from the routable network. "

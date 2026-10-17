@@ -8,7 +8,7 @@
     <title>Smart Recycling Access</title>
     <link rel="stylesheet" href="/static/vendor/leaflet/leaflet.css" />
     <link rel="stylesheet" href="/static/styles.css" />
-    <link rel="stylesheet" href="/static/citizen.css?v=jsp-1" />
+    <link rel="stylesheet" href="/static/citizen.css?v=parking-1" />
     <link rel="stylesheet" href="/static/community.css?v=trip-checkin-2" />
     <link rel="stylesheet" href="/static/account.css?v=2" />
   </head>
@@ -118,6 +118,10 @@
           <label><input type="radio" name="travel-mode" value="driving" /> Driving</label>
           <label><input type="radio" name="travel-mode" value="transit" /> JSP bus</label>
         </fieldset>
+        <div id="parking-options" hidden>
+          <label><input id="include-parking" type="checkbox" /> Park and walk to drop-offs</label>
+          <p>Mapped public parking. Space availability is unknown. Up to ten minutes walking per connection.</p>
+        </div>
         <div id="transit-options" hidden>
           <label for="transit-departure">Departure (your local time)</label>
           <input id="transit-departure" type="datetime-local" aria-describedby="transit-note" />
@@ -206,8 +210,8 @@
     <script src="/static/site-data.js?v=stop-colors-1" defer></script>
     <script src="/static/community.js?v=trip-checkin-1" defer></script>
     <script src="/static/account.js?v=3" defer></script>
-    <script src="/static/map.js?v=jsp-1" defer></script>
-    <script src="/static/trip.js?v=jsp-1" defer></script>
+    <script src="/static/map.js?v=parking-1" defer></script>
+    <script src="/static/trip.js?v=parking-1" defer></script>
     <script src="/static/path.js?trip-flow-1" defer></script>
   </body>
 </html>
