@@ -143,7 +143,9 @@ def prepare(root: Path, source_root: Path, output: Path):
         ("retained_english.json", retained),
         ("exclusions.json", exclusions),
     ]:
-        (output / name).write_text(json.dumps(values, ensure_ascii=False, indent=2) + "\n")
+        (output / name).write_text(
+            json.dumps(values, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n"
+        )
     manifest = dict(
         version="ml-development-v3",
         seed=42,
@@ -163,5 +165,7 @@ def prepare(root: Path, source_root: Path, output: Path):
             for f in ("rows.json", "retained_english.json", "exclusions.json")
         },
     )
-    (output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+    (output / "manifest.json").write_text(
+        json.dumps(manifest, indent=2) + "\n", encoding="utf-8", newline="\n"
+    )
     return rows, manifest

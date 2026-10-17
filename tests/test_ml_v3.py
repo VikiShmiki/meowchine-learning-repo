@@ -72,6 +72,9 @@ def test_source_english_survives_without_translation_and_reserved_text_is_remove
         "glass champagne bottle,GLASS BOTTLE,bottle\n"
     )
     rows, manifest = prepare(ROOT, tmp_path / "source", tmp_path / "output")
+    exported = (tmp_path / "output/rows.json").read_bytes()
+    assert b"\r\n" not in exported
+    assert json.loads(exported.decode("utf-8")) == rows
     original = [r for r in rows if r["source"] == "dataset_a"]
     assert any(r["text"] == "an apple phone charger" for r in original)
     assert all(r["language"] == "en" for r in original)
@@ -90,7 +93,10 @@ def test_source_english_survives_without_translation_and_reserved_text_is_remove
     assert all(not Path(p.split(":", 1)[1]).is_absolute() for p in manifest["inputs"])
 
 
-def test_legacy_source_manifest_relocates_but_rejects_corruption_and_escape(tmp_path):
+@pytest.mark.parametrize("original_root", ["/old/root", "C:/old/root"])
+def test_legacy_source_manifest_relocates_but_rejects_corruption_and_escape(
+    tmp_path, original_root
+):
     from smart_recycling.data.bilingual_benchmark import validate_source_inputs
     from smart_recycling.data.common import sha256_file
 
@@ -98,8 +104,8 @@ def test_legacy_source_manifest_relocates_but_rejects_corruption_and_escape(tmp_
     source = tmp_path / "data/example.csv"
     source.write_text("unchanged source")
     manifest = dict(
-        source_package="/old/root/data/processed/bilingual_mk_v1",
-        inputs={"/old/root/data/example.csv": sha256_file(source)},
+        source_package=f"{original_root}/data/processed/bilingual_mk_v1",
+        inputs={f"{original_root}/data/example.csv": sha256_file(source)},
     )
     validate_source_inputs(manifest, tmp_path)
     source.write_text("changed source")

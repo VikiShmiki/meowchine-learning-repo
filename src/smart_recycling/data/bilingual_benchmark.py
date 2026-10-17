@@ -6,7 +6,7 @@ import platform
 import sys
 import time
 from collections import Counter
-from pathlib import Path
+from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Any
 
 import pandas as pd
@@ -45,12 +45,15 @@ def validate_source_inputs(manifest: dict, source_root: Path | None = None) -> N
     for source_path, fingerprint in manifest["inputs"].items():
         path = Path(source_path)
         if source_root is not None:
-            if path.is_absolute():
-                original_root = Path(manifest["source_package"]).parents[2]
-                path = path.relative_to(original_root)
-            if ".." in path.parts:
+            # Manifest paths describe the source machine, not the current host.
+            flavor = PureWindowsPath if PureWindowsPath(source_path).drive else PurePosixPath
+            original = flavor(source_path)
+            if original.is_absolute():
+                original_root = flavor(manifest["source_package"]).parents[2]
+                original = original.relative_to(original_root)
+            if original.root or original.drive or ".." in original.parts:
                 raise ValueError("Dataset source path escapes its source root")
-            path = source_root / path
+            path = source_root.joinpath(*original.parts)
             if not path.resolve().is_relative_to(source_root.resolve()):
                 raise ValueError("Dataset source symlink escapes its source root")
         if sha256_file(path) != fingerprint:

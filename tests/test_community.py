@@ -41,10 +41,10 @@ def test_allowance_atomic_under_concurrent_requests(store):
         assert sum(pool.map(reserve, range(12))) == 3
 
 
-def test_pending_private_review_shared_expiry_and_retention(store):
+def test_full_is_immediately_shared_then_reviewed_expires_and_is_deleted(store):
     report = store.submit("container", "alice", asset_id="glass", condition="full")
     assert store.statuses("alice")[0]["glass"]["condition"] == "full"
-    assert not store.statuses("bob")[0]
+    assert store.statuses("bob")[0]["glass"]["source"] == "community_report"
     assert store.moderate(report["id"], "approved")
     assert store.statuses("bob")[0]["glass"]["source"] == "reviewed_community"
     with store.connection() as db:
@@ -61,6 +61,64 @@ def test_personal_available_cannot_override_reviewed_problem(store):
     store.moderate(report["id"], "approved")
     store.submit("container", "two", asset_id="glass", condition="available")
     assert store.statuses("two")[0]["glass"]["condition"] == "damaged"
+
+
+@pytest.mark.parametrize("condition", ["damaged", "inaccessible", "available"])
+def test_other_unreviewed_conditions_are_not_public(store, condition):
+    store.submit("container", "alice", asset_id="glass", condition=condition)
+    assert not store.statuses("bob")[0]
+    if condition != "available":
+        assert store.statuses("alice")[0]["glass"]["condition"] == condition
+
+
+def test_full_blocks_other_visitors_and_available_needs_review(store):
+    initial_version = store.statuses("bob")[1]
+    full = store.submit("container", "alice", asset_id="glass", condition="full")
+    values, version = store.statuses("bob")
+    assert version != initial_version
+    assert values["glass"]["expires"] - values["glass"]["reported_at"] == 12 * 3600
+    available = store.submit("container", "bob", asset_id="glass", condition="available")
+    assert store.statuses("bob")[0]["glass"]["condition"] == "full"
+    assert store.statuses("charlie")[0]["glass"]["condition"] == "full"
+    store.moderate(available["id"], "approved")
+    assert store.statuses("alice")[0]["glass"]["condition"] == "available"
+    # Approving the older full report later must not undo the newer observation.
+    store.moderate(full["id"], "approved")
+    assert store.statuses("charlie")[0]["glass"]["condition"] == "available"
+
+
+@pytest.mark.parametrize("state", ["rejected", "duplicate"])
+def test_reviewer_can_remove_false_full_exclusion(store, state):
+    report = store.submit("container", "alice", asset_id="glass", condition="full")
+    assert store.statuses("bob")[0]
+    store.moderate(report["id"], state)
+    assert store.statuses("alice")[0] == store.statuses("bob")[0] == {}
+
+
+def test_full_expiry_does_not_invent_available_or_change_another_asset(store):
+    full = store.submit("container", "alice", asset_id="glass", condition="full")
+    other = store.submit("container", "alice", asset_id="paper", condition="damaged")
+    store.moderate(other["id"], "approved")
+    with store.connection() as db:
+        db.execute("UPDATE reports SET expires=? WHERE id=?", (time.time() - 1, full["id"]))
+    statuses, _ = store.statuses("bob")
+    assert "glass" not in statuses
+    assert statuses["paper"]["condition"] == "damaged"
+
+
+@pytest.mark.parametrize("mode", ["walking", "driving"])
+def test_anonymous_full_report_excludes_only_that_container_for_other_riders(store, mode):
+    glass, paper = site("glass", (GLASS,)), site("paper", (PAPER,))
+    combined = glass.model_copy(update={"assets": glass.assets + paper.assets})
+    planner, _ = service([combined, site("alternative", (GLASS,), longitude=21.405)])
+    store.submit("container", "alice", asset_id="glass-asset", condition="full")
+    statuses, version = store.statuses("bob")
+    result = planner.plan(request(mode), statuses=statuses, status_version=version)
+    assert {asset for stop in result.stops for asset in stop.asset_ids} == {
+        "paper-asset",
+        "alternative-asset",
+    }
+    assert planner.snapshot.sites[0].assets[0].operational_status == "unknown"
 
 
 def test_new_reviewed_available_supersedes_old_personal_problem(store):
@@ -110,7 +168,7 @@ def test_available_report_does_not_reopen_source_closed_asset():
     assert not calls
 
 
-def test_report_api_visitors_are_separate_and_moderation_is_protected(monkeypatch):
+def test_full_report_api_is_shared_and_moderation_is_protected(monkeypatch):
     owner, stranger = TestClient(api.app), TestClient(api.app)
     asset_id = next(iter(api.community_assets))
     result = owner.post(
@@ -119,7 +177,12 @@ def test_report_api_visitors_are_separate_and_moderation_is_protected(monkeypatc
     assert result.status_code == 201
     assert result.headers["cache-control"] == "no-store"
     assert asset_id in owner.get("/api/v1/container-statuses").json()["statuses"]
-    assert asset_id not in stranger.get("/api/v1/container-statuses").json()["statuses"]
+    assert stranger.get("/api/v1/container-statuses").json()["statuses"][asset_id] == {
+        "condition": "full",
+        "reported_at": result.json()["created"],
+        "expires": result.json()["expires"],
+        "source": "community_report",
+    }
     identifier = result.json()["id"]
     endpoint = f"/api/v1/review/reports/{identifier}"
     assert stranger.patch(endpoint, json={"state": "approved"}).status_code == 401

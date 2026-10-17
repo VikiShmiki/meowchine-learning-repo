@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def write_csv(path, rows):
-    with path.open("w", newline="") as stream:
+    with path.open("w", newline="", encoding="utf-8") as stream:
         writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
         writer.writeheader()
         writer.writerows(rows)
@@ -33,7 +33,7 @@ def test_manual_identity_survives_independent_csv_reordering(evaluation_root):
     }
     for name in ("manual_test.csv", "manual_test_review.csv", "manual_test_mk.csv"):
         path = evaluation_root / "data/evaluation" / name
-        with path.open() as stream:
+        with path.open(encoding="utf-8") as stream:
             rows = list(csv.DictReader(stream))
         write_csv(
             path, list(reversed(rows)) if name.endswith("review.csv") else rows[7:] + rows[:7]
@@ -49,7 +49,7 @@ def test_manual_identity_survives_independent_csv_reordering(evaluation_root):
 @pytest.mark.parametrize("damage", ["duplicate", "missing", "source_hash", "label", "empty"])
 def test_macedonian_cases_must_match_reviewed_source(evaluation_root, damage):
     path = evaluation_root / "data/evaluation/manual_test_mk.csv"
-    with path.open() as stream:
+    with path.open(encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
     if damage == "duplicate":
         rows.append(rows[0])

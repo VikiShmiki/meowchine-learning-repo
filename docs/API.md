@@ -3,6 +3,23 @@
 JSON errors use FastAPI's standard validation response. Text is limited to 200
 characters; coordinates must be valid WGS84 values.
 
+## Container observations
+
+`POST /api/v1/container-reports` accepts an existing `asset_id` and `condition`
+(`available`, `full`, `inaccessible`, or `damaged`). It returns a pending report;
+`full` immediately excludes that individual asset from everyone's new routes,
+without an image or account. Full reports expire 12 hours after submission.
+Unreviewed availability cannot reopen a shared problem or a source-closed asset.
+
+`GET /api/v1/container-statuses` returns `statuses` and a revision `version`, with
+`Cache-Control: no-store`. Each overlay contains `condition`, `reported_at`,
+`expires`, and `source`: `community_report` for an unreviewed shared full report,
+`reviewed_community` for an approved observation, or `your_report` for another
+personal pending problem. No overlay means unknown, not confirmed available.
+Existing routes recheck this revision; browser clients refresh every 30 seconds
+and offer explicit replanning. [Community contracts](COMMUNITY.md) cover moderation,
+rate limits, expiry, and the optional post-trip check-in.
+
 ## `GET /health`
 
 Returns service state, rule version, real City `site_count` (1,583), real
@@ -174,7 +191,7 @@ Configured means a nonempty key is present, not that provider quota/auth is vali
 }
 ```
 
-Mode is `walking` or `driving`; 1-6 items, strict JSON booleans and finite WGS84
+Mode is `walking`, `driving` or `transit`; 1-6 items, strict JSON booleans and finite WGS84
 coordinates are required. Extra request fields are rejected. The entire basket is
 validated before provider use. Description-based items are revalidated against
 item-level policy and asset acceptance. Known-waste cards can instead submit stream
@@ -216,6 +233,55 @@ routes; 429 for process/provider quota; 503 for missing credentials, provider au
 unavailability or timeouts; 502 for invalid provider data. Schema errors use the
 standard FastAPI 422 shape. All trip responses use `Cache-Control: no-store`.
 
+
+For `transit`, optional `departure_at` is an ISO timestamp with timezone offset;
+blank means now plus one minute. The server accepts up to seven days ahead within
+available service calendars. Response `provider` is `jsp_gtfs_openrouteservice`,
+`profile` is `jsp-scheduled-bus+foot-walking`, and top-level `geometry` is null.
+Use separate `legs` with mode `walking|bus`, `from_name`, `to_name`, longitude-first
+`from_point`/`to_point`, departure/arrival timestamps, duration/distance, nullable
+geometry and destination `site_id`. Bus legs also include `line`, `headsign` and
+`stop_count`. Missing shape distance is zero and disclosed; it is not a zero-length ride.
+Totals include scheduled waits and intermediate drop-off allowances. Metadata includes
+`departure_at`, `arrival_at`, `transit_feed_version`, `transit_fetched_at`,
+`transit_service_end` and `transit_source`. Road-mode fields retain their meanings.
+
+Transit errors use the same no-store `{detail: {code, message}}` envelope:
+`transit_unavailable` (503), `transit_departure`, `transit_expired`,
+`transit_no_service`, `transit_no_route` or `transit_connection` (422).
+Existing provider errors/quotas apply to walking connections. `/api/v1/routing`
+advertises all three modes; `configured` describes the ORS key, not feed health.
+See [TRANSIT.md](TRANSIT.md) for search/freshness limits.
+
+## Parking-assisted driving
+
+For `POST /api/v1/trips`, optional `include_parking: true` is accepted only with
+`mode: "driving"`. It is a strict JSON boolean, default false; the direct-driving
+contract remains unchanged when omitted. Existing consent and item validation apply.
+
+Parking responses use `profile: "driving-car+foot-walking"`. Top-level `geometry`
+contains the car path; total `duration_s` / `distance_m` include driving and walking.
+`driving_duration_s` and `walking_duration_s` break down time. `parking` is ordered
+with `stops`, with one entry per drop-off: `site_id`, `parking_id`, name, coordinates,
+`access`, `fee` / `opening_hours` (source strings or `"unknown"`), `point_kind` (`mapped_point` or
+`driveway_crossing`), OSM `source_url`, `drive_access_gap_m`, and always
+`availability: "unknown"`. Each `walk_to` and optional `walk_back` contains network
+duration/distance, nullable LineString `geometry`, and start/end access gaps. A null
+walk geometry means coincident network points, not verified zero physical distance.
+`walk_back` exists at intermediate stops only. The trip ends at the last drop-off,
+leaving the car at its last parking location; the final return is not included.
+`parking_dataset_version` and `parking_source_as_of` disclose source version/age.
+
+Parking-specific errors: `parking_unavailable` (503), `parking_no_route` and
+`parking_connection` (422). Provider errors and no-store semantics still apply.
+There is no direct-driving fallback. [PARKING.md](PARKING.md) defines bounds and
+timing; source fees/hours are not verified live prices/opening decisions.
+
+`GET /api/v1/parking` accepts no location and returns the full licensed snapshot:
+schema/version, source timestamp/URL/SHA-256, canonical record checksum, ODbL
+license/attribution and `places`. It uses `Cache-Control: public, max-age=3600`.
+Missing, corrupt or stale data returns 503. Parking information is not an occupancy
+or reservation service.
 
 ## `GET /api/v1/coverage`
 

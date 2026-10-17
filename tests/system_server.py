@@ -203,6 +203,15 @@ api.vision_service = VisionService(
 app = api.app
 
 
+@app.post("/__test/reset-community")
+def reset_community():
+    """Isolate report scenarios in the test-only app; never exposed in production."""
+    with api.community_store.connection() as db:
+        db.execute("DELETE FROM reports")
+        db.execute("DELETE FROM usage WHERE bucket LIKE 'report:%'")
+    return {"reset": True}
+
+
 @app.post("/__test/reset-account-budget")
 def reset_account_budget():
     """Only the isolated fixture server exposes this, never production."""

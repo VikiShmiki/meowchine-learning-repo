@@ -2,6 +2,19 @@
 
 Updated: 2026-10-17
 
+## Integration — ML remediation with current app features
+
+Oliver's `fix/ml-data-remediation` branch is integrated with the reporting, JSP
+and parking changes. Documentation retains both development histories. Docker
+includes the pinned v3 audit heads and the current startup/readiness fixes; photo
+browser tests select the form's submit button explicitly. Pinned model/evidence
+bytes survive Windows checkout; training/evaluation JSON uses UTF-8 and LF, and
+relocated source manifests support both Windows and POSIX paths. Model weights
+and pinned checksums are unchanged. The smoke test verifies an accepted Macedonian
+suggestion and an abstained example. Combined regression and container gates are
+required before merging; see the delivery PR and CI status.
+Earlier test counts below describe their original branch revisions.
+
 ## Photo consistency improvement (Codex)
 
 Goal: prevent contradictory AI photo suggestions and stale prior-item confirmation
@@ -74,7 +87,44 @@ Historical LoRA results do not isolate architecture effects; the new controlled
 comparisons cover weighting and regularization for frozen/TF-IDF models, not a new
 LoRA experiment. No hosted/browser/device/container verification is claimed here.
 
-## Current handoff — October 17, 2026
+## Implemented — parking-assisted driving
+
+Owner: Codex, user-requested October 17, 2026. Driving now offers optional mapped
+parking plus walking to containers, including return-to-car walks between stops.
+The licensed, reproducible OSM/Geofabrik snapshot contains 144 public parking points;
+space availability stays unknown. English/Macedonian UI, distinct parking markers,
+source details and full-container exclusions are covered by 20 backend and seven
+focused browser tests. A live ORS two-drop-off journey also succeeded. Full
+regression/container delivery gates are recorded in [CI_STATUS.md](docs/CI_STATUS.md).
+See [PARKING.md](docs/PARKING.md) for source refresh, access and timing limits.
+
+## Implemented — JSP public transport
+
+Owner: Codex, user-requested October 17, 2026. Implemented scheduled JSP journeys,
+ORS walking connections, one same-stop transfer per collection leg, departure
+selection and bilingual itinerary/map UI. Full-container exclusions and post-trip
+check-ins apply. The live JSP/ORS smoke returned buses 18 and 8 to Karpoš yard.
+The 24 backend and seven focused browser cases pass at 320/390/1280 px. Lock,
+lint, formatting, 19 Node tests and all snapshot/coverage/upgrade reproduction
+checks pass. The local app loads both language models with routing configured.
+Delivery and full-regression gate results are recorded on
+[PR #2](https://github.com/VikiShmiki/meowchine-learning-repo/pull/2) and in
+[CI_STATUS.md](docs/CI_STATUS.md). See [TRANSIT.md](docs/TRANSIT.md) for limits.
+
+## Completed — trip completion and container check-ins
+
+Implemented the user-requested optional post-trip check-in without photos. Full
+reports now exclude the specific asset from everyone's routes immediately, with a
+12-hour expiry and reviewer rejection. Visited stops are tracked in memory across
+replans; individual drop-offs keep multi-stop trips open and the final drop-off ends
+the trip. Early completion keeps unfinished basket items. Both English and Macedonian
+copy are included. Full browser-enabled regression checks pass, followed by 41
+focused browser checks on the final interface, 28 community/backend tests, and 19
+Node tests. Lock, lint, formatting, seed/infrastructure/geography validators and
+visual checks at 320/360/1280 px passed. See [QUALITY.md](docs/QUALITY.md).
+Hosted CI is tracked in [CI_STATUS.md](docs/CI_STATUS.md).
+
+## Previous handoff — initial private-repository edition
 
 Private repository edition prepared with a fresh initial commit, current project
 documentation and a rebuilt technical report. Source data and historical experiment

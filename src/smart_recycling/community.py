@@ -1,7 +1,7 @@
 """Persistent, bounded community reports and provider request allowances.
 
-The source dataset stays immutable. Pending reports can only affect their reporter;
-reviewed reports expire and never turn a source-closed asset into an available one.
+The source dataset stays immutable. Full reports exclude an asset immediately for
+everyone; other pending problems affect their reporter. All conditions expire.
 """
 
 import hashlib
@@ -239,7 +239,7 @@ class CommunityStore:
         with self.connection() as db:
             rows = db.execute(
                 """SELECT * FROM reports WHERE kind='container' AND expires>?
-                AND (state='approved' OR (state='pending' AND client=?))
+                AND (state='approved' OR (state='pending' AND (client=? OR condition='full')))
                 ORDER BY created,id""",
                 (time.time(), client),
             ).fetchall()
@@ -249,9 +249,18 @@ class CommunityStore:
                 "condition": row["condition"],
                 "reported_at": row["created"],
                 "expires": row["expires"],
-                "source": "reviewed_community" if row["state"] == "approved" else "your_report",
+                "source": (
+                    "reviewed_community"
+                    if row["state"] == "approved"
+                    else "community_report"
+                    if row["condition"] == "full"
+                    else "your_report"
+                ),
             }
-            (accepted if row["state"] == "approved" else personal)[row["asset_id"]] = value
+            # Pending full reports are public exclusions, not verified observations.
+            # A newer reviewed availability report can reopen an older full report.
+            shared = row["state"] == "approved" or row["condition"] == "full"
+            (accepted if shared else personal)[row["asset_id"]] = value
         for asset_id, value in personal.items():
             # Personal positive reports cannot reopen a globally reported problem.
             if (

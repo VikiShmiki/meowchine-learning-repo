@@ -1,5 +1,17 @@
 # Quality
 
+## Combined ML integration (October 17, 2026)
+
+The merge retains the current reporting, JSP and parking regression coverage.
+Local checks passed: 735 backend tests, 21 Node cases, nine photo browser cases
+and 52 Macedonian/reporting/transit/parking browser cases. Two encoder symlink
+cases require Windows Developer Mode/privilege and are exercised in Linux CI.
+The final combined Linux suite and Docker smoke are the merge gates; their exact
+counts/results are recorded on the delivery PR. Actual pinned v3 audit models load
+in both languages, and deployment smoke checks accepted suggestions plus abstention.
+Model weights/checksums remain Oliver's; integration fixes cover Docker packaging,
+portable artifact bytes/UTF-8/source paths, and the photo submit-button selector.
+
 ## Photo consistency and confirmation-state verification (October 17, 2026)
 
 Goal achieved: prevent contradictory model descriptions/conditions from producing
@@ -85,6 +97,59 @@ manual replay records exact overlaps separately. Native/independent validation,
 container execution, fresh browser runs and physical-device testing are not claimed.
 The PDF and older sections below describe historical model evidence; current ML
 results and reproduction commands are in [ML.md](ML.md).
+
+## JSP scheduled transit — October 17, 2026
+
+The 24 new backend cases and seven new browser cases pass locally. They cover
+direct buses, same-stop transfers, missed connections, calendar exceptions,
+overnight/DST service, pickup/direction restrictions, invalid/stale feeds, missing
+shapes, disconnected walking, multi-item disposal and short walking-only trips.
+Browser checks use the real API/catalog with a synthetic timetable and walking
+provider: English/Macedonian at 320/390/1280 px, bus/walk map lines, trip completion,
+post-trip reporting, a full facility excluded for another visitor, outage retry,
+departure invalidation and switching back to Walking. Narrow screenshots were
+visually inspected; this does not establish native-language or physical-phone QA.
+
+Lock validation (including CI's uv 0.12.17), lint, formatting, JavaScript syntax,
+19 Node tests, seed/infrastructure/geography checks and exact coverage/upgrade
+reproduction pass. `/health` confirms both models on the local app; routing
+configuration advertises Walking, Driving and Transit. An opt-in live JSP/ORS
+request returned buses 18 and 8 with walking and transfer legs to Karpoš yard.
+See [TRANSIT.md](TRANSIT.md) for what that evidence establishes and its limits.
+
+The full Python/browser suite and Linux/container workflow are delivery gates.
+Their final revision-specific outcomes are on
+[PR #2](https://github.com/VikiShmiki/meowchine-learning-repo/pull/2/checks).
+No real feed archive, secret or personal route is committed.
+
+## Trip completion and immediate full-container exclusions — October 17, 2026
+
+The complete `SRA_BROWSER_TESTS=1 pytest` regression run passed locally on Windows.
+After the final timing/layout refinements, all **41** focused browser tests in
+`test_trip_checkin_browser.py`, `test_community_browser.py`, and
+`test_accounts_browser.py` passed with zero skips/failures. This includes 13 new
+check-in scenarios across 320/360/1280-pixel layouts and both travel modes.
+The 28 community/backend tests and 19 Node tests passed. Lock validation, Ruff lint,
+formatting, whitespace checks and seed/infrastructure/geography
+validators passed. The system/Macedonian browser regression selection also passed.
+
+Covered: no unsolicited reports; skip/early finish; per-asset full exclusions for
+another visitor; expiry/reviewer rejection; pending availability cannot reopen a
+problem; remaining basket items; multi-stop completion; visit preservation and
+deduplication across replans; a fresh trip resets visits; failed submission retry;
+late status responses and failed refresh after a successful write; guest/account
+activity; English/Macedonian switching. Mobile and desktop check-in screenshots
+were visually inspected. Routes and map tiles use test transports; these results
+do not claim physical-device, native-speaker, or live-provider verification.
+
+The initial private-repository CI exposed an existing Docker ignore rule excluding
+both bilingual model heads, plus Linux narrow-screen card/navigation layout failures.
+The delivery includes explicit Docker model-file exceptions and responsive grid/nav
+fixes. The next container run built successfully and exposed a transient connection
+reset in the smoke test's startup wait. The wait now retries connection resets and
+early HTTP disconnects within its existing deadline; six focused readiness tests
+pass, including terminal timeout and malformed-payload failures. Hosted results are
+tracked in [CI_STATUS.md](CI_STATUS.md).
 
 ## October 17, 2026 private-repository edition
 
@@ -345,6 +410,15 @@ is finished. Record failures and observed latency; desktop browser tests do not 
 for these device checks.
 
 ## Completion criteria
+
+Parking-assisted driving (October 17, 2026): 20 focused backend cases and seven
+browser cases pass. The latter exercise both languages at 320/390/1280 px, mapped
+parking and walking, full-container exclusion after check-in, unavailable data,
+retry and returning to direct driving/walking. Visual checks cover narrow-screen
+copy and visible parking/bin markers. The derived 144-point snapshot reproduces
+from its pinned PBF; a live ORS glass/electronics journey verifies integration.
+Full regression/container results belong to the delivery revision's CI gate;
+no field access or vacant-space accuracy is claimed. See [PARKING.md](PARKING.md).
 
 Municipality-chart regressions verify descending rank, source percentage fidelity,
 fixed 0–100% scale, report-derived floor, material updates, inline percentage labels,

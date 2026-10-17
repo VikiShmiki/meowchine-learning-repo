@@ -13,15 +13,15 @@ def load_bound_rows(rows_path: Path, manifest_path: Path, head_path: Path, head_
     """Verify the complete head -> manifest -> rows chain before accepting overlap evidence."""
     if sha256_file(head_path) != head_sha256:
         raise ValueError("Evaluation head checksum differs from the pinned model")
-    head = json.loads(head_path.read_text())
+    head = json.loads(head_path.read_text(encoding="utf-8"))
     manifest_hash = sha256_file(manifest_path)
     if head.get("dataset_sha256") != manifest_hash:
         raise ValueError("Training manifest does not belong to this model")
-    manifest = json.loads(manifest_path.read_text())
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     rows_hash = sha256_file(rows_path)
     if manifest.get("outputs", {}).get("rows.json") != rows_hash:
         raise ValueError("Training rows checksum differs from the bound manifest")
-    rows = json.loads(rows_path.read_text())
+    rows = json.loads(rows_path.read_text(encoding="utf-8"))
     return rows, dict(
         head_sha256=head_sha256,
         dataset_manifest_sha256=manifest_hash,

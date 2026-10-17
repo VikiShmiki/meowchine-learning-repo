@@ -1325,7 +1325,13 @@ def test_expanded_panels_share_layout_without_overflow(page, web_url, width):
 
 
 @pytest.mark.parametrize("width", [320, 360, 390, 768, 1280])
-def test_map_close_start_overlay_controls_and_individual_sites(page, web_url, width):
+@pytest.mark.parametrize("font", ["system", "Verdana"])
+def test_map_close_start_overlay_controls_and_individual_sites(page, web_url, width, font):
+    if font != "system":
+        page.add_init_script(
+            "document.addEventListener('DOMContentLoaded', "
+            "() => document.body.style.fontFamily = 'Verdana, sans-serif')"
+        )
     page.set_viewport_size({"width": width, "height": 900})
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
@@ -1408,7 +1414,7 @@ def test_photo_conflict_clears_previous_confirmation(page, web_url, tmp_path, de
     page.goto(web_url)
     open_ai(page)
     page.locator("#item").fill("phone")
-    page.locator("#classify-form button").click()
+    page.locator('#classify-form button[type="submit"]').click()
     expect(page.locator("#manual-form")).to_be_visible()
     expect(page.locator("#contact")).to_be_visible()
     assert len(requests) == 1

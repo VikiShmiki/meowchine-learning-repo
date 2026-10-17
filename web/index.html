@@ -8,8 +8,8 @@
     <title>Smart Recycling Access</title>
     <link rel="stylesheet" href="/static/vendor/leaflet/leaflet.css" />
     <link rel="stylesheet" href="/static/styles.css" />
-    <link rel="stylesheet" href="/static/citizen.css?v=logo-alignment-1" />
-    <link rel="stylesheet" href="/static/community.css?v=demo-review-2" />
+    <link rel="stylesheet" href="/static/citizen.css?v=parking-1" />
+    <link rel="stylesheet" href="/static/community.css?v=trip-checkin-2" />
     <link rel="stylesheet" href="/static/account.css?v=2" />
   </head>
   <body class="citizen">
@@ -116,7 +116,18 @@
         <fieldset id="trip-mode"><legend class="sr-only">Travel mode</legend>
           <label><input type="radio" name="travel-mode" value="walking" checked /> Walking</label>
           <label><input type="radio" name="travel-mode" value="driving" /> Driving</label>
+          <label><input type="radio" name="travel-mode" value="transit" /> JSP bus</label>
         </fieldset>
+        <div id="parking-options" hidden>
+          <label><input id="include-parking" type="checkbox" /> Park and walk to drop-offs</label>
+          <p>Mapped public parking. Space availability is unknown. Up to ten minutes walking per connection.</p>
+        </div>
+        <div id="transit-options" hidden>
+          <label for="transit-departure">Departure (your local time)</label>
+          <input id="transit-departure" type="datetime-local" aria-describedby="transit-note" />
+          <p id="transit-note">Leave blank to depart now. Scheduled buses, not live arrivals. Up to 15 minutes walking per connection and one transfer per drop-off.</p>
+          <a href="https://skopjebus.mk/mk/schedule/" target="_blank" rel="noopener noreferrer">JSP timetables & notices</a>
+        </div>
         <p id="sharing-note">Route location shared with openrouteservice. Not saved here.</p>
         <p id="routing-availability" role="status">Checking routing availability…</p>
         <button id="retry-routing" type="button" class="secondary" hidden>Retry routing connection</button>
@@ -185,6 +196,11 @@
         <div id="trip-result" class="card" hidden></div>
         <section id="site-details" class="card" tabindex="-1" aria-label="Selected site details" hidden></section>
         </div>
+        <div id="trip-completion" class="trip-completion" hidden>
+          <p>Finished for now? Mark the stops you visited, then end your trip. Any remaining items stay in your basket.</p>
+          <button id="finish-trip" type="button">Finish trip</button>
+        </div>
+        <section id="trip-checkin" class="card trip-checkin" aria-labelledby="checkin-heading" hidden></section>
       </section>
 
       <details id="data-details"><summary>About the map &amp; data</summary><p id="data-status" role="status">Loading site data…</p><a href="https://www.openstreetmap.org/fixthemap" target="_blank" rel="noopener noreferrer">Report a base-map issue</a><button id="refresh-sites" type="button" class="secondary">Refresh site data</button><p>Follow container instructions. Records are a dated snapshot, not live availability. Map tiles reveal the viewed area to the provider. Saved site data can be used after a failed refresh; offline maps and page loading are not supported.</p></details>
@@ -192,10 +208,10 @@
     <script src="/static/app.js?v=visual-pass-1" defer></script>
     <script src="/static/vendor/leaflet/leaflet.js" defer></script>
     <script src="/static/site-data.js?v=stop-colors-1" defer></script>
-    <script src="/static/community.js?v=1" defer></script>
+    <script src="/static/community.js?v=trip-checkin-1" defer></script>
     <script src="/static/account.js?v=3" defer></script>
-    <script src="/static/map.js?v=community-1" defer></script>
-    <script src="/static/trip.js?v=accounts-1" defer></script>
+    <script src="/static/map.js?v=parking-1" defer></script>
+    <script src="/static/trip.js?v=parking-1" defer></script>
     <script src="/static/path.js?trip-flow-1" defer></script>
   </body>
 </html>

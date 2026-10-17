@@ -25,7 +25,9 @@ from smart_recycling.object_models import HEADS, OBJECT_HEAD_VERSION, ObjectSugg
 
 def write(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n")
+    path.write_text(
+        json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n"
+    )
 
 
 def weights(rows):

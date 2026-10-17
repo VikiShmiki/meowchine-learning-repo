@@ -13,6 +13,10 @@ portable weights and repaired data splits. [Measured results and limitations](do
 supersede the historical model section of the PDF; native and independent user
 validation remain outstanding.
 
+**JSP buses are supported:** plan scheduled public-transport journeys with walking connections, bus numbers, boarding/exit stops and transfers. See [JSP setup and limits](docs/TRANSIT.md).
+
+**Driving can include parking:** choose **Park and walk to drop-offs** for mapped public parking, walking connections and returning to the car between stops. The bundled Skopje snapshot contains 144 parking points; available spaces are unknown. See [parking sources and limits](docs/PARKING.md).
+
 ## Why Goodsort matters
 
 Knowing that an item is recyclable is not enough if the nearby container does not
@@ -44,6 +48,13 @@ For a quick tour, change language in the header, select a material or describe a
 The [demo video](docs/assets/demo-app-video.mp4) shows the product; it is a walkthrough, not evidence that external providers or collection sites are currently available. The video is checked into the repository so a reviewer can inspect it without local files.
 
 ## What the prototype does
+
+**Finish a trip, help the next person.** Mark visited stops or completed drop-offs,
+then finish the trip to optionally report each container's condition. Full reports
+immediately exclude that container from route recommendations for everyone, for up
+to 12 hours, without a photo. Reports stay labeled as community observations;
+reviewers can reject them. Unfinished items remain in the basket, and skipping the
+check-in sends nothing. [Reporting and expiry rules](docs/COMMUNITY.md).
 
 | Capability | How it works | Evidence and limits |
 | --- | --- | --- |

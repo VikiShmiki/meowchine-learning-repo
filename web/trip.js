@@ -7,6 +7,9 @@
   let unconfirmedPicks = false;
   let editingOrigin = false;
   let currentRoute = null;
+  const visitedStops = new Map();
+  const completedStops = new Set();
+  let savingDropoffs = 0;
   const kindNames = { empty_glass_packaging: "Glass bottle/jar", empty_plastic_bottle: "Plastic bottle",
     empty_metal_can: "Metal can", clean_paper: "Clean paper", clean_cardboard: "Clean cardboard",
     empty_tetrapak: "Tetra Pak carton", glass: "Glass bottles & jars",
@@ -24,6 +27,7 @@
     return element;
   }
   const travelMode = () => $("trip-mode").querySelector("input:checked").value;
+  const includeParking = () => travelMode() === "driving" && $("include-parking").checked;
   function readiness() {
     if (unconfirmedPicks) return "Add your selected items to the route first.";
     if (editingOrigin && origin) return "Finish choosing your starting point.";
@@ -31,12 +35,15 @@
     return "";
   }
   function updatePlanButton() {
-    $("plan-trip").disabled = !configured || !basket.length || !origin || Boolean(pending) || unconfirmedPicks || editingOrigin;
+    $("plan-trip").disabled = !configured || !basket.length || !origin || Boolean(pending) || Boolean(savingDropoffs) || unconfirmedPicks || editingOrigin;
     $("plan-trip").textContent = pending ? "Finding route…" : "Find my route";
     $("plan-trip").setAttribute("aria-busy", String(Boolean(pending)));
+    $("trip-completion").hidden = !currentRoute && !visitedStops.size;
+    $("finish-trip").disabled = Boolean(savingDropoffs || pending);
   }
   function invalidate() {
     currentRoute = null;
+    completedStops.clear();
     generation += 1;
     pending?.abort();
     pending = null;
@@ -46,6 +53,34 @@
     document.dispatchEvent(new CustomEvent("trip-route", { detail: null }));
     $("trip-status").textContent = readiness();
   }
+  function finishTrip({ allDropped = false, saved = false } = {}) {
+    if (savingDropoffs) return;
+    const ids = [...new Set([...visitedStops.values()].flat())];
+    visitedStops.clear();
+    invalidate();
+    const panel = $("trip-checkin");
+    const heading = node("h2", "Trip finished"); heading.id = "checkin-heading"; heading.tabIndex = -1;
+    panel.replaceChildren(heading);
+    if (ids.length) {
+      panel.append(node("p", "How were the containers you visited?"));
+      panel.append(node("p", "Optional: report only what you saw. A full container is immediately excluded from everyone's routes for up to 12 hours. No photo needed."));
+      panel.append(CommunityUI.checkIn(ids));
+    } else {
+      panel.append(node("p", "No stops were marked visited. No container reports have been sent."));
+    }
+    const done = node("button", "Done / skip remaining"); done.type = "button"; done.className = "secondary";
+    done.addEventListener("click", () => {
+      panel.hidden = true; panel.replaceChildren();
+      $("basket-add-item").focus({preventScroll: true});
+      $("trip-panel").scrollIntoView({block: "start"});
+    });
+    panel.append(done); panel.hidden = false;
+    $("trip-status").textContent = allDropped ? "All items marked dropped off."
+      : "Trip ended. Items not marked dropped off are still in your basket.";
+    if (saved) $("trip-status").textContent += " Saved to My activity.";
+    heading.focus({preventScroll: true}); panel.scrollIntoView({block: "start"});
+  }
+  $("finish-trip").addEventListener("click", () => finishTrip());
   function renderBasket() {
     $("trip-items").replaceChildren();
     basket.forEach((item, index) => {
@@ -144,37 +179,56 @@
       invalidate();
     }
   });
-  $("trip-mode").addEventListener("change", invalidate);
+  $("trip-mode").addEventListener("change", () => {
+    $("transit-options").hidden = travelMode() !== "transit";
+    $("parking-options").hidden = travelMode() !== "driving";
+    invalidate();
+  });
+  $("transit-departure").addEventListener("change", invalidate);
+  $("include-parking").addEventListener("change", invalidate);
   document.addEventListener("container-status-change", event => {
-    if (!currentRoute || !currentRoute.stops.some(stop => stop.asset_ids?.some(id => event.detail.includes(id)))) return;
+    if (!currentRoute || !currentRoute.stops.some(stop => !completedStops.has(stop) && stop.asset_ids?.some(id => event.detail.includes(id)))) return;
     const notice = $("route-condition-notice");
-    if (notice) { notice.hidden = false; notice.querySelector("strong").textContent = "Container conditions changed · update your route"; $("request-route-update").hidden = true; }
+    if (notice) { notice.hidden = false; notice.querySelector("strong").textContent = "Container conditions changed · find an alternative route"; $("request-route-update").hidden = true; }
     document.dispatchEvent(new CustomEvent("trip-route", {detail: null}));
   });
   $("plan-trip").addEventListener("click", async () => {
-    if (pending || !configured || !basket.length || !origin || unconfirmedPicks || editingOrigin) {
+    if (pending || savingDropoffs || !configured || !basket.length || !origin || unconfirmedPicks || editingOrigin) {
       $("trip-status").textContent = readiness();
       return;
     }
     invalidate();
+    $("trip-checkin").hidden = true; $("trip-checkin").replaceChildren();
     const current = generation;
     const controller = new AbortController();
     pending = controller;
-    const timer = setTimeout(() => controller.abort(), 40000);
+    const timer = setTimeout(() => controller.abort(), travelMode() === "transit" || includeParking() ? 75000 : 40000);
     updatePlanButton();
     $("trip-status").textContent = "Finding compatible sites and a network route…";
     try {
+      const departure = travelMode() === "transit" && $("transit-departure").value
+        ? new Date($("transit-departure").value).toISOString() : null;
       const response = await (globalThis.GoodsortI18n?.fetch || fetch)("/api/v1/trips", {
         method: "POST", headers: { "Content-Type": "application/json" }, signal: controller.signal,
-        body: JSON.stringify({ origin, mode: travelMode(), items: basket, share_coordinates: true }),
+        body: JSON.stringify({ origin, mode: travelMode(), items: basket, share_coordinates: true,
+          ...(includeParking() ? {include_parking: true} : {}),
+          ...(departure ? {departure_at: departure} : {}) }),
       });
       const body = await response.json();
       if (current !== generation) return;
       if (!response.ok) throw new Error(body.detail?.message || "Could not plan this trip. Check the items and try again.");
       currentRoute = body;
       const result = $("trip-result");
-      result.replaceChildren(node("h3", `${body.mode === "walking" ? "Walking" : "Driving"} trip`));
-      result.append(node("p", `${(body.distance_m / 1000).toFixed(2)} km · about ${Math.ceil(body.duration_s / 60)} minutes on the network. Ends at the last stop.`));
+      result.replaceChildren(node("h3", `${{walking: "Walking", driving: "Driving", transit: "JSP bus"}[body.mode]} trip`));
+      if (body.mode === "transit") {
+        result.append(node("p", `About ${Math.ceil(body.duration_s / 60)} minutes including walking, waiting and intermediate drop-offs.`));
+        result.append(node("p", "Scheduled times · Europe/Skopje. Check JSP notices for disruptions."));
+        result.append(node("p", `Timetable checked: ${transitTime(body.transit_fetched_at)}. Service through: ${body.transit_service_end}.`));
+      } else if (body.parking?.length) {
+        result.append(node("p", `About ${Math.ceil(body.driving_duration_s / 60)} minutes driving + ${Math.ceil(body.walking_duration_s / 60)} minutes walking.`));
+        result.append(node("p", "Includes walking back to the car between drop-offs. Excludes time finding a space, payment and disposal."));
+        result.append(node("p", `Parking map dated ${body.parking_source_as_of.slice(0, 10)}. Space availability is unknown.`));
+      } else result.append(node("p", `${(body.distance_m / 1000).toFixed(2)} km · about ${Math.ceil(body.duration_s / 60)} minutes on the network. Ends at the last stop.`));
       const viewMap = node("a", "View route on map");
       viewMap.href = "#site-map";
       result.append(viewMap);
@@ -199,26 +253,61 @@
         row.style.setProperty("--stop-ink", appearance.color);
         row.dataset.materials = appearance.materials.join(" ");
         row.append(node("strong", stop.name), node("p", `Drop off: ${stop.item_kinds.map((kind) => kindNames[kind] || kind).join(", ")}`));
-        if (globalThis.CommunityUI && stop.asset_ids?.length) row.append(CommunityUI.containerControl(stop.asset_ids));
+        if (body.mode === "transit") row.append(transitItinerary(body.legs.filter(leg => leg.site_id === stop.site_id)));
+        const parking = body.parking?.find(visit => visit.site_id === stop.site_id);
+        if (parking) row.append(parkingItinerary(parking, index));
+        const stopKey = [...(stop.asset_ids || [])].sort().join("|");
+        const visitLabel = node("label", ""); visitLabel.className = "stop-visited";
+        const visited = document.createElement("input"); visited.type = "checkbox";
+        visited.checked = visitedStops.has(stopKey);
+        visited.addEventListener("change", () => {
+          if (visited.checked) visitedStops.set(stopKey, [...stop.asset_ids]);
+          else visitedStops.delete(stopKey);
+          updatePlanButton();
+        });
+        visitLabel.append(visited, node("span", "I visited this stop")); row.append(visitLabel);
+        if (globalThis.CommunityUI && stop.asset_ids?.length) {
+          const conditions = CommunityUI.containerControl(stop.asset_ids);
+          const reportProblem = node("button", "Report a problem"); reportProblem.type = "button"; reportProblem.className = "secondary";
+          reportProblem.addEventListener("click", () => {
+            conditions.open = true;
+            conditions.querySelector("summary").focus();
+          });
+          row.append(reportProblem, conditions);
+        }
         const completed = node("button", "Dropped these off"); completed.className = "secondary"; completed.type = "button";
         const skipSave = node("button", "Mark without saving"); skipSave.type = "button"; skipSave.className = "secondary"; skipSave.hidden = true;
         const saveMessage = node("p", ""); saveMessage.setAttribute("role", "status");
         function finish(saved = false) {
-          if (current !== generation) return;
+          if (current !== generation || completedStops.has(stop)) return;
+          completedStops.add(stop);
+          visitedStops.set(stopKey, [...stop.asset_ids]);
+          visited.checked = true; visited.disabled = true;
           basket = basket.filter(item => !stop.item_kinds.includes(item.material === "clothes" ? "wearable_clothes" : item.material ? item.small_only ? "small_electronics" : item.material : item.manual_kind));
-          invalidate(); renderBasket();
-          $("trip-status").textContent = basket.length ? "Remaining items kept. Choose your current starting point, then find a route." : "All items marked dropped off.";
-          if (basket.length) $("change-origin").click();
-          if (saved) $("trip-status").textContent += " Saved to My activity.";
-          $("trip-panel").scrollIntoView({block: "start"});
+          completed.disabled = true; completed.textContent = "Drop-off completed"; skipSave.hidden = true;
+          row.dataset.completed = "true";
+          saveMessage.textContent = saved ? "Saved to My activity." : "Marked dropped off.";
+          renderBasket();
+          if (!basket.length) finishTrip({allDropped: true, saved});
+          else $("trip-status").textContent = "Stop completed. Continue to your next stop, or finish your trip.";
         }
         completed.addEventListener("click", async () => {
+          if (completedStops.has(stop) || savingDropoffs) return;
+          savingDropoffs += 1; updatePlanButton();
           completed.disabled = true; skipSave.hidden = true; saveMessage.textContent = "";
-          try { finish(globalThis.AccountUI ? await AccountUI.saveDropoff(stop.completion_ticket) : false); }
+          try {
+            const saved = globalThis.AccountUI ? await AccountUI.saveDropoff(stop.completion_ticket) : false;
+            savingDropoffs -= 1;
+            finish(saved);
+          }
           catch (error) { saveMessage.textContent = error.message || "Could not save. Retry."; skipSave.hidden = false; }
-          finally { completed.disabled = false; }
+          finally {
+            savingDropoffs = 0;
+            if (current === generation) completed.disabled = completedStops.has(stop);
+            updatePlanButton();
+          }
         });
-        skipSave.addEventListener("click", () => finish());
+        skipSave.addEventListener("click", () => { if (!savingDropoffs) finish(); });
         row.append(completed, skipSave, saveMessage);
         for (const note of stop.arrival_notes || []) row.append(node("p", note));
         if (stop.unverified_materials?.includes("general")) {
@@ -256,6 +345,49 @@
       if (current === generation) { pending = null; updatePlanButton(); }
     }
   });
+  function transitTime(value) {
+    return new Intl.DateTimeFormat("en-GB", {timeZone: "Europe/Skopje", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23"}).format(new Date(value));
+  }
+  function parkingItinerary(visit, index) {
+    const panel = node("section", ""); panel.className = "parking-visit";
+    panel.id = `parking-stop-${index + 1}`; panel.tabIndex = -1;
+    panel.append(node("h4", `Park: ${visit.name}`));
+    panel.append(node("p", "Space availability: unknown. Check signs before parking."));
+    const details = node("details", ""); details.className = "parking-details";
+    details.append(node("summary", "Parking details"));
+    const fee = visit.fee === "yes" ? "Paid parking recorded" : visit.fee === "no" ? "No fee recorded" : visit.fee === "unknown" ? "Fee unknown" : `Recorded fee: ${visit.fee}`;
+    details.append(node("p", fee), node("p", visit.opening_hours === "unknown" ? "Opening hours unknown" : `Recorded hours: ${visit.opening_hours}`));
+    details.append(node("p", visit.point_kind === "driveway_crossing" ? "Mapped driveway crossing; entrance and access are unverified." : "Mapped parking point; entrance and access are unverified."));
+    panel.append(node("strong", visit.walk_to.distance_m < 1
+      ? "Parking and drop-off use the same network point. Check access on foot."
+      : `Walk ${Math.round(visit.walk_to.distance_m)} m · about ${Math.ceil(visit.walk_to.duration_s / 60)} minutes to the drop-off.`));
+    details.append(node("p", `Unverified walking access gaps: ${Math.round(visit.walk_to.start_gap_m)} m at parking, ${Math.round(visit.walk_to.end_gap_m)} m at the drop-off.`));
+    details.append(node("p", `Driving endpoint is ${Math.round(visit.drive_access_gap_m)} m from the mapped parking point. Access is unverified.`));
+    if (visit.walk_back) panel.append(node("p", `After disposal, walk back ${Math.round(visit.walk_back.distance_m)} m · about ${Math.ceil(visit.walk_back.duration_s / 60)} minutes to your car before the next drive.`));
+    else panel.append(node("p", "Final drop-off: your car remains at this parking location. The final walk back is not included."));
+    const source = node("a", "View parking on OpenStreetMap"); source.href = visit.source_url; source.target = "_blank"; source.rel = "noopener noreferrer";
+    const data = node("a", "Parking data & license"); data.href = "/api/v1/parking"; data.target = "_blank"; data.rel = "noopener noreferrer";
+    details.append(source, node("span", " · "), data); panel.append(details);
+    return panel;
+  }
+  function transitItinerary(legs) {
+    const list = node("ol", ""); list.className = "transit-legs";
+    let previous = null;
+    for (const leg of legs) {
+      const row = node("li", ""); row.dataset.mode = leg.mode;
+      if (previous && new Date(leg.departure_at) > new Date(previous)) {
+        row.append(node("p", `Wait about ${Math.ceil((new Date(leg.departure_at) - new Date(previous)) / 60000)} minutes.`));
+      }
+      if (leg.mode === "bus") {
+        row.append(node("strong", `Bus ${leg.line} · ${leg.headsign}`));
+        row.append(node("p", `Board: ${leg.from_name}`), node("p", `Get off: ${leg.to_name}`));
+        row.append(node("p", `${leg.stop_count} bus stops`));
+      } else row.append(node("strong", `Walk about ${Math.ceil(leg.duration_s / 60)} minutes`), node("p", `${leg.from_name} → ${leg.to_name}`));
+      row.append(node("p", `${transitTime(leg.departure_at)} → ${transitTime(leg.arrival_at)}`));
+      list.append(row); previous = leg.arrival_at;
+    }
+    return list;
+  }
   async function checkAvailability() {
     $("retry-routing").hidden = true;
     $("routing-availability").textContent = "Checking routing availability...";

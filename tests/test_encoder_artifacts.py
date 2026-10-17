@@ -79,13 +79,22 @@ def test_verified_snapshot_survives_relocation(encoders, tmp_path):
     assert verified_encoder_path(minilm.MODEL_ID, minilm.MODEL_REVISION, copied) == copied
 
 
+def create_symlink(destination, source, *, directory=False):
+    try:
+        destination.symlink_to(source, target_is_directory=directory)
+    except OSError as error:
+        if getattr(error, "winerror", None) == 1314:
+            pytest.skip("Windows requires Developer Mode or symlink privilege; covered by Linux CI")
+        raise
+
+
 def test_hugging_face_file_symlinks_preserve_identity(encoders, tmp_path):
     snapshot = tmp_path / "snapshot"
     for source in encoders["en"].rglob("*"):
         if source.is_file():
             destination = snapshot / source.relative_to(encoders["en"])
             destination.parent.mkdir(parents=True, exist_ok=True)
-            destination.symlink_to(source)
+            create_symlink(destination, source)
 
     assert verified_encoder_path(minilm.MODEL_ID, minilm.MODEL_REVISION, snapshot) == snapshot
 
@@ -155,7 +164,7 @@ def test_directory_symlinks_are_rejected(encoders, tmp_path):
     pooling = encoders["en"] / "1_Pooling"
     relocated = tmp_path / "external-pooling"
     pooling.rename(relocated)
-    pooling.symlink_to(relocated, target_is_directory=True)
+    create_symlink(pooling, relocated, directory=True)
 
     with pytest.raises(EncoderArtifactError):
         verified_encoder_path(minilm.MODEL_ID, minilm.MODEL_REVISION, encoders["en"])
