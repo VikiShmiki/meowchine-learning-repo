@@ -16,10 +16,10 @@ COPY src ./src
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --locked --no-dev --no-editable
 RUN --mount=type=cache,target=/root/.cache/huggingface \
-    uv run python -c "from pathlib import Path; from smart_recycling.minilm import cache_encoder; cache_encoder(Path('/app/runtime-models/all-MiniLM-L6-v2'))"
+    uv run --no-sync python -c "from pathlib import Path; from smart_recycling.minilm import cache_encoder; cache_encoder(Path('/app/runtime-models/all-MiniLM-L6-v2'))"
 
 RUN --mount=type=cache,target=/root/.cache/huggingface \
-    uv run python -c "from pathlib import Path; from smart_recycling.multilingual import cache_encoder; cache_encoder(Path('/app/runtime-models/multilingual-minilm'))"
+    uv run --no-sync python -c "from pathlib import Path; from smart_recycling.multilingual import cache_encoder; cache_encoder(Path('/app/runtime-models/multilingual-minilm'))"
 
 FROM python:3.11-slim AS runtime
 
@@ -47,6 +47,8 @@ COPY web ./web
 RUN groupadd --system app && useradd --system --gid app --home /app --no-create-home app \
     && mkdir -p /app/runtime && chown app:app /app/runtime
 USER app
+
+RUN python -c "import smart_recycling"
 
 EXPOSE 8000
 CMD ["uvicorn", "smart_recycling.api:app", "--host", "0.0.0.0", "--port", "8000"]
