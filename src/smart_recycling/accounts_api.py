@@ -36,7 +36,11 @@ class Completion(BaseModel):
 def account_write(request: Request):
     # Browsers cannot send this custom header cross-origin without a CORS preflight;
     # the app grants no cross-origin access. Origin validation is also applied globally.
-    if request.method != "GET" and request.headers.get("x-goodsort-action") != "1":
+    # Keep the previous header working for already-open clients during the rename.
+    action = any(
+        request.headers.get(name) == "1" for name in ("x-najdi-frli-action", "x-goodsort-action")
+    )
+    if request.method != "GET" and not action:
         raise HTTPException(403, "Reload the page and try again.")
 
 

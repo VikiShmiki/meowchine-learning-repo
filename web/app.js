@@ -101,7 +101,7 @@ async function classify(manual = false, suggestedKind = null) {
       && !["batteries", "other"].includes(selection.value);
   }
   try {
-    const response = await (globalThis.GoodsortI18n?.fetch || fetch)("/api/v1/classify", {
+    const response = await (globalThis.NajdiFrliI18n?.fetch || fetch)("/api/v1/classify", {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload), signal: controller.signal,
     });
@@ -202,7 +202,7 @@ async function analyzePhoto() {
   photoItems.replaceChildren();
   photoStatus.textContent = "Analyzing the photo…";
   try {
-    const response = await (globalThis.GoodsortI18n?.fetch || fetch)("/api/v1/photo-suggestions", {
+    const response = await (globalThis.NajdiFrliI18n?.fetch || fetch)("/api/v1/photo-suggestions", {
       method: "POST", headers: { "Content-Type": photo.type }, body: photo,
       signal: controller.signal,
     });

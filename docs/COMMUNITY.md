@@ -6,7 +6,7 @@ No municipal submission integration or live Pakomak feed.
 
 ## Run locally
 
-`uv run python scripts/run_local_demo.py --env-file /path/to/your/.env`
+`uv run python scripts/run_local.py --env-file /path/to/your/.env`
 
 The launcher binds only to 127.0.0.1. It creates an ignored `runtime/reviewer-key.txt`
 if `SRA_REVIEW_TOKEN` is unset. Open `/review`, paste that key, then Lock when done.
@@ -15,7 +15,7 @@ Do not share/commit the key or database. Source `.env` files are not modified.
 
 For direct uvicorn/deployment, set `SRA_REVIEW_TOKEN` to a random secret of at least
 32 characters. Without it, review APIs fail closed. This shared reviewer secret is
-a demo moderation gate, **not user registration or production role management**.
+a prototype moderation gate, **not user registration or production role management**.
 
 `SRA_COMMUNITY_DB` defaults to `runtime/community.sqlite3`. Mount persistent storage
 for deployment; do not put it in the image or use an ephemeral filesystem. The
@@ -82,7 +82,7 @@ dumping reports are unchanged.
 City coverage only: `Community reports`. Recycle retains container-condition
 reporting and rerouting, with no duplicate dumping form. Select a map point or enter
 coordinates, describe the issue, and optionally attach a photo. Coordinate bounds
-41.8–42.2 N, 21.2–21.7 E are a coarse Skopje demo envelope, not municipal boundaries.
+41.8–42.2 N, 21.2–21.7 E are a coarse Skopje prototype envelope, not municipal boundaries.
 Reports are pending until reviewer approval. Approved/cleared reports appear in a
 separate map layer; reject/duplicate hides them. They never become route destinations
 and never silently change prepared City coverage percentages or upgrade suggestions.

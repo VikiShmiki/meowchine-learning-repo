@@ -28,7 +28,7 @@ def register(page, web_url):
     page.request.post(web_url + "/__test/reset-account-budget")
     page.get_by_role("button", name="Sign in", exact=True).click()
     page.locator("#account-register-tab").click()
-    username = "demo_" + uuid.uuid4().hex[:10]
+    username = "test_" + uuid.uuid4().hex[:10]
     page.get_by_label("Username", exact=True).fill(username)
     page.get_by_label("Password", exact=True).fill(PASSWORD)
     page.locator("#account-submit").click()
@@ -126,7 +126,7 @@ def test_session_expiry_allows_explicit_unsaved_completion(page, web_url):
     page.goto(web_url)
     register(page, web_url)
     route(page, web_url)
-    page.request.post(web_url + "/api/v1/account/logout", headers={"X-Goodsort-Action": "1"})
+    page.request.post(web_url + "/api/v1/account/logout", headers={"X-Najdi-Frli-Action": "1"})
     page.get_by_role("button", name="Dropped these off", exact=True).click()
     expect(page.locator("#trip-items li")).to_have_count(1)
     page.get_by_role("button", name="Mark without saving").click()
@@ -167,7 +167,7 @@ def test_guest_route_and_dialog_keyboard_dismissal(page, web_url):
 @pytest.mark.parametrize("count", [0, 1, 10, 25])
 def test_activity_visual_states_and_keyboard_navigation(page, web_url, width, count):
     now = time.time()
-    user = {"id": "visual-test", "username": "recycling_demo"}
+    user = {"id": "visual-test", "username": "recycling_test"}
     streams = ["glass", "plastic_metal", "paper_tetrapak", "clothes", "electronics"]
     with api.community_store.connection() as db:
         db.execute(

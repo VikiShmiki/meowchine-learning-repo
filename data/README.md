@@ -1,6 +1,6 @@
 # Data workspace
 
-- `seed/`: small deterministic synthetic fixtures committed for tests and demos.
+- `seed/`: small deterministic synthetic fixtures committed for tests.
 - `raw/`: immutable source downloads; ignored by Git.
 - `processed/`: validated derived snapshots; ignored until licensing is confirmed.
 - `mappings/`: explicit local policy and a generated Toronto review queue. The Toronto

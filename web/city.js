@@ -3,7 +3,7 @@
   "use strict";
   const $ = (id) => document.getElementById(id);
   let report = null;
-  const population = (value) => Math.round(value).toLocaleString(globalThis.GoodsortI18n?.locale || "en-GB");
+  const population = (value) => Math.round(value).toLocaleString(globalThis.NajdiFrliI18n?.locale || "en-GB");
   const percent = (value) => value === null ? "Unavailable" : `${value.toFixed(1)}%`;
   function node(tag, text) {
     const element = document.createElement(tag);

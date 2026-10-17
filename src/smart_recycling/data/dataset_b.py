@@ -19,7 +19,7 @@ from smart_recycling.data.constants import (
 
 
 def _download_bytes(url: str) -> bytes:
-    request = Request(url, headers={"User-Agent": "smart-recycling-access/0.1"})
+    request = Request(url, headers={"User-Agent": "najdi-frli/0.1"})
     with urlopen(request, timeout=60) as response:  # noqa: S310 - fixed HTTPS source
         return response.read()
 

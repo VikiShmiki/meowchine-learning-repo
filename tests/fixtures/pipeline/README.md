@@ -1,6 +1,6 @@
 # Synthetic pipeline example images
 
-Created with the built-in image-generation tool on 2026-09-22; no personal photos or external source photographs. Intended for manual demos and integration smoke checks, not an independent model-accuracy benchmark. No app card artwork was changed.
+Created with the built-in image-generation tool on 2026-09-22; no personal photos or external source photographs. Intended for manual walkthroughs and integration smoke checks, not an independent model-accuracy benchmark. No app card artwork was changed.
 
 See [test instructions](../../../docs/PIPELINE_TEST_CASES.md) and [case manifest](cases.json).
 

@@ -146,7 +146,7 @@ pipeline. The source metadata does not provide clear dataset-specific licenses;
 keep records local until redistribution/training terms are confirmed. Toronto
 disposal categories are not automatically Skopje acceptance rules.
 
-## Deferred ML work
+## Follow-up at the time of acquisition
 
 These are English sources, not native Macedonian training/evaluation evidence.
 Later work needs reviewed local labels and a grouped bilingual test set, including
@@ -158,4 +158,7 @@ same approved data and evaluation protocol. Train/evaluate through Slurm on
 `gpgpu01` with `--gres=gpu:1`, host `python3`, and the shared package directory
 `/home/hpc/users/ml_models/rebeka.maneva/py_pkgs_cuda126` on `PYTHONPATH`, without a
 container. Validate interpreter/dependency compatibility before submitting jobs.
-No such jobs, new mappings, model artifacts or app changes were made in this pass.
+No such jobs, new mappings, model artifacts or app changes were made in this
+September 22 acquisition pass. Later bilingual benchmarks and the current v3 audit
+models are documented in [ML.md](ML.md) and [BILINGUAL_DATA.md](BILINGUAL_DATA.md);
+this inventory is historical source evidence, not the active ML backlog.

@@ -1,58 +1,50 @@
-# CI status and evaluation evidence
+# CI status
 
 Updated: 2026-10-17
 
-The ML integration brings `fix/ml-data-remediation` onto current main, retaining
-the reporting, JSP and parking features. It fixes the missing Docker v3 model
-bundle, an ambiguous photo-test selector, Windows model-byte preservation and
-portable ML data I/O/source paths. Local model startup and deployment smoke pass
-with the actual v3 audit heads. The final revision's quality/container jobs in
-[Actions](https://github.com/VikiShmiki/meowchine-learning-repo/actions?query=branch%3Afix%2Fml-data-remediation)
-are required before merge. Windows skips only two symlink tests when the OS denies
-the needed privilege; Linux CI runs them. Earlier branch results remain historical.
+The private repository's GitHub Actions workflow is **active**. It runs a quality
+job and a Docker smoke job on pushes and pull requests. The repository URL remains
+[VikiShmiki/meowchine-learning-repo](https://github.com/VikiShmiki/meowchine-learning-repo)
+after the Najdi Frli product rename.
 
-Parking delivery adds 20 backend and seven browser tests to the same quality gate,
-and the container smoke now verifies the bundled public-parking endpoint. The
-current parking revision's quality and container jobs in
-[Actions](https://github.com/VikiShmiki/meowchine-learning-repo/actions?query=branch%3Afeat%2Fparking-routes)
-are the merge gate. Focused local checks and a live ORS parking journey passed;
-these do not substitute for those complete gates or field access checks.
+## Rename and maintenance gate
 
-The JSP delivery is [PR #2](https://github.com/VikiShmiki/meowchine-learning-repo/pull/2).
-Its [checks](https://github.com/VikiShmiki/meowchine-learning-repo/pull/2/checks)
-include the new transit tests alongside all existing regression/browser checks and
-the container smoke test. A successful check on the current PR revision is the
-merge gate; a cancelled superseded/duplicate run is not pass evidence. The local
-key and real GTFS cache remain ignored and are not available to CI.
+The Najdi Frli audit retains both required jobs and strengthens deployment smoke
+to check the page/API product name. Runtime packaging now carries only the current
+v3 audit heads. Local verification is recorded in [QUALITY.md](QUALITY.md); the
+[Actions history](https://github.com/VikiShmiki/meowchine-learning-repo/actions)
+records the full Linux/browser/container outcome for each submitted revision.
 
-This private repository has its own [Actions runs](https://github.com/VikiShmiki/meowchine-learning-repo/actions).
-The checked-in workflow runs quality checks and a container smoke test on pushes
-and pull requests. No hosted pass is claimed until those jobs complete successfully.
+## Earlier merged baseline
 
-The [initial private-repository run](https://github.com/VikiShmiki/meowchine-learning-repo/actions/runs/39022132656)
-executed its jobs: Docker failed because `.dockerignore` excluded the bilingual
-model heads, and six browser cases failed on narrow-screen layouts. The trip-check-in
-delivery fixes both causes. Its own quality/container results should be read from
-the latest run on the delivery revision, independently of those historical results.
-The first feature run built the image but exposed an early connection reset before
-the app was ready. The smoke test's bounded startup wait now handles that transient
-failure, with six regression tests; it still fails if readiness never arrives.
-The next run exposed a runtime import failure: model-cache commands had resynced
-the installed package into editable mode. They now use `uv run --no-sync` to retain
-the non-editable installation. Bundled model files receive explicit read permissions
-for the runtime user; the runtime build loads both encoders as that non-root user,
-verifying the package, file access and model serialization together.
-That container check passed on revision `ec3f8a6`. The Linux browser run also
-identified 320 px map-control overlap and Macedonian status-summary overflow;
-fixed-width control space and wrapping status labels address these. The 22 focused
-local layout checks pass with system and wider Verdana fonts. Final combined CI
-remains the latest delivery revision's quality and container jobs.
+[PR #4](https://github.com/VikiShmiki/meowchine-learning-repo/pull/4) integrated
+Oliver's ML remediation with reporting, JSP and parking, merged as `c626c8d`.
+[Run 39031926188](https://github.com/VikiShmiki/meowchine-learning-repo/actions/runs/39031926188)
+passed both jobs: 737 backend tests, 429 browser cases, 21 Node tests, lock/lint/
+formatting and artifact checks, plus Docker startup/deployment smoke with both
+actual v3 audit language models. Windows can skip two symlink cases when the OS
+denies the needed privilege; Linux CI exercises them.
 
-The source repository's earlier account restriction and paused workflow are
-historical evidence, preserved in [UPSTREAM_CI_STATUS.md](UPSTREAM_CI_STATUS.md).
-They do not establish the status of this repository or its owner's account.
+These results belong to that tested revision. Subsequent changes require successful
+checks on their own revision; a cancelled or superseded run is not pass evidence.
+See [current Actions runs](https://github.com/VikiShmiki/meowchine-learning-repo/actions).
 
-Run `make check`, or the PowerShell equivalents in [README.md](../README.md),
-for the local gate. See [QUALITY.md](QUALITY.md) for dated local outcomes.
-Local checks do not establish hosted deployment, physical-device behavior,
-native-speaker review, or live external-provider accuracy.
+## Gate contents
+
+- Quality: locked dependencies, Ruff, backend and Node tests; infrastructure and
+  geography validation; exact coverage/upgrade reproduction; Chromium citizen,
+  City, account, reporting, bilingual, JSP and parking tests.
+- Container: build the non-root runtime image, load both pinned encoders and JSON
+  heads, serve the real data bundles, and pass `smoke_deployment.py` without keys.
+  A bounded readiness wait tolerates startup but still fails if readiness never arrives.
+
+Prior private delivery checks are linked from
+[PR #1](https://github.com/VikiShmiki/meowchine-learning-repo/pull/1),
+[PR #2](https://github.com/VikiShmiki/meowchine-learning-repo/pull/2) and
+[PR #3](https://github.com/VikiShmiki/meowchine-learning-repo/pull/3).
+The source repository's account restriction and paused workflow are preserved in
+[UPSTREAM_CI_STATUS.md](UPSTREAM_CI_STATUS.md); they do not describe this repository.
+
+Local commands and test boundaries are in [QUALITY.md](QUALITY.md). Automated CI
+does not establish public deployment, physical-device behavior, native-language
+review, vacant parking spaces or live external-provider accuracy.

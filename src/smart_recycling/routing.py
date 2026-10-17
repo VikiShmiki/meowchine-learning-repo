@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 
 class RoutingService:
-    """A single-process demo service; never cache or log origins or descriptions."""
+    """A single-process routing service; never cache or log origins or descriptions."""
 
     def __init__(
         self,

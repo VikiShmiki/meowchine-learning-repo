@@ -50,7 +50,7 @@ def test_report_container_recalculates_without_losing_items(page, web_url, width
     expect(page.locator("#trip-items li")).to_have_count(1)
     if os.getenv("SRA_LAYOUT_SCREENSHOTS"):
         page.locator("#trip-result").screenshot(
-            path=str(ROOT / "artifacts" / f"demo-container-report-{width}-{mode}.png")
+            path=str(ROOT / "artifacts" / f"container-report-{width}-{mode}.png")
         )
     with page.expect_response("**/api/v1/trips") as second_response:
         page.get_by_role("button", name="Use existing start", exact=True).click()
@@ -100,7 +100,7 @@ def test_dumping_submit_private_then_review_and_publish(page, web_url, width):
     )
     if os.getenv("SRA_LAYOUT_SCREENSHOTS"):
         page.locator("#dumping-panel").screenshot(
-            path=str(ROOT / "artifacts" / f"demo-dumping-{width}.png")
+            path=str(ROOT / "artifacts" / f"dumping-{width}.png")
         )
     with page.expect_response("**/api/v1/dumping-reports") as submitted:
         page.get_by_role("button", name="Submit report", exact=True).click()
@@ -152,6 +152,70 @@ def test_dumping_network_failure_preserves_form(page, web_url):
     expect(page.locator(".dumping-form [role=status]")).not_to_be_empty()
 
 
+def test_dumping_replacement_photo_retries_saved_report_without_duplicate(page, web_url):
+    submissions = []
+    uploads = []
+
+    def reports(route):
+        if route.request.method == "GET":
+            route.fulfill(json={"reports": []})
+        else:
+            submissions.append(route.request.post_data_json)
+            route.fulfill(json={"id": "saved-report"})
+
+    def photo(route):
+        uploads.append(route.request.url)
+        route.fulfill(status=503 if len(uploads) == 1 else 200, json={})
+
+    page.route("**/api/v1/dumping-reports", reports)
+    page.route("**/api/v1/dumping-reports/*/photo", photo)
+    page.goto(web_url + "/city")
+    page.get_by_label("Dumping latitude").fill("41.998")
+    page.get_by_label("Dumping longitude").fill("21.43")
+    page.get_by_label("Description", exact=True).fill("Bags by the road")
+    image = page.get_by_label("Photo (optional)", exact=True)
+    image.set_input_files(ROOT / "tests/fixtures/pipeline/images/glass.png")
+    page.get_by_role("button", name="Submit report", exact=True).click()
+    expect(page.locator(".dumping-form [role=status]")).to_contain_text(
+        "Report saved, but photo failed"
+    )
+    image.set_input_files(ROOT / "tests/fixtures/pipeline/images/paper.png")
+    page.get_by_role("button", name="Retry photo", exact=True).click()
+    expect(page.locator(".dumping-form [role=status]")).to_have_text(
+        "Report saved · awaiting review"
+    )
+    assert len(submissions) == 1
+    assert len(uploads) == 2
+    assert all(url.endswith("/saved-report/photo") for url in uploads)
+
+
+def test_dumping_layer_ignores_older_reads_after_toggle(page, web_url):
+    pending = []
+    page.route("**/api/v1/dumping-reports", lambda route: pending.append(route))
+    page.goto(web_url + "/city")
+    toggle = page.get_by_label("Show reviewed reports")
+    toggle.uncheck()
+    toggle.check()
+    assert len(pending) == 2
+    report = {
+        "state": "approved",
+        "latitude": 41.998,
+        "longitude": 21.43,
+        "description": "Current report",
+    }
+    pending[1].fulfill(json={"reports": [report]})
+    expect(page.locator("#dumping-map .leaflet-interactive")).to_have_count(1)
+    with page.expect_response("**/api/v1/dumping-reports"):
+        pending[0].fulfill(json={"reports": [{**report, "description": "Stale report"}]})
+    page.evaluate(
+        "() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))"
+    )
+    expect(page.locator("#dumping-map .leaflet-interactive")).to_have_count(1)
+    page.locator("#dumping-map .leaflet-interactive").click()
+    expect(page.locator("#dumping-map .leaflet-popup")).to_contain_text("Current report")
+    expect(page.locator("#dumping-map .leaflet-popup")).not_to_contain_text("Stale report")
+
+
 def test_dumping_is_only_on_city_and_container_reporting_stays_on_recycle(page, web_url):
     page.goto(web_url)
     expect(page.locator("#waste-picker")).to_be_visible()
@@ -186,3 +250,52 @@ def test_completed_stop_clears_finished_basket(page, web_url):
     expect(page.locator("#trip-result")).to_be_hidden()
     expect(page.locator("#plan-trip")).to_be_disabled()
     expect(page.locator("#trip-status")).to_have_text("All items marked dropped off.")
+
+
+@pytest.mark.parametrize("status", [200, 503])
+def test_review_lock_ignores_pending_actions_and_prevents_conflicting_changes(
+    page, web_url, status
+):
+    reads = []
+    pending = []
+    page.route(
+        "**/api/v1/review/reports",
+        lambda route: (
+            reads.append(route.request),
+            route.fulfill(
+                json={
+                    "reports": [
+                        {
+                            "id": "test-report",
+                            "kind": "container",
+                            "state": "pending",
+                            "condition": "full",
+                            "asset_id": "test-bin",
+                            "created": 1792230000,
+                            "description": "Container review fixture",
+                            "has_photo": False,
+                        }
+                    ]
+                }
+            ),
+        ),
+    )
+    page.route("**/api/v1/review/reports/test-report", lambda route: pending.append(route))
+    page.goto(web_url + "/review")
+    page.get_by_label("Reviewer key").fill(REVIEW_KEY)
+    page.get_by_role("button", name="Unlock", exact=True).click()
+    card = page.locator(".review-card")
+    card.get_by_role("button", name="Approve", exact=True).click()
+    expect(card.get_by_role("button", name="Reject", exact=True)).to_be_disabled()
+    expect(card.get_by_role("button", name="Duplicate", exact=True)).to_be_disabled()
+    page.get_by_role("button", name="Lock", exact=True).click()
+    with page.expect_response("**/api/v1/review/reports/test-report"):
+        pending[0].fulfill(status=status, json={})
+    # Let the fetch continuation and any attempted reload settle.
+    page.evaluate(
+        "() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))"
+    )
+    expect(page.locator("#review-reports")).to_be_empty()
+    expect(page.locator("#review-login")).to_be_visible()
+    expect(page.locator("#review-status")).to_be_empty()
+    assert len(reads) == 1

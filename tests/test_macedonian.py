@@ -193,7 +193,7 @@ def test_macedonian_account_validation_is_translated_and_never_echoes_password()
         response = client.post(
             "/api/v1/account/register",
             json={"username": "x", "password": "secret"},
-            headers={"Accept-Language": "mk", "X-Goodsort-Action": "1"},
+            headers={"Accept-Language": "mk", "X-Najdi-Frli-Action": "1"},
         )
     assert response.status_code == 422
     assert response.json()["detail"].startswith("Проверете го внесот")

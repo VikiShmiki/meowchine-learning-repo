@@ -20,7 +20,7 @@
   form.innerHTML = '<div class="community-coordinates"><label>Dumping latitude<input name="latitude" type="number" step="any" min="41.8" max="42.2" required></label><label>Dumping longitude<input name="longitude" type="number" step="any" min="21.2" max="21.7" required></label></div><label>Description<textarea name="description" minlength="3" maxlength="500" rows="2" placeholder="What is dumped here?" required></textarea></label><label>Photo (optional)<input name="photo" type="file" accept="image/jpeg,image/png,image/webp"></label><p class="community-privacy">Choose a point on the map or enter coordinates. Location and description become public after review. Photos are visible only to reviewers; avoid faces and personal details. Reports are kept for 30 days, not sent to the municipality.</p><button type="submit">Submit report</button>';
   const message = el("p"); message.setAttribute("role", "status"); form.append(message); body.append(form);
   document.querySelector(".city-method").before(section);
-  let map, pin, reportsLayer, submitted = null, saving = false;
+  let map, pin, reportsLayer, submitted = null, saving = false, reportGeneration = 0;
   const lat = form.elements.latitude, lon = form.elements.longitude;
   function setPoint(latitude, longitude) {
     if (saving) return;
@@ -29,16 +29,19 @@
     pin?.remove(); pin = L.marker([latitude, longitude]).addTo(map).bindTooltip("Report location");
   }
   async function drawReports() {
+    const current = ++reportGeneration;
     reportsLayer?.clearLayers();
     if (!map || !layerToggle.checked) return;
     try {
       const { reports } = await request("/api/v1/dumping-reports");
-      if (!layerToggle.checked) return;
+      if (current !== reportGeneration || !layerToggle.checked) return;
       for (const report of reports) {
         const popup = el("div"); popup.append(el("strong", report.state === "cleared" ? "Cleared" : "Reported dumping"), Object.assign(el("p", report.description), { translate: false }));
         L.circleMarker([report.latitude, report.longitude], {radius: 8, color: report.state === "cleared" ? "#3b6851" : "#9b503a", fillOpacity: .7}).addTo(reportsLayer).bindPopup(popup);
       }
-    } catch { message.textContent = "Reports unavailable. Reload the page to retry."; }
+    } catch {
+      if (current === reportGeneration && layerToggle.checked) message.textContent = "Reports unavailable. Reload the page to retry.";
+    }
   }
   try {
     map = L.map(mapNode).setView([41.998, 21.43], 13);
@@ -48,9 +51,15 @@
   } catch { mapNode.replaceChildren(el("p", "Map unavailable. Enter coordinates below.")); }
   drawReports();
   layerToggle.addEventListener("change", drawReports);
-  form.addEventListener("input", () => { if (submitted) { submitted = null; form.querySelector('button[type="submit"]').textContent = "Submit report"; } });
+  form.addEventListener("input", event => {
+    // Replacing a failed photo still belongs to the report already saved.
+    if (submitted && event.target !== form.elements.photo) {
+      submitted = null; form.querySelector('button[type="submit"]').textContent = "Submit report";
+    }
+  });
   form.addEventListener("submit", async event => {
     event.preventDefault();
+    if (saving) return;
     const button = form.querySelector('button[type="submit"]');
     const photo = form.elements.photo.files[0];
     if (photo && photo.size > 5 * 1024 * 1024) { message.textContent = "Photo must be 5 MB or smaller."; return; }

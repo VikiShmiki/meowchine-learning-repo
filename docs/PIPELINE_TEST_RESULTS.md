@@ -1,4 +1,8 @@
-# Pipeline check — 2026-09-22
+# Historical pipeline check — 2026-09-22
+
+This records the original source-repository branch and provider checks. Statements
+about paused CI or missing container evidence apply to that revision only. The
+current private repository has active CI; see [CI_STATUS.md](CI_STATUS.md).
 
 Tested the uncommitted `feat/general-electronics-guidance` worktree based on
 `59869e2441db8dda5705d8e14b6ba5928fc4494d`, including general/electronics/clothes additions.
@@ -88,4 +92,4 @@ result and original phone-photo failure are both retained above.
 The follow-up commit only records this evidence in Markdown. Main was still
 `59869e2441db8dda5705d8e14b6ba5928fc4494d` at review, with no conflicts. CI remains
 `disabled_manually`, and no protection or check bypass is requested. These checks support
-the demo merge, not production/field/real-photo-accuracy sign-off.
+the prototype merge, not production/field/real-photo-accuracy sign-off.

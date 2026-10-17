@@ -1,4 +1,4 @@
-"""Local-demo accounts and self-reported drop-offs; never store route locations."""
+"""Optional local accounts and self-reported drop-offs; never store route locations."""
 
 import base64
 import hashlib

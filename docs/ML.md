@@ -453,12 +453,13 @@ an app-layer Python-3.11 `StrEnum` import. Job 947 is the only result-bearing ru
 Before a model choice, review new vocabulary against Skopje policy, obtain native
 review, build a leak-resistant bilingual evaluation set and repeat on more seeds.
 
-## Macedonian extension (22 September 2026)
+## Historical Macedonian extension (22 September 2026)
 
-The serving policy now recognizes Macedonian Cyrillic and bounded Latin spellings.
-A separate pinned multilingual encoder with bilingual prototypes supplies uncalibrated
-Macedonian suggestions. English keeps its existing learned head; neither model can
-authorize disposal. See [LANGUAGES.md](LANGUAGES.md) for the 100-query evaluation,
+At this stage, policy added Macedonian Cyrillic and bounded Latin spellings.
+A separate pinned multilingual encoder with bilingual prototypes supplied
+uncalibrated Macedonian suggestions, while English kept its earlier learned head.
+Current v3 audit heads replace those suggestions; neither generation can authorize
+disposal. See [LANGUAGES.md](LANGUAGES.md) for the 100-query evaluation,
 retained errors and native-review limitation.
 
 ## Contract
@@ -468,13 +469,14 @@ Input is a short item description. Output is one of `glass`, `plastic_metal`,
 and `abstained`. Specialist waste is a real class; uncertainty produces no category
 and requires user confirmation.
 
-## Evaluation ladder
+## Original evaluation ladder
 
-For the demo, offer clarification or manual selection on abstention. Broad labels
+For the prototype, offer clarification or manual selection on abstention. Broad labels
 do not prove site compatibility: preserve item-specific acceptance requirements.
 Specialist guidance may link only explicitly accepting facilities; unknown support
 must not become a general-waste route. Existing rule scores are heuristic, not
-calibrated probabilities. Feedback collection is deferred beyond the demo.
+calibrated probabilities. Correction-feedback collection was deferred; current
+community observations are a separate feature and do not become training labels.
 
 1. Checked-in weighted keyword rules (`rules-v1`).
 2. TF-IDF + logistic regression.
@@ -552,8 +554,9 @@ The user-requested next comparison uses the immutable Apache-2.0
 sentence embeddings and trains only a balanced logistic-regression head with seed 42.
 It does not fine-tune MiniLM and does not replace the authoritative policy rules.
 
-The application now loads the four-class head as an explicitly uncalibrated,
-suggestion-only fallback when the reviewed rules cannot identify an exact item form.
+At that stage, the application loaded the four-class head as an explicitly
+uncalibrated, suggestion-only fallback when reviewed rules could not identify an
+exact item form. It has since been replaced by the v3 audit heads documented above.
 It may suggest `glass`, `plastic_metal`, `paper_tetrapak`, or
 `special_unsupported`; it cannot suggest `general`. The API keeps `category: null`,
 `abstained: true`, and `status: clarify`, while returning the suggestion separately

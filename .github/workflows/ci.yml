@@ -36,12 +36,12 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-      - run: docker build -t smart-recycling-ci .
-      - run: docker run -d --name recycling-ci -p 127.0.0.1:8000:8000 smart-recycling-ci
+      - run: docker build -t najdi-frli-ci .
+      - run: docker run -d --name najdi-frli-ci -p 127.0.0.1:8000:8000 najdi-frli-ci
       - run: python scripts/smoke_deployment.py --require-minilm --require-macedonian --wait-seconds 300
       - name: Container logs
         if: failure()
-        run: docker logs recycling-ci
+        run: docker logs najdi-frli-ci
       - name: Stop test container
         if: always()
-        run: docker rm -f recycling-ci
+        run: docker rm -f najdi-frli-ci

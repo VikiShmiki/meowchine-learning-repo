@@ -80,4 +80,5 @@ Run `SRA_BROWSER_TESTS=1 uv run --all-groups pytest -ra` and the two Node suites
 Fixtures test text/photo/picker journeys in both modes, map separation, narrow acceptance,
 damaged/unknown/hazardous holds, no fallback, catalog tampering, and scraper changes.
 External providers and tiles are simulated; real-photo accuracy and field access remain
-unmeasured. CI remains manually paused; no hosted-green-CI claim.
+unmeasured. CI was paused for that original branch check; the later private-repository
+integration passed browser and Docker gates. See [CI_STATUS.md](CI_STATUS.md).

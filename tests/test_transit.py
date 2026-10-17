@@ -239,6 +239,40 @@ def test_unsupported_or_invalid_feed_fails_closed(changes):
         TransitFeed(archive(changes=changes))
 
 
+@pytest.mark.parametrize(
+    "changes",
+    [
+        {"calendar_dates.txt": ("service_id,date,exception_type\nS,20261017,2\nS,20261017,1\n")},
+        {
+            "calendar.txt": (
+                "service_id,monday,tuesday,wednesday,thursday,friday,saturday,sunday,"
+                "start_date,end_date\n"
+                "S,0,0,0,0,0,0,0,20261015,20261024\n"
+                "S,1,1,1,1,1,1,1,20261015,20261024\n"
+            )
+        },
+        {
+            "calendar.txt": (
+                "service_id,monday,tuesday,wednesday,thursday,friday,saturday,sunday,"
+                "start_date,end_date\n"
+                "S,1,1,1,1,1,2,1,20261015,20261024\n"
+            )
+        },
+    ],
+    ids=["conflicting-exceptions", "duplicate-service", "invalid-weekday"],
+)
+def test_ambiguous_service_calendars_fail_with_safe_error(tmp_path, changes):
+    store = TransitFeedStore(
+        tmp_path / "feed.zip",
+        httpx.MockTransport(lambda req: httpx.Response(200, content=archive(changes=changes))),
+    )
+    with pytest.raises(RoutingError) as failure:
+        store.get()
+    assert failure.value.code == "transit_unavailable"
+    assert failure.value.status == 503
+    assert not store.path.exists()
+
+
 def test_no_pickup_restriction_and_direction_are_respected():
     from dataclasses import replace
 

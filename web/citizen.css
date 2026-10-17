@@ -5,7 +5,6 @@
 .brand-mark { display: inline-grid; place-items: center; width: 34px; height: 34px; margin-right: 9px; border-radius: 50%; background: #294a34; color: #e7efb1; font-size: 25px; }
 /* Align the visible lettering with the circle, not the font's extra baseline space. */
 .brand-wordmark { line-height: 1; white-space: nowrap; transform: translateY(-.1em); }
-.brand-dot { color: #71934f; }
 .citizen .flow-nav { margin: 0; gap: 24px; font-size: 13px; }
 .citizen .flow-nav a { padding: 8px 0; border: 0; background: none; color: #657267; text-decoration: none; }
 .citizen .flow-nav a[aria-current] { color: #263c30; border-bottom: 2px solid #263c30; }

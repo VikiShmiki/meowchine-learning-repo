@@ -36,7 +36,7 @@ WorldPop constrains modeled population to settlements. NoData pixels remain mask
 and their area is reported; they are not automatically rewritten as zero. The
 denominator is the valid **modeled population**. This input alone cannot establish
 how many real residents were omitted by the model. Report the product/year and this
-limitation when City Mode is built. Zero modeled population yields undefined municipal
+limitation in City Mode. Zero modeled population yields undefined municipal
 coverage. There is no invented population or straight-line coverage fallback.
 
 ## Network contract and access audit
@@ -52,31 +52,35 @@ coverage. There is no invented population or straight-line coverage fallback.
   unqualified barriers, and pedestrian-restriction ways. This is a documented profile,
   not a complete country-specific navigation engine.
 - Walking edge time uses actual segment length / 4.8 km/h. It ignores slope, signals
-  and individual mobility. The future coverage threshold is 600 seconds, including
-  any accepted access connectors. Computing coverage is T08, not part of this package.
+  and individual mobility. Current City coverage uses a 600-second threshold,
+  including terminal access connectors; its separate prepared report and method
+  are documented in [CITY_MODE.md](CITY_MODE.md).
 - Driving diagnostics preserve but **do not enforce turn restrictions**. They are
-  explicitly not routing-ready. T07 must use a routing engine that enforces these
-  restrictions, including via-way restrictions, exceptions and conditional rules.
-  Boundary-crossing relation references are reported instead of silently discarded.
+  explicitly not routing-ready. Citizen trips delegate mode and road restrictions
+  to ORS rather than these diagnostic graphs; the provider's handling has not had
+  an exhaustive local legality audit. The source package preserves via-way,
+  exception and conditional tags and reports boundary-crossing references.
 - Audit population and every real City site against the nearest eligible segment
   with a 100 m limit. Store the segment, fractional location, distance and component.
   These are `candidate_unverified` connections: proximity can cross a wall, river or
-  private parcel. T07/T08 must validate connections or label connector assumptions as
-  approximation. Never call these candidates verified entrances.
+  private parcel. City coverage labels these connector assumptions as an
+  approximation; citizen routes disclose provider network-access gaps. Never call these candidates verified entrances.
 - Rows beyond the limit remain in the population denominator with null connection
   references. Smaller components also remain. Do not retain only the largest component.
   Driving travel times and current population coverage are deliberately not fabricated.
 
-## Free demo configuration
+## Historical provider feasibility check — September 19, 2026
 
-Checked 2026-09-19. Recommendations are feasibility decisions; no hosting account,
-API key, subscription, public deployment, or paid resource was created.
+Checked 2026-09-19. The figures below record that inspection, not current account
+quotas, hosting suitability or a deployment recommendation. No hosting account, key
+or paid resource was created during that check. Later routing keys/integration
+checks do not establish hosted capacity; deployment remains user-deferred.
 
 | Component | Selection | Limits and integration gate |
 | --- | --- | --- |
 | Citizen routing | openrouteservice Standard; `foot-walking` and `driving-car`, server-side key | Published plan: directions 2,000/day, 40/min; matrix 500/day, 40/min. 50 direction waypoints; matrix 3,500 origin-destination pairs/request, or 25 with dynamic arguments. Confirm actual account quotas before release. |
 | City analysis | Local pinned graph and precomputed reachability | Avoid hosted all-population matrices. Validate connectors and graph assumptions before coverage. Runtime should load compact prepared results, not national data or a graph-building toolchain. |
-| Map | Leaflet with configurable OSM Standard raster tile URL for a small interactive demo | Visible OSM attribution, browser HTTP caching and Referer. No bulk download, service-worker tile prefetch or offline map promise. Best-effort service, no SLA. |
+| Map | Leaflet with configurable OSM Standard raster tile URL for a small interactive prototype | Visible OSM attribution, browser HTTP caching and Referer. No bulk download, service-worker tile prefetch or offline map promise. Best-effort service, no SLA. |
 | HTTPS app | One Render Free web service, static client served by FastAPI | 512 MB / 0.1 CPU; 750 instance hours/workspace/month. Sleeps after 15 minutes idle, with roughly minute-long wake-up. Ephemeral disk. Bake artifacts into the image; no preparation/training at startup. |
 
 Sources: [ORS current plans](https://account.heigit.org/info/plans),
@@ -91,27 +95,27 @@ An unauthenticated Skopje walking request returned HTTP 401 in 0.578 s. This pro
 the need for an API key, **not** route correctness or successful-request latency.
 T07 subsequently verified authenticated walking/driving itineraries and a known
 one-way street with fixed public points; see [ROUTING.md](ROUTING.md). Specialist
-items are rejected because no explicitly accepting specialist facilities are verified. Store the key only in local/server environment configuration. Do not send
+items without explicit accepting-facility evidence are rejected; documented
+electronics/donation destinations now have separate citizen contracts. Store keys
+only in local/server environment configuration. Do not send
 precise personal locations during provider feasibility tests; use fixed public test points.
 
-Target for a 100-trip demo rehearsal: at most one matrix and one directions request
-per trip, with explicit rate-limit/error handling. Personal trip responses are not cached. This fits the published
-daily counts, subject to per-minute throttling and request-size limits. The 100 trips
-are a planning budget, not measured load capacity. Do not request huge matrices to
-choose among all 1,583 sites.
+The original 100-trip planning budget applied to direct walking/driving: at most
+one matrix and one directions request per trip. It was not a load measurement.
+JSP and parking now use additional bounded walking calls; see [ROUTING.md](ROUTING.md),
+[TRANSIT.md](TRANSIT.md) and [PARKING.md](PARKING.md) for current per-mode limits.
+Personal trip responses are not cached, and full-city hosted matrices are not used.
+Recheck actual provider quotas before making any capacity claim.
 
-Render deployment remains T10: connect the private GitHub repo, choose Free explicitly,
-confirm current bandwidth/build quotas and disable optional billable usage. With no
-payment method, exhausted bandwidth suspends a free service; do not enable automatic
-paid capacity. Measure app RSS and cold/warm requests on the real plan before declaring
-hosting verified. Open the actual app before judging to allow its normal cold start;
-do not use artificial keep-alive traffic to evade free-tier limits.
+## Remaining evidence boundaries
 
-## Remaining gates
+Public hosting and physical iPhone checks remain user-deferred. If reopened,
+evaluate current plan terms, persistent storage, actual model memory use and
+cold/warm latency before selecting a host. The historical Render Free inspection
+above is not a capacity sign-off for the current two-encoder application.
 
-T04's inputs and feasibility report do not certify a complete route or coverage result.
-T07 delegates mode restrictions to ORS and reports unverified access gaps; its
-one-way spot check is not an exhaustive legality audit. T08 owns
-coverage computation and approximation disclosure; T10 owns actual hosting/iPhone tests.
-If a gate fails, surface the failure and revise the configuration before claiming the
-corresponding feature works. Existing policy and infrastructure reuse flags remain intact.
+Citizen routing delegates road restrictions to ORS and discloses unverified access
+gaps; a live one-way spot check is not an exhaustive legality audit. City coverage
+uses an explicitly labeled pedestrian-network approximation. Neither replaces
+field review of connectors, operating facilities or physical installation sites.
+Source reuse and human-review holds remain intact.

@@ -1,6 +1,6 @@
 # Historical source-repository CI status and evaluation evidence
 
-Verified 2026-09-22 through GitHub's API. CI is `disabled_manually` following an
+Verified 2026-09-22 through GitHub's API. Source-repository CI was `disabled_manually` following an
 explicit user decision to pause runs while the repository account restriction remains.
 
 ## What GitHub reported

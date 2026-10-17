@@ -12,6 +12,7 @@ from typing import Any, Literal
 import httpx
 from PIL import Image, ImageOps, UnidentifiedImageError
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
+from starlette.concurrency import run_in_threadpool
 
 from smart_recycling.domain import WasteCategory
 from smart_recycling.guidance import (
@@ -315,10 +316,20 @@ class OpenAIVisionProvider:
 def _extract_output_text(body: dict[str, Any]) -> str:
     if isinstance(body.get("output_text"), str):
         return body["output_text"]
-    for item in body.get("output", []):
+    output = body.get("output", [])
+    if not isinstance(output, list):
+        raise ValueError("response output is not a list")
+    for item in output:
+        if not isinstance(item, dict):
+            raise ValueError("response output item is not an object")
         if item.get("type") != "message":
             continue
-        for content in item.get("content", []):
+        contents = item.get("content", [])
+        if not isinstance(contents, list):
+            raise ValueError("response content is not a list")
+        for content in contents:
+            if not isinstance(content, dict):
+                raise ValueError("response content item is not an object")
             if content.get("type") == "refusal":
                 raise ValueError("model refused the request")
             if content.get("type") == "output_text" and isinstance(content.get("text"), str):
@@ -340,7 +351,7 @@ class VisionService:
     async def suggest(
         self, raw: bytes, declared_content_type: str | None
     ) -> PhotoSuggestionsResponse:
-        image_data_url = prepare_image(raw, declared_content_type)
+        image_data_url = await run_in_threadpool(prepare_image, raw, declared_content_type)
         analysis = await self.provider.analyze(image_data_url)
         suggestions = [self._suggestion(item) for item in analysis.items]
         message = (

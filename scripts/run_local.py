@@ -1,4 +1,4 @@
-"""Start the localhost demo with a private reviewer key; never print API credentials."""
+"""Start Najdi Frli locally with a private reviewer key; never print API credentials."""
 
 import argparse
 import os
@@ -14,10 +14,14 @@ def main():
     parser.add_argument("--env-file", type=Path)
     parser.add_argument("--port", type=int, default=8000)
     args = parser.parse_args()
+    # Explicit paths belong to the caller's directory, before entering the project.
+    env_file = args.env_file.resolve() if args.env_file is not None else None
+    if env_file is not None and not env_file.is_file():
+        parser.error(f"Environment file does not exist or is not a file: {env_file}")
     root = Path(__file__).resolve().parents[1]
     os.chdir(root)
-    if args.env_file:
-        load_dotenv(args.env_file)
+    if env_file is not None:
+        load_dotenv(env_file)
     else:
         load_dotenv(root / ".env")
     if not os.getenv("SRA_REVIEW_TOKEN"):
@@ -33,7 +37,7 @@ def main():
         if len(os.environ["SRA_REVIEW_TOKEN"]) < 32:
             raise ValueError("Local reviewer key must contain at least 32 characters")
         print(f"Reviewer key is in {key_file}. Keep this file private.")
-    # A loopback-only demo, not a production deployment. Do not trust forwarded IPs here.
+    # Loopback-only development server. Do not trust forwarded IPs here.
     uvicorn.run("smart_recycling.api:app", host="127.0.0.1", port=args.port, proxy_headers=False)
 
 

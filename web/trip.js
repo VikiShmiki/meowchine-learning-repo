@@ -208,7 +208,7 @@
     try {
       const departure = travelMode() === "transit" && $("transit-departure").value
         ? new Date($("transit-departure").value).toISOString() : null;
-      const response = await (globalThis.GoodsortI18n?.fetch || fetch)("/api/v1/trips", {
+      const response = await (globalThis.NajdiFrliI18n?.fetch || fetch)("/api/v1/trips", {
         method: "POST", headers: { "Content-Type": "application/json" }, signal: controller.signal,
         body: JSON.stringify({ origin, mode: travelMode(), items: basket, share_coordinates: true,
           ...(includeParking() ? {include_parking: true} : {}),
@@ -394,7 +394,7 @@
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 10000);
     try {
-      const response = await (globalThis.GoodsortI18n?.fetch || fetch)("/api/v1/routing", { signal: controller.signal });
+      const response = await (globalThis.NajdiFrliI18n?.fetch || fetch)("/api/v1/routing", { signal: controller.signal });
       if (!response.ok) throw new Error("Unavailable");
       configured = (await response.json()).configured === true;
       $("routing-availability").textContent = configured ? ""

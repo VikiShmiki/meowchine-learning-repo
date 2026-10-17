@@ -1,6 +1,6 @@
 # Optional accounts and drop-off badges
 
-User-approved local-demo extension. Both Recycle and City coverage have a Sign in /
+Both Recycle and City coverage have a Sign in /
 My activity button. All existing browsing, guidance and route planning remain
 available to guests; signing in never increases paid-provider allowances.
 
@@ -69,14 +69,15 @@ existing reports/quotas are preserved. No new dependencies or external auth serv
 Choices were checked against the [OWASP password storage guidance](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html)
 and [session guidance](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html).
 
-## Deliberate demo limits
+## Deliberate prototype limits
 
 No email verification, password change/recovery, MFA, identity proof, public profile
 or account administration. The signup screen warns that password recovery is absent.
-Use a demo-only password; public launch requires a reviewed identity/recovery system,
+Use a prototype-only password; public launch requires a reviewed identity/recovery system,
 HTTPS, trusted proxy configuration, abuse protection and persistent storage.
-Do not expose the loopback demo launcher to the internet. Hosting/phone testing and
-paused hosted CI remain deferred. This is not a production security sign-off.
+Do not expose the loopback launcher to the internet. Hosting and physical-phone
+testing remain user-deferred; private-repository CI is active. This is not a
+production security sign-off.
 
 ## Contracts and checks
 
@@ -91,7 +92,8 @@ paused hosted CI remain deferred. This is not a production security sign-off.
 - `POST /api/v1/account/dropoffs`: `{ "ticket": "..." }`; updated profile plus recorded flag.
 - Trip stops add nullable `completion_ticket`; guests receive null.
 
-All writes send `X-Goodsort-Action: 1`. Backend tests cover hashing, rotation,
+All writes send `X-Najdi-Frli-Action: 1`; the former `X-Goodsort-Action: 1` header
+is accepted for compatibility. Backend tests cover hashing, rotation,
 expiry, CSRF, quotas, ownership, tampering, concurrency, deletion, privacy and badge
 thresholds. Browser tests use temporary databases and simulated paid providers to
 exercise signup → route → drop-off → history, both modes, shared navigation, guest

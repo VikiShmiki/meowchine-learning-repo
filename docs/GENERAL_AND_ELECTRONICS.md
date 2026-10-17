@@ -10,7 +10,8 @@ electronics-only subtotal below documents the earlier stage.
   The user sees “This item is not recyclable. Use general waste.”
 - Electronics has its own quick-pick card, map filter/colour and trip stops.
   It remains the canonical specialist category, with a specific `electronics` item kind.
-- Walking/driving trips can combine electronics, general waste and existing recyclables.
+- Walking, driving and scheduled JSP trips can combine electronics, general waste
+  and existing recyclables; driving can optionally include parking.
 - Batteries, hazardous conditions and unknown items do not default to general waste.
   Neither a model category nor a model-generated place name authorizes a destination.
 
@@ -72,10 +73,11 @@ signals through review. Confirmation copy differs for residuals, devices and emp
 OpenAI integration retains strict JSON-schema output and the user's configured model, following
 the [Structured Outputs contract](https://developers.openai.com/api/docs/guides/structured-outputs).
 
-No new LLM, embedding model or MiniLM head was trained. The existing four-class learned
-head remains suggestion-only and cannot produce `general`; the policy layer handles the
-bounded residual subset before that fallback. Independent general-waste accuracy remains
-unmeasured. v3 validation is development-authored; frozen manual evaluation is unchanged.
+The original destination extension did not train a model. Current serving uses
+six-object development-v3-audit suggestion heads, including clothes/electronics;
+there is no `general` object label. Policy handles the bounded residual subset
+before learned fallback. Independent general-waste accuracy remains unmeasured.
+See [ML.md](ML.md) for current models and clearly separated historical evidence.
 
 The pinned `city` snapshot, policy v1, coverage and upgrade artifacts are unchanged.
 New `scope=citizen` composes those 1,583 sites with two separately versioned/checksummed

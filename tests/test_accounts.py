@@ -13,7 +13,7 @@ from smart_recycling import api
 from smart_recycling.accounts import Accounts, password_hash, password_matches, session_digest
 
 PASSWORD = "testing-recycling-only-42"
-HEADERS = {"X-Goodsort-Action": "1"}
+HEADERS = {"X-Najdi-Frli-Action": "1"}
 
 
 @pytest.fixture(scope="module")
@@ -95,6 +95,15 @@ def test_login_errors_and_logout_invalidate_session(account):
     assert client.post("/api/v1/account/logout", headers=HEADERS).status_code == 204
     assert account.user(token) is None
     assert client.get("/api/v1/account/me").json() == {"user": None}
+
+
+def test_previous_account_action_header_remains_compatible(account):
+    client = client_for(account)
+    token = client.cookies.get("sra_session")
+    assert (
+        client.post("/api/v1/account/logout", headers={"X-Goodsort-Action": "1"}).status_code == 204
+    )
+    assert account.user(token) is None
 
 
 def test_secure_cookie_on_https_and_expired_sessions(account):

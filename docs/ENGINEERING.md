@@ -1,7 +1,7 @@
 # Engineering standards
 
 Engineering excellence is a release requirement. Prefer small, explicit designs
-that can be extended after the current demo without replacing the core.
+that can be extended after the current prototype without replacing the core.
 
 ## Boundaries and extension
 
@@ -49,7 +49,8 @@ that can be extended after the current demo without replacing the core.
 - Test route legality by mode, travel direction, deduplicated stops, and small known
   optimum cases. Compare coverage/optimization against hand-calculated tiny graphs.
 - Exercise the full citizen and City Mode flows in a browser, including failures.
-  Verify actual installation on the agreed demo device before claiming it works.
+  Verify actual installation on the agreed device before claiming it works.
+  Hosting and physical-phone work remain user-deferred unless explicitly reopened.
 - Require lock validation, lint, tests, and snapshot validation before merge.
   Add a focused regression test for each behavior bug, not tests of implementation
   trivia. Set measured performance budgets before performance sign-off.
@@ -59,9 +60,11 @@ that can be extended after the current demo without replacing the core.
   Update status and contracts when capabilities change. Never bypass failing checks
   to meet the deadline or claim a feature merely because its scaffolding exists.
 
-## Still to decide
+## External evidence and scope
 
-The demo device is an iPhone; use free/free-tier services where feasible. Provider
-selection, quotas, actual iOS version, and measured performance budgets remain
-implementation inputs. Feedback/voting and retention design are deferred until
-after this edition. These requirements are not implemented guarantees.
+Use free/free-tier services where feasible, but recheck provider terms, quotas and
+measured capacity before deployment. Native-language review, independent model
+evaluation and physical access/device checks remain separate evidence requirements.
+Community reports, optional accounts and their retention rules are implemented;
+public voting and correction-feedback training remain outside delivered scope.
+See [DELIVERY_PLAN.md](DELIVERY_PLAN.md) for deferred work.

@@ -1690,7 +1690,7 @@ wheels = [
 ]
 
 [[package]]
-name = "smart-recycling-access"
+name = "najdi-frli"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

@@ -1,66 +1,52 @@
 # Product
 
-## Outcome
+Najdi Frli helps residents identify a waste item, confirm its condition and reach
+a compatible collection point. City planners can compare modeled walking access
+and additive recycling upgrades. The supported region is Skopje, with English
+and Macedonian interfaces.
 
-Help residents dispose of an item correctly and reach an appropriate collection
-point. Reuse aggregated demand and infrastructure data to help cities improve access.
+## Citizen behavior
 
-## Users and MVP
+The route-first page has six flows: glass, plastic/metal packaging, paper/cartons,
+ordinary residual waste, electronics and wearable-clothes donation. Text and photo
+help are optional. Exact-item/condition confirmation and asset-level acceptance
+control routing; learned suggestions never authorize disposal.
 
-| User | MVP task |
-| --- | --- |
-| Resident | Pick recyclable items, confirm their condition, and plan a walking/driving route; use text/photo help if unsure |
-| City planner | See coverage gaps and compare suggested upgrade locations |
+A resident chooses device, map or manual origin and Walking, Driving or JSP bus.
+Driving can add mapped parking and walking connections. Up to six confirmed items
+can share a trip, which ends at the final drop-off. Parking adds return-to-car walks
+between stops; its final return is excluded. Scheduled bus journeys do not promise
+live arrivals, and parking does not promise a vacant space.
 
-The supported classes are glass, plastic/metal packaging, paper/Tetra Pak, general
-waste, and specialist/unsupported waste. `special_unsupported` is a real confident
-prediction; low confidence is handled by abstention and manual choice, not an unknown
-class.
+Unknown/unsafe items stay held for clarification or specialist guidance. A broad
+category cannot establish compatibility with a bottle-only machine. General-waste
+navigation needs explicit acknowledgment of unverified acceptance and is never a
+fallback for held items. Source and method details are expandable; essential
+confirmation, uncertainty and location-sharing notices remain beside their actions.
 
-The October 17, 2026 edition supports Skopje in English and Macedonian. All five core
-capabilities are required: classification, real-site map, multi-item walking/driving
-routes, City Mode coverage, and upgrade recommendations. Routes end at the final
-collection point. Keep geography and language configuration extensible.
+Visited stops can be marked and the journey finished. Optional post-trip reports
+cover only visited containers; full reports remove the asset from public routing
+for up to 12 hours, subject to review. Guests can use the core flow. Accounts add
+material-only activity and self-reported badges without recording location history.
 
-The current demo runs locally on desktop; iPhone Safari and Home Screen installation
-remain deferred targets. The current webpage
-has no installation manifest or offline cache; both remain implementation work.
-There is no existing hosting. Prefer free/free-tier HTTPS hosting, maps, and routing;
-check service limits before selection. Cache sites for browsing/basic nearest-site
-lookup, but do not promise offline network routing or classification.
+## City behavior
 
-Installation reference: [Apple's iPhone web-app guide](https://support.apple.com/en-lb/guide/iphone/iphea86e5236/ios).
-Record the actual iOS version and verify launch from the Home Screen during rehearsal.
+The separate City page shows population-weighted ten-minute walking-network access
+by material and municipality. Prepared scenarios compare 0–20 upgrades at existing
+general-waste sites, retaining that service. Results expose objective, inputs,
+before/after coverage, municipal shortfalls and exact/heuristic solver status.
+See [CITY_MODE.md](CITY_MODE.md) for the modeled-access limits.
 
-Uncertain items require clarification or manual selection. Hazardous/specialist
-items get guidance and only explicitly compatible facilities; never general-waste
-fallback. When no verified facility exists, report that rather than invent a route.
+## Scope and acceptance
 
-## Delivery order
+- Residents can complete item confirmation, route selection and optional check-in.
+- Uncertain items never silently receive a confident disposal instruction.
+- Failures preserve actionable recovery; a missing provider does not invent a route.
+- Models use documented splits and evidence; historical benchmarks are clearly dated.
+- Every City recommendation explains its metric and limitations.
 
-The citizen page is route-first: all four material cards select directly, followed
-by explicit condition confirmation, starting point and travel mode. Recycling streams
-match assets accepting every supported subtype. Text/photo suggestions sit inside
-optional help and retain manual review. General waste routes to recorded bin locations
-with a visible unverified-acceptance warning, not a verified disposal recommendation;
-it can be combined with recyclables and is never an automatic fallback for held items.
-Long source/method explanations are expandable; essential safety and location-sharing
-notices stay beside the relevant action. City Mode remains a separate page.
-
-1. Classification + nearest compatible site.
-2. Multi-item route and map.
-3. Coverage scoring and paper-site recommendations.
-4. Correction feedback and public voting after this edition; neither is a demo gate.
-
-Optional accounts, activity history and six self-reported badges are implemented.
-Live truck tracking and automated policy decisions remain outside the demo scope.
-
-## Demo success
-
-City Mode's confirmed population-weighted walking coverage objective is specified
-in [CITY_MODE.md](CITY_MODE.md), including the delegated municipal equity policy.
-
-- A resident completes the classify-to-destination flow without explanation.
-- Uncertain items never silently receive a confident recycling instruction.
-- Baselines and learned models use the same fixed split and published metrics.
-- Every city recommendation shows its objective, inputs, and before/after coverage.
+The app is locally runnable and container-tested. Public hosting, physical iPhone
+testing and Home Screen installation remain user-deferred. There is no installation
+manifest or offline application shell; caching sites for browsing is not offline
+classification, routing or maps. Public voting, correction-feedback training, live
+vehicle tracking and production account recovery are not delivered features.

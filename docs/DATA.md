@@ -18,8 +18,10 @@ It preserves the original GeoJSON/CSV exports and checksums. At startup, the app
 validates and groups the real assets for `/api/v1/sites`, keeping City/metro scopes
 separate. Source site IDs must agree with coordinate groups at six decimal places;
 exact asset coordinates are retained. It never merges distinct asset capabilities.
-The current nearest-point UI/API still uses synthetic seeds pending item-specific
-lookup integration. See [API.md](API.md) for the real snapshot schema and cache contract.
+The citizen map and confirmed-item routing use the real citizen snapshot, including
+separately documented electronics/clothing destinations. Only the unused legacy
+`/api/v1/nearest` endpoint retains synthetic seeds. See [API.md](API.md) for schemas
+and cache behavior.
 
 `data/seed/sites.json` demonstrates the ingestion contract:
 
@@ -37,10 +39,13 @@ The seed is synthetic. Do not use it for analysis or claims about real coverage.
 Full local English/Macedonian dataset counterparts and filtered experimental
 splits are documented in [BILINGUAL_DATA.md](BILINGUAL_DATA.md). Translations
 retain source links and review holds; machine translation does not approve labels.
-The current v2 experimental dataset additionally uses `clothes` and `electronics`
-object classes, per the user's explicit taxonomy extension. Its prior disposal
-labels/statuses remain provenance: object classification is not site acceptance.
-This does not change the serving/API five-category contract or historical datasets.
+The current fitting corpus is development v3, with pinned audit-corrected serving
+heads. Authored bilingual concept groups separate train, tuning, calibration and
+test roles; retained English source data is independent of translation coverage.
+Legacy automatic Macedonian translations are quarantined. `clothes` and `electronics`
+are object labels, not extra disposal-policy categories or acceptance evidence.
+Historical v1/v2 data and measured results remain unchanged. See [ML.md](ML.md) and
+[BILINGUAL_DATA.md](BILINGUAL_DATA.md) for exact support, exclusions and review holds.
 
 Infrastructure locations do not train the text classifier. Classification needs a
 separate reviewed dataset with at least:
@@ -48,12 +53,12 @@ separate reviewed dataset with at least:
 | Field | Purpose |
 | --- | --- |
 | `text` | item description presented to the classifier |
-| `target_label` | locally correct category in the legacy pipeline; v2 adds the documented object classes |
+| `target_label` | reviewed object/stream label under the versioned task taxonomy; not destination acceptance |
 | `source`, `original_label` | source and source-label provenance |
 | `item_group` | keeps paraphrases of one item in the same split |
 | `generation_method` | distinguishes source text from template variants |
 | `mapping_status` | distinguishes approved labels from review candidates |
-| `split` | fixed train, validation, or test assignment |
+| `split` | fixed grouped role; v3 separates train, tuning, calibration and test |
 
 Disposal policy is local: label examples against accepted container rules, not only
 the item's material. Preserve an immutable reviewed test set before generating
@@ -63,7 +68,8 @@ synthetic training examples.
 
 For the September 22 raw-only acquisition and clothing/electronics vocabulary
 review, see [DATASET_INVENTORY.md](DATASET_INVENTORY.md). Its descriptive raw folders
-are separate from the legacy pipeline below; no new mapping or training was run.
+are separate from the legacy pipeline below. That acquisition did not train models;
+later v3 preparation and fitting are documented in [BILINGUAL_DATA.md](BILINGUAL_DATA.md).
 
 See [DISPOSAL_POLICY.md](DISPOSAL_POLICY.md) for the local evidence review: all 50
 Dataset A labels have explicit decisions (13 supported, 37 held). Toronto suggestions
@@ -100,10 +106,25 @@ Validate schema, coordinates, IDs, duplicates, nulls, category counts, and the s
 Record for every snapshot: source, license, retrieval date, checksum, transform
 version, row counts, and rejected rows. Never silently repair invalid coordinates.
 
+## Parking and timetable data
+
+The licensed 144-point parking snapshot is reproducible from a pinned OSM/Geofabrik
+extract; [PARKING.md](PARKING.md) and its [data README](../data/parking/skopje-v1/README.md)
+define access filters, age limits, attribution and source checksums. Source tags
+are not live occupancy, fee or opening verification.
+
+JSP's validated timetable is downloaded into ignored runtime storage, with source,
+version, fetch time and actual service-calendar limits exposed to journeys. No
+redistribution license was established, so real feed archives are not committed.
+Tests use independently authored schedules. See [TRANSIT.md](TRANSIT.md).
+
 ## Feedback and privacy
 
-Store the minimum needed: normalized query, predicted/corrected label, coarse area,
-model version, and time bucket. Do not retain precise location trails or direct
-identifiers. Publish only aggregated cells that meet an agreed minimum count and set
-a retention period before collecting real feedback. Classification requests never
-need location; clients should prefer local nearest-site lookup from cached site data.
+Classification needs no location, and text queries are not retained as feedback.
+Trip origins/geometries are not stored. Community reports have separate 30-day
+retention, and account history stores only material types and completion time.
+See [COMMUNITY.md](COMMUNITY.md) and [ACCOUNTS.md](ACCOUNTS.md).
+
+Correction-feedback training is not implemented. Define consent, minimum fields,
+aggregation, review and retention before collecting it; never infer authorization
+to collect user text or precise location trails from model-improvement goals.
