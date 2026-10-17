@@ -4,7 +4,7 @@ Updated: 2026-10-17
 
 ## Current application
 
-The private repository's `main` includes Oliver's ML remediation and the container
+The public repository's `main` includes Oliver's ML remediation and the container
 check-in, JSP bus and parking integrations. The product is named **Najdi Frli**;
 the repository URL, Python imports and `SRA_*` settings remain unchanged.
 
@@ -20,6 +20,13 @@ the repository URL, Python imports and `SRA_*` settings remain unchanged.
 Start locally with `uv run python scripts/run_local.py`. Route planning requires
 `SRA_ORS_API_KEY`; optional photo analysis requires `OPENAI_API_KEY`. Both belong
 in ignored `.env` or server configuration. See [README.md](README.md).
+
+## Published presentation
+
+The hackathon presentation is available at
+https://vikishmiki.github.io/meowchine-learning-repo/. Its self-contained source is
+`index.html`; GitHub Pages publishes from `gh-pages`. The application service
+remains locally hosted.
 
 ## October 17 maintenance audit
 
@@ -76,7 +83,7 @@ for the full Linux/browser/container gate on each revision.
 passed 737 backend tests, 429 browser cases, 21 Node tests and the Docker smoke gate.
 This evidence belongs to that revision; later changes must pass their own checks.
 The local app also loaded both v3 audit language models. CI is active in this
-private repository; upstream account restrictions are historical.
+public repository; upstream account restrictions are historical.
 
 Live October 17 checks exercised JSP/ORS and parking/ORS integration using public
 test coordinates. They do not establish live arrivals, vacant parking spaces or
