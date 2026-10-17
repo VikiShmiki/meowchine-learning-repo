@@ -1,0 +1,27 @@
+{
+  "verified_on": "2026-09-22",
+  "run_url": "https://github.com/AI-Tech-Summit-Filip-Avramchev/meowchine-learning-repo/actions/runs/35563102629",
+  "head_sha": "7b61b011a23c701a7d1dcbd95d1b8b12d91655b1",
+  "run_conclusion": "failure",
+  "workflow_state": "disabled_manually",
+  "jobs": [
+    {
+      "name": "container",
+      "conclusion": "failure",
+      "step_count": 0,
+      "annotations": [
+        "The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings",
+        "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+      ]
+    },
+    {
+      "name": "quality",
+      "conclusion": "failure",
+      "step_count": 0,
+      "annotations": [
+        "The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings",
+        "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+      ]
+    }
+  ]
+}

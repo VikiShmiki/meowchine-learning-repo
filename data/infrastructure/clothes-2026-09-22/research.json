@@ -1,0 +1,74 @@
+{
+  "source": "https://ckgs.org.mk/novosti/crven-krst-na-grad-skopje-doniraj-obleka-podari-nadezh/",
+  "published_on": "2026-04-20",
+  "retrieved_at": "2026-09-22T02:09:20.103503+00:00",
+  "source_sha256": "98d6825d727f2420e675992c3e12cb6238e6ef86f43c82ff0becc0e1f7d8d2c5",
+  "documented_venues": 8,
+  "reported_containers": 8,
+  "mapped_venues": 5,
+  "venues": [
+    {
+      "id": "clothes-karpos-red-cross",
+      "name": "Red Cross Karpos",
+      "reported_containers": 2,
+      "routing_status": "mapped_venue",
+      "hold_reason": null
+    },
+    {
+      "id": "clothes-dare-dzambaz",
+      "name": "Dare Dzambaz",
+      "reported_containers": 2,
+      "routing_status": "mapped_venue",
+      "hold_reason": null
+    },
+    {
+      "id": "clothes-gazi-baba",
+      "name": "Red Cross Gazi Baba",
+      "reported_containers": 1,
+      "routing_status": "held",
+      "hold_reason": "Published Anton Popov 26 conflicts with branch contact address Blagoja Stefkovski bb; collection position unresolved."
+    },
+    {
+      "id": "clothes-chair",
+      "name": "Red Cross Chair",
+      "reported_containers": 1,
+      "routing_status": "held",
+      "hold_reason": "Pavle Ilik 1 is published, but no reliable exact venue coordinate was found."
+    },
+    {
+      "id": "clothes-kisela-voda",
+      "name": "Kisela Voda municipality",
+      "reported_containers": 1,
+      "routing_status": "mapped_venue",
+      "hold_reason": null
+    },
+    {
+      "id": "clothes-city-hall",
+      "name": "Skopje City Hall",
+      "reported_containers": 1,
+      "routing_status": "mapped_venue",
+      "hold_reason": null
+    },
+    {
+      "id": "clothes-momin-potok",
+      "name": "Momin Potok warehouse",
+      "reported_containers": null,
+      "routing_status": "held",
+      "hold_reason": "Donation warehouse entrance unresolved; a neighbourhood or shelter pin is not sufficient evidence."
+    },
+    {
+      "id": "clothes-kopche",
+      "name": "Kopche",
+      "reported_containers": null,
+      "routing_status": "mapped_venue",
+      "hold_reason": null
+    }
+  ],
+  "older_unconfirmed_leads": [
+    "Novo Lisice / Lisa Centre",
+    "Avtokomanda Square",
+    "Skopje City Mall"
+  ],
+  "older_source": "https://api.ckrm.org.mk/doniraj-obleka/",
+  "excluded": "Older leads are absent from the 2026 list. H&M Skopje collection participation was not verified. One-day campaigns are not permanent sites."
+}

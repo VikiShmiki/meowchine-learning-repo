@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script src="/static/i18n.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#12372a" />
+    <title>Smart Recycling Access</title>
+    <link rel="stylesheet" href="/static/vendor/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/citizen.css?v=logo-alignment-1" />
+    <link rel="stylesheet" href="/static/community.css?v=demo-review-2" />
+    <link rel="stylesheet" href="/static/account.css?v=2" />
+  </head>
+  <body class="citizen">
+    <main>
+      <header class="site-header"><a class="brand" href="/" aria-label="Goodsort home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12"/></svg></span><span class="brand-wordmark">goodsort<span class="brand-dot">.</span></span></a><nav class="flow-nav" aria-label="Application"><a href="/" aria-current="page">Recycle</a><a href="/city" aria-label="City coverage">City coverage</a></nav></header>
+      <div class="hero"><h1>Recycling routes</h1><p class="intro">Skopje</p></div>
+      <div class="planner-layout"><div class="choose-column">
+      <section id="waste-picker" tabindex="-1" aria-labelledby="picker-heading">
+        <div class="section-heading"><h2 id="picker-heading"><span class="step">01</span> Waste types</h2></div>
+        <div class="waste-grid">
+          <button type="button" class="waste-card glass" data-material="glass" aria-label="Glass bottles and jars" aria-pressed="false"><span class="selection-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="mark-plus" d="M6 12h12M12 6v12"/><path class="mark-check" d="M5 13l4 4L19 7"/></svg></span><svg class="waste-icon" viewBox="0 0 64 64" aria-hidden="true"><path class="icon-fill" d="M15 15h12v10l6 8v21H9V33l6-8z"/><path d="M15 15h12v10l6 8v18a3 3 0 0 1-3 3H12a3 3 0 0 1-3-3V33l6-8zM15 9h12v6H15zM14 37v10"/><rect class="icon-fill" x="39" y="31" width="17" height="23" rx="4"/><rect x="39" y="31" width="17" height="23" rx="4"/><path d="M39 26h17v5H39zM44 38v9"/></svg><strong>Glass</strong></button>
+          <button type="button" class="waste-card plastic" data-material="plastic_metal" aria-label="Plastic bottles and cans" aria-pressed="false"><span class="selection-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="mark-plus" d="M6 12h12M12 6v12"/><path class="mark-check" d="M5 13l4 4L19 7"/></svg></span><svg class="waste-icon" viewBox="0 0 64 64" aria-hidden="true"><path class="icon-fill" d="M14 16h12v8l6 7v19a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4V31l6-7z"/><path d="M14 10h12v6H14zM14 16v8l-6 7v19a4 4 0 0 0 4 4h16a4 4 0 0 0 4-4V31l-6-7v-8M8 35h24M8 43h24"/><rect class="icon-fill" x="39" y="28" width="17" height="26" rx="4"/><rect x="39" y="28" width="17" height="26" rx="4"/><path d="M39 34h17M39 48h17M45 31h5"/></svg><strong>Plastic bottles &amp; cans</strong></button>
+          <button type="button" class="waste-card paper" data-material="paper_tetrapak" aria-label="Paper and cartons" aria-pressed="false"><span class="selection-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="mark-plus" d="M6 12h12M12 6v12"/><path class="mark-check" d="M5 13l4 4L19 7"/></svg></span><svg class="waste-icon" viewBox="0 0 64 64" aria-hidden="true"><path class="icon-fill" d="M16 9h23l11 11v30H16z"/><path d="M16 9h23l11 11v30H16zM39 9v12h11M23 29h19M23 36h19M23 43h12"/><path d="M10 19H8v37h34v-2"/></svg><strong>Paper &amp; cartons</strong></button>
+<button type="button" class="waste-card general" id="general-help" data-material="general" aria-pressed="false"><span class="selection-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="mark-plus" d="M6 12h12M12 6v12"/><path class="mark-check" d="M5 13l4 4L19 7"/></svg></span><svg class="waste-icon" viewBox="0 0 64 64" aria-hidden="true"><path class="icon-fill" d="M17 22h30l-3 31H20z"/><path d="M17 22h30l-3 28a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4zM12 22h40M24 16v-5h16v5M16 16h32v6H16zM27 31v14M37 31v14"/></svg><strong>General waste</strong></button>
+          <button type="button" class="waste-card electronics" data-material="electronics" aria-label="Electronics" aria-pressed="false"><span class="selection-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="mark-plus" d="M6 12h12M12 6v12"/><path class="mark-check" d="M5 13l4 4L19 7"/></svg></span><svg class="waste-icon" viewBox="0 0 64 64" aria-hidden="true"><rect class="icon-fill" x="12" y="10" width="40" height="30" rx="3"/><rect x="12" y="10" width="40" height="30" rx="3"/><path d="M25 40v10m14-10v10M20 50h24M19 17h26M24 32h16"/></svg><strong>Electronics</strong></button>
+          <button type="button" class="waste-card clothes" data-material="clothes" aria-label="Clothes for donation" aria-pressed="false"><span class="selection-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="mark-plus" d="M6 12h12M12 6v12"/><path class="mark-check" d="M5 13l4 4L19 7"/></svg></span><svg class="waste-icon" viewBox="0 0 64 64" aria-hidden="true"><path class="icon-fill" d="M24 11a8 8 0 0 0 16 0l10 5 7 11-9 6-3-4v22a3 3 0 0 1-3 3H22a3 3 0 0 1-3-3V29l-3 4-9-6 7-11z"/><path d="M24 11a8 8 0 0 0 16 0l10 5 7 11-9 6-3-4v22a3 3 0 0 1-3 3H22a3 3 0 0 1-3-3V29l-3 4-9-6 7-11z"/></svg><strong>Clothes</strong></button>
+        </div>
+        <p id="picker-condition" class="small-note" hidden>Confirm: recyclables empty / clean; general waste is ordinary household waste. No hazardous contents.</p>
+        <label id="electronics-size" class="electronics-size" hidden><input id="small-electronics" type="checkbox">Only phones, chargers, cables or earbuds</label>
+        <button id="confirm-picks" type="button" aria-describedby="picker-condition" disabled>Add to route</button>
+        <p id="picker-status" role="status"></p>
+      </section>
+      <details id="ai-help"><summary><span class="ai-spark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5z"/></svg></span><span><strong>Identify an item</strong></span><span class="disclosure-plus" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 12h12M12 6v12"/></svg></span></summary><div class="ai-body">
+      <form id="classify-form">
+        <label for="item">Item</label>
+        <div class="input-row">
+          <input id="item" name="item" maxlength="200" placeholder="e.g. wine bottle" required />
+          <button type="submit">Check</button>
+        </div>
+        <fieldset class="photo-option">
+          <legend>Or use a photo</legend>
+          <div class="input-row">
+            <div class="photo-upload">
+              <label for="item-photo"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 1-2h6l1 2h3a2 2 0 0 1 2 2v12H3V7a2 2 0 0 1 2-2z"/><circle cx="12" cy="12" r="4"/></svg>Choose photo</label>
+              <input id="item-photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp" aria-label="Photo" aria-describedby="photo-privacy photo-file-name" />
+            </div>
+            <p id="photo-file-name" translate="no" role="status"></p>
+            <button id="analyze-photo" type="button" class="secondary" disabled>Suggest from photo</button>
+          </div>
+          <p id="photo-privacy" class="small-note">Photos go to OpenAI for analysis. Not saved here.</p>
+        </fieldset>
+      </form>
+
+      <section id="photo-result" class="card" hidden aria-live="polite" aria-labelledby="photo-heading">
+        <p class="eyebrow">Photo suggestions</p>
+        <h2 id="photo-heading">Review visible items</h2>
+        <p id="photo-status" role="status"></p>
+        <ul id="photo-items" class="photo-items"></ul>
+      </section>
+
+      <section id="result" class="card" hidden aria-live="polite">
+        <p id="category" class="category"></p>
+        <p id="message"></p>
+        <p id="question"></p>
+        <form id="manual-form" hidden>
+          <label for="item-kind">Choose the item type</label>
+          <select id="item-kind" required></select>
+          <p id="condition-label">By adding, you confirm the selected item type, that it is empty/clean, and that it has no hazardous contents.</p>
+          <button id="confirm-item" type="submit" aria-describedby="condition-label">Confirm &amp; add to trip</button>
+        </form>
+        <p><a id="contact" hidden target="_blank" rel="noopener noreferrer">Contact the specialist operator</a></p>
+        <p><a id="phone" hidden></a></p>
+        <button id="add-another" type="button" class="secondary" hidden>Add another item</button>
+        <a id="continue-trip" href="#trip-panel" hidden>Continue to trip planning</a>
+      </section>
+
+      </div></details></div>
+      <section id="trip-panel" class="card" aria-labelledby="trip-heading">
+        <h2 id="trip-heading"><span class="step">02</span> Your route</h2>
+        <p id="basket-count" role="status"></p>
+        <ul id="trip-items"></ul>
+        <a id="basket-add-item" href="#waste-picker"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>Add an item</a>
+        <section class="origin-controls" aria-labelledby="origin-heading">
+          <h3 id="origin-heading">Starting point</h3>
+          <div id="origin-summary" hidden>
+            <div class="origin-summary-row">
+              <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></svg>
+              <strong id="origin-label" tabindex="-1"></strong>
+              <button id="change-origin" type="button" class="secondary">Change</button>
+            </div>
+            <details id="origin-details"><summary>Location details</summary><p id="origin-coordinates"></p></details>
+          </div>
+          <div id="origin-editor">
+          <div class="button-row">
+            <button id="locate" type="button" class="secondary" aria-busy="false">Use my location</button>
+            <button id="pick-origin" type="button" class="secondary" aria-pressed="false" disabled>Choose on map</button>
+          </div>
+          <details id="manual-origin"><summary>Enter coordinates manually</summary>
+          <form id="origin-form">
+            <div class="map-filters">
+              <div><label for="latitude">Latitude</label><input id="latitude" type="number" step="any" min="-90" max="90" placeholder="41.9981" required /></div>
+              <div><label for="longitude">Longitude</label><input id="longitude" type="number" step="any" min="-180" max="180" placeholder="21.4254" required /></div>
+            </div>
+            <button type="submit" class="secondary">Set coordinates</button>
+          </form>
+          </details>
+          <div id="origin-edit-actions" class="button-row" hidden>
+            <button id="cancel-origin-edit" type="button" class="secondary">Keep current point</button>
+            <button id="clear-origin" type="button" class="secondary">Clear starting point</button>
+          </div>
+          </div>
+          <p id="origin-status" role="status" tabindex="-1"></p>
+        </section>
+        <fieldset id="trip-mode"><legend class="sr-only">Travel mode</legend>
+          <label><input type="radio" name="travel-mode" value="walking" checked /> Walking</label>
+          <label><input type="radio" name="travel-mode" value="driving" /> Driving</label>
+        </fieldset>
+        <p id="sharing-note">Route location shared with openrouteservice. Not saved here.</p>
+        <p id="routing-availability" role="status">Checking routing availability…</p>
+        <button id="retry-routing" type="button" class="secondary" hidden>Retry routing connection</button>
+        <button id="plan-trip" type="button" aria-describedby="sharing-note trip-status" aria-label="Find my route" disabled>Find my route</button>
+        <p id="trip-status" role="status"></p>
+
+      </section>
+
+      </div>
+      <section id="collection-points" class="map-section" aria-labelledby="map-heading">
+
+        <div class="section-heading"><h2><span class="step">03</span> <span id="map-heading">Collection points</span></h2></div>
+        <details id="discovery-controls"><summary>Search &amp; browse collection points</summary>
+        <p>Acceptance and availability unverified.</p>
+        <div class="map-filters">
+          <div><label for="material-filter">Recorded material</label>
+            <select id="material-filter">
+              <option value="all">All materials</option>
+              <option value="glass">Glass</option>
+              <option value="plastic_metal">Plastic / metal</option>
+              <option value="paper_tetrapak">Paper / Tetra Pak</option>
+              <option value="general">General waste (acceptance unconfirmed)</option>
+              <option value="special_unsupported">Electronics</option>
+              <option value="clothes">Clothes · donation</option>
+            </select>
+          </div>
+          <div><label for="site-search">Search name, address or municipality</label>
+            <input id="site-search" type="search" placeholder="Search collection points…" aria-describedby="search-status" />
+          </div>
+        </div>
+        <p id="search-status" role="status"></p>
+        <ul id="site-list" class="site-list" aria-label="Collection point search results" hidden></ul>
+        <p id="site-count" role="status"></p>
+        </details>
+        <div id="route-controls" class="route-controls" hidden>
+          <p id="route-summary" role="status"></p>
+          <div class="button-row">
+            <button id="fit-route" type="button" class="secondary">Fit route</button>
+            <button id="show-other-sites" type="button" class="secondary" aria-pressed="false">Show other collection points</button>
+            <a href="#trip-panel">Edit trip</a><a href="#trip-result">View stop details</a>
+          </div>
+        </div>
+        <div id="pick-controls" class="route-controls" hidden>
+          <div class="button-row">
+            <button id="center-origin" type="button" disabled>Use map center</button>
+            <button id="cancel-origin" type="button" class="secondary">Cancel selection</button>
+          </div>
+        </div>
+        <div id="map-shell" class="map-shell">
+          <div id="site-map" aria-label="Skopje collection point map"></div>
+          <div class="map-context"><strong id="map-context-label" class="sr-only">Skopje · City centre</strong><span id="map-view-count" role="status">Loading collection points…</span></div>
+          <div class="map-view-tools" aria-label="Map view">
+            <button id="map-overview" class="secondary" type="button" aria-label="Show all matching sites" disabled>Overview</button>
+            <button id="map-home" class="secondary icon-button" type="button" aria-label="Recenter map" title="Return to your starting point or city centre" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg></button>
+          </div>
+          <div id="map-legend" class="legend" aria-label="Map legend">
+            <span><i class="legend-dot glass" aria-hidden="true"></i>Glass</span><span><i class="legend-dot plastic" aria-hidden="true"></i>Plastic / metal</span><span><i class="legend-dot paper" aria-hidden="true"></i>Paper</span><span><i class="legend-dot general" aria-hidden="true"></i>General waste</span><span><i class="legend-dot electronics" aria-hidden="true"></i>Electronics</span><span><i class="legend-dot clothes" aria-hidden="true"></i>Clothes</span>
+          </div>
+          <div id="route-map-key" class="route-map-key" hidden><span><svg class="route-line-key" viewBox="0 0 32 12" aria-hidden="true"><path d="M3 6h26"/></svg><span id="route-mode-label"></span></span><span><i class="origin-key" aria-hidden="true"></i>Start</span><span><i class="stop-key" aria-hidden="true">1</i>Drop-off stop</span></div>
+          <div id="map-pick-hint" class="map-pick-hint" hidden>Choose starting point</div>
+        </div>
+        <p id="map-status" role="status">Loading map…</p>
+        <button id="retry-map" type="button" class="secondary" hidden>Retry map tiles</button>
+
+        <div class="map-details-grid">
+        <div id="trip-result" class="card" hidden></div>
+        <section id="site-details" class="card" tabindex="-1" aria-label="Selected site details" hidden></section>
+        </div>
+      </section>
+
+      <details id="data-details"><summary>About the map &amp; data</summary><p id="data-status" role="status">Loading site data…</p><a href="https://www.openstreetmap.org/fixthemap" target="_blank" rel="noopener noreferrer">Report a base-map issue</a><button id="refresh-sites" type="button" class="secondary">Refresh site data</button><p>Follow container instructions. Records are a dated snapshot, not live availability. Map tiles reveal the viewed area to the provider. Saved site data can be used after a failed refresh; offline maps and page loading are not supported.</p></details>
+    </main>
+    <script src="/static/app.js?v=visual-pass-1" defer></script>
+    <script src="/static/vendor/leaflet/leaflet.js" defer></script>
+    <script src="/static/site-data.js?v=stop-colors-1" defer></script>
+    <script src="/static/community.js?v=1" defer></script>
+    <script src="/static/account.js?v=3" defer></script>
+    <script src="/static/map.js?v=community-1" defer></script>
+    <script src="/static/trip.js?v=accounts-1" defer></script>
+    <script src="/static/path.js?trip-flow-1" defer></script>
+  </body>
+</html>

@@ -1,0 +1,101 @@
+text,target_label,review_status
+"wine bottle from dinner",glass,needs_human_review
+"empty beer bottle made of glass",glass,needs_human_review
+"clear pasta sauce jar",glass,needs_human_review
+"green glass olive jar",glass,needs_human_review
+"where tf do I throw this wine bottle",glass,needs_human_review
+"got an empty glass beer bottle",glass,needs_human_review
+"is this jam jar recyclable?",glass,needs_human_review
+"what bin takes a glass ketchup bottle?",glass,needs_human_review
+"where does my empty pickle jar go",glass,needs_human_review
+"brown glass medicine-free bottle",glass,needs_human_review
+"can the glass jar from baby food be recycled",glass,needs_human_review
+"empty sparkling-water glass bottle",glass,needs_human_review
+"I finished a jar of tomato sauce",glass,needs_human_review
+"which container is for glass perfume bottles?",glass,needs_human_review
+"glass bottle no cap",glass,needs_human_review
+"where should this empty mason jar go",glass,needs_human_review
+"recycle an empty vinegar bottle made of glass",glass,needs_human_review
+"old glass preserve jar",glass,needs_human_review
+"where can I leave a glass juice bottle?",glass,needs_human_review
+"clean glass honey jar",glass,needs_human_review
+"plastic shampoo bottle",plastic_metal,needs_human_review
+"got an empty coke can",plastic_metal,needs_human_review
+"rinsed detergent bottle",plastic_metal,needs_human_review
+"aluminium sparkling-water can",plastic_metal,needs_human_review
+"where does a plastic milk bottle go?",plastic_metal,needs_human_review
+"empty body-wash container",plastic_metal,needs_human_review
+"can this soda can be recycled",plastic_metal,needs_human_review
+"yellow bin for a water bottle?",plastic_metal,needs_human_review
+"metal food tin with no food left",plastic_metal,needs_human_review
+"empty plastic cleaning-product bottle",plastic_metal,needs_human_review
+"what about this energy drink can",plastic_metal,needs_human_review
+"rinsed fabric-softener container",plastic_metal,needs_human_review
+"where should an empty hand-soap bottle go",plastic_metal,needs_human_review
+"plastic juice bottle no cap",plastic_metal,needs_human_review
+"clean canned-beans tin",plastic_metal,needs_human_review
+"empty aluminium tomato can",plastic_metal,needs_human_review
+"can I recycle my conditioner bottle?",plastic_metal,needs_human_review
+"where do I put a metal drink can",plastic_metal,needs_human_review
+"rinsed plastic bleach container",plastic_metal,needs_human_review
+"empty iced-tea bottle made of plastic",plastic_metal,needs_human_review
+"old magazines from last year",paper_tetrapak,needs_human_review
+"amazon cardboard delivery box",paper_tetrapak,needs_human_review
+"empty milk Tetra Pak",paper_tetrapak,needs_human_review
+"bundle of clean newspapers",paper_tetrapak,needs_human_review
+"where should my school notebook go",paper_tetrapak,needs_human_review
+"flattened cereal cardboard box",paper_tetrapak,needs_human_review
+"clean brown paper bag",paper_tetrapak,needs_human_review
+"what about old magazines?",paper_tetrapak,needs_human_review
+"juice carton marked Tetra Pak",paper_tetrapak,needs_human_review
+"office printer paper",paper_tetrapak,needs_human_review
+"cardboard sleeve from a parcel",paper_tetrapak,needs_human_review
+"can I recycle a clean shoe box",paper_tetrapak,needs_human_review
+"old paperback notebook pages",paper_tetrapak,needs_human_review
+"where do flattened packing boxes go",paper_tetrapak,needs_human_review
+"empty aseptic soup carton",paper_tetrapak,needs_human_review
+"stack of advertising leaflets",paper_tetrapak,needs_human_review
+"clean paper envelope without plastic",paper_tetrapak,needs_human_review
+"cardboard tube from kitchen roll",paper_tetrapak,needs_human_review
+"paper packaging from a dry product",paper_tetrapak,needs_human_review
+"where should this empty drink carton go?",paper_tetrapak,needs_human_review
+"used plastic toothbrush",general,needs_human_review
+"dirty kitchen sponge",general,needs_human_review
+"greasy used tissue",general,needs_human_review
+"broken ceramic coffee mug",general,needs_human_review
+"disposable plastic fork",general,needs_human_review
+"used face mask",general,needs_human_review
+"tea bag after brewing",general,needs_human_review
+"cigarette butt",general,needs_human_review
+"wooden ice-cream stick",general,needs_human_review
+"food leftovers with no compost bin",general,needs_human_review
+"dirty cling film",general,needs_human_review
+"plastic drinking straw",general,needs_human_review
+"crumbled bathroom tissue",general,needs_human_review
+"old dishwashing sponge",general,needs_human_review
+"used disposable glove",general,needs_human_review
+"where does a broken dinner plate go?",general,needs_human_review
+"chewed wooden toothpick",general,needs_human_review
+"empty snack wrapper with foil lining",general,needs_human_review
+"dust and vacuum cleaner dirt",general,needs_human_review
+"used cotton swab",general,needs_human_review
+"AA batteries from a remote",special_unsupported,needs_human_review
+"broken laptop computer",special_unsupported,needs_human_review
+"where should this old charger go",special_unsupported,needs_human_review
+"expired prescription medication",special_unsupported,needs_human_review
+"swollen phone battery",special_unsupported,needs_human_review
+"dead fluorescent tube",special_unsupported,needs_human_review
+"old Android smartphone",special_unsupported,needs_human_review
+"unused household pesticide",special_unsupported,needs_human_review
+"broken tablet device",special_unsupported,needs_human_review
+"small bottle of paint thinner",special_unsupported,needs_human_review
+"button-cell watch battery",special_unsupported,needs_human_review
+"damaged power bank",special_unsupported,needs_human_review
+"where do computer cables go?",special_unsupported,needs_human_review
+"old Wi-Fi router",special_unsupported,needs_human_review
+"half-full chemical cleaner",special_unsupported,needs_human_review
+"burnt-out compact fluorescent bulb",special_unsupported,needs_human_review
+"broken electronic headphones",special_unsupported,needs_human_review
+"unused medicine tablets",special_unsupported,needs_human_review
+"leaking rechargeable battery",special_unsupported,needs_human_review
+"obsolete laptop power adapter",special_unsupported,needs_human_review

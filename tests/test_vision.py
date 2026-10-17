@@ -1,0 +1,144 @@
+import asyncio
+import base64
+import io
+import json
+
+import httpx
+import pytest
+from PIL import Image
+
+from smart_recycling.vision import (
+    MAX_UPLOAD_BYTES,
+    ModelPhotoAnalysis,
+    ModelPhotoItem,
+    OpenAIVisionProvider,
+    SuggestionStatus,
+    VisibleCondition,
+    VisionError,
+    VisionService,
+    prepare_image,
+)
+
+
+def png_bytes(width: int = 40, height: int = 30) -> bytes:
+    output = io.BytesIO()
+    image = Image.new("RGB", (width, height), "green")
+    exif = Image.Exif()
+    exif[0x010E] = "private description"
+    image.save(output, format="PNG", exif=exif)
+    return output.getvalue()
+
+
+def test_prepare_image_resizes_and_removes_metadata() -> None:
+    prepared = prepare_image(png_bytes(2400, 1200), "image/png")
+
+    prefix, encoded = prepared.split(",", 1)
+    assert prefix == "data:image/jpeg;base64"
+    with Image.open(io.BytesIO(base64.b64decode(encoded))) as image:
+        assert image.size == (1280, 640)
+        assert image.format == "JPEG"
+        assert len(image.getexif()) == 0
+
+
+@pytest.mark.parametrize(
+    ("raw", "content_type", "code"),
+    [
+        pytest.param(b"", "image/png", "empty_image", id="empty"),
+        pytest.param(b"not an image", "image/png", "invalid_image", id="invalid"),
+        pytest.param(png_bytes(), "image/gif", "unsupported_image", id="unsupported"),
+        pytest.param(
+            b"x" * (MAX_UPLOAD_BYTES + 1),
+            "image/jpeg",
+            "image_too_large",
+            id="too-large",
+        ),
+    ],
+)
+def test_prepare_image_rejects_unsafe_uploads(raw: bytes, content_type: str, code: str) -> None:
+    with pytest.raises(VisionError) as caught:
+        prepare_image(raw, content_type)
+    assert caught.value.code == code
+
+
+def test_openai_provider_uses_private_structured_image_request() -> None:
+    async def run() -> ModelPhotoAnalysis:
+        def handler(request: httpx.Request) -> httpx.Response:
+            assert request.headers["Authorization"] == "Bearer test-key"
+            body = json.loads(request.content)
+            assert body["model"] == "test-vision-model"
+            assert body["store"] is False
+            assert body["input"][0]["content"][1]["detail"] == "low"
+            assert body["text"]["format"]["strict"] is True
+            model_output = {
+                "items": [
+                    {
+                        "description": "clear glass jar",
+                        "item_kind": "empty_glass_packaging",
+                        "visible_condition": "appears_empty_clean",
+                        "reason": "It appears to be an empty glass container.",
+                    }
+                ]
+            }
+            return httpx.Response(
+                200,
+                json={
+                    "output": [
+                        {
+                            "type": "message",
+                            "content": [{"type": "output_text", "text": json.dumps(model_output)}],
+                        }
+                    ]
+                },
+            )
+
+        async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+            provider = OpenAIVisionProvider(
+                "test-key", "test-vision-model", client=client, timeout_seconds=1
+            )
+            return await provider.analyze("data:image/jpeg;base64,fixture")
+
+    result = asyncio.run(run())
+    assert result.items[0].item_kind == "empty_glass_packaging"
+
+
+def test_service_derives_safe_statuses_instead_of_trusting_a_category() -> None:
+    class FakeProvider:
+        configured = True
+        model = "fixture-model"
+
+        async def analyze(self, image_data_url: str) -> ModelPhotoAnalysis:
+            assert image_data_url.startswith("data:image/jpeg;base64,")
+            return ModelPhotoAnalysis(
+                items=[
+                    ModelPhotoItem(
+                        description="glass jar",
+                        item_kind="empty_glass_packaging",
+                        visible_condition=VisibleCondition.APPEARS_EMPTY_CLEAN,
+                        reason="Visible glass packaging.",
+                    ),
+                    ModelPhotoItem(
+                        description="plastic bottle with liquid",
+                        item_kind="empty_plastic_bottle",
+                        visible_condition=VisibleCondition.NOT_EMPTY_OR_CONTAMINATED,
+                        reason="It appears to contain liquid.",
+                    ),
+                    ModelPhotoItem(
+                        description="battery",
+                        item_kind="batteries",
+                        visible_condition=VisibleCondition.UNCERTAIN,
+                        reason="It resembles a household battery.",
+                    ),
+                ]
+            )
+
+    result = asyncio.run(
+        VisionService(FakeProvider(), "policy-v1").suggest(png_bytes(), "image/png")
+    )
+
+    assert result.requires_user_confirmation is True
+    assert result.items[0].category == "glass"
+    assert result.items[0].status is SuggestionStatus.CANDIDATE
+    assert result.items[1].category is None
+    assert result.items[1].status is SuggestionStatus.NEEDS_REVIEW
+    assert result.items[2].category == "special_unsupported"
+    assert result.items[2].status is SuggestionStatus.SPECIALIST

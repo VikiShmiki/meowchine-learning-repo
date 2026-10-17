@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+
+# Local configuration and tools
+.env
+.env.*
+!.env.example
+.idea/
+.vscode/
+.DS_Store
+
+# Data and generated artifacts
+data/raw/
+data/processed/
+# Toronto catalogue metadata currently reports no dataset-specific license.
+data/mappings/dataset_b_item_mapping.csv
+artifacts/*
+!artifacts/models/
+artifacts/models/*
+!artifacts/models/minilm_frozen_four_class_development.joblib
+!artifacts/models/minilm_frozen_four_class_development.metadata.json
+/models/
+images/*.png
+logs/
+results/*.json
+results/*.csv
+results/**/*.json
+results/**/*.csv
+runtime/
+*.sqlite3
+*.sqlite3-journal
+*.sqlite3-wal
+*.sqlite3-shm
+
+# Keep deterministic development fixtures in data/seed/.

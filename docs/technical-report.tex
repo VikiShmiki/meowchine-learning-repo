@@ -1,0 +1,187 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage[margin=19mm,headheight=14pt]{geometry}
+\usepackage{xcolor,graphicx,booktabs,tabularx,array,enumitem,fancyhdr,hyperref,titlesec}
+\IfFontExistsTF{Arial}{\setmainfont{Arial}\setsansfont{Arial}}{\setmainfont{DejaVu Sans}\setsansfont{DejaVu Sans}}
+\definecolor{ink}{HTML}{172B2B}
+\definecolor{teal}{HTML}{146B62}
+\definecolor{mint}{HTML}{E8F4F0}
+\definecolor{gold}{HTML}{D89B38}
+\definecolor{muted}{HTML}{526462}
+\definecolor{line}{HTML}{D8E4DE}
+\hypersetup{colorlinks=true,linkcolor=teal,urlcolor=teal,pdftitle={Goodsort | Technical Report},pdfauthor={Goodsort project}}
+\color{ink}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\emergencystretch=2em
+\setlist[itemize]{leftmargin=*,topsep=3pt,itemsep=2pt}
+\titleformat{\section}{\Large\bfseries\color{teal}}{}{0pt}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{ink}}{}{0pt}{}
+\titlespacing*{\section}{0pt}{14pt}{6pt}
+\titlespacing*{\subsection}{0pt}{9pt}{3pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{muted} GOODSORT / TECHNICAL REPORT}
+\fancyhead[R]{\small\color{muted} 17 OCTOBER 2026}
+\fancyfoot[L]{\small\color{muted} Skopje prototype \quad | \quad Evidence-bounded guidance}
+\fancyfoot[R]{\small\color{muted}\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\newcommand{\repo}[2]{\href{https://github.com/VikiShmiki/meowchine-learning-repo/blob/main/#1}{#2}}
+\newcommand{\code}[1]{\texttt{\small #1}}
+\newcommand{\callout}[2]{\par\noindent\fcolorbox{line}{mint}{\begin{minipage}{0.94\linewidth}\textbf{\color{teal}#1}\quad #2\end{minipage}}\par}
+\begin{document}
+
+\thispagestyle{empty}
+\vspace*{12mm}
+{\color{teal}\rule{35mm}{2.5pt}}\par
+\vspace{15mm}
+{\sffamily\fontsize{34}{38}\selectfont\bfseries Goodsort}\par
+\vspace{3mm}
+{\sffamily\fontsize{19}{24}\selectfont Technical report}\par
+\vspace{7mm}
+{\large Bilingual recycling guidance, evidence-aware routing, and population-weighted access planning for Skopje}\par
+\vspace{10mm}
+\callout{The design principle}{A plausible model suggestion is not disposal permission. A journey requires confirmed item identity, local policy, and explicit acceptance by a recorded destination asset.}
+\vspace{15mm}
+\begin{tabularx}{\linewidth}{>{\bfseries}p{34mm}X}
+Product & Citizen web app, City planning view, moderated community reports, optional activity \\
+Languages & English and Macedonian (Cyrillic UI and separate multilingual suggestion model) \\
+Architecture & Build-free web client; one FastAPI service; versioned offline artifacts \\
+Evidence & Reproducible source snapshots, deterministic tests, explicit review holds \\
+Demo & \href{https://github.com/VikiShmiki/meowchine-learning-repo/blob/main/docs/assets/demo-app-video.mp4}{Watch the repository video} \\
+\end{tabularx}
+\vfill
+{\small\color{muted} Prepared from the checked-in implementation, data reports and project documentation for the 17 October 2026 project edition. Source snapshots and experiment records retain their original dates. Measurements below are scoped to their cited artifacts; the video illustrates the interface rather than serving as a provider or field audit.}\par
+\newpage
+
+\section*{Executive summary}
+Goodsort addresses two linked problems: residents need reliable disposal guidance and suitable collection destinations; municipalities need an interpretable way to assess unequal access. The implementation keeps these questions separate. Typed text first meets local item and hazard rules. A frozen MiniLM model may offer a \emph{broad} stream suggestion if those rules abstain, but the user still selects the exact item and condition. Routing then checks source-recorded acceptance at the asset level. City Mode uses a separately prepared pedestrian graph and modeled population to estimate ten-minute walking coverage and hypothetical site upgrades.
+
+\subsection*{Why this work matters}
+For a resident, a correct material label is useful only if it leads to an appropriate, reachable destination. Goodsort connects identification, condition checks, source-recorded site acceptance and a multi-item trip in one bilingual flow. It reduces the need to piece together separate lists and maps, while keeping uncertain and hazardous items out of an unjustified recycling recommendation. This is particularly useful for electronics and wearable clothes, whose destinations and condition rules differ from ordinary packaging.
+
+For a municipality, a map of collection points alone does not show which residents can actually walk to a compatible asset. The population-weighted, material-specific City view makes access gaps visible; the upgrade scenarios provide a transparent way to compare possible priorities before spending on infrastructure. These are decision aids, not evidence that the app has already changed behavior, that every site is operational, or that a modeled upgrade is field-feasible.
+
+The product provides six citizen journeys---glass, plastic/metal, paper/cartons, ordinary residual waste, electronics, and wearable-clothes donation---in English and Macedonian. Five canonical disposal categories and six learned object labels are deliberately not treated as complete destination capabilities. This distinction is particularly important for electronics and clothes: their safer handling comes from explicit item policy and accepting facilities, not an unsupported assumption that an object prediction establishes site acceptance.
+
+\begin{table}[h]
+\centering\small
+\begin{tabularx}{\linewidth}{>{\bfseries}p{31mm}X>{\raggedleft\arraybackslash}p{25mm}}
+\toprule
+Measured artifact & Interpretation & Result \\
+\midrule
+Infrastructure snapshot & Source assets / grouped City sites & 1,596 / 1,583 \\
+Policy rules v3 & Correct among 36 answered, 59 source-supported queries & 34 / 36 \\
+Six-class frozen heads & English / Macedonian manual macro-F1, five seeds, fixed split & 0.696 / 0.507 \\
+Walking coverage & Glass / plastic-metal / paper-cartons, modeled residents within 600 s & 58.14 / 34.94 / 5.04\% \\
+\bottomrule
+\end{tabularx}
+\caption{These figures have different denominators and validation status; they are not a composite accuracy score. The five-seed sample standard deviation of both shown frozen-head scores is 0.000 because the split, features and deterministic solver are fixed. Sources: \repo{data/classifier/README.md}{rules evidence}, \repo{docs/ML.md}{model comparison}, \repo{data/coverage/skopje-v1/README.md}{coverage method}, and \repo{data/infrastructure/skopje-2026-09-19/README.md}{infrastructure}.}
+\end{table}
+
+\callout{Decision boundary}{Neither a high similarity score nor proximity to a map marker proves that an item can be deposited there. Unreviewed sources and missing operation or entrance evidence stay visible as limits.}
+
+\subsection*{Five-seed bilingual model results}
+Seeds 42--46 compare three methods per language on the same fixed, grouped six-class dataset. The entries below are macro-F1 mean $\pm$ sample standard deviation over the five saved runs; each manual set has 59 supported examples. The selected frozen heads are highlighted.
+\begin{center}
+\scriptsize
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{29mm}XXXX}
+\toprule
+Method & English manual & English grouped test & Macedonian manual & Macedonian grouped test \\
+\midrule
+TF-IDF + logistic & 0.548 $\pm$ 0.000 & 0.455 $\pm$ 0.000 & 0.467 $\pm$ 0.000 & 0.434 $\pm$ 0.000 \\
+\textbf{Frozen MiniLM + logistic} & \textbf{0.696 $\pm$ 0.000} & 0.505 $\pm$ 0.000 & \textbf{0.507 $\pm$ 0.000} & \textbf{0.552 $\pm$ 0.000} \\
+Multilingual MiniLM LoRA & 0.644 $\pm$ 0.044 & 0.237 $\pm$ 0.083 & 0.459 $\pm$ 0.033 & 0.252 $\pm$ 0.034 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+The frozen English and Macedonian heads are used only for suggestions. Zero variance for those deterministic fits does not measure uncertainty from the tiny clothing set, translated examples or fixed test split. See \repo{docs/ML.md}{the full protocol, probe results and timings}; none of these development scores establishes field quality or disposal permission.
+
+\section{Problem, scope and user journey}
+The initial geographic scope is the City of Skopje. A citizen can select a material directly, type a description, or optionally submit a photo; inspect guidance; confirm item kind and condition; add up to six items; choose an origin manually, on the map, or by geolocation; and request a walking or driving route. A route ends at the last drop-off point. Without provider credentials, the app still serves guidance, discovery and City analysis, and says live routing is unavailable. Community reports are moderated before public display. Optional accounts save material/date-only drop-off history and self-reported badges. See \repo{docs/ROUTING.md}{routing}, \repo{docs/COMMUNITY.md}{community} and \repo{docs/ACCOUNTS.md}{accounts}.
+
+City users compare per-material walking coverage and request scenarios with 0--20 hypothetical upgrades of existing general-waste sites. The default equity floor is 50\% modeled municipal coverage; unmet floors and solver status are reported. These scenarios are planning aids, not permission to install or change collection assets. See \repo{docs/CITY_MODE.md}{City Mode}.
+
+\section{System architecture}
+\begin{center}
+\fcolorbox{line}{white}{\begin{minipage}{0.91\linewidth}\centering
+\textbf{\color{teal}Citizen + City browser client (\code{web/})}\\
+English/Macedonian presentation; in-memory trip and origin; map and report views\\[3pt]
+{\color{gold}$\downarrow$} \quad versioned JSON/HTTP \quad {\color{gold}$\downarrow$}\\[3pt]
+\textbf{\color{teal}One FastAPI service (\code{src/smart\_recycling/})}\\
+Policy and language gates $\;\vert\;$ model suggestion adapters $\;\vert\;$ exact asset matching\\
+Trip planning/ORS adapter $\;\vert\;$ compact City reports $\;\vert\;$ moderated SQLite data\\[3pt]
+{\color{gold}$\uparrow$} \quad validated, versioned artifacts \quad {\color{gold}$\uparrow$}\\[3pt]
+\textbf{\color{teal}Offline preparation (\code{scripts/}, \code{data/})}\\
+Reviewed rules; pinned site snapshot; geography; coverage/upgrades; evaluation reports
+\end{minipage}}
+\end{center}
+Training and graph construction do not run in HTTP handlers. The runtime loads policy, infrastructure and compact analytical reports at startup and rejects incompatible or stale artifacts instead of quietly substituting demo data. The English and Macedonian frozen encoders each use a separate six-class logistic head; the English head is never applied to the multilingual embedding space. The API keeps machine IDs stable across languages while localizing copy and known errors. See \repo{docs/ARCHITECTURE.md}{architecture}, \repo{docs/LANGUAGES.md}{language contract} and \repo{docs/API.md}{API}.
+
+\subsection{Authority and failure handling}
+The serving order is specialist/held and exact-item policy, then optional broad model help, then explicit user confirmation, then asset acceptance and route planning. A hazardous or held description blocks the basket. General-waste navigation requires an explicit warning and recorded mixed-waste container, not an inferred acceptance profile. Electronics uses specifically accepting destinations; wearable clothes require condition-aware donation guidance. A missing ORS key, failed request or unreachable edge yields a stated unavailable/error outcome, never invented route geometry. See \repo{docs/GENERAL_AND_ELECTRONICS.md}{special flows} and \repo{docs/ROUTING.md}{route contract}.
+
+\section{Models, data and bilingual behavior}
+The canonical internal targets are glass, plastic/metal, paper/Tetra Pak, general, and special/unsupported; \emph{abstain} is a decision, not a sixth class. Dataset A's 50 labels map into local targets only after review. Dataset B (Toronto Waste Wizard) expands vocabulary but its municipal rules are not transferred to Skopje as ground truth. Grouped train/validation/test splits keep normalized item families together. Source licenses, 37 held Dataset A families, 41 held manual queries and unreviewed proposals limit broader learning claims. See \repo{docs/DATA.md}{data contracts}, \repo{docs/DISPOSAL_POLICY.md}{policy review} and \repo{data/classifier/README.md}{evaluated rules}.
+
+The serving rules selected threshold 0.85 on development validation, then answered 36 of 59 source-supported manual questions (61.0\% coverage); 34 answers were correct (94.4\% answered accuracy). These are agent source-reviewed labels, not human-approved field ground truth. General-waste independent test support is absent. Separate frozen English and multilingual MiniLM encoders with six-class logistic heads can propose an object/stream for unresolved text, but neither decides a route. The models may be disabled without breaking policy/manual flows.
+
+The English/Macedonian selector preserves the current basket, origin, route and page state. \code{web/locales/mk.json} supplies presentation copy. Input recognition is independent of UI language: an explicit Macedonian lexicon normalizes known Cyrillic forms and Latin spellings at policy boundaries while retaining hazard and contamination cues. Unknown prose is not silently translated. The selected interface/request language chooses its separately pinned frozen MiniLM head; scores are uncalibrated suggestions, not acceptance evidence. Macedonian photo requests ask the provider for Cyrillic content, but output still goes through the same policy/confirmation guardrails. See \repo{docs/LANGUAGES.md}{implementation and exact model IDs} and \repo{docs/ML.md}{five-seed model comparison}.
+
+The older prototype-based Macedonian evaluation contains 100 development-authored translations linked to English originals by hashes. On the inherited 59 source-supported cases it scored 54 correct (91.5\% closed-set accuracy; macro-F1 0.922); it is historical evidence, \emph{not} a score for the currently selected six-class head. The corrected bilingual dataset has five runs each at seeds 42--46. Manual six-class macro-F1 is 0.696 $\pm$ 0.000 for the selected English frozen head and 0.507 $\pm$ 0.000 for the selected Macedonian head (sample standard deviation); grouped-test macro-F1 is 0.505 $\pm$ 0.000 and 0.552 $\pm$ 0.000. The fixed split, tiny clothing support, translations and source-review limits mean this is development evidence, not independent field quality. See \repo{docs/ML.md}{protocol, complete comparison and limitations}.
+
+\section{Routing and planning algorithms}
+\subsection{Citizen trips}
+For every confirmed item type, the server finds compatible assets and takes the three nearest source sites by straight-line distance. Deduplication produces at most 18 candidates. This is a \emph{shortlist heuristic}, not a claim of city-wide optimality. ORS returns a mode-specific directed travel-time matrix; unreachable edges and excessive snap distances are excluded. A shortest-path search over state $(C,s)$---covered item types $C$ and last site $s$---minimizes matrix time until every type is covered. One directions call returns network geometry for the selected order. Final displayed duration comes from directions, which can differ from the matrix estimate because arrival-direction state is not carried between stops. Straight-line map sorting is discovery only. See \repo{docs/ROUTING.md}{route method}.
+
+\subsection{Population-weighted coverage}
+Let $p_i$ be modeled population at demand location $i$, and $d(i,S_m)$ the minimum directed walking time from that location to a compatible site for material $m$, including terminal connectors. The report's metric is
+\[
+\mathrm{Coverage}_m(600)=
+100\,\frac{\sum_i p_i\,\mathbf{1}\{d(i,S_m)\leq 600\}}{\sum_i p_i}\,.
+\]
+The denominator includes disconnected demand. Street segments are split at demand and site fractions; reverse multi-source Dijkstra preserves travel direction and counts each location once. Walking speed is 4.8 km/h. Unverified connectors up to 100 m are treated as terminal costs, not shortcuts. The 2025 WorldPop-derived modeled denominator is about 522,421 residents across ten municipalities; roughly 8,620 modeled residents are disconnected. NoData areas are unknown, not zero. General-waste coverage is unavailable because a positive reviewed acceptance profile is missing. See \repo{data/coverage/skopje-v1/README.md}{coverage report}.
+
+\subsection{Upgrade scenarios}
+Candidate upgrades add one full reviewed material stream to eligible existing general-waste sites \emph{hypothetically}; source acceptance remains unchanged. Demand IDs are unioned before weights are summed, so overlapping catchments do not double-count people. The objective first seeks the 50\% municipal floor where feasible; otherwise it compares sorted municipal coverage lexicographically (max-min), then total covered population, then stable IDs. Small spaces are exhaustively enumerated; larger ones use deterministic greedy additions and limited exchanges, with optimality reported honestly. For five upgrades, the prepared estimates change glass 58.14 to 59.34\%, plastic/metal 34.94 to 36.88\%, and paper/cartons 5.04 to 11.44\%. The floor remains infeasible under the current candidate/access model. Physical access, site suitability and smaller-area equity need field review. See \repo{data/upgrades/skopje-v1/README.md}{scenario report}.
+
+\section{Implementation process: agentic workflow}
+The project used an agent-assisted, artifact-first workflow rather than treating a long chat transcript as the specification. \repo{AGENTS.md}{\code{AGENTS.md}} is the short entry point for any contributor or coding agent. It says to read \repo{STATUS.md}{\code{STATUS.md}} first, apply \repo{docs/ENGINEERING.md}{engineering rules} and \repo{docs/DELIVERY_PLAN.md}{scope/acceptance}, then open only the relevant deeper document: product, architecture, data, ML, API, quality or decisions. This makes \code{AGENTS.md} a \emph{router} into \code{docs/}, not an enormous duplicate manual.
+
+\code{STATUS.md} serves as the small live ledger of current work, verified state and blockers. Earlier milestones move to \repo{STATUS_HISTORY.md}{\code{STATUS\_HISTORY.md}}; durable contracts and evidence stay in topic files and versioned data reports. An agent beginning a routing change therefore reads the status and routing/API contracts rather than reloading model-training history. This reduces context load and the risk of \emph{context rot}: stale, repeated or truncated instructions silently steering later edits. It does not guarantee perfect memory. The protection comes from concise pointers, explicit authoritative files, and rerunning checks against the current tree.
+
+Typical task loop: identify one scoped change from status and acceptance criteria; inspect the affected code and topic document; edit with tests and artifact/provenance updates; run local deterministic checks, plus targeted browser and data-reproduction gates; record exact outcomes and unresolved limits; review a focused PR; then merge. The policy rules, model prototype set, site snapshot, coverage and upgrade reports carry hashes/version links so stale evidence cannot quietly accompany changed inputs. User-visible failures and documented review holds were kept rather than replacing them with synthetic success. This workflow is visible in \repo{docs/QUALITY.md}{quality evidence}, \repo{docs/DECISIONS.md}{decisions} and the source project’s PR history.
+
+\section{Verification, risks and reproducibility}
+The last application/test revision recorded in \repo{docs/QUALITY.md}{the quality log} passed 897 browser-enabled Python tests and 19 Node tests locally, with lock, lint, formatting, validators, coverage/upgrade reproduction and bilingual smoke checks. These are historical, commit-specific local results; this documentation update does not convert them into a new test run. Macedonian fixtures include 68 paired policy cases and a 108-case full-pipeline matrix per language using simulated external transports. Provider mocks establish integration behavior, not live model or road accuracy.
+
+This private repository includes quality and container workflows; its hosted status is recorded separately in the \repo{docs/CI_STATUS.md}{CI status record}. The source repository’s historical account restriction is retained in \repo{docs/UPSTREAM_CI_STATUS.md}{the upstream CI record}. A historical blocked run does not establish the current repository’s CI status. Container execution, hosted HTTPS, physical-device use, native Macedonian review, real entrances/operations and paid-provider field reliability remain unverified.
+
+Reproduce the local app with \code{uv sync --all-groups --locked} and \code{uv run python scripts/run\_local\_demo.py}. Run \code{make check} with Node 22 and Make (PowerShell equivalents are in \repo{README.md}{README}); reproduce the paired evaluation with \code{scripts/evaluate\_macedonian.py} and City artifacts with \code{scripts/prepare\_coverage.py --check} and \code{scripts/prepare\_upgrades.py --check} under the \code{geo} dependency group. The \repo{docs/assets/demo-app-video.mp4}{repository video} is an interface walkthrough, not a validation gate.
+
+\section{Independent review protocol}
+An independent reviewer should evaluate three layers separately. First, run the deterministic local gate on a clean checkout and inspect the committed hashes and report manifests. Second, exercise the citizen and City pages in both languages while checking that a model suggestion never skips exact-item confirmation or asset acceptance. Third, use consenting field observations to test site operation, entrances, routes and native Macedonian wording. The first two layers can be repeated from this repository; the third has not yet been completed and should not be inferred from a polished demo.
+
+\begin{table}[h]
+\centering\small
+\begin{tabularx}{\linewidth}{>{\bfseries}p{30mm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X}
+\toprule
+Open question & Why it matters & Evidence needed \\
+\midrule
+Site reality & A source-recorded stream or coordinate may no longer be usable. & Operator confirmation, on-site acceptance and entrance checks. \\
+Language quality & Development-authored translations may sound unnatural or miss colloquial hazards. & Native-speaker review and independently sampled Macedonian queries. \\
+Model coverage & The 59 supported questions omit general-waste evidence and held families. & Separately adjudicated, class-balanced local field set with abstention metrics. \\
+Deployment & Local tests and mocked providers do not establish hosted or phone behavior. & Actual CI/container run, HTTPS/physical-phone rehearsal and provider failure observations. \\
+\bottomrule
+\end{tabularx}
+\caption{Prioritized validation gaps. Each item is a current limit, not a hidden pass/fail score.}
+\end{table}
+
+For any future benchmark, preserve the separation between development fixtures, reviewed manual queries and a new independent set. Report answered accuracy \emph{and} coverage, with abstentions and hazardous false approvals visible. For City planning, retain modeled-population denominators and unavailable values, and audit the access connectors before interpreting a municipal percentage as a service guarantee.
+
+\callout{Interpretation}{The strongest current claim is a reproducible, bounded prototype with explicit uncertainty and local integration evidence. Source review, field verification and independent language assessment remain necessary before public disposal guidance is treated as authoritative.}
+
+\section*{Repository evidence and source attribution}
+\small
+Project contracts: \repo{AGENTS.md}{agent router}, \repo{STATUS.md}{current status}, \repo{docs/ARCHITECTURE.md}{architecture}, \repo{docs/ROUTING.md}{routing}, \repo{docs/LANGUAGES.md}{languages}, \repo{docs/CITY_MODE.md}{planning}, \repo{docs/QUALITY.md}{quality}, \repo{docs/CI_STATUS.md}{CI evidence}. Data reports: \repo{data/classifier/README.md}{policy evaluation}, \repo{data/classifier/evaluation-mk-v1.json}{Macedonian evaluation}, \repo{data/coverage/skopje-v1/README.md}{coverage}, \repo{data/upgrades/skopje-v1/README.md}{upgrades}, \repo{data/geography/skopje-v1/README.md}{geography}, \repo{data/infrastructure/skopje-2026-09-19/README.md}{sites}. The geographic package attributes WorldPop Global2 R2025A v1 constrained alpha (University of Southampton; DOI:10.5258/SOTON/WP00839; CC BY 4.0) and OpenStreetMap contributors via the 2026-09-18 Geofabrik extract (ODbL 1.0). Upstream terms and local review flags remain in force.
+\end{document}

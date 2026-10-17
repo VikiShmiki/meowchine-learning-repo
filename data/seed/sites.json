@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "synthetic": true,
+  "sites": [
+    {
+      "id": "demo-001",
+      "name": "Demo Central Glass Point",
+      "latitude": 41.9962,
+      "longitude": 21.4316,
+      "materials": ["glass", "general"]
+    },
+    {
+      "id": "demo-002",
+      "name": "Demo Riverside Packaging Point",
+      "latitude": 41.9981,
+      "longitude": 21.4254,
+      "materials": ["plastic_metal", "general"]
+    },
+    {
+      "id": "demo-003",
+      "name": "Demo East Paper Point",
+      "latitude": 41.9947,
+      "longitude": 21.4421,
+      "materials": ["paper_tetrapak", "general"]
+    },
+    {
+      "id": "demo-004",
+      "name": "Demo South Mixed Point",
+      "latitude": 41.9892,
+      "longitude": 21.4348,
+      "materials": ["glass", "plastic_metal", "general"]
+    }
+  ]
+}

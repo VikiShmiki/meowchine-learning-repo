@@ -1,0 +1,7 @@
+{
+  "glass": 0,
+  "plastic_metal": 1,
+  "paper_tetrapak": 2,
+  "general": 3,
+  "special_unsupported": 4
+}

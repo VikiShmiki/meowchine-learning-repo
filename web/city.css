@@ -1,0 +1,124 @@
+/* Shared Recycle shell; dashboard-specific layout. */
+.city #city-results > .card, .city .city-layout > .card { margin: 0; padding: 26px; }
+.city-section-heading { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.city-section-heading h2 { line-height: 1.5; }
+.city .material-control { width: min(290px, 100%); flex-shrink: 0; }
+.city #coverage-material { width: 100%; min-height: 44px; padding: 10px 12px; }
+.city #coverage-summary { margin-top: 20px; }
+.city .coverage-stats { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 12px; }
+.city .coverage-stats .card { min-width: 0; padding: 20px; margin: 0; border-radius: 12px; background: var(--soft); }
+.city #coverage-summary .card:first-child { background: #dfedcb; border-color: #cfddbb; }
+.city .coverage-stats p { margin: 0 0 14px; font-size: 13px; color: var(--ink); }
+.city #coverage-summary strong { display: block; font-size: clamp(26px, 3.5vw, 40px); font-weight: 650; letter-spacing: -1px; line-height: 1.2; overflow-wrap: anywhere; }
+.city .city-layout { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: start; gap: 24px; margin: 24px 0; }
+.city .city-layout > .card { min-width: 0; }
+.city #equity-note { font-size: 13px; margin: 16px 0; }
+.city .coverage-table { max-width: 100%; overflow-x: auto; }
+.city .coverage-table table { margin: 8px 0 16px; font-size: 13px; }
+.city .coverage-table th, .city .coverage-table td { padding: 14px 8px; border-color: var(--border); }
+.city .coverage-table thead th { font-size: 12px; font-weight: 600; background: var(--soft); }
+.city .coverage-table tbody th { font-weight: 500; }
+.city .coverage-table progress { border: 0; border-radius: 4px; height: 6px; min-width: 55px; overflow: hidden; accent-color: var(--accent); background: #e6e9df; }
+.city progress::-webkit-progress-bar { background: #e6e9df; border-radius: 4px; }
+.city progress::-webkit-progress-value { background: var(--accent); border-radius: 4px; }
+.city progress::-moz-progress-bar { background: var(--accent); }
+.city #upgrade-form { display: flex; align-items: end; flex-wrap: wrap; gap: 12px; margin: 22px 0 0; }
+.city #upgrade-form > div { flex: 1 1 130px; }
+.city #upgrade-count { width: 100%; max-width: none; padding: 10px 12px; }
+.city #recommend-upgrades { flex: 1 1 150px; padding: 12px; }
+#upgrade-results { --material: #9a7317; --material-soft: #f7f0d9; }
+#upgrade-results[data-material=plastic_metal] { --material: #36734e; --material-soft: #e6f0e5; }
+#upgrade-results[data-material=paper_tetrapak] { --material: #5265a6; --material-soft: #ecedf8; }
+.city .upgrade-action { display: flex; align-items: center; gap: 14px; margin: 24px 0 18px; }
+.city #upgrade-action-title { font-size: clamp(20px, 2vw, 25px); line-height: 1.2; letter-spacing: -.5px; margin: 0; text-wrap: balance; }
+#upgrade-material-icon { display: grid; place-items: center; flex: 0 0 52px; height: 52px; border-radius: 14px; background: var(--material-soft); color: var(--material); }
+#upgrade-material-icon svg { width: 30px; height: 30px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linejoin: round; }
+.upgrade-change { display: grid; grid-template-columns: minmax(0, 1fr) 22px minmax(0, 1.3fr); align-items: center; gap: 8px; padding: 18px 10px; margin: 14px 0; background: var(--material-soft); border-radius: 14px; }
+.collection-stage { min-width: 0; display: grid; justify-items: center; gap: 12px; text-align: center; }
+.collection-stage > span { font-size: 12px; font-weight: 600; }
+.collection-stage strong { font-size: 12px; line-height: 1.4; font-weight: 550; }
+.collection-bins { display: flex; align-items: center; justify-content: center; gap: 4px; height: 70px; }
+.collection-bin { position: relative; display: block; width: 44px; color: #69736c; }
+.collection-bin > svg:first-child { display: block; width: 100%; height: 66px; stroke: currentColor; stroke-width: 1.4; fill: #fffefa; }
+.collection-bin.new-bin { color: var(--material); }
+.collection-bin.new-bin > svg:first-child { fill: var(--material); }
+.collection-bin .bin-symbol { position: absolute; width: 22px; height: 25px; top: 22px; left: 11px; fill: none; stroke: #fffefa; stroke-width: 1.5; stroke-linejoin: round; }
+.collection-plus { font-size: 17px; line-height: 1; color: var(--material); }
+.collection-arrow { width: 22px; fill: none; stroke: var(--ink); stroke-width: 1.4; }
+.city .upgrade-impact { margin-top: 20px; padding-top: 22px; border-top: 1px solid var(--border); }
+.city .upgrade-impact h3 { font-size: 14px; margin: 0 0 18px; font-weight: 600; }
+.access-comparison { display: grid; gap: 10px; }
+.access-row { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 12px; align-items: center; font-size: 12px; }
+.access-track { display: block; height: 16px; border-radius: 4px; overflow: hidden; background: #edf0e7; }
+.access-fill { display: block; height: 100%; border-radius: 4px; background: var(--material); }
+.access-fill.before { background: #89958b; }
+.access-unknown { height: auto; background: none; }
+.municipal-comparison { padding: 14px 0; }
+.city .municipal-comparison h4 { margin: 0 0 12px; font-size: 13px; font-weight: 550; }
+#upgrade-map-shell { position: relative; isolation: isolate; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+#upgrade-map { height: 340px; background: #e7ebe0; z-index: 0; }
+#upgrade-map .leaflet-tile-pane { filter: saturate(.65); }
+#upgrade-position { position: absolute; z-index: 500; top: 12px; left: 50%; transform: translateX(-50%); padding: 7px 12px; border: 1px solid var(--border); border-radius: 20px; background: #fffefaf5; font-size: 12px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.city .upgrade-arrow { position: absolute; z-index: 500; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 44px; height: 44px; min-height: 44px; padding: 10px; border-radius: 50%; background: #fffefa; box-shadow: 0 2px 10px #263c3026; }
+.city .upgrade-arrow:disabled { opacity: .45; }
+.upgrade-arrow svg { display: block; width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+#upgrade-prev { left: 10px; }
+#upgrade-next { right: 10px; }
+.upgrade-star { background: none; border: 0; }
+.upgrade-star svg { display: block; width: 48px; height: 48px; fill: #fffefa; fill-opacity: .95; stroke: #263c30; stroke-width: 1.8; stroke-linejoin: miter; }
+.city #upgrade-site-info { padding: 18px 0 0; }
+.city #upgrade-site-title { font-size: 16px; margin: 0 0 8px; }
+.city #upgrade-reason { font-size: 13px; line-height: 1.6; margin: 0; }
+.city #upgrade-location { display: inline-flex; align-items: center; min-height: 44px; font-size: 12px; text-underline-offset: 4px; }
+.city #upgrade-map-status { font-size: 13px; line-height: 1.5; }
+.city details { border-top: 1px solid var(--border); margin-top: 18px; font-size: 13px; line-height: 1.6; }
+.city .city-method { padding: 4px 24px !important; }
+.city [role=status]:empty { display: none; }
+.city #city-status, .city #coverage-availability:not(:empty), .city #upgrade-status:not(:empty) { font-size: 13px; line-height: 1.6; margin: 18px 0; }
+.city #coverage-availability:not(:empty) { padding: 12px; background: #f4edd9; border-radius: 8px; }
+@media (max-width: 1000px) {
+  .city .city-layout { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  .city #city-results > .card, .city .city-layout > .card { padding: 18px; }
+  .city-section-heading { flex-direction: column; align-items: stretch; gap: 16px; }
+  .city .material-control { width: 100%; }
+  .city .coverage-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .city #coverage-summary .card:first-child { grid-column: 1 / -1; }
+  .city .coverage-stats .card { padding: 16px; }
+  .city #coverage-summary strong { font-size: 30px; }
+  .city #coverage-summary .card:first-child strong { font-size: 42px; }
+  .city .coverage-table th, .city .coverage-table td { padding: 12px 5px; }
+  .city .city-method { padding: 4px 18px !important; }
+}
+
+.city .coverage-stats .card { display: flex; flex-direction: column; }
+.city .coverage-stats p { line-height: 1.5; }
+.city .coverage-stats strong { margin-top: auto; font-variant-numeric: tabular-nums; }
+.city #coverage-summary .unavailable strong { font-size: 20px; letter-spacing: -.4px; }
+.city .coverage-table tbody tr:hover { background: #f6f7f0; }
+.city .coverage-table td { font-variant-numeric: tabular-nums; }
+.city #municipality-chart { margin: 20px 0 24px; }
+.city .chart-key { display: flex; flex-wrap: wrap; gap: 10px 20px; margin-bottom: 24px; font-size: 12px; }
+.city .chart-key span { display: inline-flex; align-items: center; gap: 7px; }
+.city .chart-key span::before { content: ''; width: 9px; height: 9px; border-radius: 2px; background: var(--accent); }
+.city .chart-key .below::before { background: #b58036; }
+.city .chart-axis { position: relative; display: flex; justify-content: space-between; margin-bottom: 18px; color: var(--muted); font-size: 11px; }
+.city .chart-floor-label { position: absolute; left: var(--coverage-floor); transform: translateX(-50%); color: var(--ink); font-weight: 600; }
+.city .chart-rows { padding: 0; margin: 0; list-style: none; }
+.city .chart-row { margin: 0 0 18px; }
+.city .chart-row-label { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; margin-bottom: 7px; font-size: 13px; }
+.city .chart-row-label strong { font-weight: 600; font-variant-numeric: tabular-nums; text-align: right; }
+.city .chart-track { position: relative; height: 14px; background: #edf0e7; border-radius: 3px; }
+.city .chart-track::after { content: ''; position: absolute; left: var(--coverage-floor); top: -4px; bottom: -4px; border-left: 1px dashed #64705c; }
+.city .chart-bar { display: block; height: 100%; background: var(--accent); border-radius: 3px; }
+.city .chart-row.below .chart-bar { background: #b58036; }
+@media (max-width: 380px) {
+  .city #coverage-summary strong { font-size: 24px; letter-spacing: -.8px; }
+  .city #coverage-summary .card { padding: 12px; }
+  .city #coverage-summary .unavailable strong { font-size: 16px; }
+  .upgrade-change { padding: 16px 6px; gap: 4px; grid-template-columns: minmax(0, 1fr) 18px minmax(0, 1.4fr); }
+  .collection-bin { width: 36px; }
+  .collection-bin .bin-symbol { width: 19px; left: 8.5px; }
+  .collection-bins { gap: 2px; }
+}

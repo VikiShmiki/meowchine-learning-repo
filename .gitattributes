@@ -1,0 +1,17 @@
+# Preserve snapshot bytes on every platform for provenance checksum validation.
+data/infrastructure/**/*.csv -text
+data/infrastructure/**/*.geojson -text
+data/infrastructure/**/summary.json -text
+data/geography/**/*.json -text
+data/geography/**/*.geojson -text
+data/geography/**/*.gz -text
+# Preserve upstream bytes (including CRLF) for the published integrity hashes.
+web/vendor/leaflet/* -text whitespace=cr-at-eol
+
+# Prepared coverage manifests hash exact artifact bytes.
+data/coverage/**/*.json -text
+
+# Policy bytes participate in the serving snapshot hash on Windows and Linux.
+data/policy/**/*.json text eol=lf
+
+data/upgrades/**/*.json -text

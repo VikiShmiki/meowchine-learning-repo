@@ -1,0 +1,162 @@
+{
+  "version": "skopje-policy-v1",
+  "reviewed_on": "2026-09-19",
+  "sources": {
+    "pakomak_streams": {
+      "url": "https://pakomak.mk/Pages/Index/vidovi_na_otpad",
+      "publisher": "Pakomak",
+      "scope": "Packaging streams: green glass; yellow plastic/cans/metal; blue paper/Tetra Pak.",
+      "retrieved_on": "2026-09-19",
+      "reviewer": "Codex",
+      "review_method": "agent_source_review",
+      "human_signoff": false
+    },
+    "pakomak_faq": {
+      "url": "https://pakomak.mk/FaqItems",
+      "publisher": "Pakomak",
+      "scope": "Citizens Q18: Tetra Pak in blue; Q20: plastic bags in yellow; Q25: empty plastic/glass packaging; Q26: bulk caps require contact.",
+      "retrieved_on": "2026-09-19",
+      "reviewer": "Codex",
+      "review_method": "agent_source_review",
+      "human_signoff": false
+    },
+    "pakomak_vending": {
+      "url": "https://pakomak.mk/Pages/Index/povratni_vending_masini",
+      "publisher": "Pakomak",
+      "scope": "Reverse vending collects plastic bottles and cans; PET is named. Do not extend this to bags, cartons or chemical containers.",
+      "retrieved_on": "2026-09-19",
+      "reviewer": "Codex",
+      "review_method": "agent_source_review",
+      "human_signoff": false
+    },
+    "nula_categories": {
+      "url": "https://nulaotpad.com.mk/",
+      "publisher": "Nula Otpad",
+      "scope": "Electrical/electronic equipment and waste batteries. This is not evidence that each collection point accepts every subtype or condition.",
+      "retrieved_on": "2026-09-19",
+      "reviewer": "Codex",
+      "review_method": "agent_source_review",
+      "human_signoff": false
+    },
+    "nula_pickup": {
+      "url": "https://nulaotpad.com.mk/prijavi-e-otpad",
+      "publisher": "Nula Otpad",
+      "scope": "Electronic-waste collection requests via 070236000. Pickup service, not a verified walk-in facility.",
+      "retrieved_on": "2026-09-19",
+      "reviewer": "Codex",
+      "review_method": "agent_source_review",
+      "human_signoff": false
+    }
+  },
+  "profiles": [
+    {
+      "id": "pakomak_glass",
+      "source_names": [
+        "Pakomak container map"
+      ],
+      "asset_type": "recycling_container",
+      "required_materials": [
+        "glass"
+      ],
+      "accepted_item_kinds": [
+        "empty_glass_packaging"
+      ],
+      "evidence_ids": [
+        "pakomak_streams",
+        "pakomak_faq"
+      ],
+      "limits": "No inference for drinking glasses, ceramics, mirrors, or hazardous contents."
+    },
+    {
+      "id": "pakomak_bottles_cans",
+      "source_names": [
+        "Pakomak container map"
+      ],
+      "asset_type": "recycling_container",
+      "required_materials": [
+        "plastic_bottles",
+        "metal_cans"
+      ],
+      "accepted_item_kinds": [
+        "empty_plastic_bottle",
+        "empty_metal_can"
+      ],
+      "evidence_ids": [
+        "pakomak_streams",
+        "pakomak_faq"
+      ],
+      "limits": "Preserve narrow snapshot capabilities. General yellow-bin policy alone does not prove this specific site accepts bags or trays."
+    },
+    {
+      "id": "pakomak_blue",
+      "source_names": [
+        "Pakomak container map"
+      ],
+      "asset_type": "recycling_container",
+      "required_materials": [
+        "paper"
+      ],
+      "accepted_item_kinds": [
+        "clean_paper",
+        "clean_cardboard",
+        "empty_tetrapak"
+      ],
+      "evidence_ids": [
+        "pakomak_streams",
+        "pakomak_faq"
+      ],
+      "limits": "Tetra Pak expansion is scoped to this operator/container profile, not all paper sites. Contaminated/coated ambiguous items require clarification."
+    },
+    {
+      "id": "pakomak_vending",
+      "source_names": [
+        "Pakomak vending-machine list"
+      ],
+      "asset_type": "reverse_vending_machine",
+      "required_materials": [
+        "plastic_bottles",
+        "metal_cans"
+      ],
+      "accepted_item_kinds": [
+        "empty_pet_beverage_bottle",
+        "empty_beverage_can"
+      ],
+      "evidence_ids": [
+        "pakomak_vending"
+      ],
+      "limits": "Conservative app subset. Require suitable shape/label and machine acceptance; exclude shampoo bottles, bags, food tins, chemicals and crushed items until specifically confirmed."
+    }
+  ],
+  "specialist_guidance": {
+    "electronics": {
+      "evidence_ids": [
+        "nula_categories",
+        "nula_pickup"
+      ],
+      "contact_url": "https://nulaotpad.com.mk/prijavi-e-otpad",
+      "phone": "+38970236000",
+      "facility_ids": [],
+      "message": "Contact Nula Otpad to confirm collection of this device; no verified walk-in facility is in the shared snapshot."
+    },
+    "batteries": {
+      "evidence_ids": [
+        "nula_categories"
+      ],
+      "contact_url": "https://nulaotpad.com.mk/",
+      "phone": "+38970236000",
+      "facility_ids": [],
+      "message": "Confirm the battery type and condition with the operator. Damaged, swollen or leaking batteries need specific guidance; ordinary battery collection acceptance is not sufficient."
+    },
+    "other_specialist": {
+      "evidence_ids": [],
+      "facility_ids": [],
+      "message": "No locally verified acceptance evidence yet for this waste type. Do not route to a general-waste site."
+    }
+  },
+  "defaults": {
+    "unknown_item": "clarify",
+    "unknown_site_acceptance": "do_not_route",
+    "unknown_operational_status": "display_unverified",
+    "general_waste": "requires_positive_item_policy_not_recycling_rejection"
+  }
+}

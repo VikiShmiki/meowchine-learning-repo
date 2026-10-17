@@ -1,0 +1,14 @@
+{
+  "model_version": "policy-rules-v3",
+  "threshold": 0.85,
+  "validation_gate_passed": true,
+  "code_sha256": "a9d4cf1300ea85aedee481325d9c3874ca90715ea1b096283e6b54cb3a131311",
+  "policy_sha256": "febbbe10e0a4aab9c7f83cdfb042c5c6101e0bf6bd9ec4b67f17fb0013b966d7",
+  "input_sha256": {
+    "guidance_validation_v3.csv": "0739f653e3aa0ffb27481990a17759ccfd3619f99eb47d25c7cec28fad5590cf",
+    "manual_test.csv": "4e4e65a86f6af9fb786bec75af2830542daad16d4f50f7e45d30837ca2c82b20",
+    "manual_test_review.csv": "d205ec71d377349a56f44b415ad0a631f20bf31843fe445aca10e5e0b91268e6"
+  },
+  "confidence_kind": "heuristic_score",
+  "human_signoff": false
+}

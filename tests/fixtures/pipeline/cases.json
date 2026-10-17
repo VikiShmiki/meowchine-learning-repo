@@ -1,0 +1,74 @@
+[
+  {
+    "id": "glass",
+    "card": "Glass bottles and jars",
+    "material": "glass",
+    "kind": "empty_glass_packaging",
+    "text": "empty glass jar",
+    "photo": "glass.png",
+    "condition": "appears_empty_clean",
+    "label": "Glass bottle/jar",
+    "map_material": "glass",
+    "mk_text": "\u043f\u0440\u0430\u0437\u043d\u0430 \u0441\u0442\u0430\u043a\u043b\u0435\u043d\u0430 \u0442\u0435\u0433\u043b\u0430"
+  },
+  {
+    "id": "plastic",
+    "card": "Plastic bottles and cans",
+    "material": "plastic_metal",
+    "kind": "empty_plastic_bottle",
+    "text": "empty plastic bottle",
+    "photo": "plastic.png",
+    "condition": "appears_empty_clean",
+    "label": "Plastic bottle",
+    "map_material": "plastic_metal",
+    "mk_text": "\u043f\u0440\u0430\u0437\u043d\u043e \u043f\u043b\u0430\u0441\u0442\u0438\u0447\u043d\u043e \u0448\u0438\u0448\u0435"
+  },
+  {
+    "id": "paper",
+    "card": "Paper and cartons",
+    "material": "paper_tetrapak",
+    "kind": "clean_cardboard",
+    "text": "clean cardboard box",
+    "photo": "paper.png",
+    "condition": "appears_empty_clean",
+    "label": "Clean cardboard",
+    "map_material": "paper_tetrapak",
+    "mk_text": "\u0447\u0438\u0441\u0442\u0430 \u043a\u0430\u0440\u0442\u043e\u043d\u0441\u043a\u0430 \u043a\u0443\u0442\u0438\u0458\u0430"
+  },
+  {
+    "id": "general",
+    "card": "General waste",
+    "material": "general",
+    "kind": "ordinary_residual",
+    "text": "used tissue",
+    "photo": "general.png",
+    "condition": "not_empty_or_contaminated",
+    "label": "General waste",
+    "map_material": "general",
+    "mk_text": "\u0443\u043f\u043e\u0442\u0440\u0435\u0431\u0435\u043d\u043e \u043c\u0430\u0440\u0430\u043c\u0447\u0435"
+  },
+  {
+    "id": "electronics",
+    "card": "Electronics",
+    "material": "electronics",
+    "kind": "small_electronics",
+    "text": "old phone",
+    "photo": "electronics.png",
+    "condition": "uncertain",
+    "label": "Small electronics",
+    "map_material": "special_unsupported",
+    "mk_text": "\u0441\u0442\u0430\u0440 \u0442\u0435\u043b\u0435\u0444\u043e\u043d"
+  },
+  {
+    "id": "clothes",
+    "card": "Clothes for donation",
+    "material": "clothes",
+    "kind": "wearable_clothes",
+    "text": "clean blue shirt",
+    "photo": "clothes.png",
+    "condition": "uncertain",
+    "label": "Clothes \u0412\u00b7 donation",
+    "map_material": "clothes",
+    "mk_text": "\u0447\u0438\u0441\u0442\u0430 \u0441\u0438\u043d\u0430 \u043c\u0430\u0438\u0446\u0430"
+  }
+]

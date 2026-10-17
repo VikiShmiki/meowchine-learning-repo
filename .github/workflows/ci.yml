@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: python -m pip install uv==0.12.17
+      - run: uv sync --all-groups --locked
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: make check
+      - run: uv run python scripts/validate_infrastructure_snapshot.py
+      - run: uv run python scripts/validate_geography.py
+      - run: uv run --group geo python scripts/prepare_coverage.py --check
+      - run: uv run --group geo python scripts/prepare_upgrades.py --check
+      - run: uv run playwright install --with-deps chromium
+      - run: uv run pytest tests/test_web_browser.py tests/test_system_browser.py tests/test_pipeline_browser.py tests/test_community_browser.py tests/test_accounts_browser.py tests/test_macedonian_browser.py
+        env:
+          SRA_BROWSER_TESTS: "1"
+
+  container:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t smart-recycling-ci .
+      - run: docker run -d --name recycling-ci -p 127.0.0.1:8000:8000 smart-recycling-ci
+      - run: python scripts/smoke_deployment.py --require-minilm --require-macedonian --wait-seconds 300
+      - name: Container logs
+        if: failure()
+        run: docker logs recycling-ci
+      - name: Stop test container
+        if: always()
+        run: docker rm -f recycling-ci

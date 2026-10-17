@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "region": "skopje",
+  "population_year": 2025,
+  "population_product": "WorldPop Global2 R2025A v1 constrained (alpha)",
+  "network_timestamp": "2026-09-18T20:21:10Z",
+  "metric_crs": "EPSG:32634",
+  "network_buffer_m": 5000,
+  "walking_speed_kmh": 4.8,
+  "coverage_seconds": 600,
+  "snap_limit_m": 100,
+  "sources": [
+    {
+      "filename": "population.tif",
+      "url": "https://data.worldpop.org/GIS/Population/Global_2015_2030/R2025A/2025/MKD/v1/100m/constrained/mkd_pop_2025_CN_100m_R2025A_v1.tif",
+      "sha256": "b5744b9a707244ce0e86e36946d4b43e047b52662110b2c73f0b906d70a8cb42",
+      "license": "CC-BY-4.0",
+      "attribution": "WorldPop, University of Southampton; Bondarenko et al.; DOI:10.5258/SOTON/WP00839",
+      "terms_url": "https://hub.worldpop.org/geodata/listing?id=135"
+    },
+    {
+      "filename": "macedonia.osm.pbf",
+      "url": "https://download.geofabrik.de/europe/macedonia-260918.osm.pbf",
+      "sha256": "ca9f4bb952501d11ea4802934b27daf304d9cf83ff3b61dd73200207f72e8bd0",
+      "license": "ODbL-1.0",
+      "attribution": "OpenStreetMap contributors; extract by Geofabrik",
+      "terms_url": "https://www.openstreetmap.org/copyright"
+    }
+  ],
+  "municipalities": [
+    {"id": "aerodrom", "name": "Aerodrom", "osm_relation_id": 2432325},
+    {"id": "butel", "name": "Butel", "osm_relation_id": 2433475},
+    {"id": "centar", "name": "Centar", "osm_relation_id": 2439777},
+    {"id": "chair", "name": "Chair", "osm_relation_id": 2433521},
+    {"id": "gazi_baba", "name": "Gazi Baba", "osm_relation_id": 2433366},
+    {"id": "gjorche_petrov", "name": "Gjorche Petrov", "osm_relation_id": 2440352},
+    {"id": "karposh", "name": "Karposh", "osm_relation_id": 2440380},
+    {"id": "kisela_voda", "name": "Kisela Voda", "osm_relation_id": 2432321},
+    {"id": "saraj", "name": "Saraj", "osm_relation_id": 2440308},
+    {"id": "shuto_orizari", "name": "Shuto Orizari", "osm_relation_id": 2433628}
+  ]
+}

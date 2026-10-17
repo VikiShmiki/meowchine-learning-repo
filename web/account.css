@@ -1,0 +1,111 @@
+.citizen .account-entry { order: 3; flex-shrink: 0; padding: 10px 16px; }
+.citizen .site-header .brand { margin-right: auto; }
+.citizen .site-header .flow-nav { order: 2; }
+.account-dialog { width: min(440px, calc(100% - 32px)); max-height: calc(100dvh - 40px); border: 1px solid #dce1d5; border-radius: 22px; padding: 26px; background: #fffefa; color: #263c30; box-shadow: 0 20px 80px #182b2830; }
+.account-dialog::backdrop { background: #182b2859; backdrop-filter: blur(3px); }
+.account-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 22px; }
+.account-heading h2 { overflow-wrap: anywhere; }
+.account-heading button { flex-shrink: 0; }
+.account-dialog [hidden] { display: none !important; }
+.account-dialog form { display: grid; gap: 10px; }
+.account-dialog input { width: 100%; min-height: 46px; padding: 10px 12px; }
+.account-dialog button { padding: 12px 16px; }
+.account-dialog label { font-weight: 600; }
+.account-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; border-radius: 12px; background: #f1f4ea; }
+.citizen .account-tabs button { background: transparent; color: #263c30; }
+.citizen .account-tabs button[aria-pressed=true] { background: #2f4d35; color: white; }
+.account-dialog p { line-height: 1.5; font-size: 13px; }
+.account-dialog #account-message:empty { display: none; }
+.account-dialog #account-message { padding: 12px; border-radius: 10px; background: #f1f4ea; }
+.account-dialog[data-member=true] { width: min(740px, calc(100% - 32px)); }
+.account-dialog[data-member=true] .account-heading { margin-bottom: 16px; }
+.account-dialog[data-member=true] .account-heading h2 { font-size: 23px; letter-spacing: -.7px; }
+.activity-tabs { display: flex; gap: 24px; border-bottom: 1px solid #dce1d5; margin-bottom: 22px; }
+.citizen .activity-tabs button { border: 0; background: none; color: #62705c; border-radius: 0; padding: 12px 2px; border-bottom: 2px solid transparent; }
+.citizen .activity-tabs button[aria-selected=true] { color: #263c30; border-bottom-color: #263c30; }
+.activity-panel { min-width: 0; }
+.account-progress { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 26px 30px; border: 1px solid #d8e2ce; border-radius: 18px; background: linear-gradient(120deg, #edf2e4, #f6f8ef); }
+.account-progress p { margin: 0; }
+.account-total { display: block; font-size: 60px; font-weight: 650; letter-spacing: -3px; line-height: 1.15; margin: 4px 0 10px; }
+.account-earned-count { font-size: 12px; }
+.account-ring { position: relative; flex: 0 0 128px; height: 128px; display: grid; place-items: center; }
+.account-ring > svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); fill: none; stroke-width: 5; }
+.ring-track { stroke: #dce5d3; }
+.ring-value { stroke: #3d6144; stroke-linecap: round; stroke-dasharray: var(--ring-progress) 100; }
+.account-ring > div { display: grid; gap: 3px; justify-items: center; }
+.account-ring strong { font-size: 30px; font-weight: 550; }
+.account-ring span { font-size: 10px; }
+.activity-section-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 22px 0 12px; }
+.activity-section-heading h3 { margin: 0; font-size: 15px; font-weight: 650; }
+.activity-section-heading > span { font-size: 11px; }
+.activity-section-heading select { max-width: 50%; padding: 8px; min-height: 44px; }
+.activity-section-heading button { font-size: 11px; min-height: 44px; padding: 8px 12px; }
+.activity-days { display: grid; grid-template-columns: repeat(28, minmax(0, 1fr)); gap: 4px; }
+.activity-days span { height: 18px; border-radius: 4px; border: 1px solid #dce1d5; }
+.activity-legend { display: flex; align-items: center; justify-content: flex-end; gap: 4px; margin-top: 7px; font-size: 10px; }
+.activity-legend i { width: 10px; height: 10px; border-radius: 2px; }
+[data-level="0"] { background: #f2f4ed; } [data-level="1"] { background: #c6d9ad; } [data-level="2"] { background: #81a46c; } [data-level="3"] { background: #3d6144; }
+.account-badges { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 14px 0 20px; }
+.account-badges.featured-badges { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.account-badge { --badge-color: #557350; --badge-tint: #e4edda; --badge-light: #f7faef; position: relative; text-align: center; display: flex; flex-direction: column; align-items: center; padding: 18px 12px 12px; border: 1px solid #dce1d5; border-radius: 16px; color: #263c30; background: #fafbf6; }
+.account-badge[data-badge=ten_dropoffs] { --badge-color: #8a6541; --badge-tint: #ede0cd; --badge-light: #fff9eb; }
+.account-badge[data-badge=twentyfive_dropoffs] { --badge-color: #526879; --badge-tint: #dce6eb; --badge-light: #f3f9fc; }
+.account-badge[data-badge=full_circle] { --badge-color: #42766b; --badge-tint: #dcece4; --badge-light: #f1faf7; }
+.account-badge[data-badge=second_life] { --badge-color: #956d68; --badge-tint: #efded7; --badge-light: #fff6f0; }
+.account-badge[data-badge=tech_return] { --badge-color: #746489; --badge-tint: #e5e0ef; --badge-light: #f8f5ff; }
+.badge-art { position: relative; width: 112px; height: 112px; margin-bottom: 8px; border-radius: 50%; background: radial-gradient(circle, var(--badge-light) 25%, transparent 70%); }
+.badge-art > svg { width: 100%; height: 100%; fill: none; stroke: var(--badge-color); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 3px 1px #263c3010); }
+.badge-base { fill: var(--badge-tint); stroke-width: 1.3; }
+.badge-rim { fill: var(--badge-light); stroke-width: 1; }
+.badge-detail { stroke-width: 2; }
+.badge-accent { fill: var(--badge-tint); }
+.badge-art text { fill: var(--badge-color); stroke: none; text-anchor: middle; dominant-baseline: middle; font: 600 26px 'Segoe UI', sans-serif; }
+.badge-status { position: absolute; right: 0; bottom: 2px; display: grid; place-items: center; width: 25px; height: 25px; border: 1px solid #dce1d5; border-radius: 50%; background: #fffefa; color: #62705c; }
+.badge-status svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.account-badge[data-earned=true] { background: #fffefa; border-color: #b8c9ac; }
+.account-badge[data-earned=true] .badge-status { background: #2f4d35; color: white; border-color: #2f4d35; }
+.account-badge[data-earned=false] .badge-art > svg { opacity: .66; }
+.account-badge h3 { margin: 4px 0 0; font-size: 14px; font-weight: 650; }
+.account-badge .badge-requirement { margin: 7px 0 12px; font-size: 11px; line-height: 1.45; flex: 1; }
+.badge-details { font-size: 11px; width: 100%; border-top: 1px solid #e4e8df; padding-top: 4px; }
+.badge-details summary { min-height: 36px; display: grid; place-items: center; font-size: 11px; list-style: none; }
+.badge-details summary::-webkit-details-marker { display: none; }
+.badge-details[open] summary { font-weight: 650; }
+.badge-details p { font-size: 11px; margin: 0 0 10px; }
+.account-history, .account-delete { padding: 14px 0; border-top: 1px solid #dce1d5; }
+.account-history-row { position: relative; display: grid; grid-template-columns: 120px 1fr; align-items: start; gap: 12px; padding: 18px 0 18px 20px; border-bottom: 1px solid #e4e8df; font-size: 12px; }
+.account-history-row::before { content: ''; position: absolute; width: 6px; height: 6px; border-radius: 50%; background: #81a46c; top: 27px; left: 1px; }
+.account-history-row time { padding-top: 6px; }
+.account-empty { display: grid; justify-items: center; text-align: center; gap: 8px; padding: 50px 18px; border: 1px dashed #ccd8c2; border-radius: 16px; margin: 18px 0; background: #f8faf3; }
+.account-empty strong { font-size: 18px; } .account-empty p { margin: 0; }
+.account-materials { display: flex; flex-wrap: wrap; gap: 5px; }
+.account-materials span { padding: 6px 9px; border-radius: 8px; background: #eaeae3; }
+.account-materials [data-material=glass] { background: #f1ecc1; }
+.account-materials [data-material=plastic_metal] { background: #dfedcb; }
+.account-materials [data-material=paper_tetrapak] { background: #e1e5f3; }
+.account-materials [data-material=electronics] { background: #eadff0; }
+.account-materials [data-material=clothes] { background: #f2e1d5; }
+.account-material-collection span { border: 1px solid transparent; font-size: 11px; }
+.account-material-collection [data-collected=false] { background: #fffefa; border-color: #dce1d5; border-style: dashed; }
+.account-signout { margin: 4px 0 18px; }
+.account-dialog .account-privacy { font-size: 11px; line-height: 1.5; margin: 16px 0; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.account-delete button { color: #793c28 !important; }
+@media (max-width: 650px) {
+  .citizen .site-header { flex-wrap: wrap; }
+  .citizen .site-header .flow-nav { order: 3; width: 100%; }
+  .citizen .site-header .flow-nav a { flex: 1; }
+  .citizen .account-entry { order: 2; }
+  .account-dialog { padding: 20px; }
+  .account-progress { padding: 20px; gap: 12px; }
+  .account-ring { flex-basis: 104px; height: 104px; }
+  .account-total { font-size: 48px; }
+  .account-badges { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .badge-art { width: 90px; height: 90px; }
+  .activity-days { grid-template-columns: repeat(14, minmax(0, 1fr)); }
+  .account-history-row { grid-template-columns: 1fr; gap: 6px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .account-badge[data-earned=true] .badge-art { animation: badge-arrive .3s ease-out both; }
+  @keyframes badge-arrive { from { transform: translateY(4px); opacity: .6; } to { transform: translateY(0); opacity: 1; } }
+}

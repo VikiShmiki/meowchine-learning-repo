@@ -1,0 +1,69 @@
+case_id,group_id,text,target_label,evidence_ids,review_method
+v01,glass_bottle,discard a green glass bottle,glass,pakomak_streams,agent_source_review
+v02,glass_bottle,glass bottles after a party,glass,pakomak_streams,agent_source_review
+v03,wine_bottle,recycle the wine bottle,glass,pakomak_streams,agent_source_review
+v04,wine_bottle,empty wine bottles,glass,pakomak_streams,agent_source_review
+v05,glass_jar,glass jar with a lid,glass,pakomak_streams,agent_source_review
+v06,glass_jar,empty glass jars,glass,pakomak_streams,agent_source_review
+v07,beer_bottle,discard a beer bottle,glass,pakomak_streams,agent_source_review
+v08,beer_bottle,beer bottles from yesterday,glass,pakomak_streams,agent_source_review
+v09,plastic_bottle,plastic bottle from lunch,plastic_metal,pakomak_streams,agent_source_review
+v10,plastic_bottle,empty plastic bottles,plastic_metal,pakomak_streams,agent_source_review
+v11,shampoo_bottle,my shampoo bottle is empty,plastic_metal,pakomak_streams,agent_source_review
+v12,shampoo_bottle,plastic shampoo bottles,plastic_metal,pakomak_streams,agent_source_review
+v13,drink_can,one aluminium can,plastic_metal,pakomak_streams,agent_source_review
+v14,drink_can,recycle drink cans,plastic_metal,pakomak_streams,agent_source_review
+v15,food_can,empty tin can,plastic_metal,pakomak_streams,agent_source_review
+v16,food_can,metal food can,plastic_metal,pakomak_streams,agent_source_review
+v17,paper,clean office paper,paper_tetrapak,pakomak_streams,agent_source_review
+v18,paper,loose paper sheets,paper_tetrapak,pakomak_streams,agent_source_review
+v19,newspaper,recycle a newspaper,paper_tetrapak,pakomak_streams,agent_source_review
+v20,newspaper,yesterday's newspapers,paper_tetrapak,pakomak_streams,agent_source_review
+v21,cardboard,clean cardboard packaging,paper_tetrapak,pakomak_streams,agent_source_review
+v22,cardboard,cardboard delivery box,paper_tetrapak,pakomak_streams,agent_source_review
+v23,tetrapak,empty tetra pak drink carton,paper_tetrapak,pakomak_faq,agent_source_review
+v24,tetrapak,one tetrapak carton,paper_tetrapak,pakomak_faq,agent_source_review
+v25,battery,used battery from a toy,special_unsupported,nula_categories,agent_source_review
+v26,battery,spent batteries,special_unsupported,nula_categories,agent_source_review
+v27,charger,an unwanted charger,special_unsupported,nula_categories,agent_source_review
+v28,charger,old phone chargers,special_unsupported,nula_categories,agent_source_review
+v29,laptop,recycle my laptop,special_unsupported,nula_categories,agent_source_review
+v30,laptop,discard an old computer,special_unsupported,nula_categories,agent_source_review
+v31,electronics,electronics from the garage,special_unsupported,nula_categories,agent_source_review
+v32,electronics,unwanted smartphone,special_unsupported,nula_categories,agent_source_review
+v33,unknown,mystery packaging,,,policy_hold
+v34,unknown,something from the kitchen,,,policy_hold
+v35,jar_unknown,a jar,,,policy_hold
+v36,bottle_unknown,a bottle,,,policy_hold
+v37,contaminated,greasy cardboard,,,policy_hold
+v38,contaminated,dirty paper,,,policy_hold
+v39,household_residual,used nappy,general,karpos_household,agent_policy_inference
+v40,unverified_general,food waste,,,policy_hold
+v41,glass_other,window glass,,,policy_hold
+v42,glass_other,a ceramic drinking mug,,,policy_hold
+v43,material_unknown,plastic,,,policy_hold
+v44,material_unknown,glass,,,policy_hold
+v45,mixed_material,glass bottle and plastic bottle,,,policy_hold
+v46,ambiguous_paper,a paper cup,,,policy_hold
+v47,unsupported_bag,plastic shopping bag,,,policy_hold
+v48,unsupported_tray,plastic tray,,,policy_hold
+v49,household_residual,discard used household tissues,general,karpos_household,agent_policy_inference
+v50,household_residual,soiled nappies,general,karpos_household,agent_policy_inference
+v51,household_residual,a dirty tissue,general,karpos_household,agent_policy_inference
+v52,household_residual,throw away used diapers,general,karpos_household,agent_policy_inference
+v53,clinical,clinical tissues,special_unsupported,karpos_household,agent_policy_inference
+v54,chemical,used tissue soaked in solvent,special_unsupported,karpos_household,agent_policy_inference
+v55,unsafe_device,swollen smartphone,special_unsupported,nula_categories,agent_source_review
+v56,unknown,mystery non recyclable stuff,,,policy_hold
+v57,mixed_residual,used tissues and glass bottle,,,policy_hold
+v58,unsupported_residual,used wet wipes,,,policy_hold
+v59,electronics,an old toaster,special_unsupported,karpos_ewaste,agent_source_review
+v60,electronics,unwanted washing machine,special_unsupported,karpos_ewaste,agent_source_review
+v61,clothes,a wearable blue t-shirt,special_unsupported,red_cross_clothes_2026,agent_source_review
+v62,clothes,washed trousers for donation,special_unsupported,red_cross_clothes_2026,agent_source_review
+v63,clothes,old sweater for reuse,special_unsupported,red_cross_clothes_2026,agent_source_review
+v64,damaged_clothes,torn trousers,,,policy_hold
+v65,damaged_clothes,wet and mouldy clothes,,,policy_hold
+v66,mixed_clothes,shirt and a metal can,,,policy_hold
+v67,mixed_clothes,shirt and used tissues,,,policy_hold
+v68,unknown_textiles,textile scraps,,,policy_hold

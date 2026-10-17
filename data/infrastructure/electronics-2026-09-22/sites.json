@@ -1,0 +1,40 @@
+{
+  "version": "skopje-electronics-v2",
+  "reviewed_on": "2026-09-22",
+  "sites": [
+    {
+      "id": "ewaste-karpos-yard",
+      "name": "Karpos recycling yard",
+      "address": "Ilinden Boulevard, behind Makpetrol, near Boris Trajkovski Sports Centre",
+      "latitude": 42.0085277,
+      "longitude": 21.4002845,
+      "municipality_code": "43",
+      "municipality_name": "Karposh",
+      "operator": "JP Komunalna Higiena Skopje",
+      "profile_id": "karpos_electronics",
+      "acceptance_source": "https://khigiena.com.mk/content/?id=4020",
+      "coordinate_source": "https://www.openstreetmap.org/node/3910765530",
+      "coordinate_parent": "https://www.openstreetmap.org/way/1497810842",
+      "coordinate_method": "OSM entrance node belonging to named Karpos transfer-station way; matched to municipal address",
+      "coordinate_updated_at": "2026-04-09T00:09:09Z",
+      "license": "https://www.openstreetmap.org/copyright"
+    },
+    {
+      "id": "ewaste-east-gate-mall",
+      "name": "East Gate Mall — small electronics",
+      "address": "Belasica 2, East Gate Mall main entrance; ask the information desk for the collection point",
+      "latitude": 41.9977993,
+      "longitude": 21.4509501,
+      "municipality_code": "27",
+      "municipality_name": "Gazi Baba",
+      "operator": "Elkolekt / Elektro Eko Grizha",
+      "profile_id": "east_gate_small_electronics",
+      "acceptance_source": "https://www.elkolekt.mk/елколект-и-електро-еко-грижа-со-ново-со/",
+      "coordinate_source": "https://www.openstreetmap.org/node/12249116577",
+      "coordinate_parent": "https://www.openstreetmap.org/way/28221187",
+      "coordinate_method": "OSM main entrance on named East Gate Mall building; mall-level destination, not the unlocated indoor collection container",
+      "coordinate_updated_at": "2024-10-13T21:22:11Z",
+      "license": "https://www.openstreetmap.org/copyright"
+    }
+  ]
+}

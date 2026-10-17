@@ -1,0 +1,721 @@
+{
+  "model_version": "policy-rules-v3",
+  "threshold": 0.85,
+  "validation_gate": {
+    "min_answered_accuracy": 0.95,
+    "min_coverage": 0.5,
+    "max_held_false_answers": 0
+  },
+  "selection": "maximize validation coverage, then highest threshold; never select on test",
+  "validation": {
+    "threshold": 0.85,
+    "examples": 68,
+    "supported_examples": 45,
+    "answered": 45,
+    "coverage": 0.6617647058823529,
+    "answered_accuracy": 1.0,
+    "supported_accuracy_including_abstention": 1.0,
+    "held_false_answers": 0,
+    "macro_f1_supported_classes": 1.0,
+    "per_class": {
+      "glass": {
+        "support": 8,
+        "predicted": 8,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "plastic_metal": {
+        "support": 8,
+        "predicted": 8,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "paper_tetrapak": {
+        "support": 8,
+        "predicted": 8,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "general": {
+        "support": 5,
+        "predicted": 5,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "special_unsupported": {
+        "support": 16,
+        "predicted": 16,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    },
+    "p95_predict_ms": 0.33273547887802124,
+    "errors": []
+  },
+  "threshold_sweep": [
+    {
+      "threshold": 0.6,
+      "examples": 68,
+      "supported_examples": 45,
+      "answered": 45,
+      "coverage": 0.6617647058823529,
+      "answered_accuracy": 1.0,
+      "supported_accuracy_including_abstention": 1.0,
+      "held_false_answers": 0,
+      "macro_f1_supported_classes": 1.0,
+      "per_class": {
+        "glass": {
+          "support": 8,
+          "predicted": 8,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "plastic_metal": {
+          "support": 8,
+          "predicted": 8,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "paper_tetrapak": {
+          "support": 8,
+          "predicted": 8,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "general": {
+          "support": 5,
+          "predicted": 5,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "special_unsupported": {
+          "support": 16,
+          "predicted": 16,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      },
+      "p95_predict_ms": 0.3588646650314331,
+      "errors": []
+    },
+    {
+      "threshold": 0.7,
+      "examples": 68,
+      "supported_examples": 45,
+      "answered": 45,
+      "coverage": 0.6617647058823529,
+      "answered_accuracy": 1.0,
+      "supported_accuracy_including_abstention": 1.0,
+      "held_false_answers": 0,
+      "macro_f1_supported_classes": 1.0,
+      "per_class": {
+        "glass": {
+          "support": 8,
+          "predicted": 8,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "plastic_metal": {
+          "support": 8,
+          "predicted": 8,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "paper_tetrapak": {
+          "support": 8,
+          "predicted": 8,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "general": {
+          "support": 5,
+          "predicted": 5,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "special_unsupported": {
+          "support": 16,
+          "predicted": 16,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      },
+      "p95_predict_ms": 0.306934118270874,
+      "errors": []
+    },
+    {
+      "threshold": 0.8,
+      "examples": 68,
+      "supported_examples": 45,
+      "answered": 45,
+      "coverage": 0.6617647058823529,
+      "answered_accuracy": 1.0,
+      "supported_accuracy_including_abstention": 1.0,
+      "held_false_answers": 0,
+      "macro_f1_supported_classes": 1.0,
+      "per_class": {
+        "glass": {
+          "support": 8,
+          "predicted": 8,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "plastic_metal": {
+          "support": 8,
+          "predicted": 8,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "paper_tetrapak": {
+          "support": 8,
+          "predicted": 8,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "general": {
+          "support": 5,
+          "predicted": 5,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "special_unsupported": {
+          "support": 16,
+          "predicted": 16,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      },
+      "p95_predict_ms": 0.3180950880050659,
+      "errors": []
+    },
+    {
+      "threshold": 0.85,
+      "examples": 68,
+      "supported_examples": 45,
+      "answered": 45,
+      "coverage": 0.6617647058823529,
+      "answered_accuracy": 1.0,
+      "supported_accuracy_including_abstention": 1.0,
+      "held_false_answers": 0,
+      "macro_f1_supported_classes": 1.0,
+      "per_class": {
+        "glass": {
+          "support": 8,
+          "predicted": 8,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "plastic_metal": {
+          "support": 8,
+          "predicted": 8,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "paper_tetrapak": {
+          "support": 8,
+          "predicted": 8,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "general": {
+          "support": 5,
+          "predicted": 5,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "special_unsupported": {
+          "support": 16,
+          "predicted": 16,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      },
+      "p95_predict_ms": 0.33273547887802124,
+      "errors": []
+    },
+    {
+      "threshold": 0.9,
+      "examples": 68,
+      "supported_examples": 45,
+      "answered": 42,
+      "coverage": 0.6176470588235294,
+      "answered_accuracy": 1.0,
+      "supported_accuracy_including_abstention": 0.9333333333333333,
+      "held_false_answers": 0,
+      "macro_f1_supported_classes": 0.9538461538461538,
+      "per_class": {
+        "glass": {
+          "support": 8,
+          "predicted": 8,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "plastic_metal": {
+          "support": 8,
+          "predicted": 8,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "paper_tetrapak": {
+          "support": 8,
+          "predicted": 5,
+          "precision": 1.0,
+          "recall": 0.625,
+          "f1": 0.7692307692307693
+        },
+        "general": {
+          "support": 5,
+          "predicted": 5,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "special_unsupported": {
+          "support": 16,
+          "predicted": 16,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      },
+      "p95_predict_ms": 0.3375336527824402,
+      "errors": [
+        {
+          "text": "clean office paper",
+          "expected": "paper_tetrapak",
+          "predicted": ""
+        },
+        {
+          "text": "loose paper sheets",
+          "expected": "paper_tetrapak",
+          "predicted": ""
+        },
+        {
+          "text": "yesterday's newspapers",
+          "expected": "paper_tetrapak",
+          "predicted": ""
+        }
+      ]
+    },
+    {
+      "threshold": 0.95,
+      "examples": 68,
+      "supported_examples": 45,
+      "answered": 42,
+      "coverage": 0.6176470588235294,
+      "answered_accuracy": 1.0,
+      "supported_accuracy_including_abstention": 0.9333333333333333,
+      "held_false_answers": 0,
+      "macro_f1_supported_classes": 0.9538461538461538,
+      "per_class": {
+        "glass": {
+          "support": 8,
+          "predicted": 8,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "plastic_metal": {
+          "support": 8,
+          "predicted": 8,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "paper_tetrapak": {
+          "support": 8,
+          "predicted": 5,
+          "precision": 1.0,
+          "recall": 0.625,
+          "f1": 0.7692307692307693
+        },
+        "general": {
+          "support": 5,
+          "predicted": 5,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "special_unsupported": {
+          "support": 16,
+          "predicted": 16,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      },
+      "p95_predict_ms": 0.31673163175582886,
+      "errors": [
+        {
+          "text": "clean office paper",
+          "expected": "paper_tetrapak",
+          "predicted": ""
+        },
+        {
+          "text": "loose paper sheets",
+          "expected": "paper_tetrapak",
+          "predicted": ""
+        },
+        {
+          "text": "yesterday's newspapers",
+          "expected": "paper_tetrapak",
+          "predicted": ""
+        }
+      ]
+    },
+    {
+      "threshold": 0.99,
+      "examples": 68,
+      "supported_examples": 45,
+      "answered": 39,
+      "coverage": 0.5735294117647058,
+      "answered_accuracy": 1.0,
+      "supported_accuracy_including_abstention": 0.8666666666666667,
+      "held_false_answers": 0,
+      "macro_f1_supported_classes": 0.8800000000000001,
+      "per_class": {
+        "glass": {
+          "support": 8,
+          "predicted": 8,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "plastic_metal": {
+          "support": 8,
+          "predicted": 8,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "paper_tetrapak": {
+          "support": 8,
+          "predicted": 2,
+          "precision": 1.0,
+          "recall": 0.25,
+          "f1": 0.4
+        },
+        "general": {
+          "support": 5,
+          "predicted": 5,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "special_unsupported": {
+          "support": 16,
+          "predicted": 16,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      },
+      "p95_predict_ms": 0.3364384174346924,
+      "errors": [
+        {
+          "text": "clean office paper",
+          "expected": "paper_tetrapak",
+          "predicted": ""
+        },
+        {
+          "text": "loose paper sheets",
+          "expected": "paper_tetrapak",
+          "predicted": ""
+        },
+        {
+          "text": "recycle a newspaper",
+          "expected": "paper_tetrapak",
+          "predicted": ""
+        },
+        {
+          "text": "yesterday's newspapers",
+          "expected": "paper_tetrapak",
+          "predicted": ""
+        },
+        {
+          "text": "clean cardboard packaging",
+          "expected": "paper_tetrapak",
+          "predicted": ""
+        },
+        {
+          "text": "cardboard delivery box",
+          "expected": "paper_tetrapak",
+          "predicted": ""
+        }
+      ]
+    }
+  ],
+  "manual_test": {
+    "examples": 59,
+    "supported_examples": 59,
+    "answered": 36,
+    "coverage": 0.6101694915254238,
+    "answered_accuracy": 0.9444444444444444,
+    "supported_accuracy_including_abstention": 0.576271186440678,
+    "held_false_answers": 0,
+    "macro_f1_supported_classes": 0.6843737756301423,
+    "per_class": {
+      "glass": {
+        "support": 13,
+        "predicted": 6,
+        "precision": 1.0,
+        "recall": 0.46153846153846156,
+        "f1": 0.631578947368421
+      },
+      "plastic_metal": {
+        "support": 15,
+        "predicted": 4,
+        "precision": 1.0,
+        "recall": 0.26666666666666666,
+        "f1": 0.42105263157894735
+      },
+      "paper_tetrapak": {
+        "support": 18,
+        "predicted": 13,
+        "precision": 1.0,
+        "recall": 0.7222222222222222,
+        "f1": 0.8387096774193549
+      },
+      "general": {
+        "support": 0,
+        "predicted": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      },
+      "special_unsupported": {
+        "support": 13,
+        "predicted": 13,
+        "precision": 0.8461538461538461,
+        "recall": 0.8461538461538461,
+        "f1": 0.8461538461538461
+      }
+    },
+    "p95_predict_ms": 0.3614872694015503,
+    "errors": [
+      {
+        "text": "green glass olive jar",
+        "expected": "glass",
+        "predicted": ""
+      },
+      {
+        "text": "what bin takes a glass ketchup bottle?",
+        "expected": "glass",
+        "predicted": ""
+      },
+      {
+        "text": "brown glass medicine-free bottle",
+        "expected": "glass",
+        "predicted": "special_unsupported"
+      },
+      {
+        "text": "which container is for glass perfume bottles?",
+        "expected": "glass",
+        "predicted": ""
+      },
+      {
+        "text": "recycle an empty vinegar bottle made of glass",
+        "expected": "glass",
+        "predicted": ""
+      },
+      {
+        "text": "where can I leave a glass juice bottle?",
+        "expected": "glass",
+        "predicted": ""
+      },
+      {
+        "text": "clean glass honey jar",
+        "expected": "glass",
+        "predicted": ""
+      },
+      {
+        "text": "got an empty coke can",
+        "expected": "plastic_metal",
+        "predicted": ""
+      },
+      {
+        "text": "rinsed detergent bottle",
+        "expected": "plastic_metal",
+        "predicted": ""
+      },
+      {
+        "text": "aluminium sparkling-water can",
+        "expected": "plastic_metal",
+        "predicted": ""
+      },
+      {
+        "text": "where does a plastic milk bottle go?",
+        "expected": "plastic_metal",
+        "predicted": ""
+      },
+      {
+        "text": "metal food tin with no food left",
+        "expected": "plastic_metal",
+        "predicted": ""
+      },
+      {
+        "text": "empty plastic cleaning-product bottle",
+        "expected": "plastic_metal",
+        "predicted": ""
+      },
+      {
+        "text": "plastic juice bottle no cap",
+        "expected": "plastic_metal",
+        "predicted": ""
+      },
+      {
+        "text": "clean canned-beans tin",
+        "expected": "plastic_metal",
+        "predicted": ""
+      },
+      {
+        "text": "empty aluminium tomato can",
+        "expected": "plastic_metal",
+        "predicted": ""
+      },
+      {
+        "text": "rinsed plastic bleach container",
+        "expected": "plastic_metal",
+        "predicted": "special_unsupported"
+      },
+      {
+        "text": "empty iced-tea bottle made of plastic",
+        "expected": "plastic_metal",
+        "predicted": ""
+      },
+      {
+        "text": "where should my school notebook go",
+        "expected": "paper_tetrapak",
+        "predicted": ""
+      },
+      {
+        "text": "can I recycle a clean shoe box",
+        "expected": "paper_tetrapak",
+        "predicted": ""
+      },
+      {
+        "text": "old paperback notebook pages",
+        "expected": "paper_tetrapak",
+        "predicted": ""
+      },
+      {
+        "text": "where do flattened packing boxes go",
+        "expected": "paper_tetrapak",
+        "predicted": ""
+      },
+      {
+        "text": "stack of advertising leaflets",
+        "expected": "paper_tetrapak",
+        "predicted": ""
+      },
+      {
+        "text": "broken tablet device",
+        "expected": "special_unsupported",
+        "predicted": ""
+      },
+      {
+        "text": "old Wi-Fi router",
+        "expected": "special_unsupported",
+        "predicted": ""
+      }
+    ]
+  },
+  "manual_test_scope": {
+    "total_queries": 100,
+    "evaluated_queries": 59,
+    "held_queries": 41,
+    "class_counts": {
+      "paper_tetrapak": 18,
+      "plastic_metal": 15,
+      "glass": 13,
+      "special_unsupported": 13
+    },
+    "review_sha256": "d205ec71d377349a56f44b415ad0a631f20bf31843fe445aca10e5e0b91268e6",
+    "scope": "agent source-reviewed subset; not human-approved or a full five-class test",
+    "review_hash_encoding": "UTF-8 text with normalized LF newlines"
+  },
+  "validation_groups": {
+    "glass_bottle": 2,
+    "wine_bottle": 2,
+    "glass_jar": 2,
+    "beer_bottle": 2,
+    "plastic_bottle": 2,
+    "shampoo_bottle": 2,
+    "drink_can": 2,
+    "food_can": 2,
+    "paper": 2,
+    "newspaper": 2,
+    "cardboard": 2,
+    "tetrapak": 2,
+    "battery": 2,
+    "charger": 2,
+    "laptop": 2,
+    "electronics": 4,
+    "unknown": 3,
+    "jar_unknown": 1,
+    "bottle_unknown": 1,
+    "contaminated": 2,
+    "household_residual": 5,
+    "unverified_general": 1,
+    "glass_other": 2,
+    "material_unknown": 2,
+    "mixed_material": 1,
+    "ambiguous_paper": 1,
+    "unsupported_bag": 1,
+    "unsupported_tray": 1,
+    "clinical": 1,
+    "chemical": 1,
+    "unsafe_device": 1,
+    "mixed_residual": 1,
+    "unsupported_residual": 1,
+    "clothes": 3,
+    "damaged_clothes": 2,
+    "mixed_clothes": 2,
+    "unknown_textiles": 1
+  },
+  "limitations": [
+    "Development-authored validation fixtures; not an independent field benchmark",
+    "No trained model and no probability calibration; scores remain heuristic",
+    "Item families overlap between validation and manual test; no unseen-family claim",
+    "General waste has development fixtures only; five-class field quality is unknown",
+    "The frozen manual test excludes held v1 queries and does not evaluate residual items",
+    "Agent inference is not human sign-off; residual scope is household tissues/nappies",
+    "Clothes use development fixtures, not an independent textile/photo benchmark"
+  ],
+  "latency_environment": "Linux-5.15.0-119-generic-x86_64-with-glibc2.35",
+  "latency_target_ms": 25,
+  "input_sha256": {
+    "guidance_validation_v3.csv": "0739f653e3aa0ffb27481990a17759ccfd3619f99eb47d25c7cec28fad5590cf",
+    "manual_test.csv": "4e4e65a86f6af9fb786bec75af2830542daad16d4f50f7e45d30837ca2c82b20",
+    "manual_test_review.csv": "d205ec71d377349a56f44b415ad0a631f20bf31843fe445aca10e5e0b91268e6"
+  },
+  "code_sha256": "a9d4cf1300ea85aedee481325d9c3874ca90715ea1b096283e6b54cb3a131311",
+  "policy_sha256": "febbbe10e0a4aab9c7f83cdfb042c5c6101e0bf6bd9ec4b67f17fb0013b966d7"
+}

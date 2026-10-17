@@ -1,0 +1,23 @@
+{
+  "recycling_assets": 538,
+  "pakomak_containers": 500,
+  "pakomak_vending_machines": 38,
+  "metro_extension_pakomak_vending_machines": 1,
+  "optional_city_mixed_waste": 1058,
+  "recycling_material_counts": {
+    "glass": 407,
+    "metal_cans": 124,
+    "plastic_bottles": 124,
+    "paper": 7
+  },
+  "source_notes": "Clean AirDrom and OpenStreetMap assets are excluded from this demo; originals remain preserved in v2 research data.",
+  "outputs": {
+    "pakomak_recycling.geojson": "2519c4bbc7495cb858cf8279c5fe7b57fcef6bee724ffe3fb4ec87fc15d8ed10",
+    "pakomak_recycling.csv": "aa40bce0a7f5569fac226bf7064b1a83fb523a2ffd07642d21057e5b74df055e",
+    "city_mixed_waste.geojson": "5684783152f9066a63dc85e782801ebfdff9127f963f74b4d1c6b63a09017caa",
+    "city_mixed_waste.csv": "84ae1d3a3e9c50239a4f0918222c61ff704cb0dba01bf9fb8d35cf21c98195ee",
+    "pakomak_metro_extension.geojson": "605b8537cae625a1a279bbee9592a6a046c3ecb54dac1ef37c180701539165e0",
+    "pakomak_metro_extension.csv": "cbcdc4531ad6c976b49a73fb2000e94ff877b6befb459290c550155faee4abda",
+    "index.html": "ed9d1c30d8e85bf9d0c5887c5abb7ec4f303f8a766756c0071c4c99ad0a5419f"
+  }
+}

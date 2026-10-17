@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head><script src="/static/i18n.js"></script>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#12372a" />
+  <title>City coverage | Smart Recycling Access</title>
+  <link rel="stylesheet" href="/static/vendor/leaflet/leaflet.css" />
+  <link rel="stylesheet" href="/static/styles.css" />
+  <link rel="stylesheet" href="/static/citizen.css?v=logo-alignment-1" />
+  <link rel="stylesheet" href="/static/city.css?v=upgrade-visuals-3" />
+  <link rel="stylesheet" href="/static/community.css?v=demo-review-2" />
+  <link rel="stylesheet" href="/static/account.css?v=2" />
+</head>
+<body class="citizen city"><main>
+  <header class="site-header"><a class="brand" href="/" aria-label="Goodsort home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12"/></svg></span><span class="brand-wordmark">goodsort<span class="brand-dot">.</span></span></a><nav class="flow-nav" aria-label="Application"><a href="/">Recycle</a><a href="/city" aria-current="page">City coverage</a></nav></header>
+  <div class="hero"><h1>City coverage</h1><p class="intro">Skopje</p></div>
+  <p id="city-status" role="status">Loading coverage…</p>
+  <button id="retry-coverage" type="button" class="secondary" hidden>Retry coverage</button>
+  <section id="city-results" hidden aria-label="Population coverage results">
+    <section class="card coverage-overview" aria-labelledby="coverage-title">
+      <div class="city-section-heading">
+        <h2 id="coverage-title"><span class="step">01</span> 10-minute walking access</h2>
+        <div class="material-control"><label for="coverage-material" class="sr-only">Material stream</label>
+          <select id="coverage-material"><option value="glass">Glass packaging</option><option value="plastic_metal">Plastic bottles / metal cans</option><option value="paper_tetrapak">Paper / cardboard / Tetra Pak</option><option value="general">General waste</option></select>
+        </div>
+      </div>
+      <div id="coverage-summary" class="coverage-stats" aria-live="polite"></div>
+      <p id="coverage-availability" role="status"></p>
+    </section>
+    <div class="city-layout">
+      <section class="card municipality-panel" aria-labelledby="municipality-title">
+        <div class="city-section-heading"><h2 id="municipality-title"><span class="step">02</span> Municipalities</h2></div>
+        <p id="equity-note"></p>
+        <div id="municipality-chart" aria-label="Municipal population coverage chart"></div>
+      </section>
+      <section class="card upgrade-panel" aria-labelledby="upgrade-title">
+        <div class="city-section-heading"><h2 id="upgrade-title"><span class="step">03</span> Suggested upgrades</h2></div>
+        <form id="upgrade-form">
+          <div><label for="upgrade-count">Maximum sites to upgrade</label><input id="upgrade-count" type="number" min="0" max="20" step="1" value="5" required /></div>
+          <button id="recommend-upgrades" type="submit">Recommend upgrades</button>
+        </form>
+        <p id="upgrade-status" role="status"></p>
+        <div id="upgrade-results" hidden>
+          <section id="upgrade-carousel" aria-label="Suggested upgrade locations" aria-roledescription="carousel" hidden>
+            <div class="upgrade-action"><span id="upgrade-material-icon" aria-hidden="true"></span><h3 id="upgrade-action-title"></h3></div>
+            <div id="upgrade-map-shell" tabindex="0" aria-label="Upgrade map carousel">
+              <div id="upgrade-map" aria-label="Suggested upgrade map"></div>
+              <span id="upgrade-position" role="status"></span>
+              <button id="upgrade-prev" class="upgrade-arrow secondary" type="button" aria-label="Previous suggested upgrade" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button>
+              <button id="upgrade-next" class="upgrade-arrow secondary" type="button" aria-label="Next suggested upgrade" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button>
+            </div>
+            <p id="upgrade-map-status" role="status"></p>
+            <button id="retry-upgrade-map" class="secondary" type="button" hidden>Retry map</button>
+            <div id="upgrade-site-info" aria-live="polite" aria-atomic="true">
+              <h3 id="upgrade-site-title"></h3>
+              <div id="upgrade-change" class="upgrade-change"></div>
+              <p id="upgrade-reason"></p>
+              <a id="upgrade-location" target="_blank" rel="noopener noreferrer">View location ↗</a>
+            </div>
+          </section>
+          <section class="upgrade-impact" aria-labelledby="upgrade-impact-title">
+            <h3 id="upgrade-impact-title">Walking access · whole plan</h3>
+            <div id="upgrade-summary"></div>
+          </section>
+          <details class="upgrade-comparison"><summary>By municipality</summary>
+            <div id="upgrade-municipalities"></div>
+          </details>
+        </div>
+      </section>
+    </div>
+  </section>
+    <details class="card city-method"><summary>Method, sources and limitations</summary>
+      <p id="coverage-scope"></p><p id="coverage-population"></p>
+      <p>Population-weighted walking-network estimate, not a field survey or a straight-line radius. Connections from homes and containers to the street network are unverified. The municipal floor is project policy, not an external standard.</p>
+      <p id="coverage-sources"></p><ul id="coverage-limits"></ul><p id="coverage-attribution"></p>
+      <h3>Upgrade recommendations</h3>
+      <p>Add recycling collection at existing general-waste sites; existing service stays. Illustrations show collection types, not installed equipment or bin counts. Walking-access comparisons describe the whole plan, not an individual site's impact. Recommendations are modeled scenarios, not approved installation sites.</p>
+      <p id="upgrade-solver"></p><ul id="upgrade-limits"></ul>
+      <p><a href="https://hub.worldpop.org/geodata/listing?id=135">WorldPop source and terms</a> · <a href="https://www.openstreetmap.org/copyright">OpenStreetMap attribution and terms</a></p>
+    </details>
+</main><script src="/static/vendor/leaflet/leaflet.js" defer></script><script src="/static/city.js?v=city-copy-3" defer></script><script src="/static/upgrades.js?v=upgrade-visuals-3" defer></script><script src="/static/community.js?v=1" defer></script><script src="/static/account.js?v=3" defer></script><script src="/static/dumping.js?v=always-visible-3" defer></script></body>
+</html>

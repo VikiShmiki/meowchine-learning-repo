@@ -1,0 +1,1116 @@
+{
+  "model_id": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "model_revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+  "model_version": "multilingual-minilm-l12-bilingual-prototypes-v1",
+  "prototype_sha256": "f3ed82e631a09dd2275c902ed7841a798c4b7e0493735d834ff1195f1cd85b61",
+  "dataset_sha256": "46d6c77c9c66c058a6eb8c155cb16f2fd867e18e8a56879b4352d4ee282b1c28",
+  "review": {
+    "total_queries": 100,
+    "evaluated_queries": 59,
+    "held_queries": 41,
+    "class_counts": {
+      "paper_tetrapak": 18,
+      "plastic_metal": 15,
+      "glass": 13,
+      "special_unsupported": 13
+    },
+    "review_sha256": "9adcdf478c0d483ca498f1d6892ec8e5545c506ea453095f196cfbeb4add42fa",
+    "scope": "agent source-reviewed subset; not human-approved or a full five-class test"
+  },
+  "translation_review_status": "needs_native_review",
+  "scope": "100 paired translations; 59 inherited source-supported English labels. Development-authored translations, not an independent field or native-speaker benchmark. No training/threshold selection on these queries. Suggestions never authorize a route.",
+  "metrics": {
+    "glass": {
+      "precision": 1.0,
+      "recall": 0.9230769230769231,
+      "f1-score": 0.96,
+      "support": 13.0
+    },
+    "paper_tetrapak": {
+      "precision": 0.8095238095238095,
+      "recall": 0.9444444444444444,
+      "f1-score": 0.8717948717948718,
+      "support": 18.0
+    },
+    "plastic_metal": {
+      "precision": 0.9230769230769231,
+      "recall": 0.8,
+      "f1-score": 0.8571428571428571,
+      "support": 15.0
+    },
+    "special_unsupported": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 13.0
+    },
+    "accuracy": 0.9152542372881356,
+    "macro avg": {
+      "precision": 0.9331501831501832,
+      "recall": 0.916880341880342,
+      "f1-score": 0.9222344322344322,
+      "support": 59.0
+    },
+    "weighted avg": {
+      "precision": 0.9223319053827528,
+      "recall": 0.9152542372881356,
+      "f1-score": 0.9157533991432297,
+      "support": 59.0
+    }
+  },
+  "p95_inference_ms": 23.074285001348468,
+  "errors": [
+    {
+      "text": "кој контејнер прифаќа стаклено шише од кечап?",
+      "english_text_sha256": "bcab48234369ac4188fab30b353a0457d1878d5228895402d2aad983df049f02",
+      "provisional_target": "glass",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.678481,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_glass_packaging"
+    },
+    {
+      "text": "имам празна лименка од кока-кола",
+      "english_text_sha256": "df81ffc9a6a6ae23f99e7d04b89fb0f75010e68b2da8d61bd2f2845adbbc5330",
+      "provisional_target": "plastic_metal",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.467037,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_metal_can"
+    },
+    {
+      "text": "што со оваа лименка од енергетски пијалак",
+      "english_text_sha256": "c20e3a12642c2025dca56492b2055056445448039923a7cd0208cbaadb3b66f9",
+      "provisional_target": "plastic_metal",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.764408,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_metal_can"
+    },
+    {
+      "text": "каде да ставам метална лименка од пијалак",
+      "english_text_sha256": "72bcf4fd75427c1fbc81d32b8f6a80a1ba701ed3d82d180d490d73e1dac7b033",
+      "provisional_target": "plastic_metal",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.786549,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_metal_can"
+    },
+    {
+      "text": "картонска цевка од кујнска ролна",
+      "english_text_sha256": "7a7209aafcb220e1f508fdfa1d3661d70e0d196fe47a2e1c15d7b44a9dcdec33",
+      "provisional_target": "paper_tetrapak",
+      "source_supported": true,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.764992,
+      "policy_status": "clarify",
+      "policy_kind": null
+    }
+  ],
+  "results": [
+    {
+      "text": "шише од вино од вечерата",
+      "english_text_sha256": "4e02a939cae805c4e26ea3c6ad20d24c017ea9f87adaf184e143e8627452c981",
+      "provisional_target": "glass",
+      "source_supported": true,
+      "suggestion": "glass",
+      "cosine_similarity": 0.710274,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_glass_packaging"
+    },
+    {
+      "text": "празно шише од пиво направено од стакло",
+      "english_text_sha256": "0de3e2196866f715bb349dcf31083d8221d4f633cd70b1121266ff26225b6ff4",
+      "provisional_target": "glass",
+      "source_supported": true,
+      "suggestion": "glass",
+      "cosine_similarity": 0.842128,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_glass_packaging"
+    },
+    {
+      "text": "проѕирна тегла од сос за тестенини",
+      "english_text_sha256": "5a086066becc21ca0265c7d085ea67ba9e32ce781d5b6d06970e5654fc637acf",
+      "provisional_target": "glass",
+      "source_supported": false,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.44064,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_glass_packaging"
+    },
+    {
+      "text": "зелена стаклена тегла од маслинки",
+      "english_text_sha256": "52419f77990f36a90d0402f0500af93ce1cb3c40354cf3e7b116727d1e04e23e",
+      "provisional_target": "glass",
+      "source_supported": true,
+      "suggestion": "glass",
+      "cosine_similarity": 0.679049,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_glass_packaging"
+    },
+    {
+      "text": "каде по ѓаволите да го фрлам ова шише од вино",
+      "english_text_sha256": "a7c84583a97454a23403a387d3368fcc78a8eaa1d5f64e35e106ccc9b414a2da",
+      "provisional_target": "glass",
+      "source_supported": true,
+      "suggestion": "glass",
+      "cosine_similarity": 0.662323,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_glass_packaging"
+    },
+    {
+      "text": "имам празно стаклено шише од пиво",
+      "english_text_sha256": "ee81be8ecdb21cf71f58d9057db2d91f802845d4904a60096b9f2f38102c139d",
+      "provisional_target": "glass",
+      "source_supported": true,
+      "suggestion": "glass",
+      "cosine_similarity": 0.699276,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_glass_packaging"
+    },
+    {
+      "text": "дали оваа тегла од џем се рециклира?",
+      "english_text_sha256": "80b4887766c662365f705ef34b334fe82929b0f35ea18f5e6853c5a45a82fd12",
+      "provisional_target": "glass",
+      "source_supported": false,
+      "suggestion": "glass",
+      "cosine_similarity": 0.544799,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_glass_packaging"
+    },
+    {
+      "text": "кој контејнер прифаќа стаклено шише од кечап?",
+      "english_text_sha256": "bcab48234369ac4188fab30b353a0457d1878d5228895402d2aad983df049f02",
+      "provisional_target": "glass",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.678481,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_glass_packaging"
+    },
+    {
+      "text": "каде оди мојата празна тегла од кисели краставички",
+      "english_text_sha256": "dc711bfdf93e7ac4d0131b483305b8dfcecfdcd17e7b502f2c2c8ad9dabde871",
+      "provisional_target": "glass",
+      "source_supported": false,
+      "suggestion": "glass",
+      "cosine_similarity": 0.513222,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_glass_packaging"
+    },
+    {
+      "text": "кафеаво стаклено шише без лекови",
+      "english_text_sha256": "a33f8b419227c199fd73e7a4fd415775758e9fa36d98a4a3162161aea8a1a0ad",
+      "provisional_target": "glass",
+      "source_supported": true,
+      "suggestion": "glass",
+      "cosine_similarity": 0.865029,
+      "policy_status": "specialist",
+      "policy_kind": null
+    },
+    {
+      "text": "може ли да се рециклира стаклената тегла од бебешка храна",
+      "english_text_sha256": "f57fffeebf579da6f1aa9d4835d91c946735563670b0c35c7a9d8b7da06b29c3",
+      "provisional_target": "glass",
+      "source_supported": false,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.480276,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_glass_packaging"
+    },
+    {
+      "text": "празно стаклено шише од газирана вода",
+      "english_text_sha256": "105bfe3e7ab1481eb87f8b72320c4a04b857f29a3800d0d11669f222e4f20040",
+      "provisional_target": "glass",
+      "source_supported": true,
+      "suggestion": "glass",
+      "cosine_similarity": 0.865224,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_glass_packaging"
+    },
+    {
+      "text": "ја потрошив теглата со сос од домати",
+      "english_text_sha256": "2800d359d820af2249d0988d9f4175cb7ca98bc1ac10ba056e587bf538ebeb03",
+      "provisional_target": "glass",
+      "source_supported": false,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.386195,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "кој контејнер е за стаклени шишиња од парфем?",
+      "english_text_sha256": "b608c190411ab465730b27dec87257ac5339d87db6a7fc40f2ec6b8821a4ae95",
+      "provisional_target": "glass",
+      "source_supported": true,
+      "suggestion": "glass",
+      "cosine_similarity": 0.741107,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_glass_packaging"
+    },
+    {
+      "text": "стаклено шише без капаче",
+      "english_text_sha256": "240611748fb5934e3b4989cbac0ab2810ad6c8af8f4955b046bbfe98d8767b20",
+      "provisional_target": "glass",
+      "source_supported": true,
+      "suggestion": "glass",
+      "cosine_similarity": 0.900575,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_glass_packaging"
+    },
+    {
+      "text": "каде треба да оди оваа празна тегла за зимница",
+      "english_text_sha256": "0c8afa2d4ec3bef3512ab0995e84fca9a63e756920a75d964804bfaffa645a9c",
+      "provisional_target": "glass",
+      "source_supported": false,
+      "suggestion": "glass",
+      "cosine_similarity": 0.36624,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_glass_packaging"
+    },
+    {
+      "text": "рециклирај празно шише од оцет направено од стакло",
+      "english_text_sha256": "189e7d592c91b361ad8e2afe857bbe0e9bf11d9d8229a500b4fe7e4e1f488ee6",
+      "provisional_target": "glass",
+      "source_supported": true,
+      "suggestion": "glass",
+      "cosine_similarity": 0.777925,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "стара стаклена тегла од зимница",
+      "english_text_sha256": "cb730a2bd9abfdd6550bafe9ea9688bd468c6f4fc9dd74a6a6c6ef07650321b7",
+      "provisional_target": "glass",
+      "source_supported": false,
+      "suggestion": "glass",
+      "cosine_similarity": 0.771701,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_glass_packaging"
+    },
+    {
+      "text": "каде можам да оставам стаклено шише од сок?",
+      "english_text_sha256": "23c5b7762bbf0de7d2c369c9bc34927a5736d73fe81a9e7733030ff89e52584b",
+      "provisional_target": "glass",
+      "source_supported": true,
+      "suggestion": "glass",
+      "cosine_similarity": 0.740193,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_glass_packaging"
+    },
+    {
+      "text": "чиста стаклена тегла од мед",
+      "english_text_sha256": "e42dc947b3415df75cd76c4d891f375b685c4e106e00059072da3471b8aab96d",
+      "provisional_target": "glass",
+      "source_supported": true,
+      "suggestion": "glass",
+      "cosine_similarity": 0.728342,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_glass_packaging"
+    },
+    {
+      "text": "пластично шише од шампон",
+      "english_text_sha256": "c1ebde745e6b3b76ed0cbe135284844073815057b1511e5889fa42810fec4c49",
+      "provisional_target": "plastic_metal",
+      "source_supported": true,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.823044,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_plastic_bottle"
+    },
+    {
+      "text": "имам празна лименка од кока-кола",
+      "english_text_sha256": "df81ffc9a6a6ae23f99e7d04b89fb0f75010e68b2da8d61bd2f2845adbbc5330",
+      "provisional_target": "plastic_metal",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.467037,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_metal_can"
+    },
+    {
+      "text": "исплакнато шише од детергент",
+      "english_text_sha256": "7b1364d096fa4ab33d3bb8673853196a35a4273ce52a0230890d357a10ac45f0",
+      "provisional_target": "plastic_metal",
+      "source_supported": true,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.820541,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "алуминиумска лименка од газирана вода",
+      "english_text_sha256": "10e62d065694b5c4761aa8d6ec29e26513ecee64981b145f3e5192eecd0cd93b",
+      "provisional_target": "plastic_metal",
+      "source_supported": true,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.811657,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_metal_can"
+    },
+    {
+      "text": "каде оди пластично шише од млеко?",
+      "english_text_sha256": "b241d3ac6d0abd9a715eb13fdbbef39332d6a2be8dcade2a98eebb61b8745c92",
+      "provisional_target": "plastic_metal",
+      "source_supported": true,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.784271,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_plastic_bottle"
+    },
+    {
+      "text": "празна амбалажа од гел за туширање",
+      "english_text_sha256": "f7bed2bd9ea6dc40c2afb3324abdbe866f58ccb7bb5f12cd5b01fe8adbf329f6",
+      "provisional_target": "plastic_metal",
+      "source_supported": false,
+      "suggestion": "glass",
+      "cosine_similarity": 0.536507,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "може ли оваа лименка од газиран пијалак да се рециклира",
+      "english_text_sha256": "0e1041b3350ec9199effd108e66183509ce07d3eb7adcf874209edfd61d18420",
+      "provisional_target": "plastic_metal",
+      "source_supported": true,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.731353,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_metal_can"
+    },
+    {
+      "text": "жолт контејнер за шише од вода?",
+      "english_text_sha256": "6d2c8e2f5a035482c55be43e2c050bc2fe7979ee945bc0a4928f9c592e9a6da9",
+      "provisional_target": "plastic_metal",
+      "source_supported": false,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.706202,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "метална конзерва од храна без остатоци",
+      "english_text_sha256": "7784a8d2112d459c9cad16e522050da8be47b8a9d7fb21c593b3ad9a9a7435ab",
+      "provisional_target": "plastic_metal",
+      "source_supported": true,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.835893,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_metal_can"
+    },
+    {
+      "text": "празно пластично шише од средство за чистење",
+      "english_text_sha256": "e83c79995ec28e264af58119cb8e8308fc9b4aeeb356091f098f710a72b69693",
+      "provisional_target": "plastic_metal",
+      "source_supported": true,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.837269,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_plastic_bottle"
+    },
+    {
+      "text": "што со оваа лименка од енергетски пијалак",
+      "english_text_sha256": "c20e3a12642c2025dca56492b2055056445448039923a7cd0208cbaadb3b66f9",
+      "provisional_target": "plastic_metal",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.764408,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_metal_can"
+    },
+    {
+      "text": "исплакната амбалажа од омекнувач",
+      "english_text_sha256": "e8bfb3b05c907649fd45aecfde82a946457b124eb30dff0f281f989ae6bc9742",
+      "provisional_target": "plastic_metal",
+      "source_supported": false,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.722063,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "каде треба да оди празно шише од течен сапун",
+      "english_text_sha256": "2d5466f284b5fc4a5d541f8e777edd3962d73216d1fb2497160d655390db40c1",
+      "provisional_target": "plastic_metal",
+      "source_supported": false,
+      "suggestion": "glass",
+      "cosine_similarity": 0.567649,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "пластично шише од сок без капаче",
+      "english_text_sha256": "b968547307f99acce70bd9c9956ebcfc9cf0a1d0d2d4613e0919323a72e78efe",
+      "provisional_target": "plastic_metal",
+      "source_supported": true,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.78712,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_plastic_bottle"
+    },
+    {
+      "text": "чиста конзерва од грав",
+      "english_text_sha256": "72d082c292bd68b1171969850d4df5e46d83e49d73f0f2b3bda41ddfed4cf30e",
+      "provisional_target": "plastic_metal",
+      "source_supported": true,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.632317,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_metal_can"
+    },
+    {
+      "text": "празна алуминиумска конзерва од домати",
+      "english_text_sha256": "5d78c8287ddf2a96c3e6191643fdf647861b4ad54821790bc461937821ead0bf",
+      "provisional_target": "plastic_metal",
+      "source_supported": true,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.684243,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_metal_can"
+    },
+    {
+      "text": "можам ли да го рециклирам шишето од регенератор за коса?",
+      "english_text_sha256": "1691920f9dbb73b782cfff07bc133edcb8626e91944f41c8109a55d8c990a28d",
+      "provisional_target": "plastic_metal",
+      "source_supported": false,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.387095,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "каде да ставам метална лименка од пијалак",
+      "english_text_sha256": "72bcf4fd75427c1fbc81d32b8f6a80a1ba701ed3d82d180d490d73e1dac7b033",
+      "provisional_target": "plastic_metal",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.786549,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_metal_can"
+    },
+    {
+      "text": "исплакната пластична амбалажа од белило",
+      "english_text_sha256": "6f6c18b521ff0daef3f1c9fdf7e29c1e2f9fab1d60c6b4bc970cf95fdc10b831",
+      "provisional_target": "plastic_metal",
+      "source_supported": true,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.928266,
+      "policy_status": "specialist",
+      "policy_kind": null
+    },
+    {
+      "text": "празно шише од ладен чај направено од пластика",
+      "english_text_sha256": "7acf6c5d6f2268b9291238e3eaff3cd2977a2bed91e961f8f9e330eb61022336",
+      "provisional_target": "plastic_metal",
+      "source_supported": true,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.775966,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "стари списанија од минатата година",
+      "english_text_sha256": "d5273b7479f513cc1873aaffbc8991755ef6582c04f2acb1bc60c2edff1d8ae8",
+      "provisional_target": "paper_tetrapak",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.717054,
+      "policy_status": "confirm_condition",
+      "policy_kind": "clean_paper"
+    },
+    {
+      "text": "картонска кутија од достава од Amazon",
+      "english_text_sha256": "225d8d9f8d31cd0912637d4b67dd5002df6a81787709a598a6e4bfc2f22cb12c",
+      "provisional_target": "paper_tetrapak",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.752866,
+      "policy_status": "confirm_condition",
+      "policy_kind": "clean_cardboard"
+    },
+    {
+      "text": "празен Tetra Pak од млеко",
+      "english_text_sha256": "ee1cb1a9a508102a43b52f4b70c9ec7d6b99be4754823679912a0f5a10c6ad8f",
+      "provisional_target": "paper_tetrapak",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.652302,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_tetrapak"
+    },
+    {
+      "text": "сноп чисти весници",
+      "english_text_sha256": "3f9c9c0920f0a31363a70b4fa3d4ae7b733ad9f2e09af1ad1666bd1bcf452d50",
+      "provisional_target": "paper_tetrapak",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.826243,
+      "policy_status": "confirm_condition",
+      "policy_kind": "clean_paper"
+    },
+    {
+      "text": "каде треба да оди мојата училишна тетратка",
+      "english_text_sha256": "ba53ca308595ef62150941bd60ddc7603ea0fa71382c86482e9e51483cde275b",
+      "provisional_target": "paper_tetrapak",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.409498,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "сплескана картонска кутија од житарки",
+      "english_text_sha256": "d84a775cf842ed9d4a9b27af53c7c132daeb380b2f8620778e303d8300662f89",
+      "provisional_target": "paper_tetrapak",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.81787,
+      "policy_status": "confirm_condition",
+      "policy_kind": "clean_cardboard"
+    },
+    {
+      "text": "чиста кафеава хартиена кеса",
+      "english_text_sha256": "2a705f26e0239c4206ca70cb1f7a041d3d3b1553e777097689c90db30ad619f6",
+      "provisional_target": "paper_tetrapak",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.634872,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "што со старите списанија?",
+      "english_text_sha256": "13f545aa23506b5afe481d3870ffd087574c12eae4b3f78d3df05b134243b51f",
+      "provisional_target": "paper_tetrapak",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.751556,
+      "policy_status": "confirm_condition",
+      "policy_kind": "clean_paper"
+    },
+    {
+      "text": "амбалажа од сок со ознака Tetra Pak",
+      "english_text_sha256": "c4ef610dd9fb0d34a57e5b1f15bbb09243ec10e286f10fb6d41373e0c7c7f818",
+      "provisional_target": "paper_tetrapak",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.740751,
+      "policy_status": "confirm_condition",
+      "policy_kind": "empty_tetrapak"
+    },
+    {
+      "text": "канцелариска хартија за печатач",
+      "english_text_sha256": "53d61d9b29c9a06f17b60ca3cd3d97258ba3986f6d0652d6658c41d87853416c",
+      "provisional_target": "paper_tetrapak",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.751822,
+      "policy_status": "confirm_condition",
+      "policy_kind": "clean_paper"
+    },
+    {
+      "text": "картонска обвивка од пратка",
+      "english_text_sha256": "8a1062f09e98e692b293dab650e2fc0cb2e7f4fa603c17c29822f9dd83bbc332",
+      "provisional_target": "paper_tetrapak",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.81882,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "можам ли да рециклирам чиста кутија од чевли",
+      "english_text_sha256": "e7870af83ac56f320a54ab220aa820471c0b2e0d06824c9d1465287a8963295b",
+      "provisional_target": "paper_tetrapak",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.50397,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "страници од стара тетратка со меки корици",
+      "english_text_sha256": "02563a7aca6b959ea2cc81c311731fdd5270ab5ec2007b4e8a1d21b149b17e61",
+      "provisional_target": "paper_tetrapak",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.678661,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "каде одат сплесканите кутии за пакување",
+      "english_text_sha256": "ac95771e3742d0f02b2beb8c0277c91a2d615e08c1f4e233c54b08374764673d",
+      "provisional_target": "paper_tetrapak",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.786616,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "празна асептична картонска амбалажа од супа",
+      "english_text_sha256": "989c4237dfb9e0e14d169abe60cf54e15d3bbc33b1a3d22a05002fbc15c5ba81",
+      "provisional_target": "paper_tetrapak",
+      "source_supported": false,
+      "suggestion": "glass",
+      "cosine_similarity": 0.598771,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "куп рекламни летоци",
+      "english_text_sha256": "22ee7eb7ba67e0e3f9595edaa04c7fec39e005533121edb25cde702cb8489b9d",
+      "provisional_target": "paper_tetrapak",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.500685,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "чист хартиен плик без пластика",
+      "english_text_sha256": "89f14dc9be6a45ebf0377c7f4a209ac8bd111ac5f2c96fcff614c07fb0a30985",
+      "provisional_target": "paper_tetrapak",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.727708,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "картонска цевка од кујнска ролна",
+      "english_text_sha256": "7a7209aafcb220e1f508fdfa1d3661d70e0d196fe47a2e1c15d7b44a9dcdec33",
+      "provisional_target": "paper_tetrapak",
+      "source_supported": true,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.764992,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "хартиена амбалажа од сув производ",
+      "english_text_sha256": "6e91c5e25b64749c91e0b062707f9f7a1f4582c6257100849ea048d756791798",
+      "provisional_target": "paper_tetrapak",
+      "source_supported": true,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.850373,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "каде треба да оди оваа празна картонска амбалажа од пијалак?",
+      "english_text_sha256": "4597a3f81608e9b9b254501fac620940a35fc7b2f4d0d318e149faf9ec462cbd",
+      "provisional_target": "paper_tetrapak",
+      "source_supported": false,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.745826,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "употребена пластична четка за заби",
+      "english_text_sha256": "57faa483d398894e96c67d1aff61a9b21339e98cf6608a1e24031c2096d86f02",
+      "provisional_target": "general",
+      "source_supported": false,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.835715,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "валкан кујнски сунѓер",
+      "english_text_sha256": "a32aff936d9a20e56f379e39cfe11a760a1ed8c02d00d7624c0e6859c6e6a229",
+      "provisional_target": "general",
+      "source_supported": false,
+      "suggestion": "special_unsupported",
+      "cosine_similarity": 0.556769,
+      "policy_status": "held",
+      "policy_kind": null
+    },
+    {
+      "text": "мрсно употребено марамче",
+      "english_text_sha256": "d382419f5c6f679cbdbbb75dd02cbc79839e208100607ffb909e9edb82aeacd2",
+      "provisional_target": "general",
+      "source_supported": false,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.72369,
+      "policy_status": "held",
+      "policy_kind": null
+    },
+    {
+      "text": "скршена керамичка шолја за кафе",
+      "english_text_sha256": "05264cdc10877ce2e337ac74efdc34d239c9db8a04bae404e41403e5db0e1eb1",
+      "provisional_target": "general",
+      "source_supported": false,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.559579,
+      "policy_status": "held",
+      "policy_kind": null
+    },
+    {
+      "text": "пластична виљушка за еднократна употреба",
+      "english_text_sha256": "9b1f1145efb2b64d232a9eaa0d2d146e6c4cf7be9aa67288b19f611db86334b8",
+      "provisional_target": "general",
+      "source_supported": false,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.796952,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "употребена маска за лице",
+      "english_text_sha256": "e2826adfe39528e256ed9f4ae87ca60743a5d28dd10c37c2794f92ec49f09dc0",
+      "provisional_target": "general",
+      "source_supported": false,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.46638,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "кесичка чај по варење",
+      "english_text_sha256": "0710eba4c9ca145fafe72a09c18258b5416ee68c91beae10f53ba4564cb0188b",
+      "provisional_target": "general",
+      "source_supported": false,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.587004,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "отпушок од цигара",
+      "english_text_sha256": "e9d4610c89b5bdb26831d73197c283d5c1066df3c6324979fc591e595b50e7c4",
+      "provisional_target": "general",
+      "source_supported": false,
+      "suggestion": "glass",
+      "cosine_similarity": 0.490537,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "дрвено стапче од сладолед",
+      "english_text_sha256": "c3a5b282bd76d0be6e77171f55aaecac1daa74f0a749301f2df03aebcf9c3051",
+      "provisional_target": "general",
+      "source_supported": false,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.43781,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "остатоци од храна без контејнер за компост",
+      "english_text_sha256": "e244e243f03c089d00dbd248002168a1c1f645251d6c10b13f4b3ce2acd96011",
+      "provisional_target": "general",
+      "source_supported": false,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.53238,
+      "policy_status": "held",
+      "policy_kind": null
+    },
+    {
+      "text": "валкана проѕирна фолија за храна",
+      "english_text_sha256": "9c8f0cff1d43ebeaf0c3016936199bb20b029c700c1212a50821d63395691640",
+      "provisional_target": "general",
+      "source_supported": false,
+      "suggestion": "special_unsupported",
+      "cosine_similarity": 0.583645,
+      "policy_status": "held",
+      "policy_kind": null
+    },
+    {
+      "text": "пластична сламка за пиење",
+      "english_text_sha256": "60d9784b74b38dccb7b083c9bf7ac95e199923cc355e503d94dd6fcaa99fc06a",
+      "provisional_target": "general",
+      "source_supported": false,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.8684,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "стуткана тоалетна хартија",
+      "english_text_sha256": "63f58c836eafc66dd87481f7bdd2e6e5c7e7bd956290c8d5efa311a07eee3b12",
+      "provisional_target": "general",
+      "source_supported": false,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.666213,
+      "policy_status": "confirm_condition",
+      "policy_kind": "clean_paper"
+    },
+    {
+      "text": "стар сунѓер за миење садови",
+      "english_text_sha256": "c10646c38516cc67cf27a76c849c98a0295c66f838f5faed436e7a094e11473b",
+      "provisional_target": "general",
+      "source_supported": false,
+      "suggestion": "glass",
+      "cosine_similarity": 0.573267,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "употребена ракавица за еднократна употреба",
+      "english_text_sha256": "caa8e76f1e298567f001c6e0df71e0212676e5e25ca399d1d9206dcf6da46483",
+      "provisional_target": "general",
+      "source_supported": false,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.621979,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "каде оди скршена чинија за јадење?",
+      "english_text_sha256": "b57a5881ab4ff24076c63bc82b536f7356a91b957865c4db137813b0bac9f872",
+      "provisional_target": "general",
+      "source_supported": false,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.42775,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "изџвакана дрвена чепкалка за заби",
+      "english_text_sha256": "cc43c35d37fcdede95cc6756ce289df5c047976991ac97b8b4b635790539d13d",
+      "provisional_target": "general",
+      "source_supported": false,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.656963,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "празна обвивка од грицки со внатрешна фолија",
+      "english_text_sha256": "d3cbede1d23c2f72453da04901897852fafe9c37c5bece6798cd38603b5c6f5f",
+      "provisional_target": "general",
+      "source_supported": false,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.58011,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "прашина и нечистотија од правосмукалка",
+      "english_text_sha256": "58fed9d4719aac9eb88fb57b4542590ed93f65e8f09c418a5c4ca9142875c20a",
+      "provisional_target": "general",
+      "source_supported": false,
+      "suggestion": "special_unsupported",
+      "cosine_similarity": 0.652623,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "употребено памучно стапче",
+      "english_text_sha256": "e31dcd2a8dca68563d92aadac43bf78f32e0ae592f108f8e82e8863c52bb4a4e",
+      "provisional_target": "general",
+      "source_supported": false,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.769203,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "AA батерии од далечински управувач",
+      "english_text_sha256": "8c811332bd835bcddcf37839cb4c6bf93ec58cb0fa551a8612d4b5984fcbe7e5",
+      "provisional_target": "special_unsupported",
+      "source_supported": true,
+      "suggestion": "special_unsupported",
+      "cosine_similarity": 0.761088,
+      "policy_status": "specialist",
+      "policy_kind": "batteries"
+    },
+    {
+      "text": "расипан лаптоп компјутер",
+      "english_text_sha256": "a14d0e7281412aca7a2da628d0410f7b4c550c99321ef472158599e8cdaf84ca",
+      "provisional_target": "special_unsupported",
+      "source_supported": true,
+      "suggestion": "special_unsupported",
+      "cosine_similarity": 0.347883,
+      "policy_status": "confirm_condition",
+      "policy_kind": "electronics"
+    },
+    {
+      "text": "каде треба да оди овој стар полнач",
+      "english_text_sha256": "4fc29f3c5aa053220e243be95d64b3ab8bf410b3d6410360a569159ecfdf8dc5",
+      "provisional_target": "special_unsupported",
+      "source_supported": true,
+      "suggestion": "special_unsupported",
+      "cosine_similarity": 0.504013,
+      "policy_status": "confirm_condition",
+      "policy_kind": "small_electronics"
+    },
+    {
+      "text": "лек на рецепт со истечен рок",
+      "english_text_sha256": "ccfffe0f0f910be40a87d90368413480d773125105e17c964c83811009b85a6c",
+      "provisional_target": "special_unsupported",
+      "source_supported": false,
+      "suggestion": "paper_tetrapak",
+      "cosine_similarity": 0.503812,
+      "policy_status": "specialist",
+      "policy_kind": null
+    },
+    {
+      "text": "надуена батерија од телефон",
+      "english_text_sha256": "3a29d2f48c65f3734240ef3b1589ebf201df8dada676c0778588e75f72981041",
+      "provisional_target": "special_unsupported",
+      "source_supported": true,
+      "suggestion": "special_unsupported",
+      "cosine_similarity": 0.847114,
+      "policy_status": "specialist",
+      "policy_kind": null
+    },
+    {
+      "text": "прегорена флуоресцентна цевка",
+      "english_text_sha256": "cb67adb914b5709859ec0298f35cb427395547e0cb5b846fe5d0c349e5ead2e1",
+      "provisional_target": "special_unsupported",
+      "source_supported": false,
+      "suggestion": "glass",
+      "cosine_similarity": 0.599823,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "стар паметен телефон Android",
+      "english_text_sha256": "b4dbc31b38324eaefae54381bdd8472d5abafb01ceb73ee2c29573ac2e38e94b",
+      "provisional_target": "special_unsupported",
+      "source_supported": true,
+      "suggestion": "special_unsupported",
+      "cosine_similarity": 0.542955,
+      "policy_status": "confirm_condition",
+      "policy_kind": "small_electronics"
+    },
+    {
+      "text": "неупотребен домашен пестицид",
+      "english_text_sha256": "6a2c2a4910389c4011d80f175b65a3ea01b035a7314bfa939bbede1891337862",
+      "provisional_target": "special_unsupported",
+      "source_supported": false,
+      "suggestion": "special_unsupported",
+      "cosine_similarity": 0.540003,
+      "policy_status": "specialist",
+      "policy_kind": null
+    },
+    {
+      "text": "расипан таблет уред",
+      "english_text_sha256": "ba40520a386a845ac6cf62ed3b38186e0ac4314d6ca5dceb86a97a1b4163dcec",
+      "provisional_target": "special_unsupported",
+      "source_supported": true,
+      "suggestion": "special_unsupported",
+      "cosine_similarity": 0.5759,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "мало шише со разредувач за боја",
+      "english_text_sha256": "9832e7f22a7b34c3753c80d6f2dc43c557f2fae7d4387fef34a9251fb231e6fc",
+      "provisional_target": "special_unsupported",
+      "source_supported": false,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.786922,
+      "policy_status": "specialist",
+      "policy_kind": null
+    },
+    {
+      "text": "копчеста батерија од часовник",
+      "english_text_sha256": "f2746d2b451df987daa88af453a171d797143bfa5fc40e6aab47a9b5cb8c6b65",
+      "provisional_target": "special_unsupported",
+      "source_supported": true,
+      "suggestion": "special_unsupported",
+      "cosine_similarity": 0.64721,
+      "policy_status": "specialist",
+      "policy_kind": "batteries"
+    },
+    {
+      "text": "оштетена преносна батерија",
+      "english_text_sha256": "1ad478fbfa1577e02bd500c6e6e2853dbe30b477ba82d22a0b0683f39a64f444",
+      "provisional_target": "special_unsupported",
+      "source_supported": true,
+      "suggestion": "special_unsupported",
+      "cosine_similarity": 0.722359,
+      "policy_status": "specialist",
+      "policy_kind": "batteries"
+    },
+    {
+      "text": "каде одат компјутерски кабли?",
+      "english_text_sha256": "3b3469562361b857484d3c7dbce3c2163db14b0b3f59e5af7b4b2fcd83b52614",
+      "provisional_target": "special_unsupported",
+      "source_supported": true,
+      "suggestion": "special_unsupported",
+      "cosine_similarity": 0.483602,
+      "policy_status": "confirm_condition",
+      "policy_kind": "small_electronics"
+    },
+    {
+      "text": "стар Wi-Fi рутер",
+      "english_text_sha256": "f86706f92bceca4748918b213b48a9c31092b231bdea642e7b35d8ecbbc22770",
+      "provisional_target": "special_unsupported",
+      "source_supported": true,
+      "suggestion": "special_unsupported",
+      "cosine_similarity": 0.360294,
+      "policy_status": "clarify",
+      "policy_kind": null
+    },
+    {
+      "text": "полуполно хемиско средство за чистење",
+      "english_text_sha256": "dbb4acc10d1c866045607048bb707d012ae8b26e3555b140a0d24c6a5077af0b",
+      "provisional_target": "special_unsupported",
+      "source_supported": false,
+      "suggestion": "plastic_metal",
+      "cosine_similarity": 0.53275,
+      "policy_status": "specialist",
+      "policy_kind": null
+    },
+    {
+      "text": "прегорена компактна флуоресцентна сијалица",
+      "english_text_sha256": "a6d21ecd15fe69b5c54dc8c40e47451e75ee297d3dc99da5ed2911f2e1e60fdf",
+      "provisional_target": "special_unsupported",
+      "source_supported": false,
+      "suggestion": "glass",
+      "cosine_similarity": 0.61053,
+      "policy_status": "specialist",
+      "policy_kind": null
+    },
+    {
+      "text": "расипани електронски слушалки",
+      "english_text_sha256": "ff567425be6c22a4f5b11c08b241f84c4b7f60002a0e42272efadf154b5cdff8",
+      "provisional_target": "special_unsupported",
+      "source_supported": true,
+      "suggestion": "special_unsupported",
+      "cosine_similarity": 0.516811,
+      "policy_status": "confirm_condition",
+      "policy_kind": "small_electronics"
+    },
+    {
+      "text": "неупотребени таблети лекови",
+      "english_text_sha256": "447663e0bf440fe8810796619bb574b951d1c0608ec3198940b129af6e3e3273",
+      "provisional_target": "special_unsupported",
+      "source_supported": false,
+      "suggestion": "special_unsupported",
+      "cosine_similarity": 0.6833,
+      "policy_status": "specialist",
+      "policy_kind": null
+    },
+    {
+      "text": "протечена батерија на полнење",
+      "english_text_sha256": "cfe6bbeb664e279bb22ca2486a445802fd7d6cb86ccac9344a8f5c34d6eda252",
+      "provisional_target": "special_unsupported",
+      "source_supported": true,
+      "suggestion": "special_unsupported",
+      "cosine_similarity": 0.737035,
+      "policy_status": "specialist",
+      "policy_kind": null
+    },
+    {
+      "text": "застарен адаптер за напојување лаптоп",
+      "english_text_sha256": "9fa2e695f6f04cb7f7bdf2cf7d56a7911565303bb16af973e185bd1886489350",
+      "provisional_target": "special_unsupported",
+      "source_supported": true,
+      "suggestion": "special_unsupported",
+      "cosine_similarity": 0.506875,
+      "policy_status": "confirm_condition",
+      "policy_kind": "electronics"
+    }
+  ]
+}

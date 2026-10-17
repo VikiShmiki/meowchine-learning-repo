@@ -1,0 +1,51 @@
+original_label,proposed_target_label,reason,mapping_status,evidence_ids,reviewer,review_method,reviewed_on
+ALUMINIUM CAN,plastic_metal,Source supports broad classification only; item condition and asset capability still gate routing.,approved,pakomak_streams,Codex,agent_source_review,2026-09-19
+ALUMINIUM SHEET,plastic_metal,Local yellow-bin acceptance of foil and sheets is unconfirmed,needs_review,,Codex,agent_source_review,2026-09-19
+ALUMINIUM TRAY,plastic_metal,Local yellow-bin acceptance depends on contamination and packaging rules,needs_review,,Codex,agent_source_review,2026-09-19
+CIGARETTE BUTT,general,No item-specific local disposal evidence established; do not infer general waste from recycling exclusion.,needs_review,,Codex,agent_source_review,2026-09-19
+CIGARETTE PACK,general,Packs can combine paper foil and plastic,needs_review,,Codex,agent_source_review,2026-09-19
+COMPOSTABLE PACKAGING,general,Local organic and compostable-packaging handling is unconfirmed,needs_review,,Codex,agent_source_review,2026-09-19
+CONDIMENT PACKETS,general,No item-specific local disposal evidence established; do not infer general waste from recycling exclusion.,needs_review,,Codex,agent_source_review,2026-09-19
+COVID TEST,special_unsupported,Local rules may treat household tests as general or medical waste,needs_review,,Codex,agent_source_review,2026-09-19
+CRUMBLED TISSUE,general,No item-specific local disposal evidence established; do not infer general waste from recycling exclusion.,needs_review,,Codex,agent_source_review,2026-09-19
+CYLINDRICAL BATTERY,special_unsupported,Source supports broad classification only; item condition and asset capability still gate routing.,approved,nula_categories,Codex,agent_source_review,2026-09-19
+FACE MASK,general,No item-specific local disposal evidence established; do not infer general waste from recycling exclusion.,needs_review,,Codex,agent_source_review,2026-09-19
+GLASS BOTTLE,glass,Source supports broad classification only; item condition and asset capability still gate routing.,approved,pakomak_streams,Codex,agent_source_review,2026-09-19
+GLASS JAR,glass,Source supports broad classification only; item condition and asset capability still gate routing.,approved,pakomak_streams,Codex,agent_source_review,2026-09-19
+LAPTOP CHARGER,special_unsupported,Source supports broad classification only; item condition and asset capability still gate routing.,approved,nula_categories,Codex,agent_source_review,2026-09-19
+MEDS BLISTER,special_unsupported,Local medicine-packaging take-back rules are unconfirmed,needs_review,,Codex,agent_source_review,2026-09-19
+METAL CAP,plastic_metal,Acceptance of loose metal caps is system-specific,needs_review,,Codex,agent_source_review,2026-09-19
+MIXED PAPER-PLASTIC PACKAGING,general,Composite packaging rules require local confirmation,needs_review,,Codex,agent_source_review,2026-09-19
+ORGANIC SCRAPS,general,No item-specific local disposal evidence established; do not infer general waste from recycling exclusion.,needs_review,,Codex,agent_source_review,2026-09-19
+PAPER BOWL,general,Coatings and food contamination change disposal route,needs_review,,Codex,agent_source_review,2026-09-19
+PAPER CUP,general,Plastic lining and contamination may prevent paper recycling,needs_review,,Codex,agent_source_review,2026-09-19
+PAPER FOOD PACKAGING,paper_tetrapak,Food contamination can make this general waste,needs_review,,Codex,agent_source_review,2026-09-19
+PAPER MAGASINE,paper_tetrapak,Source supports broad classification only; item condition and asset capability still gate routing.,approved,pakomak_streams,Codex,agent_source_review,2026-09-19
+PAPER PACKAGING,paper_tetrapak,Source supports broad classification only; item condition and asset capability still gate routing.,approved,pakomak_streams,Codex,agent_source_review,2026-09-19
+PAPER PLATE,general,Coatings and food contamination change disposal route,needs_review,,Codex,agent_source_review,2026-09-19
+PAPER SHEET,paper_tetrapak,Source supports broad classification only; item condition and asset capability still gate routing.,approved,pakomak_streams,Codex,agent_source_review,2026-09-19
+PAPER SUGAR BAG,paper_tetrapak,Material may be paper or composite,needs_review,,Codex,agent_source_review,2026-09-19
+PAPER TRAY,paper_tetrapak,Material and contamination are not encoded by the source label,needs_review,,Codex,agent_source_review,2026-09-19
+PHONE CHARGER,special_unsupported,Source supports broad classification only; item condition and asset capability still gate routing.,approved,nula_categories,Codex,agent_source_review,2026-09-19
+PIZZA BOX,paper_tetrapak,Grease contamination can make part or all of the box general waste,needs_review,,Codex,agent_source_review,2026-09-19
+PLASTIC BAG,plastic_metal,Pakomak citizens FAQ Q20 supports yellow-bin classification; snapshot sites do not explicitly advertise bags.,approved,pakomak_faq,Codex,agent_source_review,2026-09-19
+PLASTIC BOTTLE,plastic_metal,Source supports broad classification only; item condition and asset capability still gate routing.,approved,pakomak_streams,Codex,agent_source_review,2026-09-19
+PLASTIC BOWL,general,No item-specific local disposal evidence established; do not infer general waste from recycling exclusion.,needs_review,,Codex,agent_source_review,2026-09-19
+PLASTIC CAP,plastic_metal,Acceptance depends on whether caps remain attached,needs_review,,Codex,agent_source_review,2026-09-19
+PLASTIC CUP,plastic_metal,Local yellow-bin rules may exclude some plastic cups,needs_review,,Codex,agent_source_review,2026-09-19
+PLASTIC CUTLERY,general,No item-specific local disposal evidence established; do not infer general waste from recycling exclusion.,needs_review,,Codex,agent_source_review,2026-09-19
+PLASTIC DISH,general,No item-specific local disposal evidence established; do not infer general waste from recycling exclusion.,needs_review,,Codex,agent_source_review,2026-09-19
+PLASTIC GLOVES,general,No item-specific local disposal evidence established; do not infer general waste from recycling exclusion.,needs_review,,Codex,agent_source_review,2026-09-19
+PLASTIC PACKAGING,plastic_metal,The source label does not identify polymer or packaging form,needs_review,,Codex,agent_source_review,2026-09-19
+PLASTIC SNACK PACKAGING,general,Multi-layer films are often unsupported but local rules are unconfirmed,needs_review,,Codex,agent_source_review,2026-09-19
+PLASTIC STICKS,general,No item-specific local disposal evidence established; do not infer general waste from recycling exclusion.,needs_review,,Codex,agent_source_review,2026-09-19
+PLASTIC STRAW,general,No item-specific local disposal evidence established; do not infer general waste from recycling exclusion.,needs_review,,Codex,agent_source_review,2026-09-19
+PLASTIC TRAY,plastic_metal,Colour polymer and contamination can affect acceptance,needs_review,,Codex,agent_source_review,2026-09-19
+RECEIPT,general,No item-specific local disposal evidence established; do not infer general waste from recycling exclusion.,needs_review,,Codex,agent_source_review,2026-09-19
+SMARTPHONE,special_unsupported,Source supports broad classification only; item condition and asset capability still gate routing.,approved,nula_categories,Codex,agent_source_review,2026-09-19
+TEA BAG,general,No item-specific local disposal evidence established; do not infer general waste from recycling exclusion.,needs_review,,Codex,agent_source_review,2026-09-19
+TETRAPACK,paper_tetrapak,Source supports broad classification only; item condition and asset capability still gate routing.,approved,pakomak_faq,Codex,agent_source_review,2026-09-19
+TOBACCO PACK,general,Packs can combine paper foil and plastic,needs_review,,Codex,agent_source_review,2026-09-19
+TRANSPORT TICKET,general,Tickets may be plain paper thermal paper or magnetic composite,needs_review,,Codex,agent_source_review,2026-09-19
+WOODEN CUTLERY,general,No item-specific local disposal evidence established; do not infer general waste from recycling exclusion.,needs_review,,Codex,agent_source_review,2026-09-19
+WOODEN STICKS,general,No item-specific local disposal evidence established; do not infer general waste from recycling exclusion.,needs_review,,Codex,agent_source_review,2026-09-19

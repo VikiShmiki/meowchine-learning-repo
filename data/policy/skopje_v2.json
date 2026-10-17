@@ -1,0 +1,284 @@
+{
+  "version": "skopje-policy-v2",
+  "reviewed_on": "2026-09-22",
+  "sources": {
+    "red_cross_clothes_2026": {
+      "url": "https://ckgs.org.mk/novosti/crven-krst-na-grad-skopje-doniraj-obleka-podari-nadezh/",
+      "publisher": "Red Cross of the City of Skopje",
+      "scope": "20 April 2026 list: eight containers at six venues plus Kopche and Momin Potok warehouse. Clean, washed, usable clothes for donation/reuse. Five venues mapped; three held pending coordinate/address resolution. Venue coordinates are not individual bin positions; operating status is not live.",
+      "retrieved_on": "2026-09-22",
+      "reviewer": "Codex",
+      "review_method": "agent_source_review",
+      "human_signoff": false
+    },
+    "kopche_clothes": {
+      "url": "https://ckgs.org.mk/centar/kopche/",
+      "publisher": "Red Cross of the City of Skopje",
+      "scope": "Kopche donation/reuse shop at Kocho Racin 13. Route one venue, not separate headquarters/shop/container duplicates. Newer April 2026 announcement is used for published donation hours where this older page differs.",
+      "retrieved_on": "2026-09-22",
+      "reviewer": "Codex",
+      "review_method": "agent_source_review",
+      "human_signoff": false
+    },
+    "pakomak_streams": {
+      "url": "https://pakomak.mk/Pages/Index/vidovi_na_otpad",
+      "publisher": "Pakomak",
+      "scope": "Packaging streams: green glass; yellow plastic/cans/metal; blue paper/Tetra Pak.",
+      "retrieved_on": "2026-09-19",
+      "reviewer": "Codex",
+      "review_method": "agent_source_review",
+      "human_signoff": false
+    },
+    "pakomak_faq": {
+      "url": "https://pakomak.mk/FaqItems",
+      "publisher": "Pakomak",
+      "scope": "Citizens Q18: Tetra Pak in blue; Q20: plastic bags in yellow; Q25: empty plastic/glass packaging; Q26: bulk caps require contact.",
+      "retrieved_on": "2026-09-19",
+      "reviewer": "Codex",
+      "review_method": "agent_source_review",
+      "human_signoff": false
+    },
+    "pakomak_vending": {
+      "url": "https://pakomak.mk/Pages/Index/povratni_vending_masini",
+      "publisher": "Pakomak",
+      "scope": "Reverse vending collects plastic bottles and cans; PET is named. Do not extend this to bags, cartons or chemical containers.",
+      "retrieved_on": "2026-09-19",
+      "reviewer": "Codex",
+      "review_method": "agent_source_review",
+      "human_signoff": false
+    },
+    "nula_categories": {
+      "url": "https://nulaotpad.com.mk/",
+      "publisher": "Nula Otpad",
+      "scope": "Electrical/electronic equipment and waste batteries. This is not evidence that each collection point accepts every subtype or condition.",
+      "retrieved_on": "2026-09-19",
+      "reviewer": "Codex",
+      "review_method": "agent_source_review",
+      "human_signoff": false
+    },
+    "nula_pickup": {
+      "url": "https://nulaotpad.com.mk/prijavi-e-otpad",
+      "publisher": "Nula Otpad",
+      "scope": "Electronic-waste collection requests via 070236000. Pickup service, not a verified walk-in facility.",
+      "retrieved_on": "2026-09-19",
+      "reviewer": "Codex",
+      "review_method": "agent_source_review",
+      "human_signoff": false
+    },
+    "karpos_household": {
+      "url": "https://karpos.gov.mk/карпош-потсетува-за-совесно-одложува/",
+      "publisher": "Municipality of Karpos",
+      "scope": "Ordinary household waste goes in municipal containers. App subset: used personal tissues and household nappies. Item-level mapping is an agent inference, not explicit municipal item-by-item approval. Excludes clinical, chemical, electronic and bulky waste.",
+      "retrieved_on": "2026-09-22",
+      "reviewer": "Codex",
+      "review_method": "agent_source_review_with_explicit_item_inference",
+      "human_signoff": false
+    },
+    "east_gate_ewaste": {
+      "url": "https://www.elkolekt.mk/елколект-и-електро-еко-грижа-со-ново-со/",
+      "publisher": "Elkolekt",
+      "scope": "18 December 2024 announcement: East Gate Mall collection of small electrical/electronic equipment, including used lamps. App subset: phones, chargers, cables and earbuds only; no large appliances, loose batteries or lamps. Container position and current operation not independently confirmed.",
+      "retrieved_on": "2026-09-22",
+      "reviewer": "Codex",
+      "review_method": "agent_source_review",
+      "human_signoff": false
+    },
+    "karpos_ewaste": {
+      "url": "https://khigiena.com.mk/content/?id=4020",
+      "publisher": "JP Komunalna Higiena Skopje",
+      "scope": "Karpos waste selection centre accepts household electrical/electronic appliances, free drop-off, daily 07:00–19:00. Confirm present operation; excludes batteries and hazardous conditions from this app's routing subset.",
+      "retrieved_on": "2026-09-22",
+      "reviewer": "Codex",
+      "review_method": "agent_source_review",
+      "human_signoff": false
+    }
+  },
+  "profiles": [
+    {
+      "id": "red_cross_clothes",
+      "source_names": ["Red Cross of the City of Skopje"],
+      "asset_type": "collection_centre",
+      "required_materials": ["wearable_clothes"],
+      "accepted_item_kinds": ["wearable_clothes"],
+      "evidence_ids": ["red_cross_clothes_2026", "kopche_clothes"],
+      "limits": "Donate clean, washed, wearable clothes, bagged for collection. No torn, wet, stained or contaminated textiles. Donation/reuse, not evidence of general textile recycling. Pins identify venues, not individual containers. Check access/opening arrangements with the venue."
+    },
+    {
+      "id": "pakomak_glass",
+      "source_names": [
+        "Pakomak container map"
+      ],
+      "asset_type": "recycling_container",
+      "required_materials": [
+        "glass"
+      ],
+      "accepted_item_kinds": [
+        "empty_glass_packaging"
+      ],
+      "evidence_ids": [
+        "pakomak_streams",
+        "pakomak_faq"
+      ],
+      "limits": "No inference for drinking glasses, ceramics, mirrors, or hazardous contents."
+    },
+    {
+      "id": "pakomak_bottles_cans",
+      "source_names": [
+        "Pakomak container map"
+      ],
+      "asset_type": "recycling_container",
+      "required_materials": [
+        "plastic_bottles",
+        "metal_cans"
+      ],
+      "accepted_item_kinds": [
+        "empty_plastic_bottle",
+        "empty_metal_can"
+      ],
+      "evidence_ids": [
+        "pakomak_streams",
+        "pakomak_faq"
+      ],
+      "limits": "Preserve narrow snapshot capabilities. General yellow-bin policy alone does not prove this specific site accepts bags or trays."
+    },
+    {
+      "id": "pakomak_blue",
+      "source_names": [
+        "Pakomak container map"
+      ],
+      "asset_type": "recycling_container",
+      "required_materials": [
+        "paper"
+      ],
+      "accepted_item_kinds": [
+        "clean_paper",
+        "clean_cardboard",
+        "empty_tetrapak"
+      ],
+      "evidence_ids": [
+        "pakomak_streams",
+        "pakomak_faq"
+      ],
+      "limits": "Tetra Pak expansion is scoped to this operator/container profile, not all paper sites. Contaminated/coated ambiguous items require clarification."
+    },
+    {
+      "id": "pakomak_vending",
+      "source_names": [
+        "Pakomak vending-machine list"
+      ],
+      "asset_type": "reverse_vending_machine",
+      "required_materials": [
+        "plastic_bottles",
+        "metal_cans"
+      ],
+      "accepted_item_kinds": [
+        "empty_pet_beverage_bottle",
+        "empty_beverage_can"
+      ],
+      "evidence_ids": [
+        "pakomak_vending"
+      ],
+      "limits": "Conservative app subset. Require suitable shape/label and machine acceptance; exclude shampoo bottles, bags, food tins, chemicals and crushed items until specifically confirmed."
+    },
+    {
+      "id": "ordinary_household_residual",
+      "source_names": [
+        "City of Skopje GIS"
+      ],
+      "asset_type": "waste_container",
+      "required_materials": [
+        "mixed_municipal_waste"
+      ],
+      "accepted_item_kinds": [
+        "ordinary_residual"
+      ],
+      "evidence_ids": [
+        "karpos_household"
+      ],
+      "limits": "Ordinary household used tissues/nappies only. Recorded bin locations, not field-verified acceptance. No clinical, hazardous, electronic or bulky waste."
+    },
+    {
+      "id": "karpos_electronics",
+      "source_names": [
+        "JP Komunalna Higiena Skopje"
+      ],
+      "asset_type": "collection_centre",
+      "required_materials": [
+        "electrical_electronic_equipment"
+      ],
+      "accepted_item_kinds": [
+        "electronics",
+        "small_electronics"
+      ],
+      "evidence_ids": [
+        "karpos_ewaste"
+      ],
+      "limits": "Household electrical/electronic devices; daily 07:00–19:00 as published. Ask staff where to unload. No loose batteries, lamps, leaking/swollen batteries or chemically contaminated equipment. Check with the operator before travel."
+    },
+    {
+      "id": "east_gate_small_electronics",
+      "source_names": ["Elkolekt / Elektro Eko Grizha"],
+      "asset_type": "collection_centre",
+      "required_materials": ["electrical_electronic_equipment"],
+      "accepted_item_kinds": ["small_electronics"],
+      "evidence_ids": ["east_gate_ewaste"],
+      "limits": "Small devices only: phones, chargers, cables and earbuds. No large appliances, loose batteries or damaged batteries. Operator announcement dated December 2024; confirm availability with Elkolekt on +38971263500. Pin is the mall entrance, not the collection container."
+    }
+  ],
+  "specialist_guidance": {
+    "wearable_clothes": {
+      "evidence_ids": ["red_cross_clothes_2026", "kopche_clothes"],
+      "contact_url": "https://ckgs.org.mk/centar/kopche/",
+      "facility_ids": ["clothes-karpos-red-cross", "clothes-dare-dzambaz", "clothes-kopche", "clothes-kisela-voda", "clothes-city-hall"],
+      "message": "Donate clean, washed, wearable clothes for reuse; damaged textiles need different guidance."
+    },
+    "small_electronics": {
+      "evidence_ids": ["karpos_ewaste", "east_gate_ewaste", "nula_pickup"],
+      "contact_url": "https://nulaotpad.com.mk/prijavi-e-otpad",
+      "phone": "+38970236000",
+      "facility_ids": ["ewaste-karpos-yard", "ewaste-east-gate-mall"],
+      "message": "Small electrical devices need separate collection. Use a documented drop-off point or request home pickup from Nula Otpad."
+    },
+    "electronics": {
+      "evidence_ids": [
+        "nula_categories",
+        "nula_pickup",
+        "karpos_ewaste"
+      ],
+      "contact_url": "https://nulaotpad.com.mk/prijavi-e-otpad",
+      "phone": "+38970236000",
+      "facility_ids": [
+        "ewaste-karpos-yard"
+      ],
+      "message": "Electrical items need separate collection. Use the Karpos drop-off centre or contact Nula Otpad for pickup."
+    },
+    "batteries": {
+      "evidence_ids": [
+        "nula_categories"
+      ],
+      "contact_url": "https://nulaotpad.com.mk/",
+      "phone": "+38970236000",
+      "facility_ids": [],
+      "message": "Confirm the battery type and condition with the operator. Damaged, swollen or leaking batteries need specific guidance; ordinary battery collection acceptance is not sufficient."
+    },
+    "other_specialist": {
+      "evidence_ids": [],
+      "facility_ids": [],
+      "message": "No locally verified acceptance evidence yet for this waste type. Do not route to a general-waste site."
+    }
+  },
+  "arrival_notes": {
+    "clothes-karpos-red-cross": ["Red Cross entrance, Orce Nikolov 155v — look for the clothes donation containers."],
+    "clothes-dare-dzambaz": ["11 Oktomvri 42a — clothes containers are in front of Dare Dzambaz Humanitarian House."],
+    "clothes-kopche": ["Kocho Racin 13 — ask for Kopche. Published donation hours: weekdays 08:00–17:00, Saturday 09:00–14:00; check before travel."],
+    "clothes-kisela-voda": ["Municipal grounds, Petar Deljan 17 — look for the Red Cross clothes container in front of the office."],
+    "clothes-city-hall": ["City Hall grounds, Ilinden 82 — ask reception for the Red Cross clothes container. Access follows the venue's opening arrangements."],
+    "ewaste-east-gate-mall": ["Mall entrance — ask the information desk for the small-electronics collection point."]
+  },
+  "defaults": {
+    "unknown_item": "clarify",
+    "unknown_site_acceptance": "do_not_route",
+    "unknown_operational_status": "display_unverified",
+    "general_waste": "requires_positive_item_policy_not_recycling_rejection"
+  }
+}

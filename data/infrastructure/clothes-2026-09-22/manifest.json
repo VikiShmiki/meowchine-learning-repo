@@ -1,0 +1,9 @@
+{
+  "version": "skopje-clothes-v1",
+  "source": "https://ckgs.org.mk/novosti/crven-krst-na-grad-skopje-doniraj-obleka-podari-nadezh/",
+  "sites_sha256": "4a005de90343580fe1a03bfc8675480a00580a244cd335849c99ea1ba6f0c3c6",
+  "mapped_venues": 5,
+  "documented_venues": 8,
+  "coordinate_license": "https://www.openstreetmap.org/copyright",
+  "counting": "One app collection-point record per venue, not one per physical container."
+}

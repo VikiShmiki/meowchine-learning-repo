@@ -1,0 +1,81 @@
+{
+  "version": "skopje-clothes-v1",
+  "reviewed_on": "2026-09-22",
+  "sites": [
+    {
+      "id": "clothes-karpos-red-cross",
+      "name": "Red Cross Karpos — clothes donation",
+      "address": "Orce Nikolov 155v, Skopje",
+      "latitude": 42.0048625,
+      "longitude": 21.4123054,
+      "municipality_code": "43",
+      "municipality_name": "Karposh",
+      "collection_mode": "drop_off_container",
+      "reported_containers": 2,
+      "coordinate_source": "https://www.openstreetmap.org/node/8615409557",
+      "coordinate_method": "OSM main entrance of Red Cross Karpos, way/547074225; not individual containers",
+      "coordinate_updated_at": "2021-04-10T17:13:56Z",
+      "arrival_note": "Red Cross entrance, Orce Nikolov 155v — look for the clothes donation containers."
+    },
+    {
+      "id": "clothes-dare-dzambaz",
+      "name": "Dare Dzambaz — clothes donation",
+      "address": "11 Oktomvri 42a, Skopje",
+      "latitude": 41.9889534,
+      "longitude": 21.4358851,
+      "municipality_code": "60",
+      "municipality_name": "Centar",
+      "collection_mode": "drop_off_container",
+      "reported_containers": 2,
+      "coordinate_source": "https://www.openstreetmap.org/node/9315908483",
+      "coordinate_method": "OSM Red Cross city office POI matched by street and house number; not individual containers",
+      "coordinate_updated_at": "2024-07-29T16:14:41Z",
+      "arrival_note": "11 Oktomvri 42a — clothes containers are in front of Dare Dzambaz Humanitarian House."
+    },
+    {
+      "id": "clothes-kopche",
+      "name": "Kopche — clothes donation",
+      "address": "Kocho Racin 13, Skopje",
+      "latitude": 41.9907397,
+      "longitude": 21.4358225,
+      "municipality_code": "60",
+      "municipality_name": "Centar",
+      "collection_mode": "staffed_drop_off",
+      "reported_containers": null,
+      "coordinate_source": "https://www.openstreetmap.org/node/9315874307",
+      "coordinate_method": "OSM Red Cross headquarters POI at Kopche's operator-published address; not a surveyed shop entrance",
+      "coordinate_updated_at": "2026-04-04T13:33:11Z",
+      "arrival_note": "Kocho Racin 13 — ask for Kopche. Published donation hours: weekdays 08:00–17:00, Saturday 09:00–14:00; check before travel."
+    },
+    {
+      "id": "clothes-kisela-voda",
+      "name": "Kisela Voda municipality — clothes donation",
+      "address": "Petar Deljan 17, Skopje",
+      "latitude": 41.981641,
+      "longitude": 21.441606,
+      "municipality_code": "51",
+      "municipality_name": "Kisela Voda",
+      "collection_mode": "drop_off_container",
+      "reported_containers": 1,
+      "coordinate_source": "https://www.openstreetmap.org/way/284928908",
+      "coordinate_method": "Nominatim representative point for named OSM municipal grounds; not the container or entrance",
+      "coordinate_updated_at": "2021-11-09T21:08:24Z",
+      "arrival_note": "Municipal grounds, Petar Deljan 17 — look for the Red Cross clothes container in front of the office."
+    },
+    {
+      "id": "clothes-city-hall",
+      "name": "Skopje City Hall — clothes donation",
+      "address": "Ilinden 82, Skopje",
+      "latitude": 42.0039871,
+      "longitude": 21.4204431,
+      "municipality_code": "60",
+      "municipality_name": "Centar",
+      "collection_mode": "drop_off_container",
+      "reported_containers": 1,
+      "coordinate_source": "https://www.openstreetmap.org/way/1367341315",
+      "coordinate_method": "Nominatim representative point for named OSM City Hall campus; not the container or entrance",
+      "coordinate_updated_at": "2025-09-10T07:15:38Z",
+      "arrival_note": "City Hall grounds, Ilinden 82 — ask reception for the Red Cross clothes container. Access follows the venue's opening arrangements."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "artifact_sha256": "8a03d7aa2cb3171f5fafd9cc69ee31c868cd5fab7de78ab171e3ea3fbc8b97c6",
+  "development_only": true,
+  "experiment_code_sha256": "df415aa54c29b39d4a5f7c0fe4a0e6eb711eb4782415e57313d7ce8193f8f7dc",
+  "labels": [
+    "glass",
+    "paper_tetrapak",
+    "plastic_metal",
+    "special_unsupported"
+  ],
+  "manual_review_sha256": "d205ec71d377349a56f44b415ad0a631f20bf31843fe445aca10e5e0b91268e6",
+  "manual_sha256": "4e4e65a86f6af9fb786bec75af2830542daad16d4f50f7e45d30837ca2c82b20",
+  "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+  "model_revision": "8b3219a92973c328a8e22fadcfa821b5dc75636a",
+  "random_seed": 42,
+  "selected_threshold": null,
+  "selection_gate_passed": false,
+  "serving_eligible": false,
+  "training_input_sha256": {
+    "dataset_a_label_mapping.json": "a7b8dc889c6569cf059c9e5325e40de1b8f0edaf7ff03a2fafc426e40421919e",
+    "needs_manual_review.csv": "3b2de33c6a2c1f27a2f894402214a00db522d29b518e9e68f113f4c0a7f553c5",
+    "test.csv": "b1da7ad5eea7f21d14c6a9b8227e78030d56b173f5dd40c3433111e29647dfe0",
+    "train.csv": "9c4187c28e7929dffd41ff5867d6e8c9b4174fe3772afbcd1c3851c4fbf9c63c"
+  },
+  "validation_sha256": "884e95c1b6fbe7bc66890575d62c2842efed978a2fdc8fa33444f87bc755df59"
+}
