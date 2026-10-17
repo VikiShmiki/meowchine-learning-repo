@@ -2,15 +2,18 @@
 
 Updated: 2026-10-17
 
-## Active delivery — JSP public transport
+## Implemented — JSP public transport
 
 Owner: Codex, user-requested October 17, 2026. Implemented scheduled JSP journeys,
 ORS walking connections, one same-stop transfer per collection leg, departure
 selection and bilingual itinerary/map UI. Full-container exclusions and post-trip
 check-ins apply. The live JSP/ORS smoke returned buses 18 and 8 to Karpoš yard.
-The 24 backend and seven focused browser cases pass at 320/390/1280 px. Full
-regression and hosted quality/container gates are in progress; merge is pending.
-See [TRANSIT.md](docs/TRANSIT.md).
+The 24 backend and seven focused browser cases pass at 320/390/1280 px. Lock,
+lint, formatting, 19 Node tests and all snapshot/coverage/upgrade reproduction
+checks pass. The local app loads both language models with routing configured.
+Delivery and full-regression gate results are recorded on
+[PR #2](https://github.com/VikiShmiki/meowchine-learning-repo/pull/2) and in
+[CI_STATUS.md](docs/CI_STATUS.md). See [TRANSIT.md](docs/TRANSIT.md) for limits.
 
 ## Completed — trip completion and container check-ins
 
