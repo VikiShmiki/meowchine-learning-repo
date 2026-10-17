@@ -40,7 +40,11 @@ use the ASGI peer address; users on the same network can share an allowance.
   available report can supersede an older full report. Newer personal negative
   reports can override the shared status only for that reporter. Unreviewed positive
   reports cannot reopen a shared problem, and no report can reopen a source-closed
-  container. Expiry without another current report means unknown, not available.
+  container. A reviewed availability observation resolves older warnings even after
+  that clearance expires; those resolved warnings cannot return. An expired full
+  report does not resolve a separate, still-current damaged/inaccessible report.
+  With no unresolved active observation, current condition is unknown. Pending
+  positive reports cannot erase personal negative observations either.
 - Conditions are asset-scoped, not site-scoped. Filtering happens before the nearby
   shortlist and provider matrix. The existing bounded-shortlist optimizer remains;
   this is not a newly claimed city-wide best route.
@@ -54,28 +58,73 @@ use the ASGI peer address; users on the same network can share an allowance.
 - Container conditions are in the route-stop and map-details disclosures. Source
   status remains distinct from current community reports.
 
-## End-of-trip check-in
+## Container refresh decision (2026-10-17)
 
-Route stops offer **I visited this stop**, **Dropped these off**, and **Report a
-problem**. Marking a drop-off also marks that stop visited. Multi-stop trips remain
-open after individual drop-offs, and **Finish trip** lets a resident end early.
-The last drop-off ends the trip automatically and clears its route from the map.
-Ending early preserves uncompleted basket items and does not award drop-off activity.
+Use community observations now, with collection schedules as future context once
+verified for the exact assets. Street cleaning, planned waste collection and an
+observed empty container are different events.
 
-After completion, the optional check-in lists only containers at explicitly visited
-or completed stops, deduplicated across replans. Each container starts at **Didn't
-check / skip**; nothing is submitted automatically. Residents choose a condition
-and send each report, or dismiss the remaining check-in. The same report endpoint
-is used during and after a trip; full reports take effect immediately for everyone.
-No container-photo upload or GPS attendance proof is required. Visit/check-in state
-stays in page memory and is cleared when the trip ends; it is not a stored location
-history. Refreshing or leaving the page loses that unfinished trip state.
+| Approach | Benefit | Limitation and decision |
+| --- | --- | --- |
+| Scheduled resets | Work without many users | A planned visit may be missed and may cover another waste stream. Never mark available from a clock. |
+| Anonymous majority voting | Could clear stale warnings quickly | Browser cookies are not independent people; repeated identities and coordinated votes can defeat a small threshold. Do not auto-clear from vote counts. |
+| Observations, expiry and review | Works with existing data and preserves provenance | Review can delay recovery. Keep bounded warnings, invite fresh observations and label unknown conditions honestly. |
 
-Successful reports cannot be submitted twice from the same form. A failed submission
-keeps the selection for retry; server-side duplicate suppression remains in force.
-A failed status refresh after a successful submission does not turn it into a failed
-report. Existing quotas, moderation and expiry remain active; photos for separate
-dumping reports are unchanged.
+Evidence checked on October 17, 2026:
+
+- [Komunalna Higiena's service overview](https://khigiena.com.mk/channel/?id=1)
+  describes seven-day, three-shift container collection and twice-weekly household
+  bin service. It does not give a current time for an individual recycling asset.
+- [Pakomak's FAQ](https://pakomak.mk/FaqItems) identifies Komunalna Higiena as the
+  operator emptying Skopje's igloo containers. That establishes responsibility,
+  not completion of a collection visit.
+- The utility's [operational programme](https://khigiena.com.mk/download/?f=OPERATIVNA+PROGRAMA.pdf)
+  is explicitly for **2019**, despite recent search indexing. Its material-specific
+  frequencies are historical and must not become a 2026 timetable.
+
+No current asset-specific collection timetable or completed-service feed was
+verified in this research. The existing 12-hour full/available, 24-hour inaccessible
+and 72-hour damaged lifetimes are application policy, not measured cleaning cycles.
+Do not extend them from the historical programme.
+
+Implemented refresh behavior: active observations expose their validity end time.
+Expired observations appear separately as **Needs a fresh check**, with the last
+condition/time and an explicit unknown-current-condition message. They do not block
+routes or count as availability evidence. The existing 30-second visible-page
+refresh updates this state; a successful refresh also enables another observation
+after that form's previous submission expires. Network failures can delay display
+refresh; route planning always rechecks server state. Existing 30-day retention,
+private pending reports, moderation and quota controls apply to stale context too.
+
+Before adding schedule context, obtain an operator-approved asset/material mapping,
+service windows in Europe/Skopje, effective dates, exceptions, source/version and
+refresh permission. A scheduled visit should prompt a recheck, never clear a full,
+damaged or inaccessible warning. An authenticated completed-service record could
+support a fullness update after mapping and freshness validation; it would not
+prove damage repaired or access restored. Operator outreach is a next step, not an
+implemented integration, and no messages have been sent on the user's behalf.
+
+## Stop check-in
+
+Route cards use the map's stop numbers and the waste picker's material colors.
+Multi-material stops keep each assigned color. Each card offers **Dropped off** and
+**Report a problem**. Dropping off opens an optional **Still space / Full** popup;
+reporting a problem offers **Full / Damaged / Blocked** without completing the stop.
+Each tap sends one observation for the identified container. Stops with several
+containers ask about each separately; Skip or Escape dismisses the remaining check.
+Nothing is reported just by completing, ending, or skipping a trip.
+
+Multi-stop routes remain open after individual drop-offs. The final drop-off ends
+the route automatically. **Finish trip** ends early and preserves remaining basket
+items. There is no second questionnaire at the end. Account-save failures preserve
+items and allow retry or explicit completion without saving.
+
+Successful reports disable the choices and advance to the next container; failures
+keep the current container available for retry. An older status read or failed
+refresh cannot undo a successful report. Full reports immediately affect routing;
+positive observations still require review. Existing quotas, moderation, expiry,
+and duplicate suppression apply. Check-in state stays in page memory; no photo,
+GPS attendance proof, or stored location history is added.
 
 ## Dumping reports
 
@@ -125,7 +174,8 @@ edge protections and stronger identity are needed before a wide public launch.
 
 ## API and tests
 
-- `GET /api/v1/container-statuses`: personalized current overlays + revision, no-store.
+- `GET /api/v1/container-statuses`: personalized current overlays, separate expired
+  `rechecks`, and active-overlay revision, no-store.
 - `POST /api/v1/container-reports`: asset_id and condition, returns pending report.
   A pending `full` report already affects public route eligibility; status source
   `community_report` distinguishes it from `reviewed_community` and `your_report`.

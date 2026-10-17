@@ -61,14 +61,13 @@ def test_bus_itinerary_map_completion_and_full_exclusion(page, web_url, width, l
             path=str(Path(os.environ["SRA_TRANSIT_SCREENSHOTS"]) / f"jsp-{language}-{width}.png")
         )
     page.get_by_role(
-        "button", name="Dropped these off" if language == "en" else "Ги предадов", exact=True
+        "button", name="Dropped off" if language == "en" else "Ги предадов", exact=True
     ).click()
     expect(page.locator("#trip-result")).to_be_hidden()
     expect(page.locator("#trip-checkin")).to_be_visible()
-    row = page.locator("#trip-checkin .condition-row").first
-    row.locator("select").select_option("full")
-    row.locator("button").click()
-    expect(row.locator("button")).to_be_disabled()
+    row = page.locator("#stop-report-dialog .stop-report-container")
+    with page.expect_response("**/api/v1/container-reports"):
+        row.locator("button[data-condition=full]").click()
     # A fresh visitor cannot get a bus itinerary to the only compatible full facility.
     result = page.request.post(
         web_url + "/api/v1/trips",

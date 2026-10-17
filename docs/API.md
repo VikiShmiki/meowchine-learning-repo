@@ -11,11 +11,18 @@ characters; coordinates must be valid WGS84 values.
 without an image or account. Full reports expire 12 hours after submission.
 Unreviewed availability cannot reopen a shared problem or a source-closed asset.
 
-`GET /api/v1/container-statuses` returns `statuses` and a revision `version`, with
+`GET /api/v1/container-statuses` returns `statuses`, `rechecks` and a revision `version`, with
 `Cache-Control: no-store`. Each overlay contains `condition`, `reported_at`,
 `expires`, and `source`: `community_report` for an unreviewed shared full report,
 `reviewed_community` for an approved observation, or `your_report` for another
 personal pending problem. No overlay means unknown, not confirmed available.
+`rechecks` maps asset IDs to expired observations with the same fields; these are
+display-only context, never routing exclusions or proof of collection. Reviewed
+clearances resolve older warnings even after the clearance expires. Expiry of a
+full report does not clear other still-current problems. The revision hashes
+active `statuses` only. Rejected
+and duplicate observations are omitted; the same privacy and 30-day retention
+rules apply to both maps.
 Existing routes recheck this revision; browser clients refresh every 30 seconds
 and offer explicit replanning. [Community contracts](COMMUNITY.md) cover moderation,
 rate limits, expiry, and the optional post-trip check-in.

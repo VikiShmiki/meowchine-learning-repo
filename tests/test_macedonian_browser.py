@@ -62,12 +62,12 @@ def test_macedonian_text_route_and_bidirectional_switch_preserve_state(
     page.get_by_role("button", name="Најди рута", exact=True).click()
     expect(page.locator("#trip-result")).to_be_visible()
     before = page.locator("#trip-result").inner_text()
-    assert "Предајте" in before
+    assert "Ги предадов" in before
     switch(page, "en")
-    expect(page.locator("#trip-result")).to_contain_text("Drop off:")
+    expect(page.locator("#trip-result .stop-material-chips")).to_contain_text("Glass")
     expect(page.locator("#trip-items li")).to_have_count(1)
     switch(page, "mk")
-    expect(page.locator("#trip-result")).to_contain_text("Предајте")
+    expect(page.locator("#trip-result")).to_contain_text("Ги предадов")
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
 
 

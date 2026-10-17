@@ -1,4 +1,4 @@
-"""Trip completion and optional container observations on the real bilingual page."""
+"""Compact stop cards and optional per-container observations on the real page."""
 
 import os
 
@@ -32,34 +32,39 @@ def reports(page, web_url):
 
 @pytest.mark.parametrize("width", [320, 360, 1280])
 @pytest.mark.parametrize("mode", ["Walking", "Driving"])
-def test_final_dropoff_ends_trip_and_optional_checkin_full_changes_other_routes(
-    page, web_url, width, mode
-):
+def test_dropoff_popup_full_changes_other_routes(page, web_url, width, mode):
     page.set_viewport_size({"width": width, "height": 900})
     page.goto(web_url)
     with page.expect_response("**/api/v1/trips") as planned:
         route(page, web_url, mode=mode)
-    original = planned.value.json()
-    asset_ids = original["stops"][0]["asset_ids"]
-    page.get_by_role("button", name="Dropped these off", exact=True).click()
-    panel = page.locator("#trip-checkin")
-    expect(panel).to_be_visible()
+    stop = planned.value.json()["stops"][0]
+    card = page.locator("#trip-stop-1")
+    expect(card.locator(".stop-card-number")).to_have_text("1")
+    expect(card.locator(".stop-actions button")).to_have_count(2)
+    expect(card).not_to_contain_text("Unknown")
+    assert card.evaluate(
+        "el => el.style.getPropertyValue('--stop-fill') === "
+        "SiteData.stopAppearance(['glass']).background"
+    )
+    card.get_by_role("button", name="Dropped off", exact=True).click()
+    popup = page.locator("#stop-report-dialog")
+    expect(popup).to_be_visible()
+    expect(popup.locator("h2")).to_have_text("Still space here?")
+    expect(popup.locator(".stop-report-choices button")).to_have_count(2)
+    expect(popup.get_by_role("button", name="Still space", exact=True)).to_be_focused()
     expect(page.locator("#trip-result")).to_be_hidden()
-    expect(page.locator("#route-controls")).to_be_hidden()
-    expect(page.locator("#trip-completion")).to_be_hidden()
     expect(page.locator("#trip-items li")).to_have_count(0)
-    expect(panel.locator(".condition-row")).to_have_count(len(asset_ids))
-    row = panel.locator(".condition-row").first
-    expect(row.locator("select")).to_have_value("")
-    expect(row.get_by_role("button", name="Send report")).to_be_disabled()
     assert reports(page, web_url) == []
-    row.locator("select").select_option("full")
-    row.get_by_role("button", name="Send report").click()
-    expect(row.get_by_role("status")).to_contain_text("excluded from everyone's routes")
-    expect(row.get_by_role("button", name="Report sent")).to_be_disabled()
-    assert len(reports(page, web_url)) == 1
+    row = popup.locator(".stop-report-container")
     reported = row.get_attribute("data-asset-id")
-    # A second browser visitor is affected without approval or an account.
+    assert reported in stop["asset_ids"]
+    with page.expect_response("**/api/v1/container-reports"):
+        popup.get_by_role("button", name="Full", exact=True).click()
+    if len(stop["asset_ids"]) > 1:
+        expect(row).not_to_have_attribute("data-asset-id", reported)
+        popup.get_by_role("button", name="Skip", exact=True).click()
+    expect(popup).to_have_count(0)
+    assert len(reports(page, web_url)) == 1
     stranger = page.context.browser.new_context()
     try:
         statuses = stranger.request.get(web_url + "/api/v1/container-statuses").json()
@@ -79,131 +84,111 @@ def test_final_dropoff_ends_trip_and_optional_checkin_full_changes_other_routes(
         }
     finally:
         stranger.close()
+    expect(page.locator("#checkin-heading")).to_be_focused()
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
-    if os.getenv("SRA_CHECKIN_SCREENSHOTS"):
-        panel.screenshot(
-            path=os.path.join(os.environ["SRA_CHECKIN_SCREENSHOTS"], f"checkin-{width}-{mode}.png")
-        )
-    panel.get_by_role("button", name="Done / skip remaining").click()
-    expect(panel).to_be_hidden()
-    assert len(reports(page, web_url)) == 1
+    expect(page.locator("#trip-checkin select")).to_have_count(0)
 
 
-def test_end_without_visits_keeps_items_and_does_not_send_reports(page, web_url):
+@pytest.mark.parametrize("dismiss", ["Skip", "Escape"])
+def test_dismiss_popup_never_reports_and_end_early_keeps_items(page, web_url, dismiss):
     page.goto(web_url)
     route(page, web_url)
+    button = page.get_by_role("button", name="Report a problem", exact=True)
+    button.click()
+    popup = page.locator("#stop-report-dialog")
+    expect(popup).to_be_visible()
+    if dismiss == "Escape":
+        page.keyboard.press("Escape")
+    else:
+        popup.get_by_role("button", name="Skip", exact=True).click()
+    expect(popup).to_have_count(0)
+    expect(button).to_be_focused()
     page.get_by_role("button", name="Finish trip", exact=True).click()
-    expect(page.locator("#trip-checkin")).to_contain_text("No stops were marked visited")
+    expect(page.locator("#trip-checkin")).to_contain_text("Trip finished")
     expect(page.locator("#trip-items li")).to_have_count(1)
-    expect(page.locator("#route-controls")).to_be_hidden()
+    expect(page.locator("#trip-checkin select")).to_have_count(0)
     assert not reports(page, web_url)
 
 
-def test_visited_without_dropoff_checkin_retry_preserves_choice_and_remaining_items(page, web_url):
+def test_problem_retry_preserves_container_and_basket(page, web_url):
     page.goto(web_url)
     route(page, web_url)
-    page.get_by_label("I visited this stop").check()
-    page.get_by_role("button", name="Finish trip", exact=True).click()
-    expect(page.locator("#trip-items li")).to_have_count(1)
-    panel = page.locator("#trip-checkin")
-    row = panel.locator(".condition-row").first
-    row.locator("select").select_option("full")
+    page.get_by_role("button", name="Report a problem", exact=True).click()
+    popup = page.locator("#stop-report-dialog")
+    row = popup.locator(".stop-report-container")
+    expect(popup.get_by_role("button", name="Blocked", exact=True)).to_be_visible()
+    asset = row.get_attribute("data-asset-id")
     page.route("**/api/v1/container-reports", lambda interception: interception.abort())
-    row.get_by_role("button", name="Send report").click()
-    expect(row.get_by_role("status")).to_contain_text("Your choice is kept")
-    expect(row.locator("select")).to_have_value("full")
-    expect(row.get_by_role("button", name="Send report")).to_be_enabled()
+    popup.get_by_role("button", name="Full", exact=True).click()
+    expect(popup.get_by_role("status")).to_have_text("Could not send. Try again.")
+    expect(row).to_have_attribute("data-asset-id", asset)
+    expect(popup.get_by_role("button", name="Full", exact=True)).to_be_enabled()
+    expect(page.locator("#trip-items li")).to_have_count(1)
     assert not reports(page, web_url)
     page.unroute("**/api/v1/container-reports")
-    row.get_by_role("button", name="Send report").click()
-    expect(row.get_by_role("status")).to_contain_text("Reported full")
+    with page.expect_response("**/api/v1/container-reports"):
+        popup.get_by_role("button", name="Full", exact=True).click()
+    expect(page.locator("#route-condition-notice")).to_be_visible()
     assert len(reports(page, web_url)) == 1
 
 
-def test_checkin_skip_and_catalog_retry_do_not_invent_observations(page, web_url):
+def test_catalog_retry_and_macedonian_positive_report(page, web_url):
     page.goto(web_url)
     route(page, web_url)
     page.route("**/api/v1/sites?scope=citizen", lambda interception: interception.abort())
-    page.get_by_role("button", name="Dropped these off", exact=True).click()
-    panel = page.locator("#trip-checkin")
-    expect(panel).to_contain_text("Could not load containers")
+    page.get_by_role("button", name="Dropped off", exact=True).click()
+    popup = page.locator("#stop-report-dialog")
+    expect(popup).to_contain_text("Could not load containers.")
     page.unroute("**/api/v1/sites?scope=citizen")
-    panel.get_by_role("button", name="Retry", exact=True).click()
-    expect(panel.locator(".condition-row")).not_to_have_count(0)
-    panel.get_by_role("button", name="Done / skip remaining").click()
-    assert not reports(page, web_url)
-
-
-def test_macedonian_checkin_preserves_choice_when_switching_languages(page, web_url):
-    page.goto(web_url)
-    route(page, web_url)
-    page.get_by_role("button", name="Dropped these off", exact=True).click()
-    panel = page.locator("#trip-checkin")
-    row = panel.locator(".condition-row").first
-    row.locator("select").select_option("full")
-    page.locator(".language-switch").select_option("mk")
-    expect(panel.locator("h2")).to_have_text("Патувањето заврши")
-    expect(row.locator("select")).to_have_value("full")
-    row.get_by_role("button", name="Испрати пријава", exact=True).click()
-    expect(row.get_by_role("status")).to_contain_text("исклучен од рутите")
-    page.locator(".language-switch").select_option("en")
-    expect(row.get_by_role("status")).to_contain_text("Reported full")
+    popup.get_by_role("button", name="Retry", exact=True).click()
+    expect(popup.get_by_role("button", name="Still space", exact=True)).to_be_visible()
+    page.evaluate("() => NajdiFrliI18n.setLanguage('mk')")
+    expect(popup.locator("h2")).to_have_text("Има уште место?")
+    with page.expect_response("**/api/v1/container-reports") as response:
+        popup.get_by_role("button", name="Има место", exact=True).click()
+    assert response.value.request.post_data_json["condition"] == "available"
     assert len(reports(page, web_url)) == 1
+    # A positive observation remains unreviewed; no automatic public clearance.
+    assert not page.request.get(web_url + "/api/v1/container-statuses").json()["statuses"]
 
 
-def test_multi_stop_completion_keeps_route_and_checkin_contains_only_visited_assets(page, web_url):
+def test_multi_stop_cards_keep_numbers_colors_and_no_second_questionnaire(page, web_url):
     page.goto(web_url)
     route(page, web_url)
-    # Add a second material whose collection site differs from the glass stop.
     page.get_by_role("button", name="Clothes for donation", exact=True).click()
     page.locator("#confirm-picks").click()
     with page.expect_response("**/api/v1/trips") as planned:
         page.get_by_role("button", name="Find my route", exact=True).click()
     trip = planned.value.json()
     assert len(trip["stops"]) == 2
+    for number, stop in enumerate(trip["stops"], 1):
+        card = page.locator(f"#trip-stop-{number}")
+        expect(card.locator(".stop-card-number")).to_have_text(str(number))
+        assert card.evaluate(
+            "(el, kinds) => el.style.getPropertyValue('--stop-fill') === "
+            "SiteData.stopAppearance(kinds).background",
+            stop["item_kinds"],
+        )
     first = page.locator("#trip-stop-1")
-    first.get_by_role("button", name="Dropped these off", exact=True).click()
+    first.get_by_role("button", name="Dropped off", exact=True).click()
     expect(first).to_have_attribute("data-completed", "true")
     expect(page.locator("#trip-result")).to_be_visible()
     expect(page.locator("#trip-items li")).to_have_count(1)
-    expect(page.locator("#trip-checkin")).to_be_hidden()
+    popup = page.locator("#stop-report-dialog")
+    expect(popup.locator(".stop-card-number")).to_have_text("1")
+    popup.get_by_role("button", name="Skip", exact=True).click()
     page.get_by_role("button", name="Finish trip", exact=True).click()
-    rows = page.locator("#trip-checkin .condition-row")
-    expect(rows).to_have_count(len(trip["stops"][0]["asset_ids"]))
-    assert set(rows.evaluate_all("rows => rows.map(row => row.dataset.assetId)")) == set(
-        trip["stops"][0]["asset_ids"]
-    )
+    expect(page.locator("#trip-checkin")).to_contain_text("Trip finished")
+    expect(page.locator("#trip-checkin .condition-row")).to_have_count(0)
     assert not reports(page, web_url)
 
 
-def test_visited_containers_survive_replanning_are_deduplicated_and_reset_after_finish(
-    page, web_url
-):
-    page.goto(web_url)
-    route(page, web_url)
-    page.get_by_label("I visited this stop").check()
-    page.get_by_role("button", name="Update route", exact=True).click()
-    page.get_by_role("button", name="Use existing start", exact=True).click()
-    expect(page.get_by_label("I visited this stop")).to_be_checked()
-    page.get_by_role("button", name="Finish trip", exact=True).click()
-    rows = page.locator("#trip-checkin .condition-row")
-    expect(rows).not_to_have_count(0)
-    ids = rows.evaluate_all("rows => rows.map(row => row.dataset.assetId)")
-    assert len(ids) == len(set(ids))
-    page.get_by_role("button", name="Done / skip remaining", exact=True).click()
-    page.get_by_role("button", name="Find my route", exact=True).click()
-    expect(page.get_by_label("I visited this stop")).not_to_be_checked()
-    page.get_by_role("button", name="Finish trip", exact=True).click()
-    expect(page.locator("#trip-checkin")).to_contain_text("No stops were marked visited")
-    assert not reports(page, web_url)
-
-
-def test_older_status_read_and_failed_refresh_do_not_undo_a_successful_full_report(page, web_url):
+def test_older_status_read_and_failed_refresh_keep_successful_full_report(page, web_url):
     page.goto(web_url)
     route(page, web_url)
     page.get_by_role("button", name="Report a problem", exact=True).click()
-    row = page.locator("#trip-stop-1 .condition-row").first
-    expect(row.locator("select")).to_be_visible()
+    popup = page.locator("#stop-report-dialog")
+    expect(popup.get_by_role("button", name="Full", exact=True)).to_be_visible()
     held = []
 
     def old_read(interception):
@@ -215,12 +200,95 @@ def test_older_status_read_and_failed_refresh_do_not_undo_a_successful_full_repo
     page.route("**/api/v1/container-statuses", old_read)
     with page.expect_request("**/api/v1/container-statuses"):
         page.evaluate("() => { CommunityUI.refresh().catch(() => {}); }")
-    row.locator("select").select_option("full")
-    row.get_by_role("button", name="Report condition").click()
-    expect(row.get_by_role("status")).to_contain_text("Reported full")
+    with page.expect_response("**/api/v1/container-reports"):
+        popup.get_by_role("button", name="Full", exact=True).click()
     held[0].fulfill(json={"statuses": {}, "version": "older-read"})
-    expect(row.locator("form")).to_have_attribute("aria-busy", "false")
-    expect(row.locator(".condition-badge")).to_have_text("Full")
-    expect(row.get_by_role("button", name="Report sent")).to_be_disabled()
     expect(page.locator("#route-condition-notice")).to_be_visible()
     assert len(reports(page, web_url)) == 1
+
+
+def test_multiple_containers_report_only_explicit_choices_once(page, web_url):
+    page.goto(web_url)
+    page.route(
+        "**/api/v1/sites?scope=citizen",
+        lambda interception: interception.fulfill(
+            json={
+                "sites": [
+                    {
+                        "assets": [
+                            {
+                                "id": "first",
+                                "name": "Paper container",
+                                "address": "First location",
+                                "source_materials": ["paper"],
+                            },
+                            {
+                                "id": "second",
+                                "name": "Glass container",
+                                "address": "Second location",
+                                "source_materials": ["glass"],
+                            },
+                        ]
+                    }
+                ]
+            }
+        ),
+    )
+    requests = []
+    page.route("**/api/v1/container-reports", lambda interception: requests.append(interception))
+    page.evaluate("""() => CommunityUI.reportStop(['first', 'second', 'first'], {
+        number: 2, appearance: SiteData.stopAppearance(['paper_tetrapak', 'glass'])
+    })""")
+    popup = page.locator("#stop-report-dialog")
+    expect(popup).to_contain_text("Paper container")
+    expect(popup.locator(".stop-report-progress")).to_have_text("1 / 2")
+    with page.expect_request("**/api/v1/container-reports"):
+        popup.get_by_role("button", name="Full", exact=True).click()
+    expect(popup.get_by_role("button", name="Full", exact=True)).to_be_disabled()
+    expect(popup.get_by_role("button", name="Still space", exact=True)).to_be_disabled()
+    assert requests[0].request.post_data_json == {"asset_id": "first", "condition": "full"}
+    requests[0].fulfill(json={"created": 1_800_000_000, "expires": 1_800_043_200})
+    expect(popup).to_contain_text("Glass container")
+    expect(popup.locator(".stop-report-progress")).to_have_text("2 / 2")
+    expect(popup.get_by_role("button", name="Still space", exact=True)).to_be_focused()
+    popup.get_by_role("button", name="Skip", exact=True).click()
+    expect(popup).to_have_count(0)
+    assert len(requests) == 1
+
+
+def test_expired_report_details_remain_available_in_map_control(page, web_url):
+    page.goto(web_url)
+    with page.expect_response("**/api/v1/trips") as response:
+        route(page, web_url)
+    asset_id = response.value.json()["stops"][0]["asset_ids"][0]
+    page.route(
+        "**/api/v1/container-statuses",
+        lambda interception: interception.fulfill(
+            json={
+                "statuses": {},
+                "rechecks": {
+                    asset_id: {
+                        "condition": "full",
+                        "reported_at": 1_700_000_000,
+                        "expires": 1_700_043_200,
+                        "source": "community_report",
+                    }
+                },
+                "version": "expired",
+            }
+        ),
+    )
+    page.evaluate("() => CommunityUI.refresh()")
+    page.evaluate(
+        "id => { const control = CommunityUI.containerControl([id]); "
+        "document.body.append(control); control.open = true; }",
+        asset_id,
+    )
+    row = page.locator(f'.condition-row[data-asset-id="{asset_id}"]')
+    expect(row.locator(".condition-badge")).to_have_text("Needs a fresh check")
+    expect(row.locator(".condition-history")).to_be_hidden()
+    row.locator(".condition-report-details > summary").click()
+    expect(row.locator(".condition-history")).to_contain_text("Last observation: Full")
+    assert reports(page, web_url) == []
+    page.evaluate("() => NajdiFrliI18n.setLanguage('mk')")
+    expect(row.locator(".condition-badge")).to_have_text("Потребна е нова проверка")

@@ -3,6 +3,7 @@
   "use strict";
   const materials = ["glass", "plastic_metal", "paper_tetrapak", "general", "special_unsupported", "clothes"];
   const materialColors = { glass: "#9a7317", plastic_metal: "#36734e", paper_tetrapak: "#5265a6", general: "#66736c", special_unsupported: "#366d80", clothes: "#95617b" };
+  const materialSoftColors = { glass: "#f1ecc1", plastic_metal: "#dfedcb", paper_tetrapak: "#e1e5f3", general: "#eaeae3", special_unsupported: "#dfebee", clothes: "#eee2e8" };
   const materialNames = { glass: "Glass", plastic_metal: "Plastic / metal", paper_tetrapak: "Paper / cartons", general: "General waste", special_unsupported: "Electronics", clothes: "Clothes · donation" };
   const kindMaterials = { empty_glass_packaging: "glass", empty_plastic_bottle: "plastic_metal",
     empty_metal_can: "plastic_metal", clean_paper: "paper_tetrapak", clean_cardboard: "paper_tetrapak", empty_tetrapak: "paper_tetrapak",
@@ -15,7 +16,9 @@
     const background = colors.length > 1
       ? `radial-gradient(circle, #fffefa 0 46%, transparent 49%), conic-gradient(${colors.map((color, i) => `${color} ${i * 100 / colors.length}% ${(i + 1) * 100 / colors.length}%`).join(", ")})`
       : colors[0] || "#66736c";
-    return { materials: selected, background, color: colors.length > 1 ? "#263c30" : "#fff",
+    const softColors = selected.map(material => materialSoftColors[material]);
+    const surface = softColors.length > 1 ? `linear-gradient(120deg, ${softColors.join(", ")})` : softColors[0] || "#fffefa";
+    return { materials: selected, background, surface, color: colors.length > 1 ? "#263c30" : "#fff",
       label: selected.map((material) => materialNames[material]).join(" / ") || "Drop-off" };
   }
   function coordinates(latitude, longitude) {

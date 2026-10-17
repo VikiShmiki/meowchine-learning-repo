@@ -12,17 +12,20 @@ at the last collection point, with no final return leg. Driving optionally offer
 container, returning to the car between stops. The final walk back is excluded and
 the car's final location is shown. See [PARKING.md](PARKING.md) for the source,
 unknown space availability, walking limits and separate provider budget.
-Mark each visited stop explicitly or use **Dropped these off** after disposal.
+Stop cards use matching material colors and route numbers. **Dropped off** records
+completion and opens a small optional **Still space / Full** popup. **Report a
+problem** offers Full, Damaged or Blocked without completing the stop. Reports
+identify one container at a time; dismissing the popup sends nothing.
 Individual drop-offs keep a multi-stop route open; the last drop-off ends it.
 **Finish trip** ends early without marking remaining items disposed. Both endings
-clear the route and offer an optional status check-in for visited containers only.
+clear the route; there is no additional end-of-trip questionnaire.
 Reporting a container full immediately excludes that asset from everyone's new
 routes for up to 12 hours; other assets at the same site stay eligible. Existing
 routes show a change notice on the next status refresh and offer explicit replanning.
 See [COMMUNITY.md](COMMUNITY.md) for expiry, review and privacy behavior.
 Electronics offers an optional "Only phones, chargers, cables or earbuds" selection.
 That subset can use Karpos or East Gate Mall; unchecked generic devices remain
-Karpos-only. East Gate routes end at the mall entrance, with a visible instruction
+Karpos-only. East Gate routes end at the mall entrance, with an instruction under Stop details
 to ask the information desk for the collection point. Nula Otpad is a pickup service,
 not a third route destination.
 The basket displays a selection count, not progress toward the six-entry API limit.

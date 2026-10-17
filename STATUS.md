@@ -10,7 +10,7 @@ the repository URL, Python imports and `SRA_*` settings remain unchanged.
 
 - English/Macedonian citizen guidance, map and six confirmed disposal flows.
 - Walking, direct driving, scheduled JSP buses and optional parking-assisted driving.
-- Optional post-trip container observations; full assets are immediately excluded
+- Optional per-stop container observations; full assets are immediately excluded
   for everyone for up to 12 hours, with reviewer rejection and expiry.
 - Population-weighted City coverage and prepared upgrade scenarios.
 - Optional accounts, material-only activity and self-reported badges.
@@ -22,6 +22,39 @@ Start locally with `uv run python scripts/run_local.py`. Route planning requires
 in ignored `.env` or server configuration. See [README.md](README.md).
 
 ## October 17 maintenance audit
+
+New app identity: a generated recycling-loop/location-pin icon replaces the
+header arrow in Recycle and City coverage. Matching browser-tab and Apple touch
+icons are linked on all three pages. Source artwork and generation prompt are in
+`assets/brand/`; web-size exports are in `web/brand/`. All 12 bilingual header
+layout checks pass at 320, 390 and 1280 px; the mobile preview and small-size
+exports were visually inspected.
+
+Trip reporting now uses numbered, material-colored cards with two actions:
+**Dropped off** and **Report a problem**. Drop-offs open a small optional
+**Still space / Full** dialog, one identified container at a time. The old visit
+checkbox and end-of-trip questionnaire are removed; account-save recovery and
+report moderation remain intact. Mobile (360 px) and desktop (1100 px) previews
+were inspected, including the Macedonian popup. `make check` and the affected
+browser suites pass (trip check-in, community, accounts, transit, parking,
+Macedonian and system journeys). The final system/account rerun passed 63 cases.
+
+Container freshness follow-up: expired observations now appear as **Needs a fresh
+check**, separate from routing exclusions. Reviewed clearances cannot expire back
+into a resolved warning; expiry of a full report does not erase still-current
+damage. Unreviewed positive reports cannot erase a personal warning. Validity times
+and review requirements are visible in English
+and Macedonian. Research found broad operator frequencies and a 2019 programme,
+but no verified current asset-specific collection timetable. Scheduled resets remain
+disabled; see [COMMUNITY.md](docs/COMMUNITY.md) for evidence and integration criteria.
+
+Follow-up validation: `make check` passes with 769 Python tests, 441 opt-in browser
+skips, and 21 Node tests, plus lock/lint/format checks. Nine focused store cases
+cover renewal, clearance, unresolved damage, privacy, rejection and retention; an
+API regression covers the separate stale-context response. The HPC sandbox stalls
+the threaded API test client; the complete suite passes outside that sandbox.
+Chromium initially lacked host libraries; isolated dependencies under `/tmp` now
+allow local browser checks without changing the host installation.
 
 Renamed the app, documentation, package and API to Najdi Frli; removed the stale
 walkthrough asset and its links. Current contracts are consolidated, with dated

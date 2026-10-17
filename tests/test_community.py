@@ -106,6 +106,22 @@ def test_full_expiry_does_not_invent_available_or_change_another_asset(store):
     assert statuses["paper"]["condition"] == "damaged"
 
 
+def test_status_api_returns_expired_observation_separately_from_routing_status():
+    client = TestClient(api.app)
+    asset_id = next(iter(api.community_assets))
+    report = api.community_store.submit(
+        "container", "reporter", asset_id=asset_id, condition="full"
+    )
+    with api.community_store.connection() as db:
+        db.execute("UPDATE reports SET expires=? WHERE id=?", (time.time() - 1, report["id"]))
+    response = client.get("/api/v1/container-statuses")
+    assert response.status_code == 200
+    assert response.headers["cache-control"] == "no-store"
+    assert asset_id not in response.json()["statuses"]
+    assert response.json()["rechecks"][asset_id]["condition"] == "full"
+    assert "client" not in response.json()["rechecks"][asset_id]
+
+
 @pytest.mark.parametrize("mode", ["walking", "driving"])
 def test_anonymous_full_report_excludes_only_that_container_for_other_riders(store, mode):
     glass, paper = site("glass", (GLASS,)), site("paper", (PAPER,))

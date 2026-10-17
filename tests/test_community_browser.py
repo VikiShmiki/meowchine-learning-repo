@@ -36,15 +36,13 @@ def test_report_container_recalculates_without_losing_items(page, web_url, width
         page.get_by_role("button", name="Find my route", exact=True).click()
     first = first_response.value.json()
     expect(page.locator("#trip-result")).to_be_visible()
-    page.locator("#trip-stop-1 .container-condition summary").click()
-    row = page.locator("#trip-stop-1 .condition-row").first
-    expect(row.locator("select")).to_be_visible()
-    assert row.locator("select").bounding_box()["width"] >= 140
-    row.locator("select").select_option("full")
-    row.get_by_role("button", name="Report condition", exact=True).click()
-    expect(row.get_by_role("status")).to_have_text(
-        "Reported full · excluded from everyone's routes for up to 12 hours."
-    )
+    page.get_by_role("button", name="Report a problem", exact=True).click()
+    popup = page.locator("#stop-report-dialog")
+    with page.expect_response("**/api/v1/container-reports"):
+        popup.get_by_role("button", name="Full", exact=True).click()
+    if len(first["stops"][0]["asset_ids"]) > 1:
+        popup.get_by_role("button", name="Skip", exact=True).click()
+    expect(popup).to_have_count(0)
     expect(page.locator("#route-condition-notice")).to_be_visible()
     expect(page.locator("#request-route-update")).to_be_hidden()
     expect(page.locator("#trip-items li")).to_have_count(1)
@@ -245,7 +243,7 @@ def test_completed_stop_clears_finished_basket(page, web_url):
     page.get_by_label("Longitude", exact=True).fill("21.4314")
     page.get_by_role("button", name="Set coordinates", exact=True).click()
     page.get_by_role("button", name="Find my route", exact=True).click()
-    page.get_by_role("button", name="Dropped these off", exact=True).click()
+    page.get_by_role("button", name="Dropped off", exact=True).click()
     expect(page.locator("#trip-items li")).to_have_count(0)
     expect(page.locator("#trip-result")).to_be_hidden()
     expect(page.locator("#plan-trip")).to_be_disabled()

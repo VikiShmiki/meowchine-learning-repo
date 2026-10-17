@@ -8,13 +8,16 @@
     <title>Najdi Frli</title>
     <link rel="stylesheet" href="/static/vendor/leaflet/leaflet.css" />
     <link rel="stylesheet" href="/static/styles.css" />
-    <link rel="stylesheet" href="/static/citizen.css?v=najdi-frli-1" />
-    <link rel="stylesheet" href="/static/community.css?v=trip-checkin-2" />
+    <link rel="stylesheet" href="/static/citizen.css?v=app-icon-1" />
+    <link rel="stylesheet" href="/static/community.css?v=stop-actions-1" />
     <link rel="stylesheet" href="/static/account.css?v=2" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/brand/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/static/brand/app-icon-512.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/brand/apple-touch-icon.png" />
   </head>
   <body class="citizen">
     <main>
-      <header class="site-header"><a class="brand" href="/" aria-label="Najdi Frli home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12"/></svg></span><span class="brand-wordmark">Najdi Frli</span></a><nav class="flow-nav" aria-label="Application"><a href="/" aria-current="page">Recycle</a><a href="/city" aria-label="City coverage">City coverage</a></nav></header>
+      <header class="site-header"><a class="brand" href="/" aria-label="Najdi Frli home"><span class="brand-mark" aria-hidden="true"><img src="/static/brand/logo-96.png" width="40" height="40" alt="" decoding="async" /></span><span class="brand-wordmark">Najdi Frli</span></a><nav class="flow-nav" aria-label="Application"><a href="/" aria-current="page">Recycle</a><a href="/city" aria-label="City coverage">City coverage</a></nav></header>
       <div class="hero"><h1>Recycling routes</h1><p class="intro">Skopje</p></div>
       <div class="planner-layout"><div class="choose-column">
       <section id="waste-picker" tabindex="-1" aria-labelledby="picker-heading">
@@ -197,7 +200,7 @@
         <section id="site-details" class="card" tabindex="-1" aria-label="Selected site details" hidden></section>
         </div>
         <div id="trip-completion" class="trip-completion" hidden>
-          <p>Finished for now? Mark the stops you visited, then end your trip. Any remaining items stay in your basket.</p>
+          <p>Remaining items stay in your basket.</p>
           <button id="finish-trip" type="button">Finish trip</button>
         </div>
         <section id="trip-checkin" class="card trip-checkin" aria-labelledby="checkin-heading" hidden></section>
@@ -207,11 +210,11 @@
     </main>
     <script src="/static/app.js?v=najdi-frli-1" defer></script>
     <script src="/static/vendor/leaflet/leaflet.js" defer></script>
-    <script src="/static/site-data.js?v=stop-colors-1" defer></script>
-    <script src="/static/community.js?v=najdi-frli-1" defer></script>
+    <script src="/static/site-data.js?v=stop-actions-1" defer></script>
+    <script src="/static/community.js?v=stop-actions-1" defer></script>
     <script src="/static/account.js?v=najdi-frli-1" defer></script>
     <script src="/static/map.js?v=najdi-frli-1" defer></script>
-    <script src="/static/trip.js?v=najdi-frli-1" defer></script>
+    <script src="/static/trip.js?v=stop-actions-1" defer></script>
     <script src="/static/path.js?trip-flow-1" defer></script>
   </body>
 </html>
