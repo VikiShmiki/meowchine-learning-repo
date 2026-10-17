@@ -10,6 +10,7 @@
 .dumping-form textarea { font: inherit; border: 1px solid #d4dccd; border-radius: 8px; background: white; }
 .community-privacy { max-width: 70ch; font-size: 12px; line-height: 1.5; }
 .container-condition { margin: 12px 0; }
+.citizen .container-condition > summary { flex-wrap: wrap; overflow-wrap: anywhere; gap: 8px; }
 .condition-row { display: grid; gap: 8px; padding: 14px 0; border-top: 1px solid #dce1d5; }
 .condition-row strong, .condition-material { overflow-wrap: anywhere; }
 .condition-material { font-size: 12px; }

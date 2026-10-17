@@ -19,6 +19,11 @@ the installed package into editable mode. They now use `uv run --no-sync` to ret
 the non-editable installation. Bundled model files receive explicit read permissions
 for the runtime user; the runtime build loads both encoders as that non-root user,
 verifying the package, file access and model serialization together.
+That container check passed on revision `ec3f8a6`. The Linux browser run also
+identified 320 px map-control overlap and Macedonian status-summary overflow;
+fixed-width control space and wrapping status labels address these. The 22 focused
+local layout checks pass with system and wider Verdana fonts. Final combined CI
+remains the latest delivery revision's quality and container jobs.
 
 The source repository's earlier account restriction and paused workflow are
 historical evidence, preserved in [UPSTREAM_CI_STATUS.md](UPSTREAM_CI_STATUS.md).
