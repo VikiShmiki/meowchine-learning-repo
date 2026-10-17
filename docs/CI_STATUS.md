@@ -16,8 +16,9 @@ the app was ready. The smoke test's bounded startup wait now handles that transi
 failure, with six regression tests; it still fails if readiness never arrives.
 The next run exposed a runtime import failure: model-cache commands had resynced
 the installed package into editable mode. They now use `uv run --no-sync` to retain
-the non-editable installation, and the runtime image verifies its package import
-as the non-root app user during the build.
+the non-editable installation. Bundled model files receive explicit read permissions
+for the runtime user; the runtime build loads both encoders as that non-root user,
+verifying the package, file access and model serialization together.
 
 The source repository's earlier account restriction and paused workflow are
 historical evidence, preserved in [UPSTREAM_CI_STATUS.md](UPSTREAM_CI_STATUS.md).

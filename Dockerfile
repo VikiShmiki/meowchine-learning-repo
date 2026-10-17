@@ -45,10 +45,11 @@ COPY data/upgrades ./data/upgrades
 COPY web ./web
 
 RUN groupadd --system app && useradd --system --gid app --home /app --no-create-home app \
-    && mkdir -p /app/runtime && chown app:app /app/runtime
+    && mkdir -p /app/runtime && chown app:app /app/runtime \
+    && chmod -R a+rX /app/runtime-models
 USER app
 
-RUN python -c "import smart_recycling"
+RUN python -c "from pathlib import Path; from smart_recycling.minilm import load_encoder; from smart_recycling.multilingual import load_encoder as load_multilingual; load_encoder(Path('/app/runtime-models/all-MiniLM-L6-v2')); load_multilingual(Path('/app/runtime-models/multilingual-minilm'))"
 
 EXPOSE 8000
 CMD ["uvicorn", "smart_recycling.api:app", "--host", "0.0.0.0", "--port", "8000"]
