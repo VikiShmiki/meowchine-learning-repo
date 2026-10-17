@@ -1,12 +1,14 @@
-# Goodsort — recycling guidance for Skopje
+# Goodsort вЂ” recycling guidance for Skopje
 
-**Project edition: October 17, 2026** · [Private repository](https://github.com/VikiShmiki/meowchine-learning-repo)
+**Project edition: October 17, 2026** В· [Private repository](https://github.com/VikiShmiki/meowchine-learning-repo)
 
 Goodsort helps a resident identify an item, confirm its condition, and find a suitable collection point. It also gives city planners a population-weighted view of walking access and suggests where existing general-waste sites could be upgraded. The citizen and City pages work in **English and Macedonian**.
 
-**[Watch the demo](docs/assets/demo-app-video.mp4) · [Read the technical report source](docs/technical-report.tex) · [Read the technical report](docs/technical-report.pdf)**
+**[Watch the demo](docs/assets/demo-app-video.mp4) В· [Read the technical report source](docs/technical-report.tex) В· [Read the technical report](docs/technical-report.pdf)**
 
 > **Scope and evidence.** This is a Skopje hackathon prototype, not a universal disposal authority. Site acceptance comes from a versioned local snapshot; operation and access can change. The app asks for item/condition confirmation and shows uncertainty rather than silently guessing. The technical report explains the methods, measurements, and limits.
+
+**JSP buses are supported:** plan scheduled public-transport journeys with walking connections, bus numbers, boarding/exit stops and transfers. See [JSP setup and limits](docs/TRANSIT.md).
 
 ## Why Goodsort matters
 
@@ -55,19 +57,19 @@ check-in sends nothing. [Reporting and expiry rules](docs/COMMUNITY.md).
 | City coverage and upgrades | Modeled population within a 10-minute pedestrian-network walk of a compatible site; material-specific, municipality-aware upgrade scenarios | [Coverage](data/coverage/skopje-v1/README.md), [City method](docs/CITY_MODE.md). Access connectors and physical installation feasibility are unverified. |
 | Community and activity | Moderated site-condition reports, reviewer panel, optional account, material-only history and self-reported badges | [Community controls](docs/COMMUNITY.md), [account and privacy limits](docs/ACCOUNTS.md). |
 
-The authority chain is deliberate: **reviewed local policy and exact-item confirmation → source-recorded asset acceptance → route**. The six-class MiniLM heads suggest objects/streams only when rules abstain; optional photo analysis proposes item kinds; neither can authorize a bin or bypass specialist/unsafe-item handling. Electronics and clothes have explicit training labels, but their routing still depends on policy and destination evidence.
+The authority chain is deliberate: **reviewed local policy and exact-item confirmation в†’ source-recorded asset acceptance в†’ route**. The six-class MiniLM heads suggest objects/streams only when rules abstain; optional photo analysis proposes item kinds; neither can authorize a bin or bypass specialist/unsafe-item handling. Electronics and clothes have explicit training labels, but their routing still depends on policy and destination evidence.
 
 ## Five-seed model results
 
-Seeds **42–46** compare three methods per language on the same fixed, grouped
-six-class dataset. Scores are macro-F1 mean ± **sample standard deviation** over
+Seeds **42вЂ“46** compare three methods per language on the same fixed, grouped
+six-class dataset. Scores are macro-F1 mean В± **sample standard deviation** over
 the five runs; the manual set contains 59 supported examples per language.
 
 | Method | English manual | English grouped test | Macedonian manual | Macedonian grouped test |
 | --- | ---: | ---: | ---: | ---: |
-| TF-IDF + logistic | 0.548 ± 0.000 | 0.455 ± 0.000 | 0.467 ± 0.000 | 0.434 ± 0.000 |
-| Frozen MiniLM + logistic | **0.696 ± 0.000** | 0.505 ± 0.000 | **0.507 ± 0.000** | **0.552 ± 0.000** |
-| Multilingual MiniLM LoRA | 0.644 ± 0.044 | 0.237 ± 0.083 | 0.459 ± 0.033 | 0.252 ± 0.034 |
+| TF-IDF + logistic | 0.548 В± 0.000 | 0.455 В± 0.000 | 0.467 В± 0.000 | 0.434 В± 0.000 |
+| Frozen MiniLM + logistic | **0.696 В± 0.000** | 0.505 В± 0.000 | **0.507 В± 0.000** | **0.552 В± 0.000** |
+| Multilingual MiniLM LoRA | 0.644 В± 0.044 | 0.237 В± 0.083 | 0.459 В± 0.033 | 0.252 В± 0.034 |
 
 The frozen heads were selected for both language pages. Zero SD here reflects the
 fixed split and deterministic fits, **not** certainty about real-world quality.
@@ -108,7 +110,7 @@ node --test tests/web_guidance.test.js tests/web_map.test.js
 
 For the browser/system suite, install Chromium with `uv run playwright install chromium`, set `$env:SRA_BROWSER_TESTS='1'`, and rerun pytest. The deterministic tests replace external provider transports; they do not establish paid-vision accuracy or live road availability. [QUALITY.md](docs/QUALITY.md) records commit-specific local results, dataset validators, and reproduction commands. [LANGUAGES.md](docs/LANGUAGES.md) explains the paired Macedonian fixtures and model-evaluation holds.
 
-This repository includes GitHub Actions for quality and container checks. Its run status is independent of the source repository’s historical account restriction; see [CI_STATUS.md](docs/CI_STATUS.md). Hosted service, physical-phone and native-speaker sign-off remain outstanding.
+This repository includes GitHub Actions for quality and container checks. Its run status is independent of the source repositoryвЂ™s historical account restriction; see [CI_STATUS.md](docs/CI_STATUS.md). Hosted service, physical-phone and native-speaker sign-off remain outstanding.
 
 ## Data and responsible use
 

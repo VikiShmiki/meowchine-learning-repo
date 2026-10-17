@@ -2,7 +2,7 @@
 
 Updated: 2026-10-17
 
-## Completed — trip completion and container check-ins
+## Completed вЂ” trip completion and container check-ins
 
 Implemented the user-requested optional post-trip check-in without photos. Full
 reports now exclude the specific asset from everyone's routes immediately, with a
@@ -13,9 +13,9 @@ copy are included. Full browser-enabled regression checks pass, followed by 41
 focused browser checks on the final interface, 28 community/backend tests, and 19
 Node tests. Lock, lint, formatting, seed/infrastructure/geography validators and
 visual checks at 320/360/1280 px passed. See [QUALITY.md](docs/QUALITY.md).
-No further feature task is active; hosted CI is tracked in [CI_STATUS.md](docs/CI_STATUS.md).
+Hosted CI is tracked in [CI_STATUS.md](docs/CI_STATUS.md).
 
-## Previous handoff — initial private-repository edition
+## Previous handoff вЂ” initial private-repository edition
 
 Private repository edition prepared with a fresh initial commit, current project
 documentation and a rebuilt technical report. Source data and historical experiment
@@ -25,19 +25,19 @@ Local handoff checks passed: 564 Python tests, 19 Node tests, lock/lint/format a
 seed/infrastructure/geography validation. The 389 opt-in skips and verification
 limits are recorded in [QUALITY.md](docs/QUALITY.md).
 
-## Completed capability — bilingual model integration
+## Completed capability вЂ” bilingual model integration
 
-The corrected six-class bilingual dataset has five completed seed-42–46 runs (30
+The corrected six-class bilingual dataset has five completed seed-42вЂ“46 runs (30
 fits). Frozen MiniLM is the strongest of the tested methods on both languages:
-English manual macro-F1 0.696 ± 0.000 and Macedonian 0.507 ± 0.000; grouped-test
-macro-F1 is 0.505 ± 0.000 and 0.552 ± 0.000. These are sample SDs over seeds on
+English manual macro-F1 0.696 В± 0.000 and Macedonian 0.507 В± 0.000; grouped-test
+macro-F1 is 0.505 В± 0.000 and 0.552 В± 0.000. These are sample SDs over seeds on
 one fixed split, not independent test uncertainty. Full comparisons, timings and
 limitations are in [ML.md](docs/ML.md); dataset provenance is in
 [BILINGUAL_DATA.md](docs/BILINGUAL_DATA.md). Source artifacts and translations
 still need human/native review. Model outputs are suggestions only; policy and
 exact-item confirmation retain authority.
 
-## Current state — documentation and demo handoff
+## Current state вЂ” documentation and demo handoff
 
 The refreshed [README.md](README.md) links the source-backed
 [technical report](docs/technical-report.pdf), its [LaTeX source](docs/technical-report.tex)
@@ -51,7 +51,7 @@ checks and hosted/container/physical-phone verification. CI for this private
 repository is tracked separately from the historical source-repository restriction.
 See [CI_STATUS.md](docs/CI_STATUS.md).
 
-## Previous delivery — verified audit fixes (PR #24)
+## Previous delivery вЂ” verified audit fixes (PR #24)
 
 The colleague's audited application changes and documentation are preserved. These
 include English/Macedonian UI, six disposal journeys, real collection-point routing,

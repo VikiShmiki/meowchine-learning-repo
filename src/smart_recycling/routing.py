@@ -20,9 +20,14 @@ class RoutingService:
     """A single-process demo service; never cache or log origins or descriptions."""
 
     def __init__(
-        self, snapshot: SiteSnapshot, classifier: GuidanceClassifier, provider: ORSProvider
+        self,
+        snapshot: SiteSnapshot,
+        classifier: GuidanceClassifier,
+        provider: ORSProvider,
+        transit=None,
     ):
         self.snapshot, self.classifier, self.provider = snapshot, classifier, provider
+        self.transit = transit
         self._lock = threading.Lock()
         self._started: deque[float] = deque()
         self._active = 0
@@ -119,13 +124,22 @@ class RoutingService:
             *[[c.site.longitude, c.site.latitude] for c in candidates],
         ]
         masks = [sum(1 << i for i, kind in enumerate(kinds) if kind in c.kinds) for c in candidates]
+        extra = {}
         with self._budget():
-            durations = self.provider.matrix(request.mode, points)
-            indices = solve(masks, durations, (1 << len(kinds)) - 1)
-            selected = [candidates[index] for index in indices]
-            route = self.provider.directions(
-                request.mode, [points[0], *[points[i + 1] for i in indices]]
-            )
+            if request.mode == "transit":
+                if self.transit is None:
+                    raise RoutingError(
+                        "transit_unavailable", "JSP timetable is unavailable. Retry shortly.", 503
+                    )
+                indices, route, extra = self.transit.plan(request, candidates, kinds)
+            else:
+                durations = self.provider.matrix(request.mode, points)
+                indices = solve(masks, durations, (1 << len(kinds)) - 1)
+                route = self.provider.directions(
+                    request.mode, [points[0], *[points[i + 1] for i in indices]]
+                )
+                extra["profile"] = PROFILES[request.mode]
+        selected = [candidates[index] for index in indices]
         stops, remaining = [], set(kinds)
         for index, candidate in enumerate(selected):
             assigned = sorted(remaining & candidate.kinds)
@@ -158,10 +172,11 @@ class RoutingService:
         return TripResponse(
             status_version=status_version,
             mode=request.mode,
-            profile=PROFILES[request.mode],
             distance_m=route.distance_m,
             duration_s=route.duration_s,
-            geometry={"type": "LineString", "coordinates": route.geometry},
+            geometry={"type": "LineString", "coordinates": route.geometry}
+            if route.geometry
+            else None,
             stops=stops,
             dataset_version=self.snapshot.dataset_version,
             policy_version=self.snapshot.policy_version,
@@ -184,9 +199,16 @@ class RoutingService:
                 "Network endpoints may be up to 100 m from recorded sites. "
                 "Access connectors and entrances are unverified; "
                 "do not cross barriers or private land.",
-                "Time and distance cover the routed network only, "
-                "excluding access gaps, disposal time, parking and live traffic.",
+                *(
+                    []
+                    if request.mode == "transit"
+                    else [
+                        "Time and distance cover the routed network only, "
+                        "excluding access gaps, disposal time, parking and live traffic."
+                    ]
+                ),
                 "Site operation and local policy human review remain unverified. "
                 "Check container instructions.",
             ],
+            **extra,
         )

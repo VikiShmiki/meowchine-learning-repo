@@ -87,6 +87,15 @@
 .citizen #trip-mode label { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid #dce2d3; border-radius: 9px; min-height: 44px; margin: 0; cursor: pointer; }
 #trip-mode label:has(input:checked) { background: #edf3df; border-color: #8fa377; }
 .citizen #trip-mode input { flex: none; width: 14px; height: 14px; accent-color: #46643a; margin: 0; }
+.citizen #trip-mode { flex-wrap: wrap; }
+.citizen #trip-mode label { flex: 1 1 90px; min-width: 0; }
+#transit-options { margin: 14px 0; padding: 14px; background: var(--soft); border-radius: 10px; }
+#transit-options input { width: 100%; min-width: 0; max-width: 100%; box-sizing: border-box; }
+#transit-options p, #transit-options a { font-size: 13px; line-height: 1.6; }
+.transit-legs { list-style: none; padding: 0; margin: 16px 0; }
+.citizen #trip-result .transit-legs li { border-left: 3px dashed #2f4d35; padding: 8px 0 8px 10px; overflow-wrap: anywhere; }
+.citizen #trip-result .transit-legs li[data-mode=bus] { border-left: 3px solid #305d9b; }
+.route-map-key[data-mode=transit] .route-line-key path { stroke: #305d9b; }
 #sharing-note { font-size: 10px; line-height: 1.5; color: #7a8371; margin: 12px 0; }
 #plan-trip { width: 100%; min-height: 50px; }
 #retry-routing { margin: 0 0 10px; }

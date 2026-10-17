@@ -2,11 +2,11 @@
 
 from typing import Annotated, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, model_validator
+from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, StrictBool, model_validator
 
 from smart_recycling.guidance import ItemKind
 
-Mode = Literal["walking", "driving"]
+Mode = Literal["walking", "driving", "transit"]
 Finite = Annotated[float, Field(ge=0, allow_inf_nan=False)]
 
 # A quick-pick stream requires every listed capability, not a guessed item subtype.
@@ -70,6 +70,7 @@ class TripRequest(BaseModel):
     mode: Mode
     items: Annotated[list[TripItem | TripStream], Field(min_length=1, max_length=6)]
     share_coordinates: StrictBool
+    departure_at: AwareDatetime | None = None
 
 
 class Stop(Coordinates):
@@ -98,11 +99,11 @@ class TripResponse(BaseModel):
 
     mode: Mode
     status_version: str = ""
-    provider: Literal["openrouteservice"] = "openrouteservice"
+    provider: Literal["openrouteservice", "jsp_gtfs_openrouteservice"] = "openrouteservice"
     profile: str
     distance_m: Finite
     duration_s: Finite
-    geometry: LineString
+    geometry: LineString | None
     stops: list[Stop]
     dataset_version: str
     policy_version: str
@@ -112,6 +113,32 @@ class TripResponse(BaseModel):
     ends_at_last_stop: Literal[True] = True
     warnings: list[str]
     attribution: str = "© openrouteservice by HeiGIT | © OpenStreetMap contributors"
+    legs: list["TransitLeg"] = Field(default_factory=list)
+    departure_at: AwareDatetime | None = None
+    arrival_at: AwareDatetime | None = None
+    transit_feed_version: str | None = None
+    transit_fetched_at: AwareDatetime | None = None
+    transit_service_end: str | None = None
+    transit_source: str | None = None
+
+
+class TransitLeg(BaseModel):
+    """Separate walk/bus geometry: never join gaps with invented paths."""
+
+    mode: Literal["walking", "bus"]
+    from_name: str
+    to_name: str
+    from_point: list[float]
+    to_point: list[float]
+    departure_at: AwareDatetime
+    arrival_at: AwareDatetime
+    duration_s: Finite
+    distance_m: Finite
+    geometry: LineString | None
+    site_id: str
+    line: str = ""
+    headsign: str = ""
+    stop_count: int = 0
 
 
 class RoutingError(Exception):

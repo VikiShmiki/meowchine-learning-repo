@@ -27,7 +27,7 @@ jobs:
       - run: uv run --group geo python scripts/prepare_coverage.py --check
       - run: uv run --group geo python scripts/prepare_upgrades.py --check
       - run: uv run playwright install --with-deps chromium
-      - run: uv run pytest tests/test_web_browser.py tests/test_system_browser.py tests/test_pipeline_browser.py tests/test_community_browser.py tests/test_trip_checkin_browser.py tests/test_accounts_browser.py tests/test_macedonian_browser.py
+      - run: uv run pytest tests/test_web_browser.py tests/test_system_browser.py tests/test_pipeline_browser.py tests/test_community_browser.py tests/test_trip_checkin_browser.py tests/test_accounts_browser.py tests/test_macedonian_browser.py tests/test_transit_browser.py
         env:
           SRA_BROWSER_TESTS: "1"
 
